@@ -11,7 +11,7 @@ console.log(port);
   //Conditional check for connecting to instance of deployed or local DB
 
 
-configure our server with all the middleware and and routing
+//configure our server with all the middleware and and routing
 require('./config/middleware.js')(app, express);
 
 
