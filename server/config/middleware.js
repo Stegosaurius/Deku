@@ -7,7 +7,8 @@ module.exports = function (app, express) {
   //Express 4 allows us to use multiple routers with their own configurations
 
   //Create all routers we will need
-    //ex: var userRouter = express.Router();
+  var userRouter = express.Router();
+  var followerRouter = express.Router()
 
   //morgan is for logging get and post data to the console.
   app.use(morgan('dev'));
@@ -19,8 +20,10 @@ module.exports = function (app, express) {
   //app.use(express.static(__dirname + '/../../client'));
 
   //Make our app use all the routers we define 
-    //ex: app.use('/api/users', userRouter); 
+  app.use('/api/users', userRouter); 
+  app.use('/api/followers', followersRouter)
 
   //inject our routers into their respective route files
-    //ex: require('../users/userRoutes.js')(userRouter);
+  require('../users/userRoutes.js')(userRouter);
+  require('../followers/followerRoutes.js')(followerRouter);
 };
