@@ -12,7 +12,7 @@ CREATE TABLE `Users` (
 
 CREATE TABLE `Followers` (
 	`user_id` int NOT NULL,
-	`follewer_id` int NOT NULL
+	`follower_id` int NOT NULL
 );
 
 CREATE TABLE `Messages` (
@@ -46,7 +46,7 @@ CREATE TABLE `Statuses` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`user_id` INT NOT NULL,
 	`status` varchar(250) NOT NULL,
-	`timestamp` TIME NOT NULL DEFAULT 'Date.now',
+	`timestamp` TIME NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
@@ -64,7 +64,7 @@ CREATE TABLE `status_votes` (
 
 ALTER TABLE `Followers` ADD CONSTRAINT `Followers_fk0` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
 
-ALTER TABLE `Followers` ADD CONSTRAINT `Followers_fk1` FOREIGN KEY (`follewer_id`) REFERENCES `Users`(`id`);
+ALTER TABLE `Followers` ADD CONSTRAINT `Followers_fk1` FOREIGN KEY (`follower_id`) REFERENCES `Users`(`id`);
 
 ALTER TABLE `Messages` ADD CONSTRAINT `Messages_fk0` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
 
