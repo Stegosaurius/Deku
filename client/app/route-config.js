@@ -4,7 +4,7 @@
   angular.module('app')
     .config(config);
 
-  config.$inject(['$stateProvider', '$urlRouterProvider', '$httpProvider']);
+  config.$inject = ['$stateProvider', '$urlRouterProvider', '$httpProvider'];
 
   function config($stateProvider, $urlRouterProvider, $httpProvider) {
 
