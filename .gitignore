@@ -1,0 +1,3 @@
+server/db/user_schema.sql
+node_modules/
+server/config/auth.js
