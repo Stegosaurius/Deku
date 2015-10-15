@@ -1,5 +1,6 @@
 var morgan      = require('morgan'), 
-    bodyParser  = require('body-parser')
+    bodyParser  = require('body-parser'),
+    cookieParser = require('cookie-parser')
     //helpers     = require('./helpers.js'); // our custom middleware
 
 
@@ -15,9 +16,10 @@ module.exports = function (app, express) {
   //bodyParser is for processing body req information (ex: req.body)
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
-
+  app.use(cookieParser());
   //serving all of the static files from the client directory
-  //app.use(express.static(__dirname + '/../../client'));
+  app.use(express.static(path.join(__dirname, '../client')));
+ 
 
   //Make our app use all the routers we define 
   app.use('/api/users', userRouter); 
