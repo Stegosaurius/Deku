@@ -1,20 +1,22 @@
-(function() {
-  'use strict';
+// MOVING FUNCTIONALITY TO USER SERVICE FOR NOW
 
-  angular.module('app')
-    .factory('Auth', Auth);
+// (function() {
+//   'use strict';
 
-  Auth.$inject = ['$http'];
+//   angular.module('app')
+//     .factory('Auth', Auth);
 
-  function Auth($http) {
-    var service = {
-      signin: signin
-    };
+//   Auth.$inject = ['$http'];
 
-    return service;
+//   function Auth($http) {
+//     var service = {
+//       signin: signin
+//     };
 
-    function signin() {
-      // send user credentials to server
-    }
-  }
-})();
+//     return service;
+
+//     function signin() {
+//       // send user credentials to server
+//     }
+//   }
+// })();
