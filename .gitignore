@@ -1,3 +1,5 @@
+.DS_Store
+
 # Database setup
 server/db/user_schema.sql
 server/config/auth.js
