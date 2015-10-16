@@ -10,6 +10,7 @@ module.exports = function (app, express) {
   //Create all routers we will need
   var userRouter = express.Router();
   var followerRouter = express.Router()
+  var threadRouter = express.Router();
 
   //morgan is for logging get and post data to the console.
   app.use(morgan('dev'));
@@ -22,10 +23,12 @@ module.exports = function (app, express) {
  
 
   //Make our app use all the routers we define 
-  app.use('/api/users', userRouter); 
-  app.use('/api/followers', followersRouter)
+  app.use('/users', userRouter); 
+  app.use('/followers', followerRouter)
+  app.use('/threads', threadRouter);
 
   //inject our routers into their respective route files
-  require('../users/userRoutes.js')(userRouter);
-  require('../followers/followerRoutes.js')(followerRouter);
+  require('../routers/userRoutes.js')(userRouter);
+  require('../routers/followerRoutes.js')(followerRouter);
+  require('../routers/threadRoutes.js')(threadRoutes);
 };
