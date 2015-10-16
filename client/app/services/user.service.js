@@ -39,9 +39,7 @@
     function getProfile() {
       var url = '/users/' + userID;
       
-      $http.get(url, {
-        params: { id: userID }
-      })
+      $http.get(url)
       .then(function successCallback(res) {
         return res.data;
       }, function errorCallback(res) {
