@@ -20,7 +20,7 @@ module.exports = function (app, express) {
   app.use(bodyParser.json());
   app.use(cookieParser());
   //serving all of the static files from the client directory
-  app.use(express.static(__dirname + '../../client'));
+  app.use(express.static(__dirname + '/../../client'));
  
 
   //Make our app use all the routers we define 
