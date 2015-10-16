@@ -6,11 +6,15 @@ module.exports = function (app) {
 
   //Specifying which controller function we wish to call
   //based on the request url
-  app.get('/allUsers', function (req, res) {
-    userController.getAllUsers(req, res);
+  app.get('/:id', function (req, res) {
+    //Get the id
+    var id = req.params.id;
+    userController.getProfile(req, res, id);
   });
-  app.get('/allUsers', function (req, res) {
-    userController.getAllUsers(req, res);
+  app.put('/:id', function (req, res) {
+    //Get the id
+    var id = req.params.id;
+    userController.updateProfile(req, res, id);
   });
   
 }
