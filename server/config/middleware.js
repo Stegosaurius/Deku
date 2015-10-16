@@ -29,8 +29,8 @@ module.exports = function (app, express) {
   app.use('/threads', threadRouter);
 
   //inject our routers into their respective route files
-  require('../users/userRoutes.js')(userRouter, passport);
-  require('../followers/followerRoutes.js')(followerRouter);
+  require('../routers/userRoutes.js')(userRouter, passport);
+  require('../routers/followerRouter.js')(followerRouter);
   require('../routers/threadRoutes.js')(threadRoutes);
 
 };
