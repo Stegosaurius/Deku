@@ -6,23 +6,27 @@
 var model = require('../models/userModel');
 
 
-
-
-
-
-
-
-
 module.exports = {
   //Put all http req handling functions here
-  getAll: function (req, res) {
-    model.get(function (err, rows) {
+  getProfle: function (req, res, id) {
+    model.getProfile(id, function (err, userProfile) {
       if (err) {
         //do some error handing
       } else {
-        
+        res.json(userProfile);
       }
 
+    })
+  }
+
+  updateProfile: function (req, res, id) {
+    model.updateProfile(id, function (err, updatedUser) {
+      if (err) {
+        //Error handling
+        //res.send(404)
+      } else {
+        res.json(updatedUser)
+      }
     })
   }
 }
