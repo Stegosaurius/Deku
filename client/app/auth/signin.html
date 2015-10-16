@@ -1,1 +1,9 @@
-<div class="signin"></div>
+<div class="signin">
+  <h1>Sign In</h1>
+
+  <form name="signinForm" ng-submit="signin()">
+    <input type="text" name="username" ng-model="signin.user.username" placeholder="Username" required><br>
+    <input type="password" name="password" ng-model="signin.user.password" placeholder="Password" required><br>
+    <button type="submit">Sign In</button>
+  </form>
+</div>
