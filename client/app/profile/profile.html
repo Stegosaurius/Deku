@@ -1,1 +1,14 @@
-<div class="profile"></div>
+<div class="navbar"></div>
+
+<div class="profile">
+  <h2>{{ profile.username }}</h2>
+  <h4>{{ profile.location }}</h4>
+
+  <!-- <a ui-sref="dashboard">Dashboard</a> -->
+
+  <p class="about">{{ profile.about }}</p>
+
+  <ul class="plants">
+    <li class="plant" ng-repeat="plant in profile.plants"></li>
+  </ul>
+</div>

@@ -7,7 +7,7 @@
   User.$inject = ['$http'];
 
   function User($http) {
-    var userID = '';
+    var userID;
 
     var services = {
       signin: signin,
@@ -35,8 +35,11 @@
         });
     }
 
+    // retrieve user profile information
     function getProfile() {
-      $http.get('/users', {
+      var url = '/users/' + userID;
+      
+      $http.get(url, {
         params: { id: userID }
       })
       .then(function successCallback(res) {
