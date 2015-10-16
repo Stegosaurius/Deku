@@ -4,8 +4,6 @@
   angular.module('app')
     .controller('ProfileController', ProfileController);
 
-  ProfileController.$inject = ['User'];
-
   function ProfileController(User) {
     // capture variable for binding members to controller; vm stands for ViewModel
     // (https://github.com/johnpapa/angular-styleguide#controlleras-with-vm)

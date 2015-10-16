@@ -4,9 +4,9 @@
   angular.module('app')
     .controller('DashboardController', DashboardController);
 
-  DashboardController.$inject = ['User'];
-
   function DashboardController(User) {
-    // insert code here
+    var vm = this;
+
+    vm.greeting = "Hi!!!!";
   }
 })();

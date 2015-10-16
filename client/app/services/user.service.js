@@ -4,8 +4,6 @@
   angular.module('app')
     .factory('User', User);
 
-  User.$inject = ['$http'];
-
   function User($http) {
     var userID;
 
