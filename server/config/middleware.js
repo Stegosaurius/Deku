@@ -20,7 +20,7 @@ module.exports = function (app, express) {
   app.use(bodyParser.json());
   app.use(cookieParser());
   //serving all of the static files from the client directory
-  app.use(express.static(path.join(__dirname, '../client')));
+  app.use(express.static(__dirname + '../../client'));
  
 
   //Make our app use all the routers we define 
@@ -30,7 +30,7 @@ module.exports = function (app, express) {
 
   //inject our routers into their respective route files
   require('../routers/userRoutes.js')(userRouter, passport);
-  require('../routers/followerRouter.js')(followerRouter);
-  require('../routers/threadRoutes.js')(threadRoutes);
+  require('../routers/followerRoutes.js')(followerRouter);
+  require('../routers/threadRoutes.js')(threadRouter);
 
 };
