@@ -1,6 +1,7 @@
 var morgan      = require('morgan'), 
     bodyParser  = require('body-parser'),
-    cookieParser = require('cookie-parser')
+    cookieParser = require('cookie-parser'),
+    passport    = require('passport');
     //helpers     = require('./helpers.js'); // our custom middleware
 
 
@@ -28,7 +29,8 @@ module.exports = function (app, express) {
   app.use('/threads', threadRouter);
 
   //inject our routers into their respective route files
-  require('../routers/userRoutes.js')(userRouter);
-  require('../routers/followerRoutes.js')(followerRouter);
+  require('../users/userRoutes.js')(userRouter, passport);
+  require('../followers/followerRoutes.js')(followerRouter);
   require('../routers/threadRoutes.js')(threadRoutes);
+
 };

@@ -1,7 +1,7 @@
 var userController = require('./controllers/userController.js');
 
 
-module.exports = function (app) {
+module.exports = function (app, passport) {
   //app === userRouter injected from middlware.js
 
   //Specifying which controller function we wish to call
@@ -16,5 +16,13 @@ module.exports = function (app) {
     var id = req.params.id;
     userController.updateProfile(req, res, id);
   });
+
+  app.get('/profile', function (req, res) {
+    userController.getUserProfile(req, res);
+  });
+
+  app.post('/signup', function (req, res) {
+    userController.addUser(req, res);
+  })
   
 }
