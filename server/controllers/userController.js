@@ -18,7 +18,7 @@ module.exports = {
       }
 
     });
-  }
+  },
 
   updateProfile: function (req, res, id) {
     model.updateProfile(id, function (err, updatedUser) {

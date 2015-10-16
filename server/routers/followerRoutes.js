@@ -1,4 +1,4 @@
-var followerController = require('./controllers/userController.js');
+var followerController = require('../controllers/followerController.js');
 
 
 module.exports = function (app) {
