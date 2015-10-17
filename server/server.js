@@ -3,6 +3,7 @@ var passport = require('passport');
 var path = require('path');
 var flash = require('connect-flash');
 var session = require('express-session');
+var auth = require('/config/auth');
 
 //Our app is an instance of express
 var app = express();
@@ -16,7 +17,7 @@ console.log(port);
 
 
 // required for passport
-app.use(session({ secret: 'spitDaHotFire' }));
+app.use(session({ secret: auth.secret }));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session

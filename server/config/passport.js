@@ -1,13 +1,16 @@
 // load all the things we need
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
-var GoogleStrategy = require('passport-google-oath').OAuth2Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 // load up the user model
 var User = require('../models/userModel');
 
 // load the auth variables
 var configAuth = require('../config/auth');
+
+// load helpers
+var util = require('../helpers/utilities');
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
@@ -19,16 +22,16 @@ module.exports = function(passport) {
     // passport needs ability to serialize and unserialize users out of session
 
     // used to serialize the user for the session
-    passport.serializeUser(function(user, done) {
-        done(null, user[0].id);
-    });
+    // passport.serializeUser(function(user, done) {
+    //     done(null, user[0].id);
+    // });
 
-    // used to deserialize the user
-    passport.deserializeUser(function(id, done) {
-        User.getUserByID(id, function(err, user) {
-            done(err, user);
-        });
-    });
+    // // used to deserialize the user
+    // passport.deserializeUser(function(id, done) {
+    //     User.getUserByID(id, function(err, user) {
+    //         done(err, user);
+    //     });
+    // });
 
     // =========================================================================
     // LOCAL SIGNUP ============================================================
@@ -51,6 +54,7 @@ module.exports = function(passport) {
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
         User.getUserByName(username, function(err, user) {
+
             // if there are any errors, return the error
             if (err) {
                 return done(err);
@@ -71,7 +75,7 @@ module.exports = function(passport) {
                     if (err) {
                         console.error(err);
                     } else {
-                        return done(null, user);
+                        return done(null, user[0]);
                     }
                 });
             }
@@ -106,11 +110,11 @@ module.exports = function(passport) {
                 return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
             }
             // if the user is found but the password is wrong
-            if (!user.validPassword(password, user[0].password)) {
+            if (!util.isValidPassword(password, user[0].password)) {
                 return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
             }
             // all is well, return successful user
-            return done(null, user);
+            return done(null, user[0]);
         });
 
     }));
@@ -138,7 +142,7 @@ module.exports = function(passport) {
 
                 // if the user is found, then log them in
                 if (user.length === 1) {
-                    return done(null, user); // user found, return that user
+                    return done(null, user[0]); // user found, return that user
                 } else {
                     // if there is no user found with that facebook id, create them
                     var newUser = {
@@ -151,7 +155,7 @@ module.exports = function(passport) {
                         if (err) {
                             return console.error(err);
                         } else {
-                            return done(null, user);
+                            return done(null, user[0]);
                         }
                     });
                 }
@@ -184,7 +188,8 @@ module.exports = function(passport) {
 
                 if (user.length === 1) {
                     // if a user is found, log them in
-                    return done(null, user);
+
+                    return done(null, user[0]);
                 } else {
                     var newUser = {
                         username: profile.displayName,
@@ -197,7 +202,7 @@ module.exports = function(passport) {
                         if (err) {
                             return console.error(err);
                         } else {
-                            return done(null, user);
+                            return done(null, user[0]);
                         }
                     });
                 }

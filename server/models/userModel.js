@@ -179,10 +179,6 @@ module.exports = {
     });
   },
 
-  isValidPassword: function (candidatePassword, hashedPassword) {
-    return bcrypt.compareSync(candidatePassword, hashedPassword);
-  },
-
   getPassword: function (id, callback) {
     db.query('select password from users where id = ?', [id], function (err, password) {
       if (err) {
