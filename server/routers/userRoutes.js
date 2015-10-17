@@ -33,6 +33,12 @@ module.exports = function (app, passport) {
     failureFlash: true
   }));
 
+  // route for logging out
+  app.get('/logout', function(req, res) {
+      req.logout();
+      res.redirect('/');
+  });
+
   // =====================================
   // FACEBOOK ROUTES =====================
   // =====================================
