@@ -4,21 +4,40 @@
   angular.module('app')
     .controller('AuthController', AuthController);
 
-  function AuthController(User) {
+  function AuthController($window, $state, User) {
     // capture variable for binding members to controller; vm stands for ViewModel
     // (https://github.com/johnpapa/angular-styleguide#controlleras-with-vm)
     var vm = this;
 
+    vm.message = '';
     vm.signin = signin;
     vm.signup = signup;
     vm.user = {};
 
     function signin() {
-      User.signin(vm.user);
+      User.signin(vm.user)
+        .then(function(data) {
+          $window.localStorage.token = data.token;
+          $window.localStorage.userId = data.id;
+          $state.transitionTo('dashboard');
+        })
+        .catch(function() {
+          vm.signinForm.$setPristine();
+          vm.message = "Login failed. Please try again.";
+        });
     }
 
     function signup() {
-      User.signup(vm.user);
+      User.signup(vm.user)
+        .then(function(data) {
+          $window.localStorage.token = data.token;
+          $window.localStorage.userId = data.id;
+          $state.transitionTo('profile');
+        })
+        .catch(function() {
+          vm.signupForm.$setPristine();
+          vm.message = "Login failed. Please try again.";
+        });
     }
   }
 })();
