@@ -4,7 +4,8 @@
   "description": "A hub for greenhouse enthusiasts",
   "main": "./server/server.js",
   "scripts": {
-    "start": "nodemon ./server/server.js"
+    "start": "nodemon ./server/server.js",
+    "test": "mocha test/server"
   },
   "repository": {
     "type": "git",
@@ -30,5 +31,10 @@
     "passport-google-oauth": "^0.2.0",
     "passport-local": "^1.0.0",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "chai": "^3.3.0",
+    "mocha": "^2.3.3",
+    "request": "^2.65.0"
   }
 }
