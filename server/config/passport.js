@@ -81,7 +81,6 @@ module.exports = function(passport) {
         });
 
     }));
-
     // =========================================================================
     // LOCAL LOGIN =============================================================
     // =========================================================================
@@ -120,20 +119,15 @@ module.exports = function(passport) {
     // FACEBOOK ================================================================
     // =========================================================================
     passport.use(new FacebookStrategy({
-
         // pull in our app id and secret from our auth.js file
         clientID        : configAuth.facebookAuth.clientID,
         clientSecret    : configAuth.facebookAuth.clientSecret,
         callbackURL     : configAuth.facebookAuth.callbackURL
-
     },
-
     // facebook will send back the token and profile
     function(token, refreshToken, profile, done) {
-
         // asynchronous
         process.nextTick(function() {
-
             // find the user in the database based on their email
             User.getUserByEmail(profile.emails[0].value, function(err, user) {
 
