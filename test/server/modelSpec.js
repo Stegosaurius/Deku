@@ -7,6 +7,12 @@ var threadModel = require('../../server/models/threadModel.js');
 var followerModel = require('../../server/models/followerModel.js');
 
 //TODO:
+//Potentially mock out the db, or open up a connection to it
+//Check to see if a certain db query has been made
+//Could pass a callback to methods and see if they get invoked
+  //We could test the db functionality by explicitly calling the 
+  //model methods with arguments we specify, and then checking 
+  //the arguments in our callback to judge the success of the queries                    
 
 /////////////////////
 ///////MODELS////////
