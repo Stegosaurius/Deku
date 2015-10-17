@@ -4,6 +4,12 @@
   <form name="signupForm" ng-submit="signup()">
     <input type="text" name="username" ng-model="signup.user.username" placeholder="Username" required><br>
     <input type="password" name="password" ng-model="signup.user.password" placeholder="Password" required><br>
-    <button type="submit">Sign Up</button>
+    <button type="submit">Sign Up</button><br>
+
+    <a href="/auth/google">Sign Up with Google</a>
+
+    <a href="/auth/facebook">Sign Up with Facebook</a>
+
+    <p>{{ signin.message }}</p>
   </form>
 </div>
