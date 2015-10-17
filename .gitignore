@@ -1,7 +1,6 @@
 .DS_Store
 
-# Database setup
-server/db/user_schema.sql
+# Auth setup
 server/config/auth.js
 
 # Dependencies

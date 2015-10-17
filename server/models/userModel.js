@@ -16,7 +16,7 @@ module.exports = {
     });
   },
 
-  getUser: function (id, callback) {
+  getUserByID: function (id, callback) {
     // we don't need a password since a profile is viewable by anyone
     db.query('select id, username, scoped_key, about, location, growth_methods, plants from Users where id = ?', [id], function (err, userObj) {
       if (err) {
@@ -25,6 +25,27 @@ module.exports = {
         callback(null, userObj);
       }
     });
+  },
+
+  getUserByName: function (username, callback) {
+    db.query('select id, username, password, scoped_key, about, location, growth_methods, plants from Users where username = ?', [username], function (err, user) {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, user);
+      }
+    })
+  },
+
+  getUserByEmail: function (email, callback) {
+    db.query('select id, username, email, fb_id, fb_token, google_id, google_token, scoped_key, about, location, growth_methods, plants from Users where email = ?',
+      [email], function (err, user) {
+        if (err) {
+          callback(err, null);
+        } else {
+          callback(null, user);
+        }
+      })
   },
 
   updateUser: function (data, callback) {
@@ -40,9 +61,10 @@ module.exports = {
     });
   },
 
-  addUser: function (data, callback) {
+  addUserByLocal: function (data, callback) {
     var password = bcrypt.hashSync(data.password, bcrypt.genSaltSync(10));
-    db.query('insert into users values ( (username = ?), (password = ?))', [data.username, password], function (err, user) {
+  
+    db.query('insert into users values ((username = ?), (password = ?))', [data.username, password], function (err, user) {
       if (err) {
         callback(err, null);
       } else {
@@ -51,8 +73,40 @@ module.exports = {
     });
   },
 
+  addUserByFB: function (data, callback) {
+    db.query('insert into users values ((username = ?), (email = ?), (fb_id = ?), (fb_token = ?))', [data.username, data.email, data.fbID, data.fbToken],
+      function (err, user) {
+        if (err) {
+          callback(err, null);
+        } else {
+          callback(null, user);
+        }
+      });
+  },
+
+  addUserByGoogle: function (data, callback) {
+    db.query('insert insert into users values ((username = ?), (email = ?), (google_id = ?), (google_token = ?))', [data.username, data.email, data.googleID, data.googleToken],
+      function (err, user) {
+        if (err) {
+          callback(err, null);
+        } else {
+          callback(null, user);
+        }
+      });
+  },
+
   getProfilePhoto: function (id, callback) {
     db.query('select profile_photo from users where id = ?', [id], function (err, photo) {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, photo);
+      }
+    });
+  },
+
+  addProfilePhoto: function (id, photo, callback) {
+    db.query('update users set photo = ? where id = ?', [photo, id], function (err, photo) {
       if (err) {
         callback(err, null);
       } else {
@@ -112,6 +166,30 @@ module.exports = {
         } else {
           callback(null, notifications);
         }
+    });
+  },
+
+  addNotification: function (id, content, callback) {
+    db.query('insert into notifications values (?, ?)', [id, content], function (err, notification) {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, notification);
+      }
+    });
+  },
+
+  isValidPassword: function (candidatePassword, hashedPassword) {
+    return bcrypt.compareSync(candidatePassword, hashedPassword);
+  },
+
+  getPassword: function (id, callback) {
+    db.query('select password from users where id = ?', [id], function (err, password) {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, password);
+      }
     });
   }
 }

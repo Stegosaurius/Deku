@@ -1,9 +1,7 @@
-var morgan      = require('morgan'), 
-    bodyParser  = require('body-parser'),
-    cookieParser = require('cookie-parser'),
-    passport    = require('passport');
-    //helpers     = require('./helpers.js'); // our custom middleware
-
+var morgan = require('morgan');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var passport = require('passport');
 
 module.exports = function (app, express) {
   //Express 4 allows us to use multiple routers with their own configurations
@@ -32,5 +30,8 @@ module.exports = function (app, express) {
   require('../routers/userRoutes.js')(userRouter, passport);
   require('../routers/followerRoutes.js')(followerRouter);
   require('../routers/threadRoutes.js')(threadRouter);
+
+  //inject passport into passport configuration file
+  require('../config/passport')(passport);
 
 };
