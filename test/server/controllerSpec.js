@@ -1,3 +1,4 @@
+//get the expect function from the chai module
 var expect = require('chai').expect;
 
 //Require all of our controllers
@@ -6,11 +7,18 @@ var threadController = require('../../server/controllers/threadController.js');
 var followerController = require('../../server/controllers/followerController.js');
 
 //Stub out model methods?
+//TODO: controllers should invoke methods from their respective models
+  //Could stub out those methods
+//Check how many arguments controller methods accept
+//Figure out how to test the res object, maybe actually invoking model
+  //methods, OR stubing out the req and res objects and testing how
+  //the controllers handle model method success/failure
 
 /////////////////////
 /////CONTROLLERS/////
 /////////////////////
 
+//unit and integration testing
 
 describe('Server side controller testing', function () {
 
