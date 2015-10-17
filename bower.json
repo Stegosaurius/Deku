@@ -19,6 +19,8 @@
   "dependencies": {
     "angular": "~1.4.7",
     "angular-ui-router": "~0.2.15",
-    "keen-js": "~3.2.7"
+    "keen-js": "~3.2.7",
+    "jquery-knob": "jquery-knob#~1.2.11",
+    "jquery": "~2.1.4"
   }
 }

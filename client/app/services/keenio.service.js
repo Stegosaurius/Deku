@@ -1,8 +1,9 @@
 (function() {
   angular.module('app')
-    .factory('Keen', Keen);
+    .factory('Keenio', Keenio);
 
-  function Keen($http) {
+  function Keenio($http) {
+    var client = new Keen( dashboardConfigure ); //loading keys in this file
     var services = {
       query: query // FAKE
     };
