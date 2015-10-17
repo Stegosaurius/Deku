@@ -4,10 +4,11 @@
   angular.module('app')
     .factory('User', User);
 
-  function User($http) {
+  function User($http, $window, $state) {
 
     var services = {
       signin: signin,
+      signout: signout,
       signup: signup,
       getProfile: getProfile
     };
@@ -21,6 +22,11 @@
         }, function errorCallback(res) {
           console.log('Error signing in');
         });
+    }
+
+    function signout() {
+      delete $window.localStorage.token;
+      $state.transitionTo('signin');
     }
 
     function signup(data) {
