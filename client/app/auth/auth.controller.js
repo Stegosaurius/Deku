@@ -18,7 +18,6 @@
       User.signin(vm.user)
         .then(function(data) {
           $window.localStorage.token = data.token;
-          $window.localStorage.userId = data.id;
           $state.transitionTo('dashboard');
         })
         .catch(function() {
@@ -31,7 +30,6 @@
       User.signup(vm.user)
         .then(function(data) {
           $window.localStorage.token = data.token;
-          $window.localStorage.userId = data.id;
           $state.transitionTo('profile');
         })
         .catch(function() {
