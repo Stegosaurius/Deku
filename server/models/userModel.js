@@ -38,7 +38,7 @@ module.exports = {
   },
 
   getUserByEmail: function (email, callback) {
-    db.query('select id, username, email, fb_id, fb_token, google_id, google_token, scoped_key, about, location, growth_methods, plants from Users where email = ?',
+    db.query('select id, username, email, scoped_key, about, location, growth_methods, plants from Users where email = ?',
       [email], function (err, user) {
         if (err) {
           callback(err, null);

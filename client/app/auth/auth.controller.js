@@ -17,6 +17,7 @@
     function signin() {
       User.signin(vm.user)
         .then(function(data) {
+          console.log("data:",data);
           $window.localStorage.token = data.token;
           $state.transitionTo('dashboard');
         })

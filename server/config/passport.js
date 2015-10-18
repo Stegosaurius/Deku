@@ -75,6 +75,7 @@ module.exports = function(passport) {
                     if (err) {
                         console.error(err);
                     } else {
+                        console.log(user);
                         return done(null, user[0]);
                     }
                 });
@@ -102,6 +103,7 @@ module.exports = function(passport) {
         // we are checking to see if the user trying to login already exists
         User.getUserByName(username, function(err, user) {
             // if there are any errors, return the error before anything else
+            console.log(user);
             if (err) {
                 return done(err);
             }
@@ -183,12 +185,13 @@ module.exports = function(passport) {
 
             // try to find the user based on their google id
             User.getUserByEmail(profile.emails[0].value, function(err, user) {
+                console.log(user);
                 if (err)
                     return done(err);
 
                 if (user.length === 1) {
                     // if a user is found, log them in
-
+                    console.log("done :", done);
                     return done(null, user[0]);
                 } else {
                     var newUser = {
@@ -202,6 +205,8 @@ module.exports = function(passport) {
                         if (err) {
                             return console.error(err);
                         } else {
+                            // console.log(user);
+                            console.log("done :", done);
                             return done(null, user[0]);
                         }
                     });

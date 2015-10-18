@@ -2,6 +2,7 @@ var userController = require('../controllers/userController.js');
 var expressJWT = require('express-jwt');
 var jwt = require('jsonwebtoken');
 var auth = require('../config/auth');
+var util = require('../helpers/utilities');
 
 module.exports = function (app, passport) {
   //app === userRouter injected from middlware.js
@@ -36,6 +37,7 @@ module.exports = function (app, passport) {
       }
 
       if (user) {
+
         return res.json({ token: util.generateWebToken(user) });
       } else {
         return res.status(401).json(info);
@@ -79,9 +81,10 @@ module.exports = function (app, passport) {
       if (err) { 
         return next(err); 
       }
-
+      console.log(user);
+      console.log(user.username);
       if (user) {
-        return res.json({ token: util.generateWebToken(user) });
+        res.json({ token: util.generateWebToken(user) });
       } else {
         return res.status(401).json(info);
       }

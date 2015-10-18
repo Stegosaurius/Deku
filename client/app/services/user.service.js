@@ -18,6 +18,7 @@
     function signin(data) {
       $http.post('/auth/signin', data)
         .then(function successCallback(res) {
+          console.log(res);
           return res.data;
         }, function errorCallback(res) {
           console.log('Error signing in');
