@@ -3,7 +3,7 @@ var passport = require('passport');
 var path = require('path');
 var flash = require('connect-flash');
 var session = require('express-session');
-var auth = require('/config/auth');
+var auth = require('./config/auth');
 
 //Our app is an instance of express
 var app = express();

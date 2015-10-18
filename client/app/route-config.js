@@ -3,7 +3,7 @@
 
   angular.module('app')
     .config(config)
-    .factory(AttachToken);
+    .factory('AttachToken', AttachToken);
 
   function config($stateProvider, $urlRouterProvider, $httpProvider) {
     // default path
@@ -41,7 +41,7 @@
       $httpProvider.interceptors.push('AttachToken');
   }
 
-  function AttachToken($window, $state, $q) {
+  function AttachToken($window, $q) {
     return {
       // find user's JWT in local storage and attach it to outgoing request
       request: function(object) {
@@ -56,7 +56,7 @@
       // reroute user to login in authentication 
       response: function(response) {
         if (response.status === 401) {
-          $state.transitionTo('signin');
+          console.log('Unauthorized!');
         }
 
         return response || $q.when(response);
