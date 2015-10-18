@@ -22,16 +22,16 @@ module.exports = function(passport) {
     // passport needs ability to serialize and unserialize users out of session
 
     // used to serialize the user for the session
-    // passport.serializeUser(function(user, done) {
-    //     done(null, user[0].id);
-    // });
+    passport.serializeUser(function(user, done) {
+        done(null, user.id);
+    });
 
-    // // used to deserialize the user
-    // passport.deserializeUser(function(id, done) {
-    //     User.getUserByID(id, function(err, user) {
-    //         done(err, user);
-    //     });
-    // });
+    // used to deserialize the user
+    passport.deserializeUser(function(id, done) {
+        User.getUserByID(id, function(err, user) {
+            done(err, user);
+        });
+    });
 
     // =========================================================================
     // LOCAL SIGNUP ============================================================
@@ -46,7 +46,7 @@ module.exports = function(passport) {
         passReqToCallback : true // allows us to pass back the entire request to the callback
     },
     function(req, username, password, done) {
-
+        console.log('Inside passport local');
         // asynchronous
         // User.findOne wont fire unless data is sent back
         process.nextTick(function() {
@@ -185,13 +185,11 @@ module.exports = function(passport) {
 
             // try to find the user based on their google id
             User.getUserByEmail(profile.emails[0].value, function(err, user) {
-                console.log(user);
                 if (err)
                     return done(err);
 
                 if (user.length === 1) {
                     // if a user is found, log them in
-                    console.log("done :", done);
                     return done(null, user[0]);
                 } else {
                     var newUser = {
@@ -205,8 +203,6 @@ module.exports = function(passport) {
                         if (err) {
                             return console.error(err);
                         } else {
-                            // console.log(user);
-                            console.log("done :", done);
                             return done(null, user[0]);
                         }
                     });

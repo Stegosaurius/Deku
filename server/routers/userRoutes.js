@@ -30,8 +30,8 @@ module.exports = function (app, passport) {
     if (!req.body.username || !req.body.password) {
       return res.status(400).json({message: 'Please fill out all fields'});
     }
-
-    passport.authenticate('local-signup', function(err, user, info){
+    console.log("inside route for signup")
+    passport.authenticate('local-signup', { session: false }, function(err, user, info){
       if (err) { 
         return next(err); 
       }
@@ -50,7 +50,7 @@ module.exports = function (app, passport) {
       return res.status(400).json({message: 'Please fill out all fields'});
     }
 
-    passport.authenticate('local-signin', function(err, user, info){
+    passport.authenticate('local-signin', { session: false }, function(err, user, info){
       if (err) { 
         return next(err); 
       }
@@ -76,20 +76,9 @@ module.exports = function (app, passport) {
   app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
 
   // handle the callback after facebook has authenticated the user
-  app.get('/auth/facebook/callback', function (req, res, next) {
-    passport.authenticate('facebook', function (err, user, info) {
-      if (err) { 
-        return next(err); 
-      }
-      console.log(user);
-      console.log(user.username);
-      if (user) {
-        res.json({ token: util.generateWebToken(user) });
-      } else {
-        return res.status(401).json(info);
-      }
-    })(req, res, next);
-  });
+  app.get('/auth/facebook/callback', passport.authenticate('facebook', { 
+      successRedirect: "/#/profile",
+      failureRedirect: "/#/signin" }));
 
   // =====================================
   // GOOGLE ROUTES =======================
@@ -100,17 +89,9 @@ module.exports = function (app, passport) {
   app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
 
   // the callback after google has authenticated the user
-  app.get('/auth/google/callback', function (req, res, next) {
-    passport.authenticate('google', function (err, user, info) {
-      if (err) { 
-        return next(err); 
-      }
-      if (user) {
-        return res.json({ token: util.generateWebToken(user) });
-      } else {
-        return res.status(401).json(info);
-      }
-    })(req, res, next);
-  });
+  app.get('/auth/google/callback', passport.authenticate('google', 
+    {
+      successRedirect: "/#/profile",
+      failureRedirect: "/#/signin" }));
   
 }
