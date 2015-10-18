@@ -22,16 +22,16 @@ module.exports = function(passport) {
     // passport needs ability to serialize and unserialize users out of session
 
     // used to serialize the user for the session
-    // passport.serializeUser(function(user, done) {
-    //     done(null, user[0].id);
-    // });
+    passport.serializeUser(function(user, done) {
+        done(null, user.id);
+    });
 
-    // // used to deserialize the user
-    // passport.deserializeUser(function(id, done) {
-    //     User.getUserByID(id, function(err, user) {
-    //         done(err, user);
-    //     });
-    // });
+    // used to deserialize the user
+    passport.deserializeUser(function(id, done) {
+        User.getUserByID(id, function(err, user) {
+            done(err, user);
+        });
+    });
 
     // =========================================================================
     // LOCAL SIGNUP ============================================================
@@ -46,7 +46,7 @@ module.exports = function(passport) {
         passReqToCallback : true // allows us to pass back the entire request to the callback
     },
     function(req, username, password, done) {
-
+        console.log('Inside passport local');
         // asynchronous
         // User.findOne wont fire unless data is sent back
         process.nextTick(function() {
@@ -75,6 +75,7 @@ module.exports = function(passport) {
                     if (err) {
                         console.error(err);
                     } else {
+                        console.log(user);
                         return done(null, user[0]);
                     }
                 });
@@ -102,6 +103,7 @@ module.exports = function(passport) {
         // we are checking to see if the user trying to login already exists
         User.getUserByName(username, function(err, user) {
             // if there are any errors, return the error before anything else
+            console.log(user);
             if (err) {
                 return done(err);
             }
@@ -151,7 +153,7 @@ module.exports = function(passport) {
                         fbToken: token,
                         email: profile.emails[0].value
                     };
-                    User.addUserByFB(newUser, function (err, user) {
+                    User.addUserBySocial(newUser, function (err, user) {
                         if (err) {
                             return console.error(err);
                         } else {
@@ -188,7 +190,6 @@ module.exports = function(passport) {
 
                 if (user.length === 1) {
                     // if a user is found, log them in
-
                     return done(null, user[0]);
                 } else {
                     var newUser = {
@@ -198,7 +199,7 @@ module.exports = function(passport) {
                         googleToken: token
                     };
 
-                    User.addUserByGoogle(newUser, function (err, user) {
+                    User.addUserBySocial(newUser, function (err, user) {
                         if (err) {
                             return console.error(err);
                         } else {

@@ -15,6 +15,6 @@ module.exports = {
       email: userObj.email
     };
 
-    return jwt.sign(profile, auth.secret, { expiresInMinutes: 60*5 });
+    return jwt.sign(profile, auth.secret, { expiresIn: 86400 });
   }
 }

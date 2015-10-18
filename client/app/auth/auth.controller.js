@@ -17,6 +17,7 @@
     function signin() {
       User.signin(vm.user)
         .then(function(data) {
+          console.log("data:",data);
           $window.localStorage.token = data.token;
           $state.transitionTo('dashboard');
         })
@@ -27,6 +28,7 @@
     }
 
     function signup() {
+      console.log('Inside signup on front end')
       User.signup(vm.user)
         .then(function(data) {
           $window.localStorage.token = data.token;
