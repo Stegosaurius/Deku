@@ -64,7 +64,7 @@ module.exports = {
   addUserByLocal: function (data, callback) {
     var password = bcrypt.hashSync(data.password, bcrypt.genSaltSync(10));
   
-    db.query('insert into users values ((username = ?), (password = ?))', [data.username, password], function (err, user) {
+    db.query('insert into users (username, password) values (?, ?)', [data.username, password], function (err, user) {
       if (err) {
         callback(err, null);
       } else {
@@ -73,19 +73,8 @@ module.exports = {
     });
   },
 
-  addUserByFB: function (data, callback) {
-    db.query('insert into users values ((username = ?), (email = ?), (fb_id = ?), (fb_token = ?))', [data.username, data.email, data.fbID, data.fbToken],
-      function (err, user) {
-        if (err) {
-          callback(err, null);
-        } else {
-          callback(null, user);
-        }
-      });
-  },
-
-  addUserByGoogle: function (data, callback) {
-    db.query('insert insert into users values ((username = ?), (email = ?), (google_id = ?), (google_token = ?))', [data.username, data.email, data.googleID, data.googleToken],
+  addUserBySocial: function (data, callback) {
+    db.query('insert into users (username, email) values (?, ?)', [data.username, data.email],
       function (err, user) {
         if (err) {
           callback(err, null);
@@ -128,7 +117,7 @@ module.exports = {
   },
 
   addFollower: function (userID, targetID, callback) {
-    db.query('insert into followers values (?, ?)', [userID, targetID], function (err, target) {
+    db.query('insert into followers (user_id, follower_id) values (?, ?)', [userID, targetID], function (err, target) {
       if (err) {
         callback(err, null);
       } else {
@@ -148,7 +137,7 @@ module.exports = {
   },
 
   addStatus: function (data, callback) {
-    db.query('insert into statuses values ( (user_id = ?), (status = ?))', [data.userID, data.status],
+    db.query('insert into statuses (user_id, status) values (?, ?)', [data.userID, data.status],
       function (err, status) {
         if (err) {
           callback(err, null);
@@ -170,7 +159,7 @@ module.exports = {
   },
 
   addNotification: function (id, content, callback) {
-    db.query('insert into notifications values (?, ?)', [id, content], function (err, notification) {
+    db.query('insert into notifications (user_id, content) values (?, ?)', [id, content], function (err, notification) {
       if (err) {
         callback(err, null);
       } else {

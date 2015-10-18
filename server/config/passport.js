@@ -151,7 +151,7 @@ module.exports = function(passport) {
                         fbToken: token,
                         email: profile.emails[0].value
                     };
-                    User.addUserByFB(newUser, function (err, user) {
+                    User.addUserBySocial(newUser, function (err, user) {
                         if (err) {
                             return console.error(err);
                         } else {
@@ -198,7 +198,7 @@ module.exports = function(passport) {
                         googleToken: token
                     };
 
-                    User.addUserByGoogle(newUser, function (err, user) {
+                    User.addUserBySocial(newUser, function (err, user) {
                         if (err) {
                             return console.error(err);
                         } else {
