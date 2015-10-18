@@ -1,5 +1,5 @@
 var userController = require('../controllers/userController.js');
-var expressJwt = require('express-jwt');
+var expressJWT = require('express-jwt');
 var jwt = require('jsonwebtoken');
 var auth = require('../config/auth');
 
