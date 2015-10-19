@@ -1,14 +1,14 @@
 <div class="signin">
   <h1>Sign In</h1>
 
-  <form name="signinForm" ng-submit="signin()">
+  <form name="signinForm" ng-submit="signin.signin()">
     <input type="text" name="username" ng-model="signin.user.username" placeholder="Username" required><br>
     <input type="password" name="password" ng-model="signin.user.password" placeholder="Password" required><br>
     <button type="submit">Sign In</button><br>
 
-    <button ng-click="signinOAuth('/users/auth/google')">Sign In with Google</button>
+    <button ng-click="signin.signinOAuth('/users/auth/google')">Sign In with Google</button>
     <br>
-    <button ng-click="signinOAuth('/users/auth/facebook')">Sign In with Facebook</button>
+    <button ng-click="signin.signinOAuth('/users/auth/facebook')">Sign In with Facebook</button>
 
     <p>{{ signin.message }}</p>
   </form>

@@ -41,7 +41,7 @@
       $httpProvider.interceptors.push('AttachToken');
   }
 
-  function AttachToken($window, $q) {
+  function AttachToken($window, $q, $injector) {
     return {
       // find user's JWT in local storage and attach it to outgoing request
       request: function(object) {
@@ -56,7 +56,7 @@
       // reroute user to login in authentication 
       response: function(response) {
         if (response.status === 401) {
-          console.log('Unauthorized!');
+          $injector.get('User').signout();
         }
 
         return response || $q.when(response);
