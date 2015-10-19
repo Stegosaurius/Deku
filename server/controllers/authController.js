@@ -57,7 +57,7 @@ module.exports = {
         return res.status(404).send();
       }
       // if the user is found but the password is wrong
-      if (!util.isValidPassword(password, user[0].password)) {
+      if (!util.isValidPassword(req.body.password, user[0].password)) {
         return res.status(422).send();
       }
       // all is well, return successful user

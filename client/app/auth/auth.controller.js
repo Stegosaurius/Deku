@@ -16,15 +16,25 @@
     vm.signupOAuth = signupOAuth;
     vm.user = {};
 
+    function resetForm(message) {
+      vm.form.$setPristine();
+      vm.message = message;
+    }
+
     function signin() {
       User.signin(vm.user)
         .then(function(data) {
           $window.localStorage.token = data.token;
           $state.transitionTo('dashboard');
         })
-        .catch(function() {
-          vm.signinForm.$setPristine();
-          vm.message = "Login failed. Please try again.";
+        .catch(function(status) {
+          if (status === 404) {
+            resetForm('Username not found');
+          } else if (status === 422) {
+            resetForm('Incorrect password');
+          } else {
+            resetForm('Login failed. Please try again.');
+          }
         });
     }
 
@@ -35,8 +45,7 @@
           $state.transitionTo('dashboard');
         })
         .catch(function() {
-          vm.signinForm.$setPristine();
-          vm.message = "Login failed. Please try again.";
+          resetForm('Login failed. Please try again.');
         });
     }
 
@@ -46,9 +55,12 @@
           $window.localStorage.token = data.token;
           $state.transitionTo('profile');
         })
-        .catch(function() {
-          vm.signupForm.$setPristine();
-          vm.message = "Sign up failed. Please try again.";
+        .catch(function(status) {
+          if (status === 409) {
+            resetForm('Username already taken');
+          } else {
+            resetForm('Sign up failed. Please try again.');
+          }
         });
     }
 
@@ -59,8 +71,7 @@
           $state.transitionTo('profile');
         })
         .catch(function() {
-          vm.signupForm.$setPristine();
-          vm.message = "Sign up failed. Please try again.";
+          resetForm('Sign up failed. Please try again.');
         });
     }
   }
