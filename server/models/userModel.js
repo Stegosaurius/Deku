@@ -64,11 +64,12 @@ module.exports = {
   addUserByLocal: function (data, callback) {
     var password = bcrypt.hashSync(data.password, bcrypt.genSaltSync(10));
   
-    db.query('insert into users (username, password) values (?, ?)', [data.username, password], function (err, user) {
+    db.query('insert into users (username, password) values (?, ?)', [data.username, password], function (err, res) {
       if (err) {
         callback(err, null);
       } else {
-        callback(null, user);
+        console.log("saved user: ", res);
+        callback(null, res);
       }
     });
   },

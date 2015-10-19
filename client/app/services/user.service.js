@@ -18,7 +18,7 @@
     return services;
 
     function signin(data) {
-      $http.post('/users/auth/signin', data)
+      return $http.post('/users/auth/signin', data)
         .then(function successCallback(res) {
           console.log(res);
           return res.data;
@@ -28,7 +28,7 @@
     }
 
     function signinOAuth(url) {
-      $http.get(url)
+      return $http.get(url)
         .then(function successCallback(res) {
           console.log(res);
           return res.data;
@@ -43,7 +43,7 @@
     }
 
     function signup(data) {
-      $http.post('/users/auth/signup', data)
+      return $http.post('/users/auth/signup', data)
         .then(function successCallback(res) {
           return res.data;
         }, function errorCallback(res) {
@@ -52,7 +52,7 @@
     }
 
     function signupOAuth(url) {
-      $http.get(url)
+      return $http.get(url)
         .then(function successCallback(res) {
           return res.data;
         }, function errorCallback(res) {
@@ -64,7 +64,7 @@
     function getProfile() {
       var url = '/users/' + userID;
       
-      $http.get(url)
+      return $http.get(url)
       .then(function successCallback(res) {
         return res.data;
       }, function errorCallback(res) {
