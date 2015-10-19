@@ -20,17 +20,15 @@
     function signin(data) {
       return $http.post('/users/auth/signin', data)
         .then(function successCallback(res) {
-          console.log(res);
           return res.data;
         }, function errorCallback(res) {
-          console.log('Error signing in');
+          throw res.status;
         });
     }
 
     function signinOAuth(url) {
       return $http.get(url)
         .then(function successCallback(res) {
-          console.log(res);
           return res.data;
         }, function errorCallback(res) {
           console.log('Error signing in with OAuth');
@@ -47,7 +45,7 @@
         .then(function successCallback(res) {
           return res.data;
         }, function errorCallback(res) {
-          console.log('Error signing up');
+          throw res.status;
         });
     }
 
