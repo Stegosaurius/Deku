@@ -4,34 +4,59 @@
   angular.module('app')
     .factory('User', User);
 
-  User.$inject = ['$http'];
-
-  function User($http) {
-    var userID;
+  function User($http, $window, $state) {
 
     var services = {
       signin: signin,
+      signinOAuth: signinOAuth,
+      signout: signout,
       signup: signup,
+      signupOAuth: signupOAuth,
       getProfile: getProfile
     };
 
     return services;
 
     function signin(data) {
-      $http.post('/auth/signin', data)
+      return $http.post('/users/auth/signin', data)
         .then(function successCallback(res) {
-          userID = res.data.id;
+          console.log(res);
+          return res.data;
         }, function errorCallback(res) {
           console.log('Error signing in');
         });
     }
 
-    function signup(data) {
-      $http.post('/auth/signup', data)
+    function signinOAuth(url) {
+      return $http.get(url)
         .then(function successCallback(res) {
-          userID = res.data.id;
+          console.log(res);
+          return res.data;
         }, function errorCallback(res) {
-          console.log('Error signing in');
+          console.log('Error signing in with OAuth');
+        });
+    }
+
+    function signout() {
+      delete $window.localStorage.token;
+      $state.transitionTo('signin');
+    }
+
+    function signup(data) {
+      return $http.post('/users/auth/signup', data)
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log('Error signing up');
+        });
+    }
+
+    function signupOAuth(url) {
+      return $http.get(url)
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log('Error signing up with OAuth');
         });
     }
 
@@ -39,9 +64,7 @@
     function getProfile() {
       var url = '/users/' + userID;
       
-      $http.get(url, {
-        params: { id: userID }
-      })
+      return $http.get(url)
       .then(function successCallback(res) {
         return res.data;
       }, function errorCallback(res) {

@@ -4,9 +4,19 @@
   angular.module('app')
     .controller('DashboardController', DashboardController);
 
-  DashboardController.$inject = ['User'];
+  function DashboardController(User,Keenio) {
+    var vm = this;
 
-  function DashboardController(User) {
-    // insert code here
+    vm.greeting = "Hi!!!!";
+
+    Keenio.query( function(err,res){
+      if(err) {
+        console.log('error in keenio.query callback',err);
+      } else {
+        //res is the result of a keen.io query made in keenio.service
+        $("#chart-01").val(res).trigger('change');
+      }
+    });
+
   }
 })();

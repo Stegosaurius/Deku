@@ -1,5 +1,5 @@
 //Require DB connection!
-var db = require('../db');
+var db = require('../db/connection.js');
 var bcrypt = require('bcrypt-nodejs');
 
 module.exports = {
@@ -16,7 +16,7 @@ module.exports = {
     });
   },
 
-  getUser: function (id, callback) {
+  getUserByID: function (id, callback) {
     // we don't need a password since a profile is viewable by anyone
     db.query('select id, username, scoped_key, about, location, growth_methods, plants from Users where id = ?', [id], function (err, userObj) {
       if (err) {
@@ -25,6 +25,27 @@ module.exports = {
         callback(null, userObj);
       }
     });
+  },
+
+  getUserByName: function (username, callback) {
+    db.query('select id, username, password, scoped_key, about, location, growth_methods, plants from Users where username = ?', [username], function (err, user) {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, user);
+      }
+    })
+  },
+
+  getUserByEmail: function (email, callback) {
+    db.query('select id, username, email, scoped_key, about, location, growth_methods, plants from Users where email = ?',
+      [email], function (err, user) {
+        if (err) {
+          callback(err, null);
+        } else {
+          callback(null, user);
+        }
+      })
   },
 
   updateUser: function (data, callback) {
@@ -40,19 +61,42 @@ module.exports = {
     });
   },
 
-  addUser: function (data, callback) {
+  addUserByLocal: function (data, callback) {
     var password = bcrypt.hashSync(data.password, bcrypt.genSaltSync(10));
-    db.query('insert into users values ( (username = ?), (password = ?))', [data.username, password], function (err, user) {
+  
+    db.query('insert into users (username, password) values (?, ?)', [data.username, password], function (err, res) {
       if (err) {
         callback(err, null);
       } else {
-        callback(null, user);
+        console.log("saved user: ", res);
+        callback(null, res);
       }
     });
   },
 
+  addUserBySocial: function (data, callback) {
+    db.query('insert into users (username, email) values (?, ?)', [data.username, data.email],
+      function (err, user) {
+        if (err) {
+          callback(err, null);
+        } else {
+          callback(null, user);
+        }
+      });
+  },
+
   getProfilePhoto: function (id, callback) {
     db.query('select profile_photo from users where id = ?', [id], function (err, photo) {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, photo);
+      }
+    });
+  },
+
+  addProfilePhoto: function (id, photo, callback) {
+    db.query('update users set photo = ? where id = ?', [photo, id], function (err, photo) {
       if (err) {
         callback(err, null);
       } else {
@@ -74,7 +118,7 @@ module.exports = {
   },
 
   addFollower: function (userID, targetID, callback) {
-    db.query('insert into followers values (?, ?)', [userID, targetID], function (err, target) {
+    db.query('insert into followers (user_id, follower_id) values (?, ?)', [userID, targetID], function (err, target) {
       if (err) {
         callback(err, null);
       } else {
@@ -94,7 +138,7 @@ module.exports = {
   },
 
   addStatus: function (data, callback) {
-    db.query('insert into statuses values ( (user_id = ?), (status = ?))', [data.userID, data.status],
+    db.query('insert into statuses (user_id, status) values (?, ?)', [data.userID, data.status],
       function (err, status) {
         if (err) {
           callback(err, null);
@@ -112,6 +156,26 @@ module.exports = {
         } else {
           callback(null, notifications);
         }
+    });
+  },
+
+  addNotification: function (id, content, callback) {
+    db.query('insert into notifications (user_id, content) values (?, ?)', [id, content], function (err, notification) {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, notification);
+      }
+    });
+  },
+
+  getPassword: function (id, callback) {
+    db.query('select password from users where id = ?', [id], function (err, password) {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, password);
+      }
     });
   }
 }

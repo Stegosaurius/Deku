@@ -1,1 +1,15 @@
-<div class="signup"></div>
+<div class="signup">
+  <h1>Sign Up</h1>
+
+  <form name="signupForm" ng-submit="signup.signup()">
+    <input type="text" name="username" ng-model="signup.user.username" placeholder="Username" required><br>
+    <input type="password" name="password" ng-model="signup.user.password" placeholder="Password" required><br>
+    <button type="submit">Sign Up</button><br>
+
+    <button ng-click="signup.signupOAuth('/users/auth/google')">Sign Up with Google</button>
+    <br>
+    <button ng-click="signup.signupOAuth('/users/auth/facebook')">Sign Up with Facebook</button>
+
+    <p>{{ signin.message }}</p>
+  </form>
+</div>

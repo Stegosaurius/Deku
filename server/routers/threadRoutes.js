@@ -1,4 +1,4 @@
-var threadController = require('./controllers/threadController.js');
+var threadController = require('../controllers/threadController.js');
 
 
 module.exports = function (app) {

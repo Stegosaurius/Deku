@@ -1,9 +1,7 @@
-var morgan      = require('morgan'), 
-    bodyParser  = require('body-parser'),
-    cookieParser = require('cookie-parser'),
-    passport    = require('passport');
-    //helpers     = require('./helpers.js'); // our custom middleware
-
+var morgan = require('morgan');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var passport = require('passport');
 
 module.exports = function (app, express) {
   //Express 4 allows us to use multiple routers with their own configurations
@@ -20,7 +18,7 @@ module.exports = function (app, express) {
   app.use(bodyParser.json());
   app.use(cookieParser());
   //serving all of the static files from the client directory
-  app.use(express.static(path.join(__dirname, '../client')));
+  app.use(express.static(__dirname + '/../../client'));
  
 
   //Make our app use all the routers we define 
@@ -30,7 +28,10 @@ module.exports = function (app, express) {
 
   //inject our routers into their respective route files
   require('../routers/userRoutes.js')(userRouter, passport);
-  require('../routers/followerRouter.js')(followerRouter);
-  require('../routers/threadRoutes.js')(threadRoutes);
+  require('../routers/followerRoutes.js')(followerRouter);
+  require('../routers/threadRoutes.js')(threadRouter);
+
+  //inject passport into passport configuration file
+  require('../config/passport')(passport);
 
 };
