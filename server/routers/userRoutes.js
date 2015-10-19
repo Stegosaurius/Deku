@@ -3,6 +3,7 @@ var expressJWT = require('express-jwt');
 var jwt = require('jsonwebtoken');
 var auth = require('../config/auth');
 var util = require('../helpers/utilities');
+var authController = require('../controllers/authController');
 
 module.exports = function (app, passport) {
   //app === userRouter injected from middlware.js
@@ -26,42 +27,9 @@ module.exports = function (app, passport) {
   });
 
 
-  app.post('/auth/signup', function (req, res, next) {
-    if (!req.body.username || !req.body.password) {
-      return res.status(400).json({message: 'Please fill out all fields'});
-    }
-    console.log("inside route for signup")
-    passport.authenticate('local-signup', { session: false }, function(err, user, info){
-      if (err) { 
-        return next(err); 
-      }
+  app.post('/auth/signup', authController.signup);
 
-      if (user) {
-
-        return res.json({ token: util.generateWebToken(user) });
-      } else {
-        return res.status(401).json(info);
-      }
-    })(req, res, next);
-  });
-
-  app.post('/auth/signin', function (req, res, next) {
-    if (!req.body.username || !req.body.password) {
-      return res.status(400).json({message: 'Please fill out all fields'});
-    }
-
-    passport.authenticate('local-signin', { session: false }, function(err, user, info){
-      if (err) { 
-        return next(err); 
-      }
-
-      if (user) {
-        return res.json({ token: util.generateWebToken(user) });
-      } else {
-        return res.status(401).json(info);
-      }
-    })(req, res, next);
-  });
+  app.post('/auth/signin', authController.signin);
 
   // route for logging out
   app.get('/logout', function(req, res) {
