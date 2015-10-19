@@ -3,7 +3,7 @@
 //functions inside our model files, which in turn make the desired
 //db queries.
 
-var model = require('../models/threadModel.js');
+var Thread = require('../models/threadModel.js');
 
 
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
 
   //Get all threads
   getAllThreads: function (req, res) {
-    model.getAllThreads(function (err, threads) {
+    Thread.getAllThreads(function (err, threads) {
       if (err) {
         //do some error handing
         res.status(404).send();
@@ -22,8 +22,9 @@ module.exports = {
   },
 
   //Get all messages from one thread
-  getThread: function (req, res, id) {
-    model.getThread(id, function (err, threadMessages) {
+  getThread: function (req, res) {
+    var id = req.params.id;
+    Thread.getThread(id, function (err, threadMessages) {
       if (err) {
         //Error handling
         res.status(404).send();
@@ -34,8 +35,9 @@ module.exports = {
   },
 
   //write a new message to a particular thread
-  postToThread: function (req, res, id) {
-    model.postToThread(id, function (err, newMessage) {
+  postToThread: function (req, res) {
+    var id = req.params.id;
+    Thread.postToThread(id, function (err, newMessage) {
       if (err) {
         //Error handling
         res.status(404).send();

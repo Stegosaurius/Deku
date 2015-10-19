@@ -105,49 +105,6 @@ module.exports = {
     });
   },
 
-  getFollowers: function (id, callback) {
-    db.query('select u.username from users u inner join followers f on (f.follower_id = u.id) where f.user_id = ?',
-      [id],
-      function (err, followers) {
-        if (err) {
-          callback(err, null);
-        } else {
-          callback(null, followers);
-        }
-    });
-  },
-
-  addFollower: function (userID, targetID, callback) {
-    db.query('insert into followers (user_id, follower_id) values (?, ?)', [userID, targetID], function (err, target) {
-      if (err) {
-        callback(err, null);
-      } else {
-        callback(null, target);
-      }
-    });
-  },
-
-  getStatuses: function (id, callback) {
-    db.query('select * from statuses where user_id = ?', [id], function (err, statuses) {
-      if (err) {
-        callback(err, null);
-      } else {
-        callback(null, statuses);
-      }
-    })
-  },
-
-  addStatus: function (data, callback) {
-    db.query('insert into statuses (user_id, status) values (?, ?)', [data.userID, data.status],
-      function (err, status) {
-        if (err) {
-          callback(err, null);
-        } else {
-          callback(null, status);
-        }
-    });
-  },
-
   getNotifications: function (id, callback) {
     db.query('select n.content from notifications n inner join users u on (n.user_id = u.id) where user_id = ?', [id],
       function (err, notifications) {
