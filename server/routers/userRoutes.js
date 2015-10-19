@@ -8,9 +8,6 @@ var authController = require('../controllers/authController');
 module.exports = function (app, passport) {
   //app === userRouter injected from middlware.js
 
-  //Specifying which controller function we wish to call
-  //based on the request url
-
   // protect /api routes with JWT
   app.use('/api', expressJWT({ secret: auth.secret }));
 
