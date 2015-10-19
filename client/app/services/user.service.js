@@ -69,5 +69,17 @@
         console.log('Error retrieving user profile');
       });
     }
+
+    // update an existing users profile info
+    function updateProfile(data) {
+      var url = '/users' + userID;
+
+      return $http.post(url, data)
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log('Error updating user profile')
+        });
+    }
   }
 })();

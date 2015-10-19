@@ -1,0 +1,14 @@
+<div class="navbar"></div>
+
+<div class="editProfile">
+  <form name="editProfile.form" ng-submit="editProfile.updateProfile()">
+
+    <input type="text" name="about" ng-model="editProfile.about" placeholder="Tell us about yourself"><br>
+    <input type="text" name="location" ng-model="editProfile.location" placeholder="Where are you based?"><br>
+    <input type="text" name="plants" ng-model="editProfile.plants" placeholder="What do you grow?"><br>    
+    <button type="submit">Update!</button><br>
+
+    <p>{{ editProfile.message }}</p>
+  </form>
+
+</div>
