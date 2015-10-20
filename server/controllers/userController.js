@@ -10,7 +10,7 @@ var bcrypt = require('bcrypt-nodejs');
 module.exports = {
   //Put all http req handling functions here
   getProfile: function (req, res, id) {
-    User.getProfile(id, function (err, userProfile) {
+    User.getUserByID(id, function (err, userProfile) {
       if (err) {
         console.error(err);
         res.status(404).send(err);
