@@ -75,7 +75,7 @@
     function updateProfile(data) {
       var url = '/users/' + userID;
 
-      return $http.post(url, data)
+      return $http.put(url, data)
         .then(function successCallback(res) {
           return res.data;
         }, function errorCallback(res) {
