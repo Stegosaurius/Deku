@@ -73,7 +73,7 @@
 
     // update an existing users profile info
     function updateProfile(data) {
-      var url = '/users/' + userID;
+      var url = '/users/' + $window.localStorage.userID;
 
       return $http.put(url, data)
         .then(function successCallback(res) {
