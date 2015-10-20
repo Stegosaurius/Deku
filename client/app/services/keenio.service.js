@@ -10,7 +10,11 @@
       lightQuery : lightQuery,
       soundQuery : soundQuery,
       lightTriggerQuery : lightTriggerQuery,
-      soundTriggerQuery : soundTriggerQuery 
+      soundTriggerQuery : soundTriggerQuery,
+      tempTimelineQuery : tempTimelineQuery,
+      humidityTimelineQuery : humidityTimelineQuery,
+      lightTimelineQuery : lightTimelineQuery,
+      soundTimelineQuery : soundTimelineQuery
     };
 
     return services;
@@ -207,6 +211,115 @@
           });
 
           client.draw(sound_timeline, document.getElementById("chart-06"), {
+            chartType: "linechart",
+            title: " ",
+            height: 250,
+            width: "auto"
+          });
+
+        }
+      );
+    }
+
+    function tempTimelineQuery(callback) {
+      Keen.ready(
+        function(){
+
+          //temperature level timeline Query
+          var tempLevel_timeline = new Keen.Query("average", {
+            eventCollection: "climate",
+            targetProperty: "temp",
+            interval:"minutely",
+            // timeframe: {
+            //   start: "2014-10-06T00:00:00.000",
+            //   end: "2014-10-07T00:00:00.000"
+            // }
+            timeframe: "today"
+          });
+
+          client.draw(tempLevel_timeline, document.getElementById("chart-07"), {
+            chartType: "linechart",
+            title: " ",
+            height: 250,
+            width: "auto"
+          });
+
+        }
+      );
+    }
+
+    function humidityTimelineQuery(callback) {
+      Keen.ready(
+        function(){
+
+          //humidity level timeline Query
+          var humidityLevel_timeline = new Keen.Query("average", {
+            eventCollection: "climate",
+            targetProperty: "humidity",
+            interval:"minutely",
+            // timeframe: {
+            //   start: "2014-10-06T00:00:00.000",
+            //   end: "2014-10-07T00:00:00.000"
+            // }
+            timeframe: "today"
+          });
+
+          client.draw(humidityLevel_timeline, document.getElementById("chart-08"), {
+            chartType: "linechart",
+            title: " ",
+            height: 250,
+            width: "auto"
+          });
+
+        }
+      );
+    }
+
+
+    function soundTimelineQuery(callback) {
+      Keen.ready(
+        function(){
+
+          //sound level timeline Query
+          var soundLevel_timeline = new Keen.Query("average", {
+            eventCollection: "climate",
+            targetProperty: "sound",
+            interval:"minutely",
+            // timeframe: {
+            //   start: "2014-10-06T00:00:00.000",
+            //   end: "2014-10-07T00:00:00.000"
+            // }
+            timeframe: "today"
+          });
+
+          client.draw(soundLevel_timeline, document.getElementById("chart-09"), {
+            chartType: "linechart",
+            title: " ",
+            height: 250,
+            width: "auto"
+          });
+
+        }
+      );
+    }
+
+    function lightTimelineQuery(callback) {
+      Keen.ready(
+        function(){
+
+          //light level timeline Query
+          var lightLevel_timeline = new Keen.Query("average", {
+            eventCollection: "climate",
+            targetProperty: "light",
+            interval:"minutely",
+            // timeframe: {
+            //   start: "2014-10-06T00:00:00.000",
+            //   end: "2014-10-07T00:00:00.000"
+            // }
+            timeframe: "today"
+          });
+
+          client.draw(lightLevel_timeline, document.getElementById("chart-10"), {
             chartType: "linechart",
             title: " ",
             height: 250,
