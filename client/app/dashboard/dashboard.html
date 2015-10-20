@@ -1,11 +1,7 @@
 <div class="navbar"></div>
 
 <div class="dashboard">
-  <h1>{{ dashboard.greeting }}</h1>
-  <!-- <div class="container-fluid"> -->
-  <!-- <div class="chart-wrapper"> -->
-  <!-- <div class="chart-stage"> -->
-
+  <div class="row">
     <div class="knob">
       <div class="chart-title">
         Temperature
@@ -15,7 +11,86 @@
       </div>
     </div>
 
-  <!-- </div>   -->
-  <!-- </div>   -->
-  <!-- </div>  -->
+    <div class="knob">
+      <div class="chart-title">
+        Humidity
+      </div>
+      <div class="chart-stage">
+        <input type="text" id="chart-02" value="0"/>
+      </div>
+    </div>
+
+    <div class="knob">
+      <div class="chart-title">
+        Light
+      </div>
+      <div class="chart-stage">
+        <input type="text" id="chart-03" value="0"/>
+      </div>
+    </div>
+
+    <div class="knob">
+      <div class="chart-title">
+        Sound
+      </div>
+      <div class="chart-stage">
+        <input type="text" id="chart-04" value="0"/>
+      </div>
+   </div> 
+ </div>
+
+  <div class="row">
+
+    <div class="chart-title">
+      Light Trigger
+    </div>
+    <div class="chart-stage">
+      <div id="chart-05"></div>
+    </div>
+
+    <div class="chart-title">
+      Sound Trigger
+    </div>
+    <div class="chart-stage">
+      <div id="chart-06"></div>
+    </div>
+
+  </div>
+
+  <div class='row'>
+
+    <div class="chart-title">
+      Temperature Level 
+    </div>
+    <div class="chart-stage">
+      <div id="chart-07"></div>
+    </div>
+
+    <div class="chart-title">
+      Humidity Level 
+    </div>
+    <div class="chart-stage">
+      <div id="chart-08"></div>
+    </div>
+
+  </div>
+
+  <div class='row'>
+
+    <div class="chart-title">
+      Sound Level 
+    </div>
+    <div class="chart-stage">
+      <div id="chart-09"></div>
+    </div>
+
+    <div class="chart-title">
+     Light Level 
+    </div>
+    <div class="chart-stage">
+      <div id="chart-10"></div>
+    </div>
+
+  </div>
+
 </div>
