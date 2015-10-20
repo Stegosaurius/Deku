@@ -24,6 +24,18 @@ module.exports = {
         res.json(status);
       }
     })
+  },
+
+  getFriendsStatuses: function (req, res) {
+    var id = req.params.id;
+    Status.getFriendsStatuses(id, function (err, statuses) {
+      if (err) {
+        console.error(err);
+        res.status(404).send(err);
+      } else {
+        res.json(statuses);
+      }
+    });
   }
 
 }

@@ -26,21 +26,21 @@ module.exports = {
 
 	postToThread: function (data, callback) {
 		db.query('insert into messages (user_id, message, thread_id) values (?, ?, ?)', [data.userID, data.message, data.threadID],
-			function (err, results, fields) {
+			function (err, res) {
 				if (err) {
 					callback(err);
 				} else {
-					callback(null, fields);
+					callback(null, res);
 				}
 			});
 	},
 
 	createThread: function (name, callback) {
-		db.query('insert into threads (thread) value (?)', [name], function (err, results, fields) {
+		db.query('insert into threads (thread) value (?)', [name], function (err, res) {
 			if (err) {
 				callback(err);
 			} else {
-				callback(null, fields);
+				callback(null, res.insertID);
 			}
 		});
 	}

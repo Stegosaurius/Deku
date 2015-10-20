@@ -17,13 +17,23 @@ module.exports = {
 
   addStatus: function (data, callback) {
     db.query('insert into statuses (user_id, status) values (?, ?)', [data.userID, data.status],
-      function (err, results, fields) {
+      function (err, res) {
         if (err) {
           callback(err, null);
         } else {
-          callback(null, fields);
+          callback(null, res.insertID);
         }
     });
+  },
+
+  getFriendsStatuses: function (id, callback) {
+    db.query('select * from statuses where id = ?', [id], function (err, statuses) {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, statuses);
+      }
+    })
   }
   
 }
