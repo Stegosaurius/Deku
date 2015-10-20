@@ -61,7 +61,7 @@
 
     // retrieve user profile information
     function getProfile() {
-      var url = '/users/' + $window.localStorage.userId;
+      var url = '/users/' + $window.localStorage.userID;
       
       return $http.get(url)
       .then(function successCallback(res) {

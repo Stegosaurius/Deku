@@ -27,7 +27,7 @@
           // save JWT and user info to local storage
           $window.localStorage.token = data.token;
           var tokenPayload = jwtHelper.decodeToken(data.token);
-          $window.localStorage.userId = tokenPayload.id;
+          $window.localStorage.userID = tokenPayload.id;
           // TODO: UNCOMMENT THIS LINE WHEN SCOPED KEYS HAVE BEEN IMPLEMENTED
           // $window.localStorage.scopedKey = tokenPayload.scoped_key;
 
@@ -61,7 +61,7 @@
           // save JWT and user info to local storage
           $window.localStorage.token = data.token;
           var tokenPayload = jwtHelper.decodeToken(data.token);
-          $window.localStorage.userId = tokenPayload.id;
+          $window.localStorage.userID = tokenPayload.id;
           // TODO: UNCOMMENT THIS LINE WHEN SCOPED KEYS HAVE BEEN IMPLEMENTED
           // $window.localStorage.scopedKey = tokenPayload.scoped_key;
 
