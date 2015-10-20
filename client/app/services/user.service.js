@@ -12,7 +12,8 @@
       signout: signout,
       signup: signup,
       signupOAuth: signupOAuth,
-      getProfile: getProfile
+      getProfile: getProfile,
+      updateProfile: updateProfile
     };
 
     return services;
@@ -72,7 +73,7 @@
 
     // update an existing users profile info
     function updateProfile(data) {
-      var url = '/users' + userID;
+      var url = '/users/' + '2';
 
       return $http.post(url, data)
         .then(function successCallback(res) {

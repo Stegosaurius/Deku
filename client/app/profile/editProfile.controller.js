@@ -14,13 +14,15 @@
     vm.plants = [];
     vm.message = '';
 
+    vm.updateProfile = updateProfile;
+
     function updateProfile() {
       User.updateProfile(vm)
         .then(function(data) {
           $state.transitionTo('profile');
         })
         .catch(function(status) {
-          
+          vm.message = 'Bad things';
         });
     }
     
