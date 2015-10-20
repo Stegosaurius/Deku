@@ -68,7 +68,6 @@ module.exports = {
       if (err) {
         callback(err, null);
       } else {
-        console.log("saved user: ", res);
         callback(null, res);
       }
     });
@@ -117,21 +116,21 @@ module.exports = {
   },
 
   addNotification: function (id, content, callback) {
-    db.query('insert into notifications (user_id, content) values (?, ?)', [id, content], function (err, notification) {
+    db.query('insert into notifications (user_id, content) values (?, ?)', [id, content], function (err, res) {
       if (err) {
         callback(err, null);
       } else {
-        callback(null, notification);
+        callback(null, res);
       }
     });
   },
 
   getPassword: function (id, callback) {
-    db.query('select password from users where id = ?', [id], function (err, password) {
+    db.query('select password from users where id = ?', [id], function (err, res) {
       if (err) {
         callback(err, null);
       } else {
-        callback(null, password);
+        callback(null, res);
       }
     });
   }

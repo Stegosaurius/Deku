@@ -24,6 +24,10 @@ module.exports = {
         res.json(status);
       }
     })
+  },
+
+  getFriendsStatuses: function (req, res) {
+    return;
   }
 
 }

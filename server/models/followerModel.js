@@ -17,11 +17,11 @@ module.exports = {
   },
 
   addFollower: function (userID, targetID, callback) {
-    db.query('insert into followers (user_id, follower_id) values (?, ?)', [userID, targetID], function (err, results, fields) {
+    db.query('insert into followers (user_id, follower_id) values (?, ?)', [userID, targetID], function (err, res) {
       if (err) {
         callback(err, null);
       } else {
-        callback(null, fields);
+        callback(null, res.insertID);
       }
     });
   }

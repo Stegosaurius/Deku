@@ -17,11 +17,11 @@ module.exports = {
 
   addStatus: function (data, callback) {
     db.query('insert into statuses (user_id, status) values (?, ?)', [data.userID, data.status],
-      function (err, results, fields) {
+      function (err, res) {
         if (err) {
           callback(err, null);
         } else {
-          callback(null, fields);
+          callback(null, res.insertID);
         }
     });
   }
