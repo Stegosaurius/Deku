@@ -3,7 +3,8 @@
 
   angular.module('app')
     .config(config)
-    .factory('AttachToken', AttachToken);
+    .factory('AttachToken', AttachToken)
+    .run(run);
 
   function config($stateProvider, $urlRouterProvider, $httpProvider) {
     // default path
@@ -16,31 +17,36 @@
         url: '/signin',
         templateUrl: 'app/auth/signin.html',
         controller: 'AuthController',
-        controllerAs: 'signin'
+        controllerAs: 'signin',
+        authenticate: false
       })
       .state('signup', {
         url: '/signup',
         templateUrl: 'app/auth/signup.html',
         controller: 'AuthController',
-        controllerAs: 'signup'
+        controllerAs: 'signup',
+        authenticate: false
       })
       .state('dashboard', {
         url: '/dashboard',
         templateUrl: 'app/dashboard/dashboard.html',
         controller: 'DashboardController',
-        controllerAs: 'dashboard'
+        controllerAs: 'dashboard',
+        authenticate: true
       })
       .state('profile', {
         url: '/profile',
         templateUrl: 'app/profile/profile.html',
         controller: 'ProfileController',
-        controllerAs: 'profile'
+        controllerAs: 'profile',
+        authenticate: true
       })
       .state('editProfile', {
         url: '/editProfile',
         templateUrl: 'app/profile/editProfile.html',
         controller: 'EditProfileController',
-        controllerAs: 'editProfile'
+        controllerAs: 'editProfile',
+        authenticate: true
       });
 
       // auth interceptor to ensure JWT gets sent in request header
@@ -68,5 +74,15 @@
         return response || $q.when(response);
       }
     };
+  }
+
+  function run($rootScope, $state, $window) {
+    // check for a token in local storage, redirect to sign in if there is none
+    $rootScope.$on('$stateChangeStart', function(event, toState) {
+      if (toState.authenticate && !$window.localStorage.token) {
+        event.preventDefault();
+        $state.transitionTo('signin');
+      }
+    });
   }
 })();

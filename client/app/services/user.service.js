@@ -19,7 +19,7 @@
     return services;
 
     function signin(data) {
-      return $http.post('/users/auth/signin', data)
+      return $http.post('/auth/signin', data)
         .then(function successCallback(res) {
           return res.data;
         }, function errorCallback(res) {
@@ -42,7 +42,7 @@
     }
 
     function signup(data) {
-      return $http.post('/users/auth/signup', data)
+      return $http.post('/auth/signup', data)
         .then(function successCallback(res) {
           return res.data;
         }, function errorCallback(res) {
@@ -61,7 +61,7 @@
 
     // retrieve user profile information
     function getProfile() {
-      var url = '/users/' + userID;
+      var url = '/users/' + $window.localStorage.userID;
       
       return $http.get(url)
       .then(function successCallback(res) {

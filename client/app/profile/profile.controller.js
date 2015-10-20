@@ -24,7 +24,7 @@
           vm.location = data.location;
           vm.plants = data.plants;
           vm.username = data.username;
-          getPhoto();
+          // getPhoto();
         });
     }
 
