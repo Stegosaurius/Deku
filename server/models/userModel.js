@@ -1,6 +1,8 @@
 //Require DB connection!
 var db = require('../db/connection.js');
 var bcrypt = require('bcrypt-nodejs');
+var Keen = require("keen-js");
+var auth = require("../config/auth");
 
 module.exports = {
   //Example function for querying the db for all users
@@ -62,9 +64,19 @@ module.exports = {
   },
 
   addUserByLocal: function (data, callback) {
+    var scopedKey = Keen.utils.encryptScopedKey(auth.dashboardConfigure.masterKey, {
+      "allowed_operations": ["read", "write"]
+      // "filters": [{
+      //   "property_name": "account.id",
+      //   "operator": "eq",
+      //   "property_value": "123"
+      // }]
+    });
+
+
     var password = bcrypt.hashSync(data.password, bcrypt.genSaltSync(10));
   
-    db.query('insert into users (username, password) values (?, ?)', [data.username, password], function (err, res) {
+    db.query('insert into users (username, password, scoped_key) values (?, ?, ?)', [data.username, password, scoped_key], function (err, res) {
       if (err) {
         callback(err, null);
       } else {
@@ -74,7 +86,16 @@ module.exports = {
   },
 
   addUserBySocial: function (data, callback) {
-    db.query('insert into users (username, email) values (?, ?)', [data.username, data.email],
+    var scopedKey = Keen.utils.encryptScopedKey(auth.dashboardConfigure.masterKey, {
+      "allowed_operations": ["read", "write"]
+      // "filters": [{
+      //   "property_name": "account.id",
+      //   "operator": "eq",
+      //   "property_value": "123"
+      // }]
+    });
+
+    db.query('insert into users (username, email, scoped_key) values (?, ?, ?)', [data.username, data.email, scoped_key],
       function (err, user) {
         if (err) {
           callback(err, null);

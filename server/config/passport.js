@@ -63,8 +63,6 @@ module.exports = function(passport) {
                     // if there is no user found with that facebook id, create them
                     var newUser = {
                         username: profile.name.givenName + ' ' + profile.name.familyName,
-                        fbID: profile.id,
-                        fbToken: token,
                         email: profile.emails[0].value
                     };
                     User.addUserBySocial(newUser, function (err, user) {
@@ -108,9 +106,7 @@ module.exports = function(passport) {
                 } else {
                     var newUser = {
                         username: profile.displayName,
-                        email: profile.emails[0].value,
-                        googleID: profile.id,
-                        googleToken: token
+                        email: profile.emails[0].value
                     };
 
                     User.addUserBySocial(newUser, function (err, user) {
