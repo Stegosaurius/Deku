@@ -73,7 +73,7 @@
 
     // update an existing users profile info
     function updateProfile(data) {
-      var url = '/users/' + '2';
+      var url = '/users/' + userID;
 
       return $http.post(url, data)
         .then(function successCallback(res) {
