@@ -72,11 +72,9 @@ module.exports = {
       //   "property_value": "123"
       // }]
     });
-
-
     var password = bcrypt.hashSync(data.password, bcrypt.genSaltSync(10));
   
-    db.query('insert into users (username, password, scoped_key) values (?, ?, ?)', [data.username, password, scoped_key], function (err, res) {
+    db.query('insert into users (username, password, scoped_key) values (?, ?, ?)', [data.username, password, scopedKey], function (err, res) {
       if (err) {
         callback(err, null);
       } else {
@@ -95,7 +93,7 @@ module.exports = {
       // }]
     });
 
-    db.query('insert into users (username, email, scoped_key) values (?, ?, ?)', [data.username, data.email, scoped_key],
+    db.query('insert into users (username, email, scoped_key) values (?, ?, ?)', [data.username, data.email, scopedKey],
       function (err, user) {
         if (err) {
           callback(err, null);
