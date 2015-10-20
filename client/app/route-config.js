@@ -35,6 +35,12 @@
         templateUrl: 'app/profile/profile.html',
         controller: 'ProfileController',
         controllerAs: 'profile'
+      })
+      .state('editProfile', {
+        url: '/editProfile',
+        templateUrl: 'app/profile/editProfile.html',
+        controller: 'EditProfileController',
+        controllerAs: 'editProfile'
       });
 
       // auth interceptor to ensure JWT gets sent in request header

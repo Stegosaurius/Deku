@@ -12,7 +12,8 @@
       signout: signout,
       signup: signup,
       signupOAuth: signupOAuth,
-      getProfile: getProfile
+      getProfile: getProfile,
+      updateProfile: updateProfile
     };
 
     return services;
@@ -68,6 +69,18 @@
       }, function errorCallback(res) {
         console.log('Error retrieving user profile');
       });
+    }
+
+    // update an existing users profile info
+    function updateProfile(data) {
+      var url = '/users/' + $window.localStorage.userID;
+
+      return $http.put(url, data)
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log('Error updating user profile')
+        });
     }
   }
 })();
