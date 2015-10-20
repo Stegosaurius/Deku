@@ -24,6 +24,16 @@ module.exports = {
           callback(null, res.insertID);
         }
     });
+  },
+
+  getFriendsStatuses: function (id, callback) {
+    db.query('select * from statuses where id = ?', [id], function (err, statuses) {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, statuses);
+      }
+    })
   }
   
 }
