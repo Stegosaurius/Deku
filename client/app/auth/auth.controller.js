@@ -4,7 +4,7 @@
   angular.module('app')
     .controller('AuthController', AuthController);
 
-  function AuthController($window, $state, User) {
+  function AuthController($window, $state, jwtHelper, User) {
     // capture variable for binding members to controller; vm stands for ViewModel
     // (https://github.com/johnpapa/angular-styleguide#controlleras-with-vm)
     var vm = this;
@@ -24,7 +24,13 @@
     function signin() {
       User.signin(vm.user)
         .then(function(data) {
+          // save JWT and user info to local storage
           $window.localStorage.token = data.token;
+          var tokenPayload = jwtHelper.decodeToken(data.token);
+          $window.localStorage.userId = tokenPayload.id;
+          // TODO: UNCOMMENT THIS LINE WHEN SCOPED KEYS HAVE BEEN IMPLEMENTED
+          // $window.localStorage.scopedKey = tokenPayload.scoped_key;
+
           $state.transitionTo('dashboard');
         })
         .catch(function(status) {
@@ -52,7 +58,13 @@
     function signup() {
       User.signup(vm.user)
         .then(function(data) {
+          // save JWT and user info to local storage
           $window.localStorage.token = data.token;
+          var tokenPayload = jwtHelper.decodeToken(data.token);
+          $window.localStorage.userId = tokenPayload.id;
+          // TODO: UNCOMMENT THIS LINE WHEN SCOPED KEYS HAVE BEEN IMPLEMENTED
+          // $window.localStorage.scopedKey = tokenPayload.scoped_key;
+
           $state.transitionTo('profile');
         })
         .catch(function(status) {
