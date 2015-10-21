@@ -9,13 +9,16 @@
     // (https://github.com/johnpapa/angular-styleguide#controlleras-with-vm)
     var vm = this;
 
-    vm.notifications = [];
+    vm.notifications = ['Beasta is following you!'];
     // show notification nav icon if there are notifications
     // vm.showNotifications = vm.notifications.length;
     vm.signout = signout;
 
     // on mobile-sized screen, make the nav bar appear on menu icon click
-    angular.element('.button-collapse').sideNav();
+    angular.element('.button-collapse').sideNav({
+      edge: 'right',
+      closeOnClick: true
+    });
 
     getNotifications();
 

@@ -29,23 +29,50 @@
       })
       .state('dashboard', {
         url: '/dashboard',
-        templateUrl: 'app/dashboard/dashboard.html',
-        controller: 'DashboardController',
-        controllerAs: 'dashboard',
+        views: {
+          'nav': {
+            templateUrl: 'app/navbar/navbar.html',
+            controller: 'NavbarController',
+            controllerAs: 'navbar'
+          },
+          '': {
+            templateUrl: 'app/dashboard/dashboard.html',
+            controller: 'DashboardController',
+            controllerAs: 'dashboard'
+          }
+        },
         authenticate: true
       })
       .state('profile', {
         url: '/profile',
-        templateUrl: 'app/profile/profile.html',
-        controller: 'ProfileController',
-        controllerAs: 'profile',
+        views: {
+          'nav': {
+            templateUrl: 'app/navbar/navbar.html',
+            controller: 'NavbarController',
+            controllerAs: 'navbar'
+          },
+          '': {
+            templateUrl: 'app/profile/profile.html',
+            controller: 'ProfileController',
+            controllerAs: 'profile'
+          }
+        },
         authenticate: true
       })
       .state('editProfile', {
         url: '/editProfile',
-        templateUrl: 'app/profile/editProfile.html',
-        controller: 'EditProfileController',
-        controllerAs: 'editProfile',
+        views: {
+          'nav': {
+            templateUrl: 'app/navbar/navbar.html',
+            controller: 'NavbarController',
+            controllerAs: 'navbar'
+          },
+          '': {
+            templateUrl: 'app/profile/editProfile.html',
+            controller: 'EditProfileController',
+            controllerAs: 'editProfile'
+          }
+        },
         authenticate: true
       });
 
