@@ -21,8 +21,10 @@ module.exports = {
     });
   },
 
-  updateProfile: function (req, res, id) {
-    User.updateProfile(id, function (err, updatedUser) {
+  updateProfile: function (req, res) {
+    var data = req.body;
+    data.id = req.params.id;
+    User.updateUser(data, function (err, updatedUser) {
       if (err) {
         //Error handling
         console.error(err);
