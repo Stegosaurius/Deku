@@ -11,10 +11,29 @@
 
     vm.about = '';
     vm.location = '';
+    vm.photo = '';
     vm.plants = [];
+    vm.username = '';
     vm.message = '';
 
     vm.updateProfile = updateProfile;
+
+    //Invoke get profile to prepopulate our view model with 
+    //existing data for a user. This way the data object will
+    //be complete when we send it to the database.
+    getProfile();
+
+    function getProfile() {
+      User.getProfile()
+        .then(function(data) {
+          console.log(data);
+          vm.about = data.about;
+          vm.location = data.location;
+          vm.plants = data.plants;
+          vm.username = data.username;
+          // getPhoto();
+        });
+    }
 
     function updateProfile() {
       User.updateProfile(vm)
