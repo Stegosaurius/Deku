@@ -9,11 +9,11 @@
     // (https://github.com/johnpapa/angular-styleguide#controlleras-with-vm)
     var vm = this;
 
-    vm.about = '';
-    vm.location = '';
+    vm.about = 'About me...';
+    vm.location = 'Where am I?';
     vm.photo = '';
-    vm.plants = [];
-    vm.username = '';
+    vm.plants = ['Plants?', 'Methods/Technologies?', 'Interests?', 'Put them here.'];
+    vm.username = 'Who am I?';
 
     getProfile();
 
@@ -22,7 +22,7 @@
         .then(function(data) {
           vm.about = data.about;
           vm.location = data.location;
-          vm.plants = data.plants;
+          vm.tags = data.plants;
           vm.username = data.username;
           // getPhoto();
         });

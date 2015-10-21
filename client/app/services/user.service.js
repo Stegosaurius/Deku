@@ -38,6 +38,7 @@
 
     function signout() {
       delete $window.localStorage.token;
+      delete $window.localStorage.userID;
       $state.transitionTo('signin');
     }
 
