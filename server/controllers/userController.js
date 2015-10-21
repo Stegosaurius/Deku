@@ -97,5 +97,17 @@ module.exports = {
         res.json(notification);
       }
     })
+  },
+
+  getScopedKey: function (req, res) {
+    var id = req.params.id;
+    User.getScopedKey(id, function (err, key) {
+      if (err) {
+        console.error(err);
+        return res.status(500).send();
+      } else {
+        return res.status(200).json(key[0]);
+      }
+    });
   }
 }

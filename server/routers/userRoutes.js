@@ -20,5 +20,6 @@ module.exports = function (app, passport) {
     userController.updateProfile(req, res, id);
   });
 
+  app.get('/scopekey/:id', userController.getScopedKey);
   
 }

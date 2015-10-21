@@ -64,4 +64,6 @@ module.exports = {
       return res.status(200).json({ token: util.generateWebToken(user[0]) });
     });
   }
+
+
 };
