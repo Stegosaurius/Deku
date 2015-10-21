@@ -2,10 +2,14 @@
 
 <div class="editProfile">
   <form name="editProfile.form" ng-submit="editProfile.updateProfile()">
-
-    <input type="text" name="about" ng-model="editProfile.about" placeholder="Tell us about yourself"><br>
-    <input type="text" name="location" ng-model="editProfile.location" placeholder="Where are you based?"><br>
-    <input type="text" name="plants" ng-model="editProfile.plants" placeholder="What do you grow?"><br>    
+    <h2>Username</h2>
+    <h2>{{ editProfile.username }}</h2>
+    <h2>Location</h2>
+    <input type="text" ng-model="editProfile.location" value="{{ editProfile.location }}" placeholder="Where are you based?"><br>
+    <h2>About</h2>
+    <input type="text" ng-model="editProfile.about" placeholder="Tell us about yourself"><br>
+    <h2>Plants</h2>
+    <input type="text" ng-model="editProfile.plants" placeholder="What do you grow?"><br>    
     <button type="submit">Update!</button><br>
 
     <!-- <p>{{ editProfile.message }}</p> -->
