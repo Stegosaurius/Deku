@@ -15,7 +15,7 @@ module.exports = {
         console.error(err);
         res.status(404).send(err);
       } else {
-        res.json(userProfile);
+        res.json(userProfile[0]);
       }
 
     });

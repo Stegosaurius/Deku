@@ -9,11 +9,11 @@
     // (https://github.com/johnpapa/angular-styleguide#controlleras-with-vm)
     var vm = this;
 
-    // vm.about = '';
-    // vm.location = '';
-    // vm.photo = '';
-    // vm.plants = [];
-    // vm.username = '';
+    vm.about = '';
+    vm.location = '';
+    vm.photo = '';
+    vm.plants = [];
+    vm.username = '';
     vm.message = '';
 
     vm.updateProfile = updateProfile;
