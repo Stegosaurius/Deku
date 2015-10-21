@@ -8,6 +8,8 @@ module.exports = function (app, passport) {
 
 	app.post('/signin', authController.signin);
 
+	app.get('/scopekey/:id', authController.getScopedKey);
+
 	// route for logging out
 	app.get('/logout', function(req, res) {
 	  req.logout();

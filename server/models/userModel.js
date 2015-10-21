@@ -152,5 +152,15 @@ module.exports = {
         callback(null, res);
       }
     });
+  },
+
+  getScopedKey: function (id, callback) {
+    db.query('select scoped_key from users where id = ?', [id], function (err, res) {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, res);
+      }
+    });
   }
 }

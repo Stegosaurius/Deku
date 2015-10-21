@@ -2,24 +2,13 @@
   angular.module('app')
     .factory('Keenio', Keenio);
 
-  function Keenio($http) {
-    var client = new Keen( dashboardConfigure ); //loading keys in this file
-    var services = {
-      tempQuery: tempQuery, 
-      humidityQuery : humidityQuery,
-      lightQuery : lightQuery,
-      soundQuery : soundQuery,
-      lightTriggerQuery : lightTriggerQuery,
-      soundTriggerQuery : soundTriggerQuery,
-      tempTimelineQuery : tempTimelineQuery,
-      humidityTimelineQuery : humidityTimelineQuery,
-      lightTimelineQuery : lightTimelineQuery,
-      soundTimelineQuery : soundTimelineQuery
-    };
-
-    return services;
-
-    function tempQuery(callback) {
+  function Keenio($http, $window) {
+    var url = '/auth/scopekey/' + $window.localStorage.userID;
+    return $http.get(url).then(function (data) {
+      console.log("scoped_key :", data.data.scoped_key);
+      var client = new Keen( data.data.scoped_key ); //loading keys in this file
+      console.log("client is: ", client);
+      function tempQuery(callback) {
       Keen.ready(
         function(){
 
@@ -330,5 +319,24 @@
       );
     }
 
+
+      var services = {
+        tempQuery: tempQuery, 
+        humidityQuery : humidityQuery,
+        lightQuery : lightQuery,
+        soundQuery : soundQuery,
+        lightTriggerQuery : lightTriggerQuery,
+        soundTriggerQuery : soundTriggerQuery,
+        tempTimelineQuery : tempTimelineQuery,
+        humidityTimelineQuery : humidityTimelineQuery,
+        lightTimelineQuery : lightTimelineQuery,
+        soundTimelineQuery : soundTimelineQuery
+      };
+
+      return services;
+    });
+
+
+    
   }
 })();

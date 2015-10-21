@@ -63,5 +63,17 @@ module.exports = {
       // all is well, return successful user
       return res.status(200).json({ token: util.generateWebToken(user[0]) });
     });
+  },
+
+  getScopedKey: function (req, res) {
+    var id = req.params.id;
+    User.getScopedKey(id, function (err, key) {
+      if (err) {
+        console.error(err);
+        return res.status(500).send();
+      } else {
+        return res.status(200).json(key[0]);
+      }
+    });
   }
 };
