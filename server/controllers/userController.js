@@ -111,5 +111,33 @@ module.exports = {
         return res.status(200).json(key[0]);
       }
     });
+  },
+
+  getTags: function (req, res) {
+    var id = req.params.id; 
+    User.getTags(id, function (err, tags) {
+      if (err) {
+        console.error(err);
+        res.status(500).send();
+      } else {
+        res.status(200).json(tags);
+      }
+    });
+  },
+
+  addTag: function (req, res) {
+    var data = req.body;
+    data.id = req.params.id;
+    User.addTag(data, function (err, tag) {
+      if (err) {
+        console.error(err);
+        res.status(500).send();
+      } else {
+        res.status(200).json(tag);
+      }
+    })
   }
+
+
+
 }

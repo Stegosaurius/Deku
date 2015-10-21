@@ -170,6 +170,28 @@ module.exports = {
         callback(null, res);
       }
     });
+  },
+
+  getTags: function (id, callback) {
+      db.query('select * from tags where user_id = ?', [id], function (err, tags) {
+        if (err) {
+          callback(err, null);
+        } else {
+          callback(null, tags);
+        }
+      });
+  },
+
+  addTag: function (data, callback) {
+    db.query('insert into tags (user_id, tag) values (?, ?)', [data.id, data.tag],
+      function (err, res) {
+        if (err) {
+          callback(err, null);
+        } else {
+          callback(null, res.insertID);
+        }
+
+    });
   }
 
 }
