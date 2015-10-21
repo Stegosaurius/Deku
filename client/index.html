@@ -10,7 +10,8 @@
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"/> -->
 </head>
 <body>
-  <div ui-view></div>
+  <div ui-view name="nav"></div>
+  <div ui-view name="content"></div>
 
   <script src="lib/jquery/dist/jquery.min.js" type="text/javascript"></script>
   <script src="lib/angular/angular.min.js"></script>
@@ -26,6 +27,7 @@
   <script src="app/dashboard/dashboard.controller.js"></script>
   <script src="app/profile/profile.controller.js"></script>
   <script src="app/profile/editProfile.controller.js"></script>
+  <script src="app/navbar/navbar.controller.js"></script>
   <script src="app/route-config.js"></script>
   <script src="app/services/user.service.js"></script>
   <script src="app/services/keenio.service.js"></script>
