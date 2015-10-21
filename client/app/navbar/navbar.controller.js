@@ -9,7 +9,7 @@
     // (https://github.com/johnpapa/angular-styleguide#controlleras-with-vm)
     var vm = this;
 
-    vm.notifications = ['Beasta is following you!'];
+    vm.notifications = [];
     // show notification nav icon if there are notifications
     // vm.showNotifications = vm.notifications.length;
     vm.signout = signout;

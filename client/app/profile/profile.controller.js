@@ -20,9 +20,9 @@
     function getProfile() {
       User.getProfile()
         .then(function(data) {
-          vm.about = data.about;
-          vm.location = data.location;
-          vm.tags = data.plants;
+          vm.about = data.about || vm.about;
+          vm.location = data.location || vm.about;
+          vm.tags = data.plants || vm.tags;
           vm.username = data.username;
           // getPhoto();
         });
