@@ -9,10 +9,10 @@
     // (https://github.com/johnpapa/angular-styleguide#controlleras-with-vm)
     var vm = this;
 
-    vm.about = 'About me...';
-    vm.location = 'Where am I?';
+    vm.about = 'Talk a little about yourself...';
+    vm.location = 'Where are you?';
     vm.photo = '';
-    vm.plants = ['Plants?', 'Methods/Technologies?', 'Interests?', 'Put them here.'];
+    vm.tags = ['Plants?', 'Methods/Technologies?', 'Interests?', 'Put them here.'];
     vm.username = 'Who am I?';
 
     getProfile();
