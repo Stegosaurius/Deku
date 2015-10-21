@@ -3,17 +3,23 @@
 <head>
   <meta charset="utf-8">
   <title>Deku</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="lib/Materialize/dist/css/materialize.min.css">
   <link rel="stylesheet" type="text/css" href="styles/styles.css">
+  <!-- uncomment line below to let browser know that site is optimized for mobile -->
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"/> -->
 </head>
 <body>
+  <div ui-view="nav"></div>
   <div ui-view></div>
 
+  <script src="lib/jquery/dist/jquery.min.js" type="text/javascript"></script>
   <script src="lib/angular/angular.min.js"></script>
   <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
   <script src="lib/angular-jwt/dist/angular-jwt.min.js"></script>
   <script src="lib/keen-js/dist/keen.min.js"></script>
-  <script src="lib/jquery/dist/jquery.min.js" type="text/javascript"></script>
   <script src="lib/jquery-knob/dist/jquery.knob.min.js" type="text/javascript"></script>
+  <script src="lib/Materialize/dist/js/materialize.min.js" type="text/javascript"></script>
 
   <script src="keys/dashboardConfigure.js"></script>
   <script src="app/app.js"></script>
@@ -21,6 +27,7 @@
   <script src="app/dashboard/dashboard.controller.js"></script>
   <script src="app/profile/profile.controller.js"></script>
   <script src="app/profile/editProfile.controller.js"></script>
+  <script src="app/navbar/navbar.controller.js"></script>
   <script src="app/route-config.js"></script>
   <script src="app/services/user.service.js"></script>
   <script src="app/services/keenio.service.js"></script>

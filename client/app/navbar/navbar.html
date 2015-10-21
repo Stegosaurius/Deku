@@ -1,0 +1,23 @@
+<ul id="notif-dropdown">
+  <li ng-repeat="notification in navbar.notifications">{{ notification }}</li>
+</ul>
+
+<nav>
+  <div class="nav-wrapper">
+    <a href="#" class"logo">Deku</a>
+    <a href="#" data-activates="mobile-nav" class="button-collapse hide-on-med-and-up right"><i class="material-icons">menu</i></a>
+    <ul class="right hide-on-small-only">
+      <li><a class="dropdown-button" href="#!" data-activates="notif-dropdown" ng-show="navbar.notifications.length"><i class="material-icons">mail</i></a>
+      <li><a ui-sref="forum">Forum</a></li>
+      <li><a ui-sref="profile">Profile</a></li>
+      <li><a ui-sref="dashboard">Dashboard</a></li>
+      <li><a ng-click="navbar.signout()">Logout</a></li>
+    </ul>
+    <ul class="side-nav" id="mobile-nav">
+      <li><a ui-sref="forum">Forum</a></li>
+      <li><a ui-sref="profile">Profile</a></li>
+      <li><a ui-sref="dashboard">Dashboard</a></li>
+      <li><a ng-click="navbar.signout()">Logout</a></li>
+    </ul>
+  </div>
+</nav>

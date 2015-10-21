@@ -12,7 +12,7 @@
     vm.about = '';
     vm.location = '';
     vm.photo = '';
-    vm.plants = [];
+    vm.tags = [];
     vm.username = '';
 
     getProfile();
@@ -20,9 +20,9 @@
     function getProfile() {
       User.getProfile()
         .then(function(data) {
-          vm.about = data.about;
-          vm.location = data.location;
-          vm.plants = data.plants;
+          vm.about = data.about || 'Talk a little about yourself...';
+          vm.location = data.location || 'Where are you?';
+          vm.tags = data.plants || ['Plants?', 'Methods/Technologies?', 'Interests?', 'Put them here.'];
           vm.username = data.username;
           // getPhoto();
         });

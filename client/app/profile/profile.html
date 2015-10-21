@@ -1,14 +1,13 @@
-<div class="navbar"></div>
 
 <div class="profile">
-  <h2>{{ profile.username }}</h2>
+  <h3>{{ profile.username }}</h3>
   <h4>{{ profile.location }}</h4>
 
-  <!-- <a ui-sref="dashboard">Dashboard</a> -->
+  <a ui-sref="editProfile">Edit Profile</a>
 
   <p class="about">{{ profile.about }}</p>
 
-  <ul class="plants">
-    <li class="plant" ng-repeat="plant in profile.plants">{{ plant }}</li>
+  <ul class="tags">
+    <li class="tag" ng-repeat="tag in profile.tags">{{ tag }}</li>
   </ul>
 </div>
