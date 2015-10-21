@@ -3,10 +3,11 @@
     .factory('Keenio', Keenio);
 
   function Keenio($http, $window) {
-    var url = '/auth/scopekey/' + $window.localStorage.userID;
+    var url = '/users/scopekey/' + $window.localStorage.userID;
     return $http.get(url).then(function (data) {
-      console.log("scoped_key :", data.data.scoped_key);
-      var client = new Keen( data.data.scoped_key ); //loading keys in this file
+      dashboardConfigure.readKey = data.data.scoped_key;
+      console.log("dashboardConfigure is :",dashboardConfigure);
+      var client = new Keen( dashboardConfigure ); //loading keys in this file
       console.log("client is: ", client);
       function tempQuery(callback) {
       Keen.ready(
