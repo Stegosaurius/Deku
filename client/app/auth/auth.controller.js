@@ -47,8 +47,9 @@
     function signinOAuth(url) {
       User.signinOAuth(url)
         .then(function(data) {
-          $window.localStorage.token = data.token;
-          $state.transitionTo('dashboard');
+          // $window.localStorage.token = data.token;
+          // $state.transitionTo('dashboard');
+          console.log(data);
         })
         .catch(function() {
           resetForm('Login failed. Please try again.');

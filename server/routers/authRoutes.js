@@ -21,10 +21,19 @@ module.exports = function (app, passport) {
 	app.get('/facebook', passport.authenticate('facebook', { scope : 'email' }));
 
 	// handle the callback after facebook has authenticated the user
-  	app.get('/facebook/callback', passport.authenticate('facebook', { 
-      successRedirect: "/#/profile",
-      failureRedirect: "/#/signin" }));
+  	app.get('/facebook/callback', function(req, res, next) {
+      passport.authenticate('facebook', function(err, user, info) {
+        if (err) { 
+          return next(err); 
+        }
+        if (!user) { 
+          return res.redirect('/#/signin'); 
+        }
+        
+        return res.redirect('/#/profile/' + user.id);
 
+      })(req, res, next);
+    });
 	// =====================================
 	// GOOGLE ROUTES =======================
 	// =====================================
@@ -34,8 +43,17 @@ module.exports = function (app, passport) {
 	app.get('/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
 
 	// the callback after google has authenticated the user
-	app.get('/google/callback', passport.authenticate('google', 
-    {
-      successRedirect: "/#/profile",
-      failureRedirect: "/#/signin" }));
+	app.get('/google/callback', function(req, res, next) {
+      passport.authenticate('google', function(err, user, info) {
+        if (err) { 
+          return next(err); 
+        }
+        if (!user) { 
+          return res.redirect('/#/signin'); 
+        }
+        
+        return res.redirect('/#/profile/' + user.id);
+
+      })(req, res, next);
+    });
 }

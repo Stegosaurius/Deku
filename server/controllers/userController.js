@@ -24,13 +24,13 @@ module.exports = {
   updateProfile: function (req, res) {
     var data = req.body;
     data.id = req.params.id;
-    User.updateUser(data, function (err, updatedUser) {
+    User.updateUser(data, function (err, result) {
       if (err) {
         //Error handling
         console.error(err);
         res.send(404);
       } else {
-        res.json(updatedUser)
+        res.send(result)
       }
     })
   },
@@ -69,12 +69,12 @@ module.exports = {
   },
 
   addProfilePhoto: function (req, res, id) {
-    User.addProfilePhoto(id, req.body.photo, function (err, photo) {
+    User.addProfilePhoto(id, req.body.photo, function (err, result) {
       if (err) {
         console.error(err);
         res.status(404).send(err);
       } else {
-        res.send(photo);
+        res.send(result);
       }
     })
   },
@@ -91,12 +91,12 @@ module.exports = {
   },
 
   createNotification: function (req, res, id) {
-    User.addNotification(id, req.body.content, function (err, notification) {
+    User.addNotification(id, req.body.content, function (err, result) {
       if (err) {
         console.error(err);
         res.send(err);
       } else {
-        res.json(notification);
+        res.send(result);
       }
     })
   },

@@ -8,8 +8,7 @@ module.exports = {
   //Example function for querying the db for all users
   //and passing the result to the callback
   getAllUsers: function (callback) {
-    //Some DB queries here
-    db.query('select id, username, scoped_key, about, location, growth_methods, plants from Users', function (err, users) {
+    db.query('select id, username from Users', function (err, users) {
       if (err) {
         callback(err, null);
       } else {
@@ -20,7 +19,7 @@ module.exports = {
 
   getUserByID: function (id, callback) {
     // we don't need a password since a profile is viewable by anyone
-    db.query('select id, username, scoped_key, about, location, growth_methods, plants from Users where id = ?', [id], function (err, userObj) {
+    db.query('select id, username, email, scoped_key, token, about, location from Users where id = ?', [id], function (err, userObj) {
       if (err) {
         callback(err, null);
       } else {
@@ -30,7 +29,7 @@ module.exports = {
   },
 
   getUserByName: function (username, callback) {
-    db.query('select id, username, password, scoped_key, about, location, growth_methods, plants from Users where username = ?', [username], function (err, user) {
+    db.query('select id, username, password, email, scoped_key, token, about, location from Users where username = ?', [username], function (err, user) {
       if (err) {
         callback(err, null);
       } else {
@@ -40,7 +39,7 @@ module.exports = {
   },
 
   getUserByEmail: function (email, callback) {
-    db.query('select id, username, email, scoped_key, about, location, growth_methods, plants from Users where email = ?',
+    db.query('select id, username, email, scoped_key, about, location from Users where email = ?',
       [email], function (err, user) {
         if (err) {
           callback(err, null);
@@ -51,14 +50,13 @@ module.exports = {
   },
 
   updateUser: function (data, callback) {
-    db.query('update Users set about = ?, profile_photo = ?, location = ?, \
-      growth_methods = ?, plants = ? where id = ?', 
-      [data.about, data.photo, data.location, data.growthMethods, data.plants, data.id],
-      function (err, user) {
+    db.query('update Users set about = ?, email = ?, profile_photo = ?, location = ? where id = ?', 
+      [data.about, data.email, data.photo, data.location, data.id],
+      function (err, res) {
         if (err) {
           callback(err, null);
         } else {
-          callback(null, user);
+          callback(null, res);
         }
     });
   },
@@ -94,11 +92,11 @@ module.exports = {
     });
 
     db.query('insert into users (username, email, scoped_key) values (?, ?, ?)', [data.username, data.email, scopedKey],
-      function (err, user) {
+      function (err, res) {
         if (err) {
           callback(err, null);
         } else {
-          callback(null, user);
+          callback(null, res);
         }
       });
   },
@@ -114,11 +112,11 @@ module.exports = {
   },
 
   addProfilePhoto: function (id, photo, callback) {
-    db.query('update users set photo = ? where id = ?', [photo, id], function (err, photo) {
+    db.query('update users set photo = ? where id = ?', [photo, id], function (err, res) {
       if (err) {
         callback(err, null);
       } else {
-        callback(null, photo);
+        callback(null, res);
       }
     });
   },
@@ -162,5 +160,16 @@ module.exports = {
         callback(null, res);
       }
     });
+  },
+
+  updateToken: function (data, callback) {
+    db.query('update users set token = ? where id = ?', [data.token, data.id], function (err, res) {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, res);
+      }
+    });
   }
+
 }

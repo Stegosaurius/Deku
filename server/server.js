@@ -4,6 +4,7 @@ var path = require('path');
 var flash = require('connect-flash');
 var session = require('express-session');
 var auth = require('./config/auth');
+var cors = require('cors');
 
 //Our app is an instance of express
 var app = express();
@@ -16,6 +17,7 @@ console.log(port);
   //Conditional check for connecting to instance of deployed or local DB
 
 
+app.use(cors());
 // required for passport
 app.use(session({ secret: auth.secret }));
 app.use(passport.initialize());
