@@ -4,7 +4,7 @@ var path = require('path');
 var flash = require('connect-flash');
 var session = require('express-session');
 var cors = require('cors');
-var auth = require('./config/auth.example.js');//process.env.ENV_AUTH;//
+var auth = require('./config/auth.deploy.js');
 
 //Our app is an instance of express
 var app = express();

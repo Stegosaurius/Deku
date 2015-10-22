@@ -8,7 +8,7 @@ var User = require('../models/userModel');
 
 // load the auth variables
 // var configAuth = require('../config/auth.js');
-var configAuth = require('../config/auth.example.js');
+var configAuth = require('../config/auth.deploy.js');
 
 // load helpers
 var util = require('../helpers/utilities');
