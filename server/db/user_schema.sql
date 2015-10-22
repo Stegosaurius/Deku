@@ -10,7 +10,6 @@ CREATE TABLE `Users` (
 	`email` varchar(50),
 	`password` varchar(100),
 	`scoped_key` varchar(250),
-	`token` varchar(250),
 	`about` TEXT,
 	`profile_photo` blob,
 	`location` varchar(20),

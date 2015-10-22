@@ -24,7 +24,7 @@ module.exports = {
 
   getUserByID: function (id, callback) {
     // we don't need a password since a profile is viewable by anyone
-    db.query('select id, username, email, scoped_key, token, about, location from Users where id = ?', [id], function (err, userObj) {
+    db.query('select id, username, email, scoped_key, about, location from Users where id = ?', [id], function (err, userObj) {
       if (err) {
         callback(err, null);
       } else {
@@ -34,7 +34,7 @@ module.exports = {
   },
 
   getUserByName: function (username, callback) {
-    db.query('select id, username, password, email, scoped_key, token, about, location from Users where username = ?', [username], function (err, user) {
+    db.query('select id, username, password, email, scoped_key, about, location from Users where username = ?', [username], function (err, user) {
       if (err) {
         callback(err, null);
       } else {
@@ -49,6 +49,7 @@ module.exports = {
         if (err) {
           callback(err, null);
         } else {
+          debugger;
           callback(null, user);
         }
       })
@@ -77,7 +78,7 @@ module.exports = {
     });
     var password = bcrypt.hashSync(data.password, bcrypt.genSaltSync(10));
   
-    db.query('insert into users (username, password, email, scoped_key) values (?, ?, ?)', [data.username, password, scopedKey], function (err, res) {
+    db.query('insert into users (username, password, email, scoped_key) values (?, ?, ?, ?)', [data.username, password, data.email, scopedKey], function (err, res) {
       if (err) {
         callback(err, null);
       } else {

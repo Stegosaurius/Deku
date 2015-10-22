@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Stegosaurius/Deku#readme",
   "dependencies": {
+    "aws-sdk": "^2.2.11",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.14.1",
     "connect-flash": "^0.1.1",
@@ -27,7 +28,7 @@
     "express": "^4.13.3",
     "express-jwt": "^3.1.0",
     "express-session": "^1.11.3",
-    "formidable": "^1.0.17",
+    "gm": "^1.20.0",
     "jsonwebtoken": "^5.4.0",
     "keen-js": "^3.2.7",
     "morgan": "^1.6.1",
