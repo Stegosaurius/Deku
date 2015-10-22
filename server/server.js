@@ -18,9 +18,9 @@ var port = process.env.PORT || 3000;
 app.use(cors());
 
 // required for passport
-app.use(session({ secret: auth.secret }));
+// app.use(session({ secret: auth.secret }));
 app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
+// app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 //configure our server with all the middleware and and routing
