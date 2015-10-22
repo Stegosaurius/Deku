@@ -27,7 +27,7 @@
           // save JWT and user info to local storage
           $window.localStorage.token = data.token;
           var tokenPayload = jwtHelper.decodeToken(data.token);
-          $window.localStorage.userID = tokenPayload.id;
+          $window.localStorage.username = tokenPayload.username;
           // TODO: UNCOMMENT THIS LINE WHEN SCOPED KEYS HAVE BEEN IMPLEMENTED
           // $window.localStorage.scopedKey = tokenPayload.scoped_key;
 
@@ -44,25 +44,13 @@
         });
     }
 
-    function signinOAuth(url) {
-      User.signinOAuth(url)
-        .then(function(data) {
-          // $window.localStorage.token = data.token;
-          // $state.transitionTo('dashboard');
-          console.log(data);
-        })
-        .catch(function() {
-          resetForm('Login failed. Please try again.');
-        });
-    }
-
     function signup() {
       User.signup(vm.user)
         .then(function(data) {
           // save JWT and user info to local storage
           $window.localStorage.token = data.token;
           var tokenPayload = jwtHelper.decodeToken(data.token);
-          $window.localStorage.userID = tokenPayload.id;
+          $window.localStorage.username = tokenPayload.username;
           // TODO: UNCOMMENT THIS LINE WHEN SCOPED KEYS HAVE BEEN IMPLEMENTED
           // $window.localStorage.scopedKey = tokenPayload.scoped_key;
 
@@ -74,17 +62,6 @@
           } else {
             resetForm('Sign up failed. Please try again.');
           }
-        });
-    }
-
-    function signupOAuth(url) {
-      User.signupOAuth(url)
-        .then(function(data) {
-          $window.localStorage.token = data.token;
-          $state.transitionTo('profile');
-        })
-        .catch(function() {
-          resetForm('Sign up failed. Please try again.');
         });
     }
   }

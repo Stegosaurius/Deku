@@ -28,7 +28,7 @@
         authenticate: false
       })
       .state('dashboard', {
-        url: '/dashboard',
+        url: '/dashboard/:username',
         views: {
           'nav': {
             templateUrl: 'app/navbar/navbar.html',
@@ -44,7 +44,7 @@
         authenticate: true
       })
       .state('profile', {
-        url: '/profile',
+        url: '/profile/:username',
         views: {
           'nav': {
             templateUrl: 'app/navbar/navbar.html',

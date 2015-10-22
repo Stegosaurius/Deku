@@ -27,18 +27,9 @@
         });
     }
 
-    function signinOAuth(url) {
-      return $http.get(url)
-        .then(function successCallback(res) {
-          return res.data;
-        }, function errorCallback(res) {
-          console.log('Error signing in with OAuth');
-        });
-    }
-
     function signout() {
       delete $window.localStorage.token;
-      delete $window.localStorage.userID;
+      delete $window.localStorage.username;
       $state.transitionTo('signin');
     }
 
@@ -51,18 +42,9 @@
         });
     }
 
-    function signupOAuth(url) {
-      return $http.get(url)
-        .then(function successCallback(res) {
-          return res.data;
-        }, function errorCallback(res) {
-          console.log('Error signing up with OAuth');
-        });
-    }
-
     // retrieve user profile information
-    function getProfile() {
-      var url = '/users/' + $window.localStorage.userID;
+    function getActiveProfile() {
+      var url = '/users/' + $window.localStorage.username;
       
       return $http.get(url)
       .then(function successCallback(res) {
@@ -74,13 +56,13 @@
 
     // update an existing users profile info
     function updateProfile(data) {
-      var url = '/users/' + $window.localStorage.userID;
+      var url = '/users/' + $window.localStorage.username;
 
       return $http.put(url, data)
         .then(function successCallback(res) {
           return res.data;
         }, function errorCallback(res) {
-          console.log('Error updating user profile')
+          console.log('Error updating user profile');
         });
     }
   }
