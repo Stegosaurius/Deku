@@ -10,3 +10,6 @@ client/dist
 
 #API Keys
 client/keys/dashboardConfigure.js
+
+#Environmental variables
+.env
