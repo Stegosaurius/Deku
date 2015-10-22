@@ -3,7 +3,7 @@
 
   <form name="signup.form" ng-submit="signup.signup()">
     <input type="email" name="email" ng-model="signup.user.email" placeholder="Email Address" required><br>
-    <input type="text" name="username" ng-model="signup.user.username" placeholder="Username" required><br>
+    <input type="text" name="username" ng-model="signup.user.username" placeholder="Username" ng-pattern='/^[a-zA-Z0-9]*$/' required><p>Only alphanumeric characters</p><br>
     <input type="password" name="password" ng-model="signup.user.password" placeholder="Password" required><br>
     <button type="submit">Sign Up</button><br>
   </form>
