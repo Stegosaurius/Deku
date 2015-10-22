@@ -12,11 +12,12 @@
     vm.about = '';
     vm.location = '';
     vm.photo = '';
-    vm.plants = [];
+    vm.tags = [];
     vm.username = '';
     vm.message = '';
 
     vm.updateProfile = updateProfile;
+    vm.addTag = addTag;
 
     //Invoke get profile to prepopulate our view model with 
     //existing data for a user. This way the data object will
@@ -29,12 +30,16 @@
           console.log(data);
           vm.about = data.about;
           vm.location = data.location;
-          vm.plants = data.plants;
+          // vm.tags = data.plants;
+          //placeholder
+          vm.tags = ['kale', 'spinach', 'chia']
           vm.username = data.username;
           // getPhoto();
         });
     }
 
+    //Send new user data to the database to update the user's
+    //Profile and redirect them to their profile page.
     function updateProfile() {
       User.updateProfile(vm)
         .then(function(data) {
@@ -43,6 +48,14 @@
         .catch(function(status) {
           vm.message = 'Bad things';
         });
+    }
+
+    //Adds a tag input by the user to the list of tags
+    //stored in the view model.
+    function addTag() {
+      vm.tags.push(vm.newTag);
+      console.log(vm.tags);
+      vm.newTag='';
     }
     
   }
