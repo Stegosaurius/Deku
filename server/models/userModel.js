@@ -77,7 +77,7 @@ module.exports = {
     });
     var password = bcrypt.hashSync(data.password, bcrypt.genSaltSync(10));
   
-    db.query('insert into users (username, password, scoped_key) values (?, ?, ?)', [data.username, password, scopedKey], function (err, res) {
+    db.query('insert into users (username, password, email, scoped_key) values (?, ?, ?)', [data.username, password, scopedKey], function (err, res) {
       if (err) {
         callback(err, null);
       } else {
@@ -159,16 +159,6 @@ module.exports = {
 
   getScopedKey: function (id, callback) {
     db.query('select scoped_key from users where id = ?', [id], function (err, res) {
-      if (err) {
-        callback(err);
-      } else {
-        callback(null, res);
-      }
-    });
-  },
-
-  updateToken: function (data, callback) {
-    db.query('update users set token = ? where id = ?', [data.token, data.id], function (err, res) {
       if (err) {
         callback(err);
       } else {

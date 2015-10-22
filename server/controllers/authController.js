@@ -6,7 +6,7 @@ module.exports = {
   signup: function(req, res) {
     // find a user whose email is the same as the forms email
     // we are checking to see if the user trying to login already exists
-    User.getUserByName(req.body.username, function(err, user) {
+    User.getUserByEmail(req.body.email, function(err, user) {
       // if there are any errors, return the error
       if (err) {
         console.error(err);
@@ -47,7 +47,7 @@ module.exports = {
   signin:  function(req, res) { // callback with email and password from our form
     // find a user whose email is the same as the forms email
     // we are checking to see if the user trying to login already exists
-    User.getUserByName(req.body.username, function(err, user) {
+    User.getUserByEmail(req.body.email, function(err, user) {
       // if there are any errors, return the error before anything else
       if (err) {
         console.error(err);
@@ -63,17 +63,9 @@ module.exports = {
       }
       // all is well, create new token, save it to database and return it
       var newToken = util.generateWebToken(user[0]);
-      var data = {
-        id: user[0].id,
-        token: newToken
-      };
-      User.updateToken(data, function (err, result) {
-        if (err) {
-          console.error(err);
-        } else {
-          return res.status(200).json({ token: newToken });  
-        }
-      })
+      return res.status(200).json({ token: newToken });  
+
+
     });
   }
 
