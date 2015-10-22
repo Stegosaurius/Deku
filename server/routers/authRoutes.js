@@ -1,5 +1,6 @@
 var expressJWT = require('express-jwt');
-var auth = require('../config/auth');
+// var auth = require('../config/auth');
+var auth = require('../config/auth.example.js');
 var authController = require('../controllers/authController');
 // load helpers
 var util = require('../helpers/utilities');

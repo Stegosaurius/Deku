@@ -1,6 +1,7 @@
 var bcrypt = require('bcrypt-nodejs');
 var jwt = require('jsonwebtoken');
-var auth = require('../config/auth');
+// var auth = require('../config/auth');
+var auth = require('../config/auth.example.js');
 
 module.exports = {
   isValidPassword: function (candidatePassword, hashedPassword) {
