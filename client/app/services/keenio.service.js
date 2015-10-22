@@ -2,6 +2,8 @@
   angular.module('app')
     .factory('Keenio', Keenio);
 
+  Keenio.$inject = ['$http', '$window'];
+
   function Keenio($http, $window) {
     var url = '/users/scopekey/' + $window.localStorage.userID;
     return $http.get(url).then(function (data) {

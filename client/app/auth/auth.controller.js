@@ -4,6 +4,8 @@
   angular.module('app')
     .controller('AuthController', AuthController);
 
+  AuthController.$inject = ['$window', '$state', 'jwtHelper', 'User'];
+
   function AuthController($window, $state, jwtHelper, User) {
     // capture variable for binding members to controller; vm stands for ViewModel
     // (https://github.com/johnpapa/angular-styleguide#controlleras-with-vm)
