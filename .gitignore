@@ -8,6 +8,9 @@ node_modules/
 client/lib
 client/dist
 
+# Images
+images/
+
 #API Keys
 client/keys/dashboardConfigure.js
 
