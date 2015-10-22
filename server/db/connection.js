@@ -3,7 +3,7 @@ var mysql = require('mysql');
 var dbURL = process.env.DATABASE_URL || 'localhost';
 
 var connection = mysql.createConnection({
-  host: 'localhost',
+  host: dbURL,
   user: 'root',
   database: 'Deku'
 });
