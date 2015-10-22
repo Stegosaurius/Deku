@@ -8,10 +8,10 @@
 
     var services = {
       signin: signin,
-      signinOAuth: signinOAuth,
+      // signinOAuth: signinOAuth,
       signout: signout,
       signup: signup,
-      signupOAuth: signupOAuth,
+      // signupOAuth: signupOAuth,
       getProfile: getProfile,
       updateProfile: updateProfile
     };
