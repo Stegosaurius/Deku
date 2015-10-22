@@ -3,21 +3,20 @@ var passport = require('passport');
 var path = require('path');
 var flash = require('connect-flash');
 var session = require('express-session');
-var auth = require('./config/auth');
 var cors = require('cors');
+var auth = require('./config/auth.example.js');//process.env.ENV_AUTH;//
 
 //Our app is an instance of express
 var app = express();
 
 //Configure our port for deployment/local development
 var port = process.env.PORT || 3000;
-console.log(port);
 
 //Set up MySQL database here
   //Conditional check for connecting to instance of deployed or local DB
 
-
 app.use(cors());
+
 // required for passport
 app.use(session({ secret: auth.secret }));
 app.use(passport.initialize());
