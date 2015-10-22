@@ -4,7 +4,7 @@
   angular.module('app')
     .controller('ProfileController', ProfileController);
 
-  function ProfileController(User) {
+  function ProfileController($stateParams, User) {
     // capture variable for binding members to controller; vm stands for ViewModel
     // (https://github.com/johnpapa/angular-styleguide#controlleras-with-vm)
     var vm = this;
@@ -18,7 +18,7 @@
     getProfile();
 
     function getProfile() {
-      User.getProfile()
+      User.getProfile($stateParams.username)
         .then(function(data) {
           vm.about = data.about || 'Talk a little about yourself...';
           vm.location = data.location || 'Where are you?';

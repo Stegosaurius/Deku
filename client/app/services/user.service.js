@@ -43,8 +43,8 @@
     }
 
     // retrieve user profile information
-    function getActiveProfile() {
-      var url = '/users/' + $window.localStorage.username;
+    function getProfile(username) {
+      var url = '/users/' + username;
       
       return $http.get(url)
       .then(function successCallback(res) {

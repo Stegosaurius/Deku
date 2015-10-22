@@ -4,11 +4,12 @@
   angular.module('app')
     .controller('NavbarController', NavbarController);
 
-  function NavbarController(User) {
+  function NavbarController($window, $state, User) {
     // capture variable for binding members to controller; vm stands for ViewModel
     // (https://github.com/johnpapa/angular-styleguide#controlleras-with-vm)
     var vm = this;
 
+    vm.getActiveProfile = getActiveProfile;
     vm.notifications = [];
     // show notification nav icon if there are notifications
     // vm.showNotifications = vm.notifications.length;
@@ -21,6 +22,12 @@
     });
 
     getNotifications();
+
+    function getActiveProfile() {
+      var username = $window.localStorage.username;
+
+      $state.transitionTo('profile', { username:username });
+    }
 
     function getNotifications() {
       // User.getNotifications();
