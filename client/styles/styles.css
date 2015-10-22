@@ -1,5 +1,15 @@
-/* MAIN STYLESHEET */
+*,
+*::before,
+*::after {
+  box-sizing: inherit; }
+
+html {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  font-size: 62.5%; }
 
 ul {
-  margin: 0;
-}
+  margin: 0; }
+
+/*# sourceMappingURL=styles.css.map */
