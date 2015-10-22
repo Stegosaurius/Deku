@@ -12,10 +12,10 @@ module.exports = function (app, passport) {
   // // protect routes with JWT
   // app.use('/:id', expressJWT({ secret: auth.secret }));
 
-  app.get('/:id', function (req, res) {
+  app.get('/:username', function (req, res) {
     //Get the id
-    var id = req.params.id;
-    userController.getProfile(req, res, id);
+    var username = req.params.username;
+    userController.getProfile(req, res, username);
   });
 
   app.put('/:id', function (req, res) {
