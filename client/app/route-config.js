@@ -6,9 +6,17 @@
     .factory('AttachToken', AttachToken)
     .run(run);
 
-  function config($stateProvider, $urlRouterProvider, $httpProvider) {
+  function config($stateProvider, $urlRouterProvider, $httpProvider, $windowProvider) {
     // default path
-    $urlRouterProvider.otherwise('/dashboard');
+    $urlRouterProvider.otherwise(function ($injector, $location) {
+      var window = $windowProvider.$get();
+      var username = window.localStorage.username;
+      if (username) {
+        return '/dashboard/' + username;
+      } else {
+        return '/signin';
+      }
+    });
 
     // controllerAs determines how the controller's scope will be identified
     // in our html files
