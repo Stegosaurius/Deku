@@ -6,6 +6,7 @@ module.exports = {
   signup: function(req, res) {
     // find a user whose email is the same as the forms email
     // we are checking to see if the user trying to login already exists
+    
     User.getUserByEmail(req.body.email, function(err, user) {
       // if there are any errors, return the error
       if (err) {
@@ -24,6 +25,7 @@ module.exports = {
           password: req.body.password,
           email: req.body.email
         };
+        debugger;
         User.addUserByLocal(newUser, function (err, result) {
           if (err) {
             console.error(err);
