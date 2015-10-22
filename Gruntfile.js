@@ -6,18 +6,55 @@ module.exports = function(grunt) {
     concat: {
       client: {
         src: [
-          'client/**/*.js'
+          "client/keys/dashboardConfigure.js",
+          "client/app/app.js",
+          "client/app/auth/auth.controller.js",
+          "client/app/dashboard/dashboard.controller.js",
+          "client/app/profile/profile.controller.js",
+          "client/app/profile/editProfile.controller.js",
+          "client/app/navbar/navbar.controller.js",
+          "client/app/route-config.js",
+          "client/app/services/user.service.js",
+          "client/app/services/keenio.service.js"
         ],
         dest: 'client/dist/client.js'
+      },
+      dependencies: {
+        src: [
+          "client/lib/jquery/dist/jquery.min.js",
+          "client/lib/angular/angular.min.js",
+          "client/lib/angular-ui-router/release/angular-ui-router.min.js",
+          "client/lib/angular-jwt/dist/angular-jwt.min.js",
+          "client/lib/keen-js/dist/keen.min.js",
+          "client/lib/jquery-knob/dist/jquery.knob.min.js",
+          "client/lib/Materialize/dist/js/materialize.min.js"
+        ],
+        dest: 'client/dist/dependencies.min.js'
       }
     },
 
     uglify: {
       client: {
         src: [
-          'dist/client.js'
+          'client/dist/client.js'
         ],
         dest: 'client/dist/client.min.js'
+      }
+    },
+
+    shell: {
+      runServer: {
+        options: {
+          stdout: true, 
+          stderr: true
+        },
+        command: 'heroku local web'
+      }
+    },
+
+    nodemon: {
+      dev: {
+        script: 'server/server.js'
       }
     }
   });
@@ -31,7 +68,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
 
-
   ////////////////////////////////////////////////////
   // Main grunt tasks
   ////////////////////////////////////////////////////
@@ -41,4 +77,8 @@ module.exports = function(grunt) {
     'uglify'
   ]);
 
+  grunt.registerTask('default', [
+    'build',
+    'nodemon'
+  ]);
 };
