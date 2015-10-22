@@ -14,6 +14,7 @@ CREATE TABLE `Users` (
 	`about` TEXT,
 	`profile_photo` blob,
 	`location` varchar(20),
+	`tessel` tinyint NOT NULL DEFAULT '0',
 	PRIMARY KEY (`id`)
 );
 

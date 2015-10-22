@@ -1,6 +1,8 @@
 var expressJWT = require('express-jwt');
 var auth = require('../config/auth');
 var authController = require('../controllers/authController');
+// load helpers
+var util = require('../helpers/utilities');
 
 module.exports = function (app, passport) {
 
@@ -29,8 +31,13 @@ module.exports = function (app, passport) {
         if (!user) { 
           return res.redirect('/#/signin'); 
         }
-        
-        return res.redirect('/#/profile/' + user.id);
+        var userObject = {
+          id: user.id,
+          username: user.username,
+          email: user.email 
+        };
+        var newToken = util.generateWebToken(userObject);
+        return res.redirect('/#/oauth/' + newToken);
 
       })(req, res, next);
     });
@@ -45,14 +52,22 @@ module.exports = function (app, passport) {
 	// the callback after google has authenticated the user
 	app.get('/google/callback', function(req, res, next) {
       passport.authenticate('google', function(err, user, info) {
+        console.log("Err equals ", err);
+        console.log("Info equals ", info)
+        console.log("User object equals ",user);
         if (err) { 
           return next(err); 
         }
         if (!user) { 
           return res.redirect('/#/signin'); 
         }
-        
-        return res.redirect('/#/profile/' + user.id);
+        var userObject = {
+          id: user.id,
+          username: user.username,
+          email: user.email 
+        };
+        var newToken = util.generateWebToken(userObject);
+        return res.redirect('/#/oauth/' + newToken);
 
       })(req, res, next);
     });

@@ -22,16 +22,16 @@ module.exports = function(passport) {
     // passport needs ability to serialize and unserialize users out of session
 
     // used to serialize the user for the session
-    passport.serializeUser(function(user, done) {
-        done(null, user.id);
-    });
+    // passport.serializeUser(function(user, done) {
+    //     done(null, user.id);
+    // });
 
-    // used to deserialize the user
-    passport.deserializeUser(function(id, done) {
-        User.getUserByID(id, function(err, user) {
-            done(err, user);
-        });
-    });
+    // // used to deserialize the user
+    // passport.deserializeUser(function(id, done) {
+    //     User.getUserByID(id, function(err, user) {
+    //         done(err, user);
+    //     });
+    // });
 
 
 
@@ -53,7 +53,6 @@ module.exports = function(passport) {
         process.nextTick(function() {
             // find the user in the database based on their email
             User.getUserByName(profile.emails[0].value, function(err, user) {
-                console.log("Profile is: ", profile);
                 // if there is an error, stop everything and return that
                 // ie an error connecting to the database
                 if (err) {
@@ -63,32 +62,22 @@ module.exports = function(passport) {
                 // if the user is found, generate new token
                 // save token in database
                 // then return the updated user object
-                if (user.length === 1) {
-                    var newToken = util.generateWebToken(user[0]);
-                    var data = {
-                        id: user[0].id,
-                        token: newToken
-                    }
-                    User.updateToken(data, function (err, result) {
-                        if (err) {
-                            return done(err);
-                        } else {
-                            done(null, user[0]);
-                        }
-                    });
+                if (user.length >= 1) {
+                    return done(user[0]);
+
                 } else {
                     // if there is no user found with that facebook id, create them
                     var newUser = {
                         username: profile.name.givenName + ' ' + profile.name.familyName,
                         email: profile.emails[0].value,
-                        token: token
+                        photo: profile.photos[0].value
                     };
 
                     User.addUserBySocial(newUser, function (err, result) {
                         if (err) {
                             done(err);
                         } else {
-                            User.getUserByID(result.insertID, function (err, user) {
+                            User.getUserByEmail(newUser.email, function (err, user) {
                                 if (err) {
                                     done(err);
                                 } else {
@@ -115,13 +104,13 @@ module.exports = function(passport) {
 
     },
     function(token, refreshToken, profile, done) {
-
         // make the code asynchronous
         // User.findOne won't fire until we have all our data back from Google
         process.nextTick(function() {
 
             // try to find the user based on their google id
             User.getUserByEmail(profile.emails[0].value, function(err, user) {
+
                 if (err) {
                     return done(err);
                 }
@@ -129,24 +118,14 @@ module.exports = function(passport) {
                 // if the user is found, generate new token
                 // save token in database
                 // then return the updated user object
-                if (user.length === 1) {
-                    var newToken = util.generateWebToken(user[0]);
-                    var data = {
-                        id: user[0].id,
-                        token: newToken
-                    }
-                    User.updateToken(data, function (err, result) {
-                        if (err) {
-                            return done(err);
-                        } else {
-                            done(null, user[0]);
-                        }
-                    });
+                if (user.length >= 1) {
+                    return done(null, user[0]);
+
                 } else {
                     var newUser = {
                         username: profile.displayName,
                         email: profile.emails[0].value,
-                        token: token
+                        photo: profile.photos[0].value
                     };
 
                     User.addUserBySocial(newUser, function (err, result) {
@@ -154,11 +133,12 @@ module.exports = function(passport) {
                             console.error(err);
                             return done(err);
                         } else {
-                            User.getUserByID(result.insertID, function (err, user) {
+                            User.getUserByEmail(newUser.email, function (err, user) {
                                 if (err) {
-                                    done(err);
+                                    return done(err);
                                 } else {
-                                    done(null, user[0]);
+                                    debugger;
+                                    return done(null, user[0]);
                                 }
                             });
                         }
