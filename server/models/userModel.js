@@ -3,7 +3,11 @@ var db = require('../db/connection.js');
 var bcrypt = require('bcrypt-nodejs');
 var Keen = require("keen-js");
 // var auth = require("../config/auth");
-var auth = require("../config/auth.deploy.js");
+if (process.env.PORT) {
+  var auth = require('../config/auth.deploy.js');
+} else {
+  var auth = require('../config/auth.js');
+}
 
 module.exports = {
   //Example function for querying the db for all users

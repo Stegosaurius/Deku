@@ -10,7 +10,7 @@
       <li><a class="dropdown-button" href="#!" data-activates="notif-dropdown" ng-show="navbar.notifications.length"><i class="material-icons">mail</i></a>
       <li><a ui-sref="forum">Forum</a></li>
       <li><a ng-click="navbar.getActiveProfile()">Profile</a></li>
-      <li><a ui-sref="dashboard">Dashboard</a></li>
+      <li><a ui-sref="dashboard({ username : navbar.username })">Dashboard</a></li>
       <li><a ng-click="navbar.signout()">Logout</a></li>
     </ul>
     <ul class="side-nav" id="mobile-nav">
