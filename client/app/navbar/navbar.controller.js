@@ -24,9 +24,7 @@
     getNotifications();
 
     function getActiveProfile() {
-      var username = $window.localStorage.username;
-
-      $state.transitionTo('profile', { username:username });
+      $state.transitionTo('profile', { username: $window.localStorage.username });
     }
 
     function getNotifications() {

@@ -27,6 +27,11 @@
         controllerAs: 'signup',
         authenticate: false
       })
+      .state('oauth', {
+        url: '/oauth/:token',
+        controller: 'OAuthController',
+        authenticate: false
+      })
       .state('dashboard', {
         url: '/dashboard/:username',
         views: {

@@ -21,16 +21,19 @@
       vm.message = message;
     }
 
+    function saveToken(token) {
+      // save JWT and user info to local storage
+      $window.localStorage.token = token;
+      var tokenPayload = jwtHelper.decodeToken(token);
+      $window.localStorage.username = tokenPayload.username;
+      // TODO: UNCOMMENT THIS LINE WHEN SCOPED KEYS HAVE BEEN IMPLEMENTED
+      // $window.localStorage.scopedKey = tokenPayload.scoped_key;
+    }
+
     function signin() {
       User.signin(vm.user)
         .then(function(data) {
-          // save JWT and user info to local storage
-          $window.localStorage.token = data.token;
-          var tokenPayload = jwtHelper.decodeToken(data.token);
-          $window.localStorage.username = tokenPayload.username;
-          // TODO: UNCOMMENT THIS LINE WHEN SCOPED KEYS HAVE BEEN IMPLEMENTED
-          // $window.localStorage.scopedKey = tokenPayload.scoped_key;
-
+          saveToken(data.token);
           $state.transitionTo('dashboard');
         })
         .catch(function(status) {
@@ -47,14 +50,8 @@
     function signup() {
       User.signup(vm.user)
         .then(function(data) {
-          // save JWT and user info to local storage
-          $window.localStorage.token = data.token;
-          var tokenPayload = jwtHelper.decodeToken(data.token);
-          $window.localStorage.username = tokenPayload.username;
-          // TODO: UNCOMMENT THIS LINE WHEN SCOPED KEYS HAVE BEEN IMPLEMENTED
-          // $window.localStorage.scopedKey = tokenPayload.scoped_key;
-
-          $state.transitionTo('profile');
+          saveToken(data.token);
+          $state.transitionTo('profile', { username: $window.localStorage.username });
         })
         .catch(function(status) {
           if (status === 409) {
