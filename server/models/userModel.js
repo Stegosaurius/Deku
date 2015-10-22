@@ -170,6 +170,28 @@ module.exports = {
         callback(null, res);
       }
     });
+  },
+
+  getUserTags: function (id, callback) {
+      db.query('select t.tag from tags t inner join usertags u on (t.id = u.tag_id) where u.user_id = ?', [id], function (err, tags) {
+        if (err) {
+          callback(err, null);
+        } else {
+          callback(null, tags);
+        }
+      });
+  },
+
+  addTag: function (data, callback) {
+    db.query('insert into tags (user_id, tag) values (?, ?)', [data.id, data.tag],
+      function (err, res) {
+        if (err) {
+          callback(err, null);
+        } else {
+          callback(null, res.insertID);
+        }
+
+    });
   }
 
 }

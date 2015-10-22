@@ -21,5 +21,9 @@ module.exports = function (app, passport) {
   });
 
   app.get('/scopekey/:id', userController.getScopedKey);
+
+  app.get('/tags/:id', userController.getTags);
+
+  app.post('/tags/:id', userController.addTag);
   
 }
