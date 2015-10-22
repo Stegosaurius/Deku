@@ -115,7 +115,7 @@ module.exports = {
 
   getTags: function (req, res) {
     var id = req.params.id; 
-    User.getTags(id, function (err, tags) {
+    User.getUserTags(id, function (err, tags) {
       if (err) {
         console.error(err);
         res.status(500).send();
