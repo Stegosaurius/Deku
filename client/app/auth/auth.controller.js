@@ -34,7 +34,7 @@
       User.signin(vm.user)
         .then(function(data) {
           saveToken(data.token);
-          $state.transitionTo('dashboard');
+          $state.transitionTo('dashboard', { username: $window.localStorage.username });
         })
         .catch(function(status) {
           if (status === 404) {

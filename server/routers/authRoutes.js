@@ -1,6 +1,12 @@
 var expressJWT = require('express-jwt');
+
 // var auth = require('../config/auth');
-var auth = require('../config/auth.deploy.js');
+if (process.env.PORT) {
+  var auth = require('../config/auth.deploy.js');
+} else {
+  var auth = require('../config/auth.js');
+}
+
 var authController = require('../controllers/authController');
 // load helpers
 var util = require('../helpers/utilities');

@@ -8,8 +8,12 @@ var User = require('../models/userModel');
 
 // load the auth variables
 // var configAuth = require('../config/auth.js');
-var configAuth = require('../config/auth.deploy.js');
-
+// var configAuth = require('../config/auth.deploy.js');
+if (process.env.PORT) {
+  var configAuth = require('./auth.deploy.js');
+} else {
+  var configAuth = require('./auth.js');
+}
 // load helpers
 var util = require('../helpers/utilities');
 

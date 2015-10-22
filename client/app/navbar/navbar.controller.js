@@ -9,6 +9,8 @@
     // (https://github.com/johnpapa/angular-styleguide#controlleras-with-vm)
     var vm = this;
 
+    vm.username = $window.localStorage.username;
+
     vm.getActiveProfile = getActiveProfile;
     vm.notifications = [];
     // show notification nav icon if there are notifications
