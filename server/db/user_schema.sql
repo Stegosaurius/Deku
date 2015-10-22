@@ -10,11 +10,10 @@ CREATE TABLE `Users` (
 	`email` varchar(50),
 	`password` varchar(100),
 	`scoped_key` varchar(250),
+	`token` varchar(250),
 	`about` TEXT,
 	`profile_photo` blob,
 	`location` varchar(20),
-	`growth_methods` TEXT,
-	`plants` TEXT,
 	PRIMARY KEY (`id`)
 );
 
@@ -63,6 +62,17 @@ CREATE TABLE `status_votes` (
 	`status_id` INT NOT NULL
 );
 
+CREATE TABLE `Tags` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`tag` varchar(50) NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `UserTags` (
+	`user_id` INT NOT NULL,
+	`tag_id` INT NOT NULL
+);
+
 ALTER TABLE `Followers` ADD CONSTRAINT `Followers_fk0` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
 
 ALTER TABLE `Followers` ADD CONSTRAINT `Followers_fk1` FOREIGN KEY (`follower_id`) REFERENCES `Users`(`id`);
@@ -82,3 +92,7 @@ ALTER TABLE `message_votes` ADD CONSTRAINT `message_votes_fk1` FOREIGN KEY (`use
 ALTER TABLE `status_votes` ADD CONSTRAINT `status_votes_fk0` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
 
 ALTER TABLE `status_votes` ADD CONSTRAINT `status_votes_fk1` FOREIGN KEY (`status_id`) REFERENCES `Statuses`(`id`);
+
+ALTER TABLE `UserTags` ADD CONSTRAINT `UserTags_fk0` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
+
+ALTER TABLE `UserTags` ADD CONSTRAINT `UserTags_fk1` FOREIGN KEY (`tag_id`) REFERENCES `Tags`(`id`);

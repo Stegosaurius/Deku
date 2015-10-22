@@ -7,7 +7,7 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var User = require('../models/userModel');
 
 // load the auth variables
-var configAuth = require('../config/auth');
+var configAuth = require('../config/auth.js');
 
 // load helpers
 var util = require('../helpers/utilities');
@@ -42,34 +42,59 @@ module.exports = function(passport) {
         // pull in our app id and secret from our auth.js file
         clientID        : configAuth.facebookAuth.clientID,
         clientSecret    : configAuth.facebookAuth.clientSecret,
-        callbackURL     : configAuth.facebookAuth.callbackURL
+        callbackURL     : configAuth.facebookAuth.callbackURL,
+        profileFields   : ['id', 'displayName', 'email', 'photos']
     },
     // facebook will send back the token and profile
     function(token, refreshToken, profile, done) {
+        console.log("Profile is: ", profile);
+        console.log("Token is: ", token);
         // asynchronous
         process.nextTick(function() {
             // find the user in the database based on their email
-            User.getUserByEmail(profile.emails[0].value, function(err, user) {
-
+            User.getUserByName(profile.emails[0].value, function(err, user) {
+                console.log("Profile is: ", profile);
                 // if there is an error, stop everything and return that
                 // ie an error connecting to the database
-                if (err)
+                if (err) {
                     return done(err);
+                }
 
-                // if the user is found, then log them in
+                // if the user is found, generate new token
+                // save token in database
+                // then return the updated user object
                 if (user.length === 1) {
-                    return done(null, user[0]); // user found, return that user
+                    var newToken = util.generateWebToken(user[0]);
+                    var data = {
+                        id: user[0].id,
+                        token: newToken
+                    }
+                    User.updateToken(data, function (err, result) {
+                        if (err) {
+                            return done(err);
+                        } else {
+                            done(null, user[0]);
+                        }
+                    });
                 } else {
                     // if there is no user found with that facebook id, create them
                     var newUser = {
                         username: profile.name.givenName + ' ' + profile.name.familyName,
-                        email: profile.emails[0].value
+                        email: profile.emails[0].value,
+                        token: token
                     };
-                    User.addUserBySocial(newUser, function (err, user) {
+
+                    User.addUserBySocial(newUser, function (err, result) {
                         if (err) {
-                            return console.error(err);
+                            done(err);
                         } else {
-                            return done(null, user[0]);
+                            User.getUserByID(result.insertID, function (err, user) {
+                                if (err) {
+                                    done(err);
+                                } else {
+                                    done(null, user[0]);
+                                }
+                            });
                         }
                     });
                 }
@@ -97,23 +122,45 @@ module.exports = function(passport) {
 
             // try to find the user based on their google id
             User.getUserByEmail(profile.emails[0].value, function(err, user) {
-                if (err)
+                if (err) {
                     return done(err);
+                }
 
+                // if the user is found, generate new token
+                // save token in database
+                // then return the updated user object
                 if (user.length === 1) {
-                    // if a user is found, log them in
-                    return done(null, user[0]);
+                    var newToken = util.generateWebToken(user[0]);
+                    var data = {
+                        id: user[0].id,
+                        token: newToken
+                    }
+                    User.updateToken(data, function (err, result) {
+                        if (err) {
+                            return done(err);
+                        } else {
+                            done(null, user[0]);
+                        }
+                    });
                 } else {
                     var newUser = {
                         username: profile.displayName,
-                        email: profile.emails[0].value
+                        email: profile.emails[0].value,
+                        token: token
                     };
 
-                    User.addUserBySocial(newUser, function (err, user) {
+                    User.addUserBySocial(newUser, function (err, result) {
                         if (err) {
-                            return console.error(err);
+                            console.error(err);
+                            return done(err);
                         } else {
-                            return done(null, user[0]);
+                            User.getUserByID(result.insertID, function (err, user) {
+                                if (err) {
+                                    done(err);
+                                } else {
+                                    done(null, user[0]);
+                                }
+                            });
                         }
                     });
                 }

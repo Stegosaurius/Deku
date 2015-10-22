@@ -24,10 +24,10 @@ module.exports = {
           password: req.body.password,
           email: req.body.email
         };
-
         User.addUserByLocal(newUser, function (err, result) {
           if (err) {
             console.error(err);
+            res.status(500).send();
           } else {
             User.getUserByID(result.insertId, function (err, user) {
               if (err) {
@@ -38,6 +38,7 @@ module.exports = {
               }
             });
           }
+
         });
       }
     });
@@ -60,8 +61,19 @@ module.exports = {
       if (!util.isValidPassword(req.body.password, user[0].password)) {
         return res.status(422).send();
       }
-      // all is well, return successful user
-      return res.status(200).json({ token: util.generateWebToken(user[0]) });
+      // all is well, create new token, save it to database and return it
+      var newToken = util.generateWebToken(user[0]);
+      var data = {
+        id: user[0].id,
+        token: newToken
+      };
+      User.updateToken(data, function (err, result) {
+        if (err) {
+          console.error(err);
+        } else {
+          return res.status(200).json({ token: newToken });  
+        }
+      })
     });
   }
 
