@@ -5,7 +5,11 @@
 
 var User = require('../models/userModel');
 var bcrypt = require('bcrypt-nodejs');
-
+var fs = require('fs');
+var zlib = require('zlib');
+var config = require('../config/auth.deploy.js');
+var AWS = require("aws-sdk");
+AWS.config.update({ accessKeyId: config.awsStorage.accessKey, secretAccessKey: config.awsStorage.secretKey });
 
 module.exports = {
   //Put all http req handling functions here
@@ -35,17 +39,6 @@ module.exports = {
     })
   },
 
-  // createUser: function (req, res, id) {
-  //   User.addUser(req.body, function (err, user) {
-  //     if (err) {
-  //       console.error(err);
-  //       res.status(404).send(err);
-  //     } else {
-  //       res.json(user);
-  //     }
-  //   });
-  // },
-
   getUser: function (req, res, id) {
     User.getUserByID(id, function (err, user) {
       if (err) {
@@ -57,26 +50,51 @@ module.exports = {
     })
   },
 
-  getProfilePhoto: function (req, res, id) {
-    User.getProfilePhoto(id, function (err, photo) {
+  getAvatarPath: function (req, res) {
+    User.getProfilePhoto(req.body.username, function (err, path) {
       if (err) {
         console.error(err);
         res.status(404).send(err);
       } else {
-        res.send(photo);
+        res.json({ avatarURL: path });
       }
     });
   },
 
-  addProfilePhoto: function (req, res, id) {
-    User.addProfilePhoto(id, req.body.photo, function (err, result) {
+  addAvatarPath: function (req, res) {
+    User.addProfilePhoto(req.body.username, req.body.photo, function (err, result) {
       if (err) {
         console.error(err);
         res.status(404).send(err);
       } else {
-        res.send(result);
+        res.json({ avatarURL: req.body.photo });
       }
     })
+  },
+
+  uploadAvatar: function (req, res) {
+    var file = req.files.file;
+    // Load the stream
+    var username = req.body.username;
+    var body = fs.createReadStream(file).pipe(zlib.createGzip());
+    // Upload the stream
+    var s3 = new AWS.S3({params: { Bucket: config.awsStorage.bucket }});
+    s3.upload({ Body: body }, function(err, data) {
+      if (err) {
+        console.error(err);
+        res.status(500).send(err);
+      } else {
+        // store path to avatar in our database
+        User.addProfilePhoto(username, data.Location, function (err, result) {
+          if (err) {
+            console.error(err);
+            res.status(500).send(err);
+          } else {
+            res.status(200).json({ avatarURL: data.Location });
+          }
+        });
+      }
+    });
   },
 
   getNotifications: function (req, res, id) {
@@ -128,15 +146,17 @@ module.exports = {
   addTag: function (req, res) {
     var data = req.body;
     data.id = req.params.id;
-    User.addTag(data, function (err, tag) {
+    User.addTag(data, function (err, result) {
       if (err) {
         console.error(err);
         res.status(500).send();
       } else {
-        res.status(200).json(tag);
+        res.status(200).send(result);
       }
-    })
-  }
+    });
+  },
+
+
 
 
 

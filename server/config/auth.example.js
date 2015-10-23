@@ -23,6 +23,12 @@ module.exports =
         'baseUrl': "https://api.keen.io/"
     },
 
+    'awsStorage' : {
+        'accessKey': "xxxxxxxxxxx",
+        'secretKey': "xxxxxxxxxxx",
+        'bucket': "xxxxxxxxxxx"
+    },
+
     'secret' : 'xxxxxxxxxxx'
 
 }; 

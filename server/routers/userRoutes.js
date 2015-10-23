@@ -8,9 +8,6 @@ if (process.env.PORT) {
 }
 module.exports = function (app, passport) {
   //app === userRouter injected from middlware.js
-  
-  // // protect routes with JWT
-  // app.use('/:id', expressJWT({ secret: auth.secret }));
 
   app.get('/:username', function (req, res) {
     //Get the id
@@ -29,5 +26,11 @@ module.exports = function (app, passport) {
   app.get('/tags/:id', userController.getTags);
 
   app.post('/tags/:id', userController.addTag);
+
+  app.post('/upload/avatar', userController.uploadAvatar);
+
+  app.get('/avatarpath', userController.getAvatarPath);
+
+  app.post('/avatarpath', userController.addAvatarPath);
   
 }
