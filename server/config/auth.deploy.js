@@ -21,6 +21,12 @@ module.exports =
         'baseUrl': process.env.KEEN_BU
     },
 
+    'awsStorage' : {
+        'accessKey': process.env.AWS_ACCESS_KEY,
+        'secretKey': process.env.AWS_SECRET_KEY,
+        'bucket': process.env.AWS_BUCKET
+    },
+
     'secret' : process.env.SECRET
 
 }; 

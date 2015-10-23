@@ -107,18 +107,18 @@ module.exports = {
       });
   },
 
-  getProfilePhoto: function (id, callback) {
-    db.query('select profile_photo from users where id = ?', [id], function (err, photo) {
+  getProfilePhoto: function (username, callback) {
+    db.query('select profile_photo from users where username = ?', [username], function (err, path) {
       if (err) {
         callback(err, null);
       } else {
-        callback(null, photo);
+        callback(null, path);
       }
     });
   },
 
-  addProfilePhoto: function (id, photo, callback) {
-    db.query('update users set photo = ? where id = ?', [photo, id], function (err, res) {
+  addProfilePhoto: function (username, photo, callback) {
+    db.query('update users set photo = ? where username = ?', [photo, username], function (err, res) {
       if (err) {
         callback(err, null);
       } else {
