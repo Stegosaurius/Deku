@@ -55,7 +55,7 @@
     // store thread names for listing on page
     // make obj so thread id can be referenced from thread name
     function getRecentThreads() {
-      User.getRecentThreads()
+      User.getRecentThreads(vm.username)
         .then(function(data) {
           for (var i = 0; i < data.length; i++) {
             vm.recentThreadNames.push(data[i].thread);

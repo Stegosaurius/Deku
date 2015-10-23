@@ -21,4 +21,14 @@
   <ul class="statuses">
     <li class="status" ng-repeat="status in profile.statuses">{{ status }}</li>
   </ul>
+
+  <div>
+    <span>Following {{ profile.following.length }}</span>
+    <span>Followers {{ profile.followers.length }}</span>
+  </div>
+
+  <h5>Recent forum activity:</h5>
+  <ul class="recentThreads">
+    <li class="thread" ng-repeat="thread in profile.recentThreadNames">{{ thread }}</li>
+  </ul>
 </div>
