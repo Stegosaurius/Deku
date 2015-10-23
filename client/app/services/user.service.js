@@ -10,11 +10,13 @@
 
     var services = {
       signin: signin,
-      // signinOAuth: signinOAuth,
       signout: signout,
       signup: signup,
-      // signupOAuth: signupOAuth,
+      getFollowers: getFollowers,
+      getAvatar: getAvatar,
       getProfile: getProfile,
+      getRecentThreads: getRecentThreads,
+      getStatuses: getStatuses,
       updateProfile: updateProfile
     };
 
@@ -44,16 +46,54 @@
         });
     }
 
+    // retrieve followers AND following lists 
+    function getFollowers(username) {
+      return $http.get('/follower/' + username)
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log('Error retrieving followers');
+        });
+    }
+
+    // retrieve a user's profile photo
+    function getAvatar(username) {
+      return $http.get('/users/avatarpath/' + username)
+        .then(function successCallback(res) {
+          return res.data.avatarURL;
+        }, function errorCallback(res) {
+          console.log('Error retrieving avatar');
+        });
+    }
+
     // retrieve user profile information
     function getProfile(username) {
-      var url = '/users/' + username;
-      
-      return $http.get(url)
-      .then(function successCallback(res) {
-        return res.data;
-      }, function errorCallback(res) {
-        console.log('Error retrieving user profile');
-      });
+      return $http.get('/users/' + username)
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log('Error retrieving user profile');
+        });
+    }
+
+    // retrieve user's most recent forum posts
+    function getRecentThreads(username) {
+      return $http.get('/threads/recent/' + username)
+        .then(function successCallback(res) {
+          return res.data.threads;
+        }, function errorCallback(res) {
+          console.log('Error retrieving recent threads');
+        });
+    }
+
+    // retrieve user statuses
+    function getStatuses(username) {
+      return $http.get('/status/' + username)
+        .then(function successCallback(res) {
+          return res.data.statuses;
+        }, function errorCallback(res) {
+          console.log('Error retrieving statuses');
+        });
     }
 
     // update an existing users profile info
