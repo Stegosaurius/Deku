@@ -4,15 +4,17 @@
   angular.module('app')
     .controller('ProfileController', ProfileController);
 
-  ProfileController.$inject = ['$stateParams', 'User'];
+  ProfileController.$inject = ['$stateParams', '$window', 'jwtHelper', 'User'];
 
-  function ProfileController($stateParams, User) {
+  function ProfileController($stateParams, $window, jwtHelper, User) {
     // capture variable for binding members to controller; vm stands for ViewModel
     // (https://github.com/johnpapa/angular-styleguide#controlleras-with-vm)
     var vm = this;
 
     vm.about = '';
+    vm.activeUser = false;
     vm.avatar = '';
+    vm.follow = follow;
     vm.followers = [];
     vm.following = [];
     vm.location = '';
@@ -22,7 +24,20 @@
     vm.tags = [];
     vm.username = $stateParams.username;
 
+    checkActiveUser();
     getProfile();
+
+    // make the active user a follower of this profile's user
+    function follow() {
+
+    }
+
+    // return true if the active user is viewing his/her own profile
+    function checkActiveUser() {
+      // checking token is more secure than checking localStorage.username
+      var user = jwtHelper.decodeToken($window.localStorage.token).username;
+      vm.activeUser = user === $stateParams.username;
+    }
 
     function getProfile() {
       User.getProfile(vm.username)

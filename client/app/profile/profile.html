@@ -1,9 +1,10 @@
-
 <div class="profile">
   <h3>{{ profile.username }}</h3>
   <h4>{{ profile.location }}</h4>
 
-  <a ui-sref="editProfile">Edit Profile</a>
+  <a ui-sref="editProfile" ng-show="profile.activeUser">Edit Profile</a>
+  <a ui-sref="dashboard({ username: profile.username })" ng-hide="profile.activeUser">Dashboard</a>
+  <a ng-click="profile.follow()" ng-hide="profile.activeUser">Follow</a>
 
   <p class="about">{{ profile.about }}</p>
 
