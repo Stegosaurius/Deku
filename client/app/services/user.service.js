@@ -13,8 +13,9 @@
       signout: signout,
       signup: signup,
       getFollowers: getFollowers,
-      getPhoto: getPhoto,
+      getAvatar: getAvatar,
       getProfile: getProfile,
+      getRecentThreads: getRecentThreads,
       getStatuses: getStatuses,
       updateProfile: updateProfile
     };
@@ -56,13 +57,13 @@
     }
 
     // retrieve a user's profile photo
-    function getPhoto(username) {
+    function getAvatar(username) {
       // TODO: request URL
       return $http.get()
         .then(function successCallback(res) {
-          // TODO
+          return res.data.avatarURL;
         }, function errorCallback(res) {
-          console.log('Error retrieving profile photo');
+          console.log('Error retrieving avatar');
         });
     }
 
@@ -73,6 +74,16 @@
           return res.data;
         }, function errorCallback(res) {
           console.log('Error retrieving user profile');
+        });
+    }
+
+    // retrieve user's most recent forum posts
+    function getRecentThreads(username) {
+      return $http.get('/threads/recent/' + username)
+        .then(function successCallback(res) {
+          return res.data.threads;
+        }, function errorCallback(res) {
+          console.log('Error retrieving recent threads');
         });
     }
 

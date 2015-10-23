@@ -12,10 +12,12 @@
     var vm = this;
 
     vm.about = '';
+    vm.avatar = '';
     vm.followers = [];
     vm.following = [];
     vm.location = '';
-    vm.photo = '';
+    vm.recentThreadNames = [];
+    vm.recentThreads = {};
     vm.statuses = [];
     vm.tags = [];
     vm.username = $stateParams.username;
@@ -30,7 +32,8 @@
           vm.tags = data.plants || ['Plants?', 'Methods/Technologies?', 'Interests?', 'Put them here.'];
           // getStatuses();
           // getFollowers();
-          // getPhoto();
+          // getRecentThreads();
+          // getAvatar();
         });
     }
 
@@ -49,11 +52,23 @@
         });
     }
 
+    // store thread names for listing on page
+    // make obj so thread id can be referenced from thread name
+    function getRecentThreads() {
+      User.getRecentThreads()
+        .then(function(data) {
+          for (var i = 0; i < data.length; i++) {
+            vm.recentThreadNames.push(data[i].thread);
+            vm.recentThreads[data[i].thread] = data[i].id;
+          }
+        });
+    }
+
     // this may change
-    function getPhoto() {
-      User.getPhoto(vm.username)
-        .then(function(photo) {
-          vm.photo = photo;
+    function getAvatar() {
+      User.getAvatar(vm.username)
+        .then(function(avatar) {
+          vm.avatar = avatar;
         });
     }
   }
