@@ -12,10 +12,12 @@
     var vm = this;
 
     vm.about = '';
+    vm.avatar = '';
+    vm.followers = '';
+    vm.following = '';
     vm.location = '';
-    vm.photo = '';
     vm.tags = [];
-    vm.username = '';
+    vm.username = $window.localStorage.username;
     vm.message = '';
 
     vm.updateProfile = updateProfile;
@@ -27,21 +29,16 @@
     getProfile();
 
     function getProfile() {
-      User.getProfile($window.localStorage.username)
+      User.getProfile(vm.username)
         .then(function(data) {
-          console.log(data);
           vm.about = data.about;
           vm.location = data.location;
-          // vm.tags = data.plants;
-          //placeholder
-          vm.tags = ['kale', 'spinach', 'chia']
-          vm.username = data.username;
+          vm.tags = data.plants || ['kale', 'spinach', 'chia'];
           // getPhoto();
         });
     }
 
-    //Send new user data to the database to update the user's
-    //Profile and redirect them to their profile page.
+    //Update location and about sections of profile
     function updateProfile() {
       User.updateProfile(vm)
         .then(function(data) {
@@ -52,13 +49,39 @@
         });
     }
 
-    //Adds a tag input by the user to the list of tags
-    //stored in the view model.
+    function getFollowers() {
+      User.getFollowers(vm.username)
+        .then(function (data) {
+          vm.followers = data.followers;
+          vm.following = data.following;
+        });
+    }
+
+    //Get current profile picture(avatar)
+    function getAvatar() {
+      User.getAvatar(vm.username)
+        .then(function (avatar) {
+          vm.avatar = avatar;
+        });
+        //After we get the avatar, we then need to use
+        //the url as the src attribute in the image
+    }
+
+    //Uploading a new profile picture
+    function updateAvatar() {
+
+    }
+
+    //Add tag to the vm tags list and send the new tag to the 
+    //server to store the new tag in the database
     function addTag() {
       vm.tags.push(vm.newTag);
       console.log(vm.tags);
       vm.newTag='';
+      //Invoke updateTags function
     }
+
+
     
   }
 })();
