@@ -34,7 +34,7 @@ module.exports = {
         console.error(err);
         res.send(404);
       } else {
-        res.send(result)
+        res.status(201).send(result)
       }
     })
   },
@@ -45,29 +45,29 @@ module.exports = {
         console.error(err);
         res.status(404).send(err);
       } else {
-        res.json(user);
+        res.status(200).json(user);
       }
     })
   },
 
   getAvatarPath: function (req, res) {
-    User.getProfilePhoto(req.body.username, function (err, path) {
+    User.getProfilePhoto(req.params.username, function (err, path) {
       if (err) {
         console.error(err);
         res.status(404).send(err);
       } else {
-        res.json({ avatarURL: path });
+        res.status(200).json({ avatarURL: path });
       }
     });
   },
 
   addAvatarPath: function (req, res) {
-    User.addProfilePhoto(req.body.username, req.body.photo, function (err, result) {
+    User.addProfilePhoto(req.params.username, req.body.photo, function (err, result) {
       if (err) {
         console.error(err);
         res.status(404).send(err);
       } else {
-        res.json({ avatarURL: req.body.photo });
+        res.status(201).json({ avatarURL: req.body.photo });
       }
     })
   },
@@ -75,7 +75,7 @@ module.exports = {
   uploadAvatar: function (req, res) {
     var file = req.files.file;
     // Load the stream
-    var username = req.body.username;
+    var username = req.params.username;
     var body = fs.createReadStream(file).pipe(zlib.createGzip());
     // Upload the stream
     var s3 = new AWS.S3({params: { Bucket: config.awsStorage.bucket }});
@@ -90,7 +90,7 @@ module.exports = {
             console.error(err);
             res.status(500).send(err);
           } else {
-            res.status(200).json({ avatarURL: data.Location });
+            res.status(201).json({ avatarURL: data.Location });
           }
         });
       }
@@ -151,7 +151,7 @@ module.exports = {
         console.error(err);
         res.status(500).send();
       } else {
-        res.status(200).send(result);
+        res.status(201).send(result);
       }
     });
   },

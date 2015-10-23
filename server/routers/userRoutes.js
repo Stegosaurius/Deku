@@ -27,10 +27,10 @@ module.exports = function (app, passport) {
 
   app.post('/tags/:id', userController.addTag);
 
-  app.post('/upload/avatar', userController.uploadAvatar);
+  app.post('/upload/avatar/:username', userController.uploadAvatar);
 
-  app.get('/avatarpath', userController.getAvatarPath);
+  app.get('/avatarpath/:username', userController.getAvatarPath);
 
-  app.post('/avatarpath', userController.addAvatarPath);
+  app.post('/avatarpath/:username', userController.addAvatarPath);
   
 }
