@@ -1,29 +1,60 @@
-<div class="navbar"></div>
+<div class="editProfile section">
 
-<div class="editProfile">
-  <form name="editProfile.form" ng-submit="editProfile.updateProfile()">
+  <div class="row z-depth-1">
+
+    <form class="col m6" name="editProfile.form" ng-submit="editProfile.updateProfile()">
+
+      <div class="row"> 
+      
+        <img class="col m4" style="width: 140px;height:140px; border-radius: 20px; padding: 0;"src="github_pic.jpg">
+
+        <div class="col m8">
+
+          <p>Username</p>
+          <p>{{ editProfile.username }}</p>
+          <p>Location</p>
+          <input type="text" ng-model="editProfile.location"  placeholder="Where are you based?"><br>
+          <!-- <input type="text" ng-model="editProfile.about" placeholder="Tell us about yourself"><br>   --> 
+          
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <p>About</p>
+        <textarea ng-model="editProfile.about"> {{ editProfile.about }} </textarea>
+        <button class="waves-effect waves-light btn" type="submit">Update!</button><br>
+
+      </div>
+      <!-- <p>{{ editProfile.message }}</p> -->
+    </form>
     
-    <img style="width: 150px;height:150px; border-radius: 20px;"src="github_pic.jpg">
+    <div class="col m6 valign-wrapper">
+      <h5 class="valign">Add some pictures of your greenhouse! (placeholder)</h5>
+    </div>
 
-    <h4>Username</h4>
-    <h4>{{ editProfile.username }}</h4>
-    <h4>Location</h4>
-    <input type="text" ng-model="editProfile.location"  placeholder="Where are you based?"><br>
-    <h4>About</h4>
-    <!-- <input type="text" ng-model="editProfile.about" placeholder="Tell us about yourself"><br>   --> 
-    <textarea ng-model="editProfile.about"> {{ editProfile.about }} </textarea>
-    <button type="submit">Update!</button><br>
+  </div>
 
-    <!-- <p>{{ editProfile.message }}</p> -->
-  </form>
+  <div class="row z-depth-1"> 
 
-  <ul class="tags">
-    <li class="tag" ng-repeat="tag in editProfile.tags">{{ tag }}</li>
-  </ul> 
+    <div class="col m6">
+      
+      <ul class="tags collection">
+        <li class="tag collection-item" ng-repeat="tag in editProfile.tags">{{ tag }}</li>
+      </ul> 
 
-  <form name="editProfile.tagForm" ng-submit="editProfile.addTag()">
-      <input type="text" ng-model="editProfile.newTag" placeholder="Add a new tag"><br>
-      <button type="submit">Add</button>
-  </form>
+      <form name="editProfile.tagForm" ng-submit="editProfile.addTag()">
+          <input type="text" ng-model="editProfile.newTag" placeholder="Add a new tag"><br>
+          <button class="waves-effect waves-light btn" type="submit">Add</button>
+      </form>
+
+    </div>
+
+    <div class="col m6 valign-wrapper">
+      <h5 class="valign">Something to do with removing followers</h5>
+    </div>
+
+  </div>
 
 </div>
