@@ -13,9 +13,7 @@
 
     vm.message = '';
     vm.signin = signin;
-    // vm.signinOAuth = signinOAuth;
     vm.signup = signup;
-    // vm.signupOAuth = signupOAuth;
     vm.user = {};
 
     function resetForm(message) {

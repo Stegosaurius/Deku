@@ -10,11 +10,12 @@
 
     var services = {
       signin: signin,
-      // signinOAuth: signinOAuth,
       signout: signout,
       signup: signup,
-      // signupOAuth: signupOAuth,
+      getFollowers: getFollowers,
+      getPhoto: getPhoto,
       getProfile: getProfile,
+      getStatuses: getStatuses,
       updateProfile: updateProfile
     };
 
@@ -44,16 +45,45 @@
         });
     }
 
+    // retrieve followers AND following lists 
+    function getFollowers(username) {
+      return $http.get('/follower/' + username)
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log('Error retrieving followers');
+        });
+    }
+
+    // retrieve a user's profile photo
+    function getPhoto(username) {
+      // TODO: request URL
+      return $http.get()
+        .then(function successCallback(res) {
+          // TODO
+        }, function errorCallback(res) {
+          console.log('Error retrieving profile photo');
+        });
+    }
+
     // retrieve user profile information
     function getProfile(username) {
-      var url = '/users/' + username;
-      
-      return $http.get(url)
-      .then(function successCallback(res) {
-        return res.data;
-      }, function errorCallback(res) {
-        console.log('Error retrieving user profile');
-      });
+      return $http.get('/users/' + username)
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log('Error retrieving user profile');
+        });
+    }
+
+    // retrieve user statuses
+    function getStatuses(username) {
+      return $http.get('/status/' + username)
+        .then(function successCallback(res) {
+          return res.data.statuses;
+        }, function errorCallback(res) {
+          console.log('Error retrieving statuses');
+        });
     }
 
     // update an existing users profile info

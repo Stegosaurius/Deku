@@ -12,27 +12,46 @@
     var vm = this;
 
     vm.about = '';
+    vm.followers = [];
+    vm.following = [];
     vm.location = '';
     vm.photo = '';
+    vm.statuses = [];
     vm.tags = [];
-    vm.username = '';
+    vm.username = $stateParams.username;
 
     getProfile();
 
     function getProfile() {
-      User.getProfile($stateParams.username)
+      User.getProfile(vm.username)
         .then(function(data) {
           vm.about = data.about || 'Talk a little about yourself...';
           vm.location = data.location || 'Where are you?';
           vm.tags = data.plants || ['Plants?', 'Methods/Technologies?', 'Interests?', 'Put them here.'];
-          vm.username = data.username;
+          // getStatuses();
+          // getFollowers();
           // getPhoto();
+        });
+    }
+
+    function getStatuses() {
+      User.getStatuses(vm.username)
+        .then(function(statuses) {
+          vm.statuses = statuses;
+        });
+    }
+
+    function getFollowers() {
+      User.getFollowers(vm.username)
+        .then(function(data) {
+          vm.followers = data.followers;
+          vm.following = data.following;
         });
     }
 
     // this may change
     function getPhoto() {
-      User.getPhoto()
+      User.getPhoto(vm.username)
         .then(function(photo) {
           vm.photo = photo;
         });

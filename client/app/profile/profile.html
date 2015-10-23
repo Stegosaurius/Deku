@@ -10,4 +10,15 @@
   <ul class="tags">
     <li class="tag" ng-repeat="tag in profile.tags">{{ tag }}</li>
   </ul>
+
+  <h5>What's good in the greenhouse?</h5>
+  <form name="profile.statusUpdate" ng-submit="profile.updateStatus()">
+    <input type="text" name="status" ng-model="profile.status" required>
+    <button type="submit">Post</button>
+  </form>
+
+  <h5>Recent Updates</h5>
+  <ul class="statuses">
+    <li class="status" ng-repeat="status in profile.statuses">{{ status }}</li>
+  </ul>
 </div>
