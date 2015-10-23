@@ -6,6 +6,8 @@
     .factory('AttachToken', AttachToken)
     .run(run);
 
+  config.$inject = ['$stateProvider', '$urlRouterProvider', '$httpProvider', '$windowProvider'];
+
   function config($stateProvider, $urlRouterProvider, $httpProvider, $windowProvider) {
     // default path
     $urlRouterProvider.otherwise(function ($injector, $location) {
@@ -93,6 +95,8 @@
       $httpProvider.interceptors.push('AttachToken');
   }
 
+  AttachToken.$inject = ['$window', '$q', '$injector'];
+
   function AttachToken($window, $q, $injector) {
     return {
       // find user's JWT in local storage and attach it to outgoing request
@@ -115,6 +119,8 @@
       }
     };
   }
+
+  run.$inject = ['$rootScope', '$state', '$window'];
 
   function run($rootScope, $state, $window) {
     // check for a token in local storage, redirect to sign in if there is none

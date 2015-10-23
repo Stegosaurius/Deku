@@ -1,5 +1,8 @@
 .DS_Store
 
+# SASS cache files
+.sass-cache
+
 # Auth setup
 server/config/auth.js
 

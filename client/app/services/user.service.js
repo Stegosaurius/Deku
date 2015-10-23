@@ -4,6 +4,8 @@
   angular.module('app')
     .factory('User', User);
 
+  User.$inject = ['$http', '$window', '$state'];
+
   function User($http, $window, $state) {
 
     var services = {

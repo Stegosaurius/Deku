@@ -4,6 +4,8 @@
   angular.module('app')
     .controller('DashboardController', DashboardController);
 
+  DashboardController.$inject = ['User', 'Keenio'];
+
   function DashboardController(User,Keenio) {
     var vm = this;
     Keenio.then(function (Keenio) {

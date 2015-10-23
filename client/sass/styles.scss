@@ -1,0 +1,19 @@
+$light-green: #27ae60;
+$light-blue: #1abc9c;
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  font-size: 62.5%;
+}
+
+ul {
+  margin: 0;
+}
