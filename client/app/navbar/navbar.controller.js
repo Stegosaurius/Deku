@@ -21,6 +21,7 @@
 
     // on mobile-sized screen, make the nav bar appear on menu icon click
     angular.element('.button-collapse').sideNav({
+      menuWidth: 200,
       edge: 'right',
       closeOnClick: true
     });
