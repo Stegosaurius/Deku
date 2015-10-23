@@ -58,8 +58,7 @@
 
     // retrieve a user's profile photo
     function getAvatar(username) {
-      // TODO: request URL
-      return $http.get()
+      return $http.get('/users/avatarpath/' + username)
         .then(function successCallback(res) {
           return res.data.avatarURL;
         }, function errorCallback(res) {
