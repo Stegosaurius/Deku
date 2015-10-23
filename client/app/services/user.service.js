@@ -17,6 +17,7 @@
       getProfile: getProfile,
       getRecentThreads: getRecentThreads,
       getStatuses: getStatuses,
+      getTags: getTags,
       updateProfile: updateProfile
     };
 
@@ -96,7 +97,17 @@
         });
     }
 
-    // update an existing users profile info
+    // retrieve user's tags
+    function getTags(username) {
+      return $http.get('/users/tags/' + username)
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log('Error retrieving tags');
+        });
+    }
+
+    // update an existing user's profile info
     function updateProfile(data) {
       var url = '/users/' + $window.localStorage.username;
 

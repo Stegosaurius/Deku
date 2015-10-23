@@ -44,11 +44,24 @@
         .then(function(data) {
           vm.about = data.about || 'Talk a little about yourself...';
           vm.location = data.location || 'Where are you?';
-          vm.tags = data.plants || ['Plants?', 'Methods/Technologies?', 'Interests?', 'Put them here.'];
+          // getTags();
           // getStatuses();
           // getFollowers();
           // getRecentThreads();
           // getAvatar();
+        });
+    }
+
+    function getTags() {
+      User.getTags(vm.username)
+        .then(function(tags) {
+          if (tags.length === 0) {
+            vm.tags = ['Plants?', 'Methods/Technologies?', 'Interests?', 'Put them here.'];
+          } else {
+            for (var i = 0; i < tags.length; i++) {
+              vm.tags.push(tags[i]);
+            }
+          }
         });
     }
 
