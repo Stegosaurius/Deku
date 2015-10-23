@@ -1,5 +1,8 @@
-$light-green: #27ae60;
-$light-blue: #1abc9c;
+$lightGreen: #27ae60;
+$niceGreen: #2DBB69;
+$lightBlue: #1abc9c;
+$lightGrey: #DFDFDF;
+$mainBackground: #EFEFEF;
 
 *,
 *::before,
@@ -11,8 +14,60 @@ html {
   box-sizing: border-box;
   width: 100%;
   height: 100%;
+  background-color: $mainBackground;
 }
 
 ul {
   margin: 0;
 }
+
+ul.tags {
+  margin-top: 5px;
+  list-style: none;
+  border: 1px solid $lightGrey;
+  border-radius: 2px;
+  padding: 5px;
+}
+
+.tag {
+  display: inline-block;
+  margin: 2px 5px;
+  background-color: $lightGrey;
+  border: 1px solid $lightGrey;
+  border-radius: 3px;
+  padding: 2px 5px;
+} 
+
+.tag span {
+  padding-right: 5px
+}
+
+.main {
+  margin: 0 10%;
+}
+
+.tag-form {
+  display: block;
+}
+
+.tag-form {
+  input {
+    display: inline-block;
+    width: 50%;
+  }
+  button {
+    display: inline-block;
+  }
+}
+
+.editProfile div {
+  margin: 5px 0;
+  margin-bottom: 15px;
+  padding: 5px 0;
+  background-color: white;
+}
+
+.nav {
+  background-color: $niceGreen;
+}
+

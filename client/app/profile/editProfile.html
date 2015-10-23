@@ -10,8 +10,7 @@
 
         <div class="col m8">
 
-          <p>Username</p>
-          <p>{{ editProfile.username }}</p>
+          <p>@{{ editProfile.username }}</p>
           <p>Location</p>
           <input type="text" ng-model="editProfile.location"  placeholder="Where are you based?"><br>
           <!-- <input type="text" ng-model="editProfile.about" placeholder="Tell us about yourself"><br>   --> 
@@ -40,13 +39,20 @@
 
     <div class="col m6">
       
-      <ul class="tags collection">
-        <li class="tag collection-item" ng-repeat="tag in editProfile.tags">{{ tag }}</li>
-      </ul> 
+      <p>Tags</p>
 
-      <form name="editProfile.tagForm" ng-submit="editProfile.addTag()">
-          <input type="text" ng-model="editProfile.newTag" placeholder="Add a new tag"><br>
-          <button class="waves-effect waves-light btn" type="submit">Add</button>
+      <ul class="tags">
+        <li class="tag" ng-repeat="tag in editProfile.tags">
+          <span>{{ tag }}</span>
+          <a class="remove-item" href="#"><i class="tiny material-icons">clear</i></a>
+        </li>
+      </ul> 
+      
+      <form class="tag-form" name="editProfile.tagForm" ng-submit="editProfile.addTag()">
+          <input type="text" ng-model="editProfile.newTag" placeholder="Add a new tag">
+          <!-- <button class="waves-effect waves-light btn" type="submit">Add</button> -->
+          <button type="submit" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">add</i></button>
+
       </form>
 
     </div>
