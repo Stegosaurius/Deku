@@ -13,6 +13,7 @@
 
     vm.about = '';
     vm.activeUser = false;
+    vm.addStatus = addStatus;
     vm.avatar = '';
     vm.follow = follow;
     vm.followers = [];
@@ -22,23 +23,27 @@
     vm.recentThreads = {};
     vm.statuses = [];
     vm.tags = [];
-    vm.addStatus = addStatus;
     vm.username = $stateParams.username;
 
     checkActiveUser();
     getProfile();
+
+    // post status to database and clear form
+    function addStatus() {
+      vm.statuses.push(vm.status);
+      User.addStatus(vm.status, getID());
+      vm.statusUpdate.$setPristine();
+      vm.status = '';
+    }
 
     // make the active user a follower of this profile's user
     function follow() {
 
     }
 
-    // post status to database and clear form
-    function addStatus() {
-      vm.statuses.push(vm.status);
-      User.addStatus(vm.status);
-      vm.statusUpdate.$setPristine();
-      vm.status = '';
+    // return active user's ID
+    function getID() {
+      return jwtHelper.decodeToken($window.localStorage.token).id;
     }
 
     // return true if the active user is viewing his/her own profile

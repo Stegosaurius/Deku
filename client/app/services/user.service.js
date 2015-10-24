@@ -119,8 +119,8 @@
         });
     }
 
-    function addStatus(status) {
-      return $http.post('/status/' + $window.localStorage.username, { status: status })
+    function addStatus(status, id) {
+      return $http.post('/status/' + id, { status: status })
         .then(function successCallback(res) {
           return res.data;
         }, function errorCallback(res) {
