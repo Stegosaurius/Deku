@@ -22,7 +22,7 @@
     vm.recentThreads = {};
     vm.statuses = [];
     vm.tags = [];
-    vm.updateStatus = updateStatus;
+    vm.addStatus = addStatus;
     vm.username = $stateParams.username;
 
     checkActiveUser();
@@ -33,9 +33,12 @@
 
     }
 
-    function updateStatus() {
+    // post status to database and clear form
+    function addStatus() {
       vm.statuses.push(vm.status);
-      User.updateStatus(vm.status);
+      User.addStatus(vm.status);
+      vm.statusUpdate.$setPristine();
+      vm.status = '';
     }
 
     // return true if the active user is viewing his/her own profile

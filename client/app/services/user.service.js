@@ -19,7 +19,7 @@
       getStatuses: getStatuses,
       getTags: getTags,
       updateProfile: updateProfile,
-      updateStatus: updateStatus
+      addStatus: addStatus
     };
 
     return services;
@@ -120,8 +120,8 @@
         });
     }
 
-    function updateStatus(status) {
-      return $http.post('/status/' + $window.localStorage.username, status)
+    function addStatus(status) {
+      return $http.post('/status/' + $window.localStorage.username, { status: status })
         .then(function successCallback(res) {
           return res.data;
         }, function errorCallback(res) {

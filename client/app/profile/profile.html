@@ -25,8 +25,8 @@
         <li class="tag" ng-repeat="tag in profile.tags">{{ tag }}</li>
       </ul>
 
-      <h5>What's good in the greenhouse?</h5>
-      <form name="profile.statusUpdate" ng-submit="profile.updateStatus()">
+      <form name="profile.statusUpdate" ng-submit="profile.addStatus()" ng-show="profile.activeUser">
+        <h5>What's good in the greenhouse?</h5>
         <input type="text" name="status" ng-model="profile.status" required>
         <button type="submit">Post</button>
       </form>
