@@ -235,10 +235,12 @@ module.exports = {
     })
   },
 
-  // getPhotos: function (req, res) {
-  //   User.getPhotos()
-  // }
+  getPhotos: function (req, res) {
+    User.getPhotos()
+  },
 
-
+  addPhoto: function (req, res) {
+    User.addPhoto()
+  }
 
 }
