@@ -18,6 +18,22 @@ $white: #ffffff;
   box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 }
 
+.default-button {
+  background-color: $lightGreen;
+  color: $white;
+  padding: .5rem 1rem;
+  border: 0;
+  display: inline-block;
+  @extend .z-depth-1;
+  -webkit-transition: box-shadow .2s;
+  transition: box-shadow .2s;
+}
+
+.default-button-hover {
+  cursor: pointer;
+  @extend .z-depth-1-half;
+}
+
 /* ___GENERAL___ */
 
 *,
@@ -34,58 +50,104 @@ html {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+.main {
+  margin: 0 2%;
+}
+
 ul {
   margin: 0;
 }
 
 /* ___EDITPROFILE___ */
+.editProfile {
 
-ul.tags {
-  margin-top: 5px;
-  list-style: none;
-  border: 1px solid $lightGrey;
-  border-radius: 2px;
-  padding: 5px;
-}
-
-.tag {
-  display: inline-block;
-  margin: 2px 5px;
-  background-color: $lightGrey;
-  border: 1px solid $lightGrey;
-  border-radius: 3px;
-  padding: 2px 5px;
-} 
-
-.tag span {
-  padding-right: 5px
-}
-
-.main {
-  margin: 0 2%;
-}
-
-.tag-form {
-  display: block;
-}
-
-.tag-form {
-  input {
-    display: inline-block;
-    width: 50%;
+  ul.tags {
+    margin-top: 5px;
+    list-style: none;
+    border: 1px solid $lightGrey;
+    border-radius: 2px;
+    padding: 5px;
   }
+
+  .tag {
+    display: inline-block;
+    margin: 2px 5px;
+    background-color: $lightGrey;
+    border: 1px solid $lightGrey;
+    border-radius: 3px;
+    padding: 2px 5px;
+  } 
+
+  .tag span {
+    margin: 3px 0px;
+    padding-right: 5px
+  }
+
+
+  .tag-form {
+    display: block;
+  }
+
+  .tag-form {
+    input {
+      margin-top: 10px;
+      display: inline-block;
+      width: 50%;
+    }
+    button {
+      display: inline-block;
+    }
+  }
+
+  div {
+    margin: 5px 0;
+    margin-bottom: 15px;
+    padding: 5px 0;
+    background-color: white;
+  }
+
+  .user-photos-container {
+    width: 40rem;
+    overflow-x: scroll;
+  }
+
+  .user-photos-container ul {
+    width: 100rem;
+  }
+
+  .user-photos-container li {
+    display: inline;
+  }
+
+  .photo {
+    height: 15rem;
+  }
+
+  .follow {
+    height: 10rem;
+    overflow-y: scroll;
+  }
+
+  .follow li {
+    width: 10rem;
+    border-bottom: 1px solid $lightGrey;
+    text-align: right;
+  }
+
   button {
-    display: inline-block;
+    @extend .default-button;
   }
-}
 
-.editProfile div {
-  margin: 5px 0;
-  margin-bottom: 15px;
-  padding: 5px 0;
-  background-color: white;
-}
+  button:hover {
+    @extend .default-button-hover;
+  }
+  
+  textarea {
+    resize: none;
+    width: 24.1rem;
+  }
 
+<<<<<<< HEAD
 .user-photos-container {
   overflow-x: auto;
   margin: auto;
@@ -99,17 +161,32 @@ ul.tags {
 .user-photo {
   height: 10rem;
 }
+=======
+  input, textarea {
+    border: 2px solid $lightGrey;
+  }
 
-.follow-container {
-  height: 10rem;
-  overflow-y: scroll;
+  input {
+    height: 2rem;
+    padding-right: 0px;
+  }
+
+  input:focus, textarea:focus {
+    border-bottom: 2px solid $darkGreen;
+  }
+
+>>>>>>> Improve input styling for editProfile forms
+
 }
 
+<<<<<<< HEAD
 .follow li {
   width: 10rem;
   border-botton: 1px solid $lightGrey;
   text-align: right;
 }
+=======
+>>>>>>> Improve input styling for editProfile forms
 
 /* ___PROFILE___ */
 
@@ -234,6 +311,7 @@ ul.tags {
 .icon {
   margin: auto;
   padding: 5px;
+  margin-right: 10px;
 }
 
 /* ____TYPOGRAPHY_____ */
