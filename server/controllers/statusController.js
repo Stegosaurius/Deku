@@ -9,19 +9,22 @@ module.exports = {
         console.error(err);
         res.status(404).send(err);
       } else {
-        res.json(statuses);
+        res.status(200).json(statuses);
       }
     })
   },
 
   updateStatus: function (req, res) {
-    var id = req.params.id;
-    Status.addStatus(req.body, function (err, status) {
+    var data = {
+      userID: req.params.id,
+      status: req.body.status
+    };
+    Status.addStatus(data, function (err, status) {
       if (err) {
         console.error(err);
         res.status(404).send(err);
       } else {
-        res.json(status);
+        res.status(201).json(status);
       }
     })
   },
@@ -33,9 +36,21 @@ module.exports = {
         console.error(err);
         res.status(404).send(err);
       } else {
-        res.json(statuses);
+        res.status(200).json(statuses);
       }
     });
+  },
+
+  deleteStatus: function (req, res) {
+    var id = req.params.id;
+    Status.deleteStatus(id, function (err, result) {
+      if (err) {
+        console.error(err);
+        res.status(500).send();
+      } else {
+        res.status(204).end();
+      }
+    })
   }
 
 }

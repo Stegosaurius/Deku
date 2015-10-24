@@ -8,4 +8,6 @@ module.exports = function (app) {
 
   app.get('/friends/:id', statusController.getFriendsStatuses);
 
+  app.delete('/status/:id', statusController.deleteStatus);
+
 }

@@ -13,8 +13,8 @@ AWS.config.update({ accessKeyId: config.awsStorage.accessKey, secretAccessKey: c
 
 module.exports = {
   //Put all http req handling functions here
-  getProfile: function (req, res, username) {
-    User.getUserByName(username, function (err, userProfile) {
+  getProfile: function (req, res) {
+    User.getUserByName(req.params.username, function (err, userProfile) {
       if (err) {
         console.error(err);
         res.status(404).send(err);
@@ -25,9 +25,9 @@ module.exports = {
     });
   },
 
-  updateProfile: function (req, res, username) {
+  updateProfile: function (req, res) {
     var data = req.body;
-    data.username = username;
+    data.username = req.params.username;
     User.updateUser(data, function (err, result) {
       if (err) {
         //Error handling
@@ -131,9 +131,83 @@ module.exports = {
     });
   },
 
-  getTags: function (req, res) {
-    var id = req.params.id; 
-    User.getUserTags(id, function (err, tags) {
+  getUserTags: function (req, res) {
+    var username = req.params.username; 
+    User.getUserByName(username, function (err, user) {
+      if (err) {
+        console.error(err);
+        res.status(500).send();
+      } else {
+        User.getUserTags(user.id, function (err, tags) {
+          if (err) {
+            console.error(err);
+            res.status(500).send();
+          } else {
+            res.status(200).json(tags);
+          }
+        });
+      }
+    });
+  },
+
+  addUserTag: function (req, res) {
+    // add a tag to the tags table first if it not already part of our collection
+    // then add to UserTags table
+    var userID = req.params.id;
+    var tagname = req.body.tag;
+    User.getTag(tagname, function (err, tag) {
+      if (err) {
+        console.error(err);
+        return res.status(500).send();
+      } 
+
+      if (!tag[0]) {
+        User.addTag(tagname, function (err, result) {
+          if (err) {
+            console.error(err);
+            return res.status(500).send();
+          } else {
+            User.getTag(tagname, function (err, newtag) {
+              if (err) {
+                console.error(err);
+                return res.status(500).send();
+              } else {
+                var data = {
+                  userID: userID,
+                  tagID: tag[0].id
+                };
+                User.addUserTag(data, function (err, result) {
+                  if (err) {
+                    console.error(err);
+                    return res.status(500).send();
+                  } else {
+                    return res.status(201).json(newtag[0]);
+                  }
+                });
+              }
+            })
+          }
+        });
+
+      } else { // tag does exist in database already
+        var data = {
+          userID: userID,
+          tagID: tag[0].id
+        };
+        User.addUserTag(data, function (err, result) {
+          if (err) {
+            console.error(err);
+            res.status(500).send();
+          } else {
+            res.status(201).json(tag[0]);
+          }
+        })
+      }
+    });
+  },
+
+  getAllTags: function (req, res) {
+    User.getAllTags(function (err, tags) {
       if (err) {
         console.error(err);
         res.status(500).send();
@@ -143,20 +217,27 @@ module.exports = {
     });
   },
 
-  addTag: function (req, res) {
-    var data = req.body;
-    data.id = req.params.id;
-    User.addTag(data, function (err, result) {
+  deleteUserTag: function (req, res) {
+    User.getTag(req.body.tag, function (err, tag) {
       if (err) {
         console.error(err);
-        res.status(500).send();
+        res.status(500).end();
       } else {
-        res.status(201).send(result);
+        User.deleteUserTag(req.params.id, tag.id, function (err, result) {
+          if (err) {
+            console.error(err);
+            res.status(500).end();
+          } else {
+            res.status(204).end();
+          }
+        })
       }
-    });
+    })
   },
 
-
+  // getPhotos: function (req, res) {
+  //   User.getPhotos()
+  // }
 
 
 
