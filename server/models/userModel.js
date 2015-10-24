@@ -177,8 +177,9 @@ module.exports = {
     })
   },
 
-  getUserTags: function (id, callback) {
-    db.query('select t.tag from tags t inner join usertags u on (t.id = u.tag_id) where u.user_id = ?', [id], function (err, tags) {
+  getUserTags: function (username, callback) {
+    db.query('select t.tag from tags t inner join usertags u on (t.id = u.tag_id) \
+      inner join users v on (v.id = u.user_id) where v.username = ?', [username], function (err, tags) {
       if (err) {
         callback(err, null);
       } else {
@@ -217,9 +218,9 @@ module.exports = {
       }
     });
   },
-
-  deleteUserTag: function (user_id, tagname, callback) {
-    db.query('delete from usertags where user_id = ? and where tag_id = ?', [user_id, tag_id], function (err, res) {
+cp
+  deleteUserTag: function (userID, tagID, callback) {
+    db.query('delete from usertags where user_id = ? and where tag_id = ?', [userID, tagID], function (err, res) {
       if (err) {
         callback(err);
       } else {
@@ -228,8 +229,34 @@ module.exports = {
     });
   },
 
-  // getPhotos: function (username, callback) {
-  //   db.query('select p.photo from photos p ')
-  // }
+  getPhotos: function (username, callback) {
+    db.query('select photos.photo from photos inner join users on (users.id = photos.user_id) where users.username = ?', [username], function (err, res) {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, res);
+      }
+    });
+  },
+
+  addPhoto: function (userID, photo, callback) {
+    db.query('insert into photos (user_id, photo) values (?,?)', [userID, photo], function (err, res) {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, res);
+      }
+    });
+  },
+
+  deletePhoto: function (photo, callback) {
+    db.query('delete from photos where photo = ?', [photo], function (err, res) {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, res);
+      }
+    });
+  }
 
 }

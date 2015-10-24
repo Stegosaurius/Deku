@@ -7,5 +7,7 @@ module.exports = function (app) {
   app.get('/:id', followerController.getFollowers);
 
   app.post('/:id', followerController.addFollower);
+
+  app.delete('/:id', followerController.unfollow);
   
 }
