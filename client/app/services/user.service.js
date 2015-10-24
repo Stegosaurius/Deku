@@ -17,7 +17,9 @@
       getProfile: getProfile,
       getRecentThreads: getRecentThreads,
       getStatuses: getStatuses,
-      updateProfile: updateProfile
+      getTags: getTags,
+      updateProfile: updateProfile,
+      addStatus: addStatus
     };
 
     return services;
@@ -96,7 +98,17 @@
         });
     }
 
-    // update an existing users profile info
+    // retrieve user's tags
+    function getTags(username) {
+      return $http.get('/users/tags/' + username)
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log('Error retrieving tags');
+        });
+    }
+
+    // update an existing user's profile info
     function updateProfile(data) {
       var url = '/users/' + $window.localStorage.username;
 
@@ -105,6 +117,15 @@
           return res.data;
         }, function errorCallback(res) {
           console.log('Error updating user profile');
+        });
+    }
+
+    function addStatus(status) {
+      return $http.post('/status/' + $window.localStorage.username, { status: status })
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log('Error posting status');
         });
     }
   }

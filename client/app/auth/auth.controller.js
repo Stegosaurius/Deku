@@ -18,6 +18,7 @@
 
     function resetForm(message) {
       vm.form.$setPristine();
+      vm.user.password = '';
       vm.message = message;
     }
 
