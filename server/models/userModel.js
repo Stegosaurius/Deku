@@ -49,7 +49,6 @@ module.exports = {
         if (err) {
           callback(err, null);
         } else {
-          debugger;
           callback(null, user);
         }
       })
@@ -168,26 +167,69 @@ module.exports = {
     });
   },
 
-  getUserTags: function (id, callback) {
-      db.query('select t.tag from tags t inner join usertags u on (t.id = u.tag_id) where u.user_id = ?', [id], function (err, tags) {
-        if (err) {
-          callback(err, null);
-        } else {
-          callback(null, tags);
-        }
-      });
+  getAllTags: function (callback) {
+    db.query('select * from tags', function (err, tags) {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, tags);
+      }
+    })
   },
 
-  addTag: function (data, callback) {
-    db.query('insert into tags (user_id, tag) values (?, ?)', [data.id, data.tag],
+  getUserTags: function (id, callback) {
+    db.query('select t.tag from tags t inner join usertags u on (t.id = u.tag_id) where u.user_id = ?', [id], function (err, tags) {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, tags);
+      }
+    });
+  },
+
+  addUserTag: function (data, callback) {
+    db.query('insert into usertags (user_id, tag_id) values (?, ?)', [data.userID, data.tagID],
       function (err, res) {
         if (err) {
           callback(err, null);
         } else {
-          callback(null, res.insertID);
+          callback(null, res);
         }
-
     });
-  }
+  },
+
+  addTag: function (tag, callback) {
+    db.query('insert into tags (tag) values (?)', [tag], function (err, res) {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, res);
+      }
+    });
+  },
+
+  getTag: function (tagname, callback) {
+    db.query('select * from tags where tag = ?', [tagname], function (err, tag) {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, tag);
+      }
+    });
+  },
+
+  deleteUserTag: function (user_id, tagname, callback) {
+    db.query('delete from usertags where user_id = ? and where tag_id = ?', [user_id, tag_id], function (err, res) {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, res);
+      }
+    });
+  },
+
+  // getPhotos: function (username, callback) {
+  //   db.query('select p.photo from photos p ')
+  // }
 
 }

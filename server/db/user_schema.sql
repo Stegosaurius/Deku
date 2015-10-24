@@ -73,6 +73,13 @@ CREATE TABLE `UserTags` (
 	`tag_id` INT NOT NULL
 );
 
+CREATE TABLE `Photos` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`photo` varchar(250) NOT NULL,
+	`user_id` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
 ALTER TABLE `Followers` ADD CONSTRAINT `Followers_fk0` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
 
 ALTER TABLE `Followers` ADD CONSTRAINT `Followers_fk1` FOREIGN KEY (`follower_id`) REFERENCES `Users`(`id`);
@@ -96,3 +103,5 @@ ALTER TABLE `status_votes` ADD CONSTRAINT `status_votes_fk1` FOREIGN KEY (`statu
 ALTER TABLE `UserTags` ADD CONSTRAINT `UserTags_fk0` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
 
 ALTER TABLE `UserTags` ADD CONSTRAINT `UserTags_fk1` FOREIGN KEY (`tag_id`) REFERENCES `Tags`(`id`);
+
+ALTER TABLE `Photos` ADD CONSTRAINT `Photos_fk0` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
