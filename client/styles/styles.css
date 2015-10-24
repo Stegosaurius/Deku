@@ -63,25 +63,25 @@ ul.tags {
 /* ___PROFILE___ */
 .profile {
   color: #4a4a4a; }
-  .profile h3 {
+  .profile h4 {
     color: #109418;
-    margin: 2rem 0 0 0; }
+    margin: 2.8rem 0 0 0; }
   .profile h5 {
     font-size: 1.4rem; }
   .profile .avatar {
-    height: 8.5rem;
-    margin-top: 2.3rem;
+    height: 10rem;
+    margin-top: 2rem;
     border-radius: 50%; }
   .profile .userInfo li {
     display: inline-block;
     vertical-align: top;
     padding-right: 1rem; }
   .profile .location {
-    color: #27ae60;
+    color: #8e8e8e;
     margin: .6rem 0 1rem 0; }
   .profile .buttons a,
   .profile button {
-    background-color: #109418;
+    background-color: #27ae60;
     color: #ffffff;
     padding: .5rem 1rem;
     border: 0;
@@ -94,15 +94,13 @@ ul.tags {
   .profile button {
     padding-top: .3rem;
     padding-bottom: .3rem; }
-  .profile input {
-    width: calc(100% - 74px); }
   .profile .tags {
     border: 0; }
   .profile input {
+    width: calc(100% - 74px);
     height: 1.6rem;
     padding: .2rem;
     margin: 0;
-    border: 1px solid #8e8e8e;
     color: #8e8e8e; }
   .profile .follow a {
     display: inline-block;

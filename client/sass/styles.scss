@@ -115,9 +115,9 @@ ul.tags {
 .profile {
   color: $darkGrey;
 
-  h3 {
+  h4 {
     color: $darkGreen;
-    margin: 2rem 0 0 0;
+    margin: 2.8rem 0 0 0;
   }
 
   h5 {
@@ -125,8 +125,8 @@ ul.tags {
   }
 
   .avatar {
-    height: 8.5rem;
-    margin-top: 2.3rem;
+    height: 10rem;
+    margin-top: 2rem;
     border-radius: 50%;
   }
 
@@ -137,13 +137,13 @@ ul.tags {
   }
 
   .location {
-    color: $lightGreen;
+    color: $grey;
     margin: .6rem 0 1rem 0;
   }
 
   .buttons a,
   button {
-    background-color: $darkGreen;
+    background-color: $lightGreen;
     color: $white;
     padding: .5rem 1rem;
     border: 0;
@@ -164,19 +164,15 @@ ul.tags {
     padding-bottom: .3rem;
   }
 
-  input {
-    width: calc(100% - 74px);
-  }
-
   .tags {
     border: 0;
   }
 
   input {
+    width: calc(100% - 74px);
     height: 1.6rem;
     padding: .2rem;
     margin: 0;
-    border: 1px solid $grey;
     color: $grey;
   }
 
