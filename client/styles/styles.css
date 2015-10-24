@@ -60,6 +60,10 @@ ul.tags {
 .user-photo {
   height: 10rem; }
 
+.follow-container {
+  height: 10rem;
+  overflow-y: scroll; }
+
 /* ___NAVBAR___ */
 .nav {
   background-image: linear-gradient(90deg, #27ae60 15%, #1abc9c 100%);

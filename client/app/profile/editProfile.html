@@ -33,9 +33,6 @@
       <ul class="user-photos" ng-repeat="path in editProfile.photos">
         <li><img class="user-photo" ng-src="{{ path }}"/></li>
       </ul>
-      <button type="submit" class="btn-floating btn-small waves-effect waves-light red">
-            <i class="material-icons">add</i>
-      </button>
     </div>
 
   </div>
@@ -67,7 +64,29 @@
     </div>
 
     <div class="col m6 valign-wrapper">
-      <h5 class="valign">Something to do with removing followers</h5>
+      <div class="follow-container col m6">
+        <p>Followers</p>
+        <ul class="follow">
+          <li ng-repeat="follower in editProfile.followers">
+            <span> {{ follower }} </span>
+            <a class="remove-item" href="#">
+              <i class="tiny material-icons">clear</i>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="follow-container col m6">
+        <p>Following</p>
+        <ul class="follow">
+          <li ng-repeat="following in editProfile.following">
+            <span> {{ following }} </span>
+            <a class="remove-item" href="#">
+              <i class="tiny material-icons">clear</i>
+            </a>
+          </li>
+        </ul>
+      </div>
+
     </div>
 
   </div>
