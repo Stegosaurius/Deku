@@ -1,35 +1,50 @@
 <div class="profile">
-  <h3>{{ profile.username }}</h3>
-  <h4>{{ profile.location }}</h4>
+  <div class="row">
+    <div class="col s2">
+      <span>photo</span>
+    </div>
 
-  <a ui-sref="editProfile" ng-show="profile.activeUser">Edit Profile</a>
-  <a ui-sref="dashboard({ username: profile.username })" ng-hide="profile.activeUser">Dashboard</a>
-  <a ng-click="profile.follow()" ng-hide="profile.activeUser">Follow</a>
+    <div class="col s3">
+      <h3>{{ profile.username }}</h3>
+      <h5 class="location">{{ profile.location }}</h5>
 
-  <p class="about">{{ profile.about }}</p>
+      <a ui-sref="editProfile" ng-show="profile.activeUser">Edit Profile</a>
 
-  <ul class="tags">
-    <li class="tag" ng-repeat="tag in profile.tags">{{ tag }}</li>
-  </ul>
-
-  <h5>What's good in the greenhouse?</h5>
-  <form name="profile.statusUpdate" ng-submit="profile.updateStatus()">
-    <input type="text" name="status" ng-model="profile.status" required>
-    <button type="submit">Post</button>
-  </form>
-
-  <h5>Recent Updates</h5>
-  <ul class="statuses">
-    <li class="status" ng-repeat="status in profile.statuses">{{ status }}</li>
-  </ul>
-
-  <div>
-    <span>Following {{ profile.following.length }}</span>
-    <span>Followers {{ profile.followers.length }}</span>
+      <a ui-sref="dashboard({ username: profile.username })" ng-hide="profile.activeUser">Dashboard</a>
+      <a ng-click="profile.follow()" ng-hide="profile.activeUser">Follow</a>
+    </div>
   </div>
 
-  <h5>Recent forum activity:</h5>
-  <ul class="recentThreads">
-    <li class="thread" ng-repeat="thread in profile.recentThreadNames">{{ thread }}</li>
-  </ul>
+  <div class="row">
+    <div class="col s7">
+      <p class="about">{{ profile.about }}</p>
+
+      <ul class="tags">
+        <li class="tag" ng-repeat="tag in profile.tags">{{ tag }}</li>
+      </ul>
+
+      <h5>What's good in the greenhouse?</h5>
+      <form name="profile.statusUpdate" ng-submit="profile.updateStatus()">
+        <input type="text" name="status" ng-model="profile.status" required>
+        <button type="submit">Post</button>
+      </form>
+
+      <h5>Recent Updates</h5>
+      <ul class="statuses">
+        <li class="status" ng-repeat="status in profile.statuses">{{ status }}</li>
+      </ul>
+    </div>
+
+    <div class="col s5">
+      <div>
+        <span>Following {{ profile.following.length }}</span>
+        <span>Followers {{ profile.followers.length }}</span>
+      </div>
+
+      <h5>Recent forum activity:</h5>
+      <ul class="recentThreads">
+        <li class="thread" ng-repeat="thread in profile.recentThreadNames">{{ thread }}</li>
+      </ul>
+    </div>
+  </div>
 </div>
