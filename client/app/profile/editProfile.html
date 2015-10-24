@@ -69,7 +69,7 @@
         <ul class="follow">
           <li ng-repeat="follower in editProfile.followers">
             <span> {{ follower }} </span>
-            <a class="remove-item" href="#">
+            <a ng-click="editProfile.removeFollower(follower)" class="remove-item">
               <i class="tiny material-icons">clear</i>
             </a>
           </li>
@@ -80,7 +80,7 @@
         <ul class="follow">
           <li ng-repeat="following in editProfile.following">
             <span> {{ following }} </span>
-            <a class="remove-item" href="#">
+            <a ng-click="editProfile.removeFollowing(following)" class="remove-item">
               <i class="tiny material-icons">clear</i>
             </a>
           </li>
