@@ -10,15 +10,13 @@ module.exports = function (app, passport) {
   //app === userRouter injected from middlware.js
 
   app.get('/:username', function (req, res) {
-    //Get the id
     var username = req.params.username;
     userController.getProfile(req, res, username);
   });
 
-  app.put('/:id', function (req, res) {
-    //Get the id
-    var id = req.params.id;
-    userController.updateProfile(req, res, id);
+  app.put('/:username', function (req, res) {
+    var username = req.params.username;
+    userController.updateProfile(req, res, username);
   });
 
   app.get('/scopekey/:id', userController.getScopedKey);

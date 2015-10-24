@@ -25,9 +25,9 @@ module.exports = {
     });
   },
 
-  updateProfile: function (req, res) {
+  updateProfile: function (req, res, username) {
     var data = req.body;
-    data.id = req.params.id;
+    data.username = username;
     User.updateUser(data, function (err, result) {
       if (err) {
         //Error handling
