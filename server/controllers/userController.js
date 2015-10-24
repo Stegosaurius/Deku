@@ -132,20 +132,12 @@ module.exports = {
   },
 
   getUserTags: function (req, res) {
-    var username = req.params.username; 
-    User.getUserByName(username, function (err, user) {
+    User.getUserTags(req.params.id, function (err, tags) {
       if (err) {
         console.error(err);
         res.status(500).send();
       } else {
-        User.getUserTags(user.id, function (err, tags) {
-          if (err) {
-            console.error(err);
-            res.status(500).send();
-          } else {
-            res.status(200).json(tags);
-          }
-        });
+        res.status(200).json(tags);
       }
     });
   },
@@ -236,11 +228,61 @@ module.exports = {
   },
 
   getPhotos: function (req, res) {
-    User.getPhotos()
+    User.getPhotos(req.params.username, function (err, photos) {
+      if (err) {
+        console.error(err);
+        res.status(500).end();
+      } else {
+        res.status(200).json(photos);
+      }
+    })
   },
 
-  addPhoto: function (req, res) {
-    User.addPhoto()
+  addPhotoURL: function (req, res) {
+    User.addPhoto(req.params.id, req.body.photo, function (err, result) {
+      if (err) {
+        console.error(err);
+        res.status(500).end();
+      } else {
+        res.status(201).send({ photo: req.body.photo });
+      }
+    });
+  },
+
+  addPhotoS3: function (req, res) {
+    var file = req.files.file;
+    // Load the stream
+    var userID = req.params.id;
+    var body = fs.createReadStream(file).pipe(zlib.createGzip());
+    // Upload the stream
+    var s3 = new AWS.S3({params: { Bucket: config.awsStorage.bucket }});
+    s3.upload({ Body: body }, function(err, data) {
+      if (err) {
+        console.error(err);
+        res.status(500).send(err);
+      } else {
+        // store path to avatar in our database
+        User.addPhoto(userID, data.Location, function (err, result) {
+          if (err) {
+            console.error(err);
+            res.status(500).send(err);
+          } else {
+            res.status(201).json({ photo: data.Location });
+          }
+        });
+      }
+    });
+  },
+
+  deletePhoto: function (req, res) {
+    User.deletePhoto(req.body.photo, function (err, result) {
+      if (err) {
+        console.error(err);
+        res.status(500).end();
+      } else {
+        res.status(204).end();
+      }
+    });
   }
 
 }

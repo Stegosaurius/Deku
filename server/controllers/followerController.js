@@ -1,4 +1,5 @@
 var Follower = require('../models/followerModel.js');
+var User = require('../models/userModel.js');
 
 module.exports = {
 
@@ -24,6 +25,26 @@ module.exports = {
         res.json(follower);
       }
     });
+  },
+
+  unfollow: function (req, res) {
+    // get user id of follower first
+    User.getUserByName(req.body.follower, function (err, follower) {
+      if (err) {
+        console.error(err);
+        res.status(500).end();
+      } else {
+        // then pass both ids into delete function
+        Follower.deleteFollower(req.params.id, follower.id, function (err, result) {
+          if (err) {
+            console.error(err);
+            res.status(500).end();
+          } else {
+            res.status(204).end();
+          }
+        })
+      }
+    })
   }
 
 }
