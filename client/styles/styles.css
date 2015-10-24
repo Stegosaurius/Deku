@@ -43,7 +43,7 @@ ul.tags {
   padding-right: 5px; }
 
 .main {
-  margin: 0 5%; }
+  margin: 0 2%; }
 
 .tag-form {
   display: block; }
@@ -68,6 +68,14 @@ ul.tags {
     margin: 2rem 0 0 0; }
   .profile h5 {
     font-size: 1.4rem; }
+  .profile .avatar {
+    height: 8.5rem;
+    margin-top: 2.3rem;
+    border-radius: 50%; }
+  .profile .userInfo li {
+    display: inline-block;
+    vertical-align: top;
+    padding-right: 1rem; }
   .profile .location {
     color: #27ae60;
     margin: .6rem 0 1rem 0; }
@@ -76,7 +84,6 @@ ul.tags {
     background-color: #109418;
     color: #ffffff;
     padding: .5rem 1rem;
-    margin-bottom: .5rem;
     border: 0;
     display: inline-block;
     -webkit-transition: box-shadow .2s;
@@ -88,23 +95,31 @@ ul.tags {
     padding-top: .3rem;
     padding-bottom: .3rem; }
   .profile input {
-    width: calc(100% - 68px); }
+    width: calc(100% - 74px); }
   .profile .tags {
     border: 0; }
   .profile input {
     height: 1.6rem;
-    border: 1px solid #9b9b9b; }
+    padding: .2rem;
+    margin: 0;
+    border: 1px solid #8e8e8e;
+    color: #8e8e8e; }
   .profile .follow a {
     display: inline-block;
     margin-top: 1rem;
     font-size: 1.2rem;
     color: #1abc9c; }
     .profile .follow a span {
-      color: #9b9b9b; }
+      color: #8e8e8e; }
+  .profile li.status {
+    font-size: 1.2rem;
+    padding-left: 1rem;
+    margin-bottom: 1.5rem;
+    border-left: 8px solid #27ae60; }
   .profile .follow a:hover {
     color: #17a689; }
     .profile .follow a:hover span {
-      color: #9b9b9b; }
+      color: #8e8e8e; }
 
 /* ___NAVBAR___ */
 .nav {
