@@ -40,28 +40,52 @@ describe('Server side controller testing', function () {
       expect(userController.getUser).to.be.a('function');
     });
 
-    it('should have a method called getProfilePhoto', function () {
-      expect(userController.getProfilePhoto).to.be.a('function');
+    it('should have a method called getAvatarPath', function() {
+      expect (userController.getAvatarPath).to.be.a('function');
     });
 
-    it('should have a method called addProfilePhoto', function () {
-      expect(userController.addProfilePhoto).to.be.a('function');
+    it('should have a method called addAvatarPath',function(){
+       expect (userController.addAvatarPath).to.be.a('function');
     });
 
-    it('should have a method called getFollowers', function () {
-      expect(userController.getFollowers).to.be.a('function');
+    it('should have method called uploadAvatar',function(){
+       expect (userController.uploadAvatar).to.be.a('function');
     });
 
-    it('should have a method called addFollower', function () {
-      expect(userController.addFollower).to.be.a('function');
+    it('should have method called getNotifications',function(){
+       expect (userController.getNotifications).to.be.a('function');
     });
 
-    it('should have a method called getStatuses', function () {
-      expect(userController.getStatuses).to.be.a('function');
+    it('should have method called createNotification',function(){
+       expect (userController.createNotification).to.be.a('function');
     });
 
-    it('should have a method called updateStatus', function () {
-      expect(userController.updateStatus).to.be.a('function');
+    it('should have method called getScopedKey',function(){
+       expect (userController.getScopedKey).to.be.a('function');
+    });
+
+    it('should have method called getUserTags',function(){
+       expect (userController.getUserTags).to.be.a('function');
+    });
+
+    it('should have method called addUserTag',function(){
+       expect (userController.addUserTag).to.be.a('function');
+    });
+
+    it('should have method called getAllTags',function(){
+       expect (userController.getAllTags).to.be.a('function');
+    });
+
+    it('should have method called deleteUserTag',function(){
+       expect (userController.deleteUserTag).to.be.a('function');
+    });
+
+    it('should have method called getPhotos',function(){
+       expect (userController.getPhotos).to.be.a('function');
+    });
+
+    it('should have method called addPhoto',function(){
+       expect (userController.addPhoto).to.be.a('function');
     });
 
     it('should have a method called getNotifications', function () {

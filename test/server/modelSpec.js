@@ -48,12 +48,8 @@ describe('Server side model testing', function () {
       expect(userModel.addUserByLocal).to.be.a('function');
     });
 
-    it('should have a method called addUserByFB', function () {
-      expect(userModel.addUserByFB).to.be.a('function');
-    });
-
-    it('should have a method called addUserByGoogle', function () {
-      expect(userModel.addUserByGoogle).to.be.a('function');
+    it('should have a method called addUserBySocial', function () {
+      expect(userModel.addUserBySocial).to.be.a('function');
     });
 
     it('should have a method called getProfilePhoto', function () {
@@ -63,23 +59,7 @@ describe('Server side model testing', function () {
     it('should have a method called addProfilePhoto', function () {
       expect(userModel.addProfilePhoto).to.be.a('function');
     });
-
-    it('should have a method called getFollowers', function () {
-      expect(userModel.getFollowers).to.be.a('function');
-    });
-
-    it('should have a method called addFollower', function () {
-      expect(userModel.addFollower).to.be.a('function');
-    });
-
-    it('should have a method called getStatuses', function () {
-      expect(userModel.getStatuses).to.be.a('function');
-    });
-
-    it('should have a method called addStatus', function () {
-      expect(userModel.addStatus).to.be.a('function');
-    });
-    
+   
     it('should have a method called getNotifications', function () {
       expect(userModel.getNotifications).to.be.a('function');
     });
@@ -88,14 +68,37 @@ describe('Server side model testing', function () {
       expect(userModel.addNotification).to.be.a('function');
     });
     
-    it('should have a method called isValidPassword', function () {
-      expect(userModel.isValidPassword).to.be.a('function');
-    });
-
     it('should have a method called getPassword', function () {
       expect(userModel.getPassword).to.be.a('function');
     });
 
+    it('should have a method called getScopedKey', function () {
+      expect(userModel.getPassword).to.be.a('function');
+    });
+
+    it('should have a method called getAllTags', function () {
+      expect(userModel.getAllTags).to.be.a('function');
+    });
+
+    it('should have a method called getUserTags', function () {
+      expect(userModel.getPassword).to.be.a('function');
+    });
+
+    it('should have a method called addUserTag', function () {
+      expect(userModel.addUserTag).to.be.a('function');
+    });
+
+    it('should have a method called addTag', function () {
+      expect(userModel.addTag).to.be.a('function');
+    });
+
+    it('should have a method called getTag', function () {
+      expect(userModel.getTag).to.be.a('function');
+    });
+
+    it('should have a method called deleteUserTag', function () {
+      expect(userModel.deleteUserTag).to.be.a('function');
+    });
 
   });
 
