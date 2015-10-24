@@ -64,6 +64,11 @@ ul.tags {
   height: 10rem;
   overflow-y: scroll; }
 
+.follow li {
+  width: 10rem;
+  border-botton: 1px solid #dfdfdf;
+  text-align: right; }
+
 /* ___NAVBAR___ */
 .nav {
   background-image: linear-gradient(90deg, #27ae60 15%, #1abc9c 100%);

@@ -88,11 +88,11 @@ ul.tags {
   overflow-y: scroll;
 }
 
-.follow {
-  
+.follow li {
+  width: 10rem;
+  border-botton: 1px solid $lightGrey;
+  text-align: right;
 }
-
-
 
 /* ___NAVBAR___ */
 
