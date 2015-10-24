@@ -8,15 +8,17 @@
       <h3>{{ profile.username }}</h3>
       <h5 class="location">{{ profile.location }}</h5>
 
-      <a ui-sref="editProfile" ng-show="profile.activeUser">Edit Profile</a>
+      <div class="buttons">
+        <a ui-sref="editProfile" ng-show="profile.activeUser">Edit Profile</a>
 
-      <a ui-sref="dashboard({ username: profile.username })" ng-hide="profile.activeUser">Dashboard</a>
-      <a ng-click="profile.follow()" ng-hide="profile.activeUser">Follow</a>
+        <a ui-sref="dashboard({ username: profile.username })" ng-hide="profile.activeUser">Dashboard</a>
+        <a ng-click="profile.follow()" ng-hide="profile.activeUser">Follow</a>
+      </div>
     </div>
   </div>
 
   <div class="row">
-    <div class="col s7">
+    <div class="col s8">
       <p class="about">{{ profile.about }}</p>
 
       <ul class="tags">
@@ -35,10 +37,14 @@
       </ul>
     </div>
 
-    <div class="col s5">
-      <div>
-        <span>Following {{ profile.following.length }}</span>
-        <span>Followers {{ profile.followers.length }}</span>
+    <div class="col s4">
+      <div class="follow row">
+        <div class="col s6 center-align">
+          <a href="#">Following <span>{{ profile.following.length }}</span></a>
+        </div>
+        <div class="col s6 center-align">
+          <a href="#">Followers <span>{{ profile.followers.length }}</span></a>
+        </div>
       </div>
 
       <h5>Recent forum activity:</h5>
