@@ -22,15 +22,20 @@
       <div class="row">
 
         <p>About</p>
-        <textarea ng-model="editProfile.about"> {{ editProfile.about }} </textarea>
+        <input type="text" ng-model="editProfile.about" placeholder="Where are you based?">
         <button class="waves-effect waves-light btn" type="submit">Update!</button><br>
 
       </div>
       <!-- <p>{{ editProfile.message }}</p> -->
     </form>
     
-    <div class="col m6 valign-wrapper">
-      <h5 class="valign">Add some pictures of your greenhouse! (placeholder)</h5>
+    <div class="user-photos-container col m6 valign-wrapper">
+      <ul class="user-photos" ng-repeat="path in editProfile.photos">
+        <li><img class="user-photo" ng-src="{{ path }}"/></li>
+      </ul>
+      <button type="submit" class="btn-floating btn-small waves-effect waves-light red">
+            <i class="material-icons">add</i>
+      </button>
     </div>
 
   </div>
@@ -44,14 +49,18 @@
       <ul class="tags">
         <li class="tag" ng-repeat="tag in editProfile.tags">
           <span>{{ tag }}</span>
-          <a class="remove-item" href="#"><i class="tiny material-icons">clear</i></a>
+          <a class="remove-item" href="#">
+            <i class="tiny material-icons">clear</i>
+          </a>
         </li>
       </ul> 
       
       <form class="tag-form" name="editProfile.tagForm" ng-submit="editProfile.addTag()">
           <input type="text" ng-model="editProfile.newTag" placeholder="Add a new tag">
           <!-- <button class="waves-effect waves-light btn" type="submit">Add</button> -->
-          <button type="submit" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">add</i></button>
+          <button type="submit" class="btn-floating btn-small waves-effect waves-light red">
+            <i class="material-icons">add</i>
+          </button>
 
       </form>
 

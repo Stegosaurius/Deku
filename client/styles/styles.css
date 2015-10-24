@@ -12,6 +12,7 @@ html {
 ul {
   margin: 0; }
 
+/* ___EDITPROFILE___ */
 ul.tags {
   margin-top: 5px;
   list-style: none;
@@ -48,6 +49,17 @@ ul.tags {
   padding: 5px 0;
   background-color: white; }
 
+.user-photos-container {
+  overflow-x: auto;
+  margin: auto; }
+
+.user-photos {
+  display: inline-block;
+  padding: 3px; }
+
+.user-photo {
+  height: 10rem; }
+
 /* ___NAVBAR___ */
 .nav {
   background-image: linear-gradient(90deg, #27ae60 15%, #1abc9c 100%);
@@ -65,5 +77,14 @@ ul.tags {
 
 .nav a:hover {
   cursor: pointer; }
+
+.icon {
+  margin: auto;
+  padding: 5px; }
+
+/* ____TYPOGRAPHY_____ */
+p {
+  padding: 0;
+  margin: 0; }
 
 /*# sourceMappingURL=styles.css.map */

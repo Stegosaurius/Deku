@@ -18,7 +18,13 @@
     vm.location = '';
     vm.tags = [];
     vm.username = $window.localStorage.username;
-    vm.photos = [];
+    // vm.photos = [];
+
+    vm.photos = ['http://www.mnlga.org/slider/rw4Yqd0POkqMUqg.jpg',
+                 'http://www.mafc.com/blog/wp-content/uploads/2014/07/Garden-Greenhouse-108.jpg',
+                 'http://www.sustainablenantucket.org/wp-content/uploads/2014/03/green_house_77.jpg'];
+
+
 
     //editProfile user actions
     vm.updateProfile = updateProfile;
@@ -38,7 +44,7 @@
         .then(function(data) {
           vm.about = data.about;
           vm.location = data.location;
-          vm.tags = data.plants || ['kale', 'spinach', 'chia'];
+          // vm.tags = data.plants || ['kale', 'spinach', 'chia'];
           // getPhoto();
         });
     }
@@ -82,6 +88,11 @@
 
     //Uploading a new profile picture
     function updateAvatar () {
+
+    }
+
+    //Get all tags for the user and add them to the vm
+    function getTags () {
 
     }
 
