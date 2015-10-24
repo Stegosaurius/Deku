@@ -18,7 +18,8 @@
       getRecentThreads: getRecentThreads,
       getStatuses: getStatuses,
       getTags: getTags,
-      updateProfile: updateProfile
+      updateProfile: updateProfile,
+      updateStatus: updateStatus
     };
 
     return services;
@@ -116,6 +117,15 @@
           return res.data;
         }, function errorCallback(res) {
           console.log('Error updating user profile');
+        });
+    }
+
+    function updateStatus(status) {
+      return $http.post('/status/' + $window.localStorage.username, status)
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log('Error posting status');
         });
     }
   }

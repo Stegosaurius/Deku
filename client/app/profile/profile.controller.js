@@ -22,6 +22,7 @@
     vm.recentThreads = {};
     vm.statuses = [];
     vm.tags = [];
+    vm.updateStatus = updateStatus;
     vm.username = $stateParams.username;
 
     checkActiveUser();
@@ -30,6 +31,11 @@
     // make the active user a follower of this profile's user
     function follow() {
 
+    }
+
+    function updateStatus() {
+      vm.statuses.push(vm.status);
+      User.updateStatus(vm.status);
     }
 
     // return true if the active user is viewing his/her own profile
