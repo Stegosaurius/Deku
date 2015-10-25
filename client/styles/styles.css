@@ -92,6 +92,8 @@ ul {
   width: 100%;
   border-bottom: 1px solid #dfdfdf;
   text-align: right; }
+.editProfile .follow li:hover {
+  border-bottom: 1px solid #27ae60; }
 .editProfile textarea {
   resize: none;
   width: 24.1rem; }
@@ -107,6 +109,8 @@ ul {
   color: #109418; }
 .editProfile .follow-header:hover {
   color: #27ae60; }
+.editProfile a:hover {
+  cursor: pointer; }
 
 /* ___PROFILE___ */
 .profile {

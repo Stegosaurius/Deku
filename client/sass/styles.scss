@@ -148,6 +148,10 @@ ul {
     text-align: right;
   }
 
+  .follow li:hover {
+    border-bottom: 1px solid $lightGreen;
+  }
+
   button {
     @extend .default-button;
   }
@@ -181,6 +185,10 @@ ul {
 
   .follow-header:hover {
     color: $lightGreen;
+  }
+
+  a:hover {
+    cursor: pointer;
   }
 
 }
