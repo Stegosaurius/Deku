@@ -3,11 +3,10 @@ var Status = require('../models/statusModel');
 module.exports = {
 
   getStatuses: function (req, res) {
-    var id = req.params.id;
-    Status.getStatuses(id, function (err, statuses) {
+    Status.getStatuses(req.params.username, function (err, statuses) {
       if (err) {
         console.error(err);
-        res.status(404).send(err);
+        res.status(500).end();
       } else {
         res.status(200).json(statuses);
       }
@@ -17,7 +16,8 @@ module.exports = {
   updateStatus: function (req, res) {
     var data = {
       userID: req.params.id,
-      status: req.body.status
+      status: req.body.status,
+      timestamp: Date.now()
     };
     Status.addStatus(data, function (err, status) {
       if (err) {

@@ -55,8 +55,8 @@ module.exports = {
   },
 
   updateUser: function (data, callback) {
-    db.query('update Users set about = ?, email = ?, profile_photo = ?, location = ? where username = ?', 
-      [data.about, data.email, data.photo, data.location, data.username],
+    db.query('update Users set about = ?, email = ?, profile_photo = ?, location = ? where id = ?', 
+      [data.about, data.email, data.photo, data.location, data.userID],
       function (err, res) {
         if (err) {
           callback(err, null);
@@ -116,8 +116,8 @@ module.exports = {
     });
   },
 
-  addProfilePhoto: function (username, photo, callback) {
-    db.query('update users set photo = ? where username = ?', [photo, username], function (err, res) {
+  addProfilePhoto: function (userID, photo, callback) {
+    db.query('update users set photo = ? where id = ?', [photo, userID], function (err, res) {
       if (err) {
         callback(err, null);
       } else {
@@ -127,7 +127,7 @@ module.exports = {
   },
 
   getNotifications: function (id, callback) {
-    db.query('select n.content from notifications n inner join users u on (n.user_id = u.id) where user_id = ?', [id],
+    db.query('select n.content from notifications n inner join users u on (n.user_id = u.id) where n.user_id = ?', [id],
       function (err, notifications) {
         if (err) {
           callback(err, null);
@@ -218,7 +218,7 @@ module.exports = {
       }
     });
   },
-cp
+
   deleteUserTag: function (userID, tagID, callback) {
     db.query('delete from usertags where user_id = ? and where tag_id = ?', [userID, tagID], function (err, res) {
       if (err) {

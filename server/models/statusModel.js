@@ -5,8 +5,8 @@ var bcrypt = require('bcrypt-nodejs');
 
 module.exports = {
 
-  getStatuses: function (id, callback) {
-      db.query('select * from statuses where user_id = ?', [id], function (err, statuses) {
+  getStatuses: function (username, callback) {
+      db.query('select * from statuses s inner join users u on (u.id = s.user_id) where u.username = ?', [username], function (err, statuses) {
         if (err) {
           callback(err, null);
         } else {
@@ -16,12 +16,12 @@ module.exports = {
     },
 
   addStatus: function (data, callback) {
-    db.query('insert into statuses (user_id, status) values (?, ?)', [data.userID, data.status],
+    db.query('insert into statuses (user_id, status, timestamp) values (?, ?, ?)', [data.userID, data.status, data.timestamp],
       function (err, res) {
         if (err) {
           callback(err, null);
         } else {
-          callback(null, res.insertID);
+          callback(null, res);
         }
     });
   },

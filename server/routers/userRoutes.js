@@ -12,7 +12,7 @@ module.exports = function (app, passport) {
 
   app.get('/:username', userController.getProfile);
 
-  app.put('/:username', userController.updateProfile);
+  app.put('/:id', userController.updateProfile);
 
 
 
@@ -24,16 +24,16 @@ module.exports = function (app, passport) {
 
   app.get('/tags/:username', userController.getUserTags);
 
-  app.post('/tags/:username', userController.addUserTag);
+  app.post('/tags/:id', userController.addUserTag);
 
-  app.delete('/tags/:username', userController.deleteUserTag);
+  app.delete('/tags/:id', userController.deleteUserTag);
 
   // Avatars for users
-  app.post('/upload/avatar/:username', userController.uploadAvatar);
+  app.post('/upload/avatar/:id', userController.uploadAvatar);
 
   app.get('/avatarpath/:username', userController.getAvatarPath);
 
-  app.post('/avatarpath/:username', userController.addAvatarPath);
+  app.post('/avatarpath/:id', userController.addAvatarPath);
 
   // Greenhouse photos
   app.get('/users/photos/:username', userController.getPhotos);
@@ -44,6 +44,6 @@ module.exports = function (app, passport) {
   // If photo is stored somewhere else, get path and store in database
   app.post('/users/photos/path/:id', userController.addPhotoURL)
 
-  app.delete('/users/photos/:username', userController.deletePhoto);
+  app.delete('/users/photos/:id', userController.deletePhoto);
   
 }
