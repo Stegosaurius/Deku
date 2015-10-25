@@ -39,6 +39,11 @@ ul {
   margin: 0; }
 
 /* ___EDITPROFILE___ */
+.editProfile h4 {
+  color: #109418;
+  margin: 0 0 0 0; }
+.editProfile h5 {
+  font-size: 1.4rem; }
 .editProfile ul.tags {
   margin-top: 5px;
   list-style: none;
@@ -58,7 +63,7 @@ ul {
 .editProfile .tag-form {
   display: block; }
 .editProfile .tag-form input {
-  margin-top: 10px;
+  margin-top: 20px;
   display: inline-block;
   width: 50%; }
 .editProfile .tag-form button {
@@ -77,11 +82,14 @@ ul {
   display: inline; }
 .editProfile .photo {
   height: 15rem; }
+.editProfile .follow-container {
+  border-left: 2px solid #dfdfdf;
+  text-align: right; }
 .editProfile .follow {
   height: 10rem;
   overflow-y: scroll; }
 .editProfile .follow li {
-  width: 10rem;
+  width: 100%;
   border-bottom: 1px solid #dfdfdf;
   text-align: right; }
 .editProfile textarea {
@@ -94,6 +102,11 @@ ul {
   padding-right: 0px; }
 .editProfile input:focus, .editProfile textarea:focus {
   border-bottom: 2px solid #109418; }
+.editProfile .follow-header {
+  font-size: 1.2rem;
+  color: #109418; }
+.editProfile .follow-header:hover {
+  color: #27ae60; }
 
 /* ___PROFILE___ */
 .profile {

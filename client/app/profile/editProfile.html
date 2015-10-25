@@ -10,8 +10,8 @@
 
         <div class="col m6">
 
-          <p>@{{ editProfile.username }}</p>
-          <p>Location</p>
+          <h4>@{{ editProfile.username }}</h4>
+          <h5>Location</h5>
           <input type="text" ng-model="editProfile.location"  placeholder="Where are you based?"><br>
           <!-- <input type="text" ng-model="editProfile.about" placeholder="Tell us about yourself"><br>   --> 
           
@@ -78,8 +78,8 @@
       <form class="tag-form" name="editProfile.tagForm" ng-submit="editProfile.addTag()">
           <input type="text" ng-model="editProfile.newTag" placeholder="Add a new tag">
           <!-- <button class="waves-effect waves-light btn" type="submit">Add</button> -->
-          <a ng-click="editProfile.addTag()" class="btn-floating btn-tiny waves-effect waves-light red">
-            <i class="small material-icons">add</i>
+          <a ng-click="editProfile.addTag()" class="btn-floating btn-small waves-effect waves-light red">
+            <i class="material-icons">add</i>
           </a>
 
       </form>
@@ -88,7 +88,7 @@
 
     <div class="col m6 valign-wrapper">
       <div class="follow-container col m6">
-        <p>Followers</p>
+        <span class="follow-header">Followers</span>
         <ul class="follow">
           <li ng-repeat="follower in editProfile.followers">
             <span> {{ follower }} </span>
@@ -96,7 +96,7 @@
         </ul>
       </div>
       <div class="follow-container col m6">
-        <p>Following</p>
+        <span class="follow-header">Following</span>
         <ul class="follow">
           <li ng-repeat="following in editProfile.following">
             <span> {{ following }} </span>

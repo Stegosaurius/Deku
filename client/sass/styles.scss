@@ -61,6 +61,15 @@ ul {
 /* ___EDITPROFILE___ */
 .editProfile {
 
+  h4 {
+    color: $darkGreen;
+    margin: 0 0 0 0;
+  }
+
+  h5 {
+    font-size: 1.4rem;
+  }
+
   ul.tags {
     margin-top: 5px;
     list-style: none;
@@ -90,7 +99,7 @@ ul {
 
   .tag-form {
     input {
-      margin-top: 10px;
+      margin-top: 20px;
       display: inline-block;
       width: 50%;
     }
@@ -123,13 +132,18 @@ ul {
     height: 15rem;
   }
 
+  .follow-container {
+    border-left: 2px solid $lightGrey;
+    text-align: right;
+  }
+
   .follow {
     height: 10rem;
     overflow-y: scroll;
   }
 
   .follow li {
-    width: 10rem;
+    width: 100%;
     border-bottom: 1px solid $lightGrey;
     text-align: right;
   }
@@ -147,21 +161,6 @@ ul {
     width: 24.1rem;
   }
 
-<<<<<<< HEAD
-.user-photos-container {
-  overflow-x: auto;
-  margin: auto;
-}
-
-.user-photos {
-  display: inline-block;
-  padding: 3px;
-}
-
-.user-photo {
-  height: 10rem;
-}
-=======
   input, textarea {
     border: 2px solid $lightGrey;
   }
@@ -175,18 +174,17 @@ ul {
     border-bottom: 2px solid $darkGreen;
   }
 
->>>>>>> Improve input styling for editProfile forms
+  .follow-header {
+    font-size: 1.2rem;
+    color: $darkGreen;
+  }
+
+  .follow-header:hover {
+    color: $lightGreen;
+  }
 
 }
 
-<<<<<<< HEAD
-.follow li {
-  width: 10rem;
-  border-botton: 1px solid $lightGrey;
-  text-align: right;
-}
-=======
->>>>>>> Improve input styling for editProfile forms
 
 /* ___PROFILE___ */
 
