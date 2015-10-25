@@ -27,7 +27,7 @@ module.exports = {
 
   updateProfile: function (req, res) {
     var data = req.body;
-    data.username = req.params.username;
+    data.userID = req.params.id;
     User.updateUser(data, function (err, result) {
       if (err) {
         //Error handling
@@ -39,8 +39,8 @@ module.exports = {
     })
   },
 
-  getUser: function (req, res, id) {
-    User.getUserByID(id, function (err, user) {
+  getUser: function (req, res) {
+    User.getUserByID(req.params.id, function (err, user) {
       if (err) {
         console.error(err);
         res.status(404).send(err);
@@ -62,7 +62,7 @@ module.exports = {
   },
 
   addAvatarPath: function (req, res) {
-    User.addProfilePhoto(req.params.username, req.body.photo, function (err, result) {
+    User.addProfilePhoto(req.params.id, req.body.photo, function (err, result) {
       if (err) {
         console.error(err);
         res.status(404).send(err);
@@ -75,7 +75,7 @@ module.exports = {
   uploadAvatar: function (req, res) {
     var file = req.files.file;
     // Load the stream
-    var username = req.params.username;
+    var userID = req.params.id;
     var body = fs.createReadStream(file).pipe(zlib.createGzip());
     // Upload the stream
     var s3 = new AWS.S3({params: { Bucket: config.awsStorage.bucket }});
@@ -85,7 +85,7 @@ module.exports = {
         res.status(500).send(err);
       } else {
         // store path to avatar in our database
-        User.addProfilePhoto(username, data.Location, function (err, result) {
+        User.addProfilePhoto(userID, data.Location, function (err, result) {
           if (err) {
             console.error(err);
             res.status(500).send(err);
@@ -97,8 +97,8 @@ module.exports = {
     });
   },
 
-  getNotifications: function (req, res, id) {
-    User.getNotifications(id, function (err, notifications) {
+  getNotifications: function (req, res) {
+    User.getNotifications(req.params.id, function (err, notifications) {
       if (err) {
         console.error(err);
         res.send(err);
@@ -108,8 +108,8 @@ module.exports = {
     })
   },
 
-  createNotification: function (req, res, id) {
-    User.addNotification(id, req.body.content, function (err, result) {
+  createNotification: function (req, res) {
+    User.addNotification(req.params.id, req.body.content, function (err, result) {
       if (err) {
         console.error(err);
         res.send(err);
@@ -132,7 +132,7 @@ module.exports = {
   },
 
   getUserTags: function (req, res) {
-    User.getUserTags(req.params.id, function (err, tags) {
+    User.getUserTags(req.params.username, function (err, tags) {
       if (err) {
         console.error(err);
         res.status(500).send();
@@ -275,14 +275,18 @@ module.exports = {
   },
 
   deletePhoto: function (req, res) {
-    User.deletePhoto(req.body.photo, function (err, result) {
-      if (err) {
-        console.error(err);
-        res.status(500).end();
-      } else {
-        res.status(204).end();
-      }
-    });
+    if (req.params.id) {
+      User.deletePhoto(req.body.photo, function (err, result) {
+        if (err) {
+          console.error(err);
+          res.status(500).end();
+        } else {
+          res.status(204).end();
+        }
+      });
+    } else {
+      res.status(404).end();
+    }
   }
 
 }

@@ -4,8 +4,8 @@ var bcrypt = require('bcrypt-nodejs');
 
 module.exports = {
 
-  getFollowers: function (id, callback) {
-    db.query('select u.username from users u inner join followers f on (f.follower_id = u.id) where f.user_id = ?',
+  getFollowers: function (username, callback) {
+    db.query('select u.username from users u inner join followers f on (f.follower_id = u.id) where u.username = ?',
       [id],
       function (err, followers) {
         if (err) {

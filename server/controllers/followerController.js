@@ -4,8 +4,7 @@ var User = require('../models/userModel.js');
 module.exports = {
 
   getFollowers: function (req, res) {
-    var id = req.params.id;
-    Follower.getFollowers(id, function (err, followers) {
+    Follower.getFollowers(req.params.username, function (err, followers) {
       if (err) {
         console.error(err);
         res.status(404).send(err);
