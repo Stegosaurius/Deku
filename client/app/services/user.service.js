@@ -22,8 +22,7 @@
       getTags: getTags,
       addTag: addTag,
       updateProfile: updateProfile
-      removeTag: removeTag,
-      addStatus: addStatus
+      removeTag: removeTag
     };
 
     return services;
