@@ -166,7 +166,7 @@ module.exports = {
               } else {
                 var data = {
                   userID: userID,
-                  tagID: tag[0].id
+                  tagID: newtag[0].id
                 };
                 User.addUserTag(data, function (err, result) {
                   if (err) {

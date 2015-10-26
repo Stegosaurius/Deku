@@ -4,9 +4,9 @@
   angular.module('app')
     .controller('EditProfileController', EditProfileController);
 
-  EditProfileController.$inject = ['$window', '$state', 'User'];
+  EditProfileController.$inject = ['$window', '$state', 'jwtHelper', 'User'];
 
-  function EditProfileController($window, $state, User) {
+  function EditProfileController($window, $state, jwtHelper, User) {
     // capture variable for binding members to controller; vm stands for ViewModel
     // (https://github.com/johnpapa/angular-styleguide#controlleras-with-vm)
     var vm = this;
@@ -18,8 +18,8 @@
     vm.followers =['john', 'edgar', 'beasta', 'sam', 'watson', 'fred', 'smithy', 'johnson', 'patty', 'ron artest', 'junior'];
     vm.following =['john', 'edgar', 'beasta', 'elon musk', 'bubba', 'gump', 'shrimp', 'fred', 'smithy', 'johnson', 'patty', 'ron artest', 'junior'];
     vm.location = '';
-    // vm.tags = [];
-    vm.tags = ['tomatos', 'aquaponics', 'kale', 'spruce', 'beans']
+    vm.tags = [];
+    // vm.tags = ['tomatos', 'aquaponics', 'kale', 'spruce', 'beans']
     vm.username = $window.localStorage.username;
     // vm.photos = [];
 
@@ -41,9 +41,14 @@
     //existing data for a user. This way the data object will
     //be complete when we send it to the database.
     getProfile();
-    // getFollowers();
+    getTags();
+    //getFollowers();
     //getAvatar();
 
+    // return active user's ID
+    function getID() {
+      return jwtHelper.decodeToken($window.localStorage.token).id;
+    }
 
     function getProfile () {
       User.getProfile(vm.username)
@@ -105,14 +110,23 @@
 
     //Get all tags for the user and add them to the vm
     function getTags () {
-
+      User.getTags(vm.username)
+        .then(function (data) {
+          console.log(data);
+          for (var i = 0; i < data.length; i++) {
+            vm.tags.push(data[i].tag);
+          }
+        });
     }
 
     //Add tag to the vm tags list and send the new tag to the 
     //server to store the new tag in the database
     function addTag () {
-      vm.tags.push(vm.newTag);
-      console.log(vm.tags);
+      var id = getID();
+      if (vm.tags.indexOf(vm.newTag) === -1) {
+        vm.tags.push(vm.newTag);
+        User.addTag(vm.newTag, id);
+      } 
       vm.newTag='';
       //Invoke updateTags function
     }

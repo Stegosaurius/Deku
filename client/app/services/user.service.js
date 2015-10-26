@@ -18,6 +18,7 @@
       getRecentThreads: getRecentThreads,
       getStatuses: getStatuses,
       getTags: getTags,
+      addTag: addTag,
       updateProfile: updateProfile,
       addStatus: addStatus
     };
@@ -105,6 +106,15 @@
           return res.data;
         }, function errorCallback(res) {
           console.log('Error retrieving tags');
+        });
+    }
+
+    function addTag(tag, id) {
+      return $http.post('/users/tags/' + id, {tag: tag}) 
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log("Error posting status");
         });
     }
 
