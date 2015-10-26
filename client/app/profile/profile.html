@@ -35,7 +35,9 @@
 
       <h5>Recent Updates</h5>
       <ul class="statuses">
-        <li class="status" ng-repeat="status in profile.statuses">{{ status }}</li>
+        <li class="status" ng-repeat="status in profile.statuses">{{ status }}
+          <button ng-click="profile.deleteStatus(status)">X</button>
+        </li>
       </ul>
     </div>
 

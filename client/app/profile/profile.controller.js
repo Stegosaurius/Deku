@@ -15,6 +15,7 @@
     vm.activeUser = false;
     vm.addStatus = addStatus;
     vm.avatar = '';
+    vm.deleteStatus = deleteStatus;
     vm.follow = follow;
     vm.followers = [];
     vm.following = [];
@@ -28,12 +29,22 @@
     checkActiveUser();
     getProfile();
 
+    // link statuses to IDs to aid in deletion
+    var statusObj = {};
+
     // post status to database and clear form
     function addStatus() {
       vm.statuses.push(vm.status);
       User.addStatus(vm.status, getID());
       vm.statusUpdate.$setPristine();
       vm.status = '';
+    }
+
+    // remove status from database
+    function deleteStatus(status) {
+      // call delete with status ID
+      User.deleteStatus(statusObj[status]);
+      vm.statuses.splice(vm.statuses.indexOf(status), 1);
     }
 
     // make the active user a follower of this profile's user
@@ -58,8 +69,8 @@
         .then(function(data) {
           vm.about = data.about || 'Talk a little about yourself...';
           vm.location = data.location || 'Where are you?';
-          // getTags();
-          // getStatuses();
+          getTags();
+          getStatuses();
           // getFollowers();
           // getRecentThreads();
           // getAvatar();
@@ -82,7 +93,11 @@
     function getStatuses() {
       User.getStatuses(vm.username)
         .then(function(statuses) {
-          vm.statuses = statuses;
+          vm.statuses = [];
+          for (var i = 0; i < statuses.length; i++) {
+            vm.statuses.push(statuses[i].status);
+            statusObj[statuses[i].status] = statuses[i].id;
+          }
         });
     }
 

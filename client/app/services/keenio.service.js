@@ -8,9 +8,7 @@
     var url = '/users/scopekey/' + $window.localStorage.userID;
     return $http.get(url).then(function (data) {
       dashboardConfigure.readKey = data.data.scoped_key;
-      console.log("dashboardConfigure is :",dashboardConfigure);
       var client = new Keen( dashboardConfigure ); //loading keys in this file
-      console.log("client is: ", client);
       function tempQuery(callback) {
       Keen.ready(
         function(){
