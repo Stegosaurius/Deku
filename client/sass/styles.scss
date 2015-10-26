@@ -166,7 +166,8 @@ ul {
   }
 
   input, textarea {
-    border: 2px solid $lightGrey;
+    border: 1px solid $lightGrey;
+    padding-left: 5px;
   }
 
   input {

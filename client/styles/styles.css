@@ -98,7 +98,8 @@ ul {
   resize: none;
   width: 24.1rem; }
 .editProfile input, .editProfile textarea {
-  border: 2px solid #dfdfdf; }
+  border: 1px solid #dfdfdf;
+  padding-left: 5px; }
 .editProfile input {
   height: 2rem;
   padding-right: 0px; }
