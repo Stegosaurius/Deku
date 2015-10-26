@@ -20,18 +20,28 @@ var request = require('request');
 var expect = require('chai').expect;
 
 xdescribe('Persistent Express Server with functional Database', function () {
+  var dbURL = process.env.DATABASE_URL;
 
-  var dbConnection;
+   
 
   beforeEach(function(done) {
     //Create a connection with the database and open it
-    dbConnection = mysql.createConnection({
-      user: "root", 
-      password: "",
-      database: "Deku"
+    if (dbURL) {
+      var dbConnection = mysql.createConnection(dbURL);
+  } else {
+      var dbConnection = mysql.createConnection({
+        host: 'localhost', 
+        user: 'root',
+        database: 'Deku'
+      });
+  }
+    connection.connect(function(err) {
+      if (err) {
+        console.error('error connecting to database',err);
+      } else {
+        console.log('Database is connected');
+      }
     });
-
-    dbConnection.connect();
     //Invoke done so mocha knows it can proceed to the test
     done();
   })
