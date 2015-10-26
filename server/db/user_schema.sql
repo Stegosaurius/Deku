@@ -25,7 +25,7 @@ CREATE TABLE `Followers` (
 CREATE TABLE `Messages` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`message` TEXT NOT NULL,
-	`timestamp` TIME NOT NULL,
+	`timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`user_id` INT NOT NULL,
 	`thread_id` INT NOT NULL,
 	`vote_tally` INT NOT NULL DEFAULT '0',
@@ -35,6 +35,7 @@ CREATE TABLE `Messages` (
 CREATE TABLE `Threads` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`thread` varchar(80) NOT NULL,
+	`lastupdated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`)
 );
 
@@ -47,7 +48,7 @@ CREATE TABLE `Statuses` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`user_id` INT NOT NULL,
 	`status` varchar(250) NOT NULL,
-	`timestamp` TIME NOT NULL,
+	`timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`vote_tally` INT NOT NULL DEFAULT '0',
 	PRIMARY KEY (`id`)
 );
