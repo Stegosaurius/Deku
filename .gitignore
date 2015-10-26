@@ -11,6 +11,7 @@ server/config/auth.js
 node_modules/
 client/lib
 client/dist
+client/styles
 
 # Images
 images/
