@@ -34,10 +34,19 @@
 
     // post status to database and clear form
     function addStatus() {
-      vm.statuses.push(vm.status);
-      User.addStatus(vm.status, getID());
+      var newStatus = vm.status;
+
+      // reset form
       vm.statusUpdate.$setPristine();
       vm.status = '';
+
+      vm.statuses.unshift(vm.status);
+
+      User.addStatus(newStatus, getID())
+        .then(function(status) {
+          // add new status and ID to status object
+          statusObj[newStatus] = status.id;
+        });
     }
 
     // remove status from database
