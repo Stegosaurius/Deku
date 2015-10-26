@@ -123,9 +123,10 @@
     //server to store the new tag in the database
     function addTag () {
       var id = getID();
-      console.log(id);
-      vm.tags.push(vm.newTag);
-      User.addTag(vm.newTag, id);
+      if (vm.tags.indexOf(vm.newTag) === -1) {
+        vm.tags.push(vm.newTag);
+        User.addTag(vm.newTag, id);
+      } 
       vm.newTag='';
       //Invoke updateTags function
     }
