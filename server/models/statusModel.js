@@ -16,7 +16,7 @@ module.exports = {
     },
 
   addStatus: function (data, callback) {
-    db.query('insert into statuses (user_id, status, timestamp) values (?, ?, ?)', [data.userID, data.status, data.timestamp],
+    db.query('insert into statuses (user_id, status, timestamp) values (?, ?, now())', [data.userID, data.status],
       function (err, res) {
         if (err) {
           callback(err, null);

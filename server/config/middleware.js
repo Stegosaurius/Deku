@@ -26,7 +26,8 @@ module.exports = function (app, express) {
 
   //Make our app use all the routers we define 
   app.use('/users', userRouter); 
-  app.use('/followers', followerRouter)
+  app.use('/followers', followerRouter);
+  app.use('/status', statusRouter);
   app.use('/threads', threadRouter);
   app.use('/auth', authRouter);
 
