@@ -34,6 +34,10 @@ module.exports = {
     })
   },
 
+  getThreadByPage: function (req, res) {
+    Thread.getThreadByPage();
+  },
+
   // write a new message to a particular thread
   // update lastupdated column of that thread
   postToThread: function (req, res) {
@@ -53,5 +57,11 @@ module.exports = {
         })
       }
     });
+  },
+
+  deleteThread: function (req, res) {
+    Thread.deleteThread();
   }
+
+
 }

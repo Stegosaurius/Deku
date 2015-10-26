@@ -18,14 +18,21 @@ module.exports = {
       userID: req.params.id,
       status: req.body.status
     };
-    Status.addStatus(data, function (err, status) {
+    Status.addStatus(data, function (err, result) {
       if (err) {
         console.error(err);
         res.status(404).send(err);
       } else {
-        res.status(201).json(status);
+        Status.getStatusByID(result.insertID, function (err, status) {
+          if (err) {
+            console.error(err);
+            res.status(500).end();
+          } else {
+            res.status(201).json(status);
+          }
+        });
       }
-    })
+    });
   },
 
   getFriendsStatuses: function (req, res) {

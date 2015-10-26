@@ -11,6 +11,10 @@ module.exports = function (app) {
   //particular thread
   app.get('/:id', threadController.getThread);
 
+  app.get('/:threadID/:page', threadController.getThreadByPage);
+
   //Route for posting a message to a particular thread
   app.post('/:id', threadController.postToThread);
+
+  app.delete('/:id', threadController.deleteThread);
 }

@@ -178,7 +178,7 @@ module.exports = {
   },
 
   getUserTags: function (username, callback) {
-    db.query('select t.tag from tags t inner join usertags u on (t.id = u.tag_id) \
+    db.query('select t.id, t.tag from tags t inner join usertags u on (t.id = u.tag_id) \
       inner join users v on (v.id = u.user_id) where v.username = ?', [username], function (err, tags) {
       if (err) {
         callback(err, null);
