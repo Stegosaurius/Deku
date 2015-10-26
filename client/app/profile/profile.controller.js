@@ -40,7 +40,7 @@
       vm.statusUpdate.$setPristine();
       vm.status = '';
 
-      vm.statuses.unshift(vm.status);
+      vm.statuses.unshift(newStatus);
 
       User.addStatus(newStatus, getID())
         .then(function(status) {
