@@ -14,11 +14,16 @@ module.exports = {
 		});
 	},
 
-	getThread: function (id, callback) {
-		db.query('select * from messages where thread_id = ?', [id], function (err, messages) {
+	getThread: function (threadID, page, callback) {
+		db.query('select * from messages where thread_id = ?', [threadID], function (err, messages) {
 			if (err) {
 				callback(err);
 			} else {
+				// set up pagination for thread by creating object which stores messages by each page number
+				// get length of array of messages and store in count property on object
+				// iterate over array of messages
+				// for every twenty, store into a property that is the page number
+				// 
 				callback(null, messages);
 			}
 		});
@@ -40,9 +45,19 @@ module.exports = {
 			if (err) {
 				callback(err);
 			} else {
-				callback(null, res.insertID);
+				callback(null, res);
 			}
 		});
+	},
+
+	updateTime: function (threadID, callback) {
+		db.query('update Threads set lastupdated = current_timestamp where id = ?', [threadID], function (err, res) {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, res);
+			}
+		})
 	}
   
 }

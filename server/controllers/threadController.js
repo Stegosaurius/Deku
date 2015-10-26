@@ -14,7 +14,7 @@ module.exports = {
     Thread.getAllThreads(function (err, threads) {
       if (err) {
         //do some error handing
-        res.status(404).send();
+        res.status(500).end();
       } else {
         res.status(200).json(threads);
       }
@@ -27,23 +27,31 @@ module.exports = {
     Thread.getThread(id, function (err, threadMessages) {
       if (err) {
         //Error handling
-        res.status(404).send();
+        res.status(500).end();
       } else {
         res.status(200).json(threadMessages);
       }
     })
   },
 
-  //write a new message to a particular thread
+  // write a new message to a particular thread
+  // update lastupdated column of that thread
   postToThread: function (req, res) {
     var id = req.params.id;
     Thread.postToThread(id, function (err, newMessage) {
       if (err) {
         //Error handling
-        res.status(404).send();
+        res.status(500).end();
       } else {
-        res.status(200).json(newMessage);
+        // update time in thread table
+        Thread.updateTime(id, function (err, result) {
+          if (err) {
+            res.status(500).end();
+          } else {
+            res.status(201).send(result);
+          }
+        })
       }
-    })
+    });
   }
 }

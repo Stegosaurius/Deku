@@ -6,17 +6,20 @@ var bcrypt = require('bcrypt-nodejs');
 module.exports = {
 
   getStatuses: function (username, callback) {
-      db.query('select * from statuses s inner join users u on (u.id = s.user_id) where u.username = ?', [username], function (err, statuses) {
+      db.query('select s.id, s.user_id, u.username, s.status, s.timestamp, s.vote_tally from statuses s inner join users u where u.username = ?', [username], function (err, statuses) {
         if (err) {
           callback(err, null);
         } else {
+          statuses = statuses.sort(function (a,b) {
+            return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
+          });
           callback(null, statuses);
         }
       })
     },
 
   addStatus: function (data, callback) {
-    db.query('insert into statuses (user_id, status, timestamp) values (?, ?, now())', [data.userID, data.status],
+    db.query('insert into statuses (user_id, status) values (?, ?)', [data.userID, data.status],
       function (err, res) {
         if (err) {
           callback(err, null);
