@@ -68,8 +68,8 @@
 
       <ul class="tags">
         <li class="tag" ng-repeat="tag in editProfile.tags">
-          <span>{{ tag }}</span>
-          <a class="remove-item" href="#">
+          <span>{{ tag.tag }}</span>
+          <a ng-click="editProfile.removeTag(tag)" class="remove-item">
             <i class="tiny material-icons">clear</i>
           </a>
         </li>

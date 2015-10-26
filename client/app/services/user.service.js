@@ -22,6 +22,8 @@
       getTags: getTags,
       addTag: addTag,
       updateProfile: updateProfile
+      removeTag: removeTag,
+      addStatus: addStatus
     };
 
     return services;
@@ -134,6 +136,15 @@
           return res.data;
         }, function errorCallback(res) {
           console.log("Error posting status");
+        });
+    }
+
+    function removeTag(tag_id, user_id) {
+      return $http.delete('/users/tags/' + tag_id + '/' + user_id)
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log("Error deleting tag");
         });
     }
 

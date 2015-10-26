@@ -26,7 +26,7 @@ module.exports = function (app, passport) {
 
   app.post('/tags/:id', userController.addUserTag);
 
-  app.delete('/tags/:id', userController.deleteUserTag);
+  app.delete('/tags/:tagid/:userid', userController.deleteUserTag);
 
   // Avatars for users
   app.post('/upload/avatar/:id', userController.uploadAvatar);
