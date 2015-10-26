@@ -17,7 +17,7 @@ module.exports = {
   },
 
   addFollower: function (userID, followerID, callback) {
-    db.query('insert into followers (user_id, follower_id) select  ', [userID, followerID], function (err, res) {
+    db.query('insert into followers (user_id, follower_id) values (?, ?)', [userID, followerID], function (err, res) {
       if (err) {
         callback(err);
       } else {
