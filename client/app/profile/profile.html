@@ -35,8 +35,9 @@
 
       <h5>Recent Updates</h5>
       <ul class="statuses">
-        <li class="status" ng-repeat="status in profile.statuses">{{ status }}
-          <button ng-click="profile.deleteStatus(status)">X</button>
+        <li class="status row valign-wrapper" ng-repeat="status in profile.statuses">
+          <button class="removeStatus col s1 valign" ng-click="profile.deleteStatus(status)">X</button>
+          <div class="col s8">{{ status }}</div>
         </li>
       </ul>
     </div>
