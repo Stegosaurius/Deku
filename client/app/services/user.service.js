@@ -36,7 +36,12 @@
     }
 
     function deleteStatus(id) {
-      
+      return $http.delete('/status/' + id)
+        .then(function successCallback(res) {
+          return res;
+        }, function errorCallback(res) {
+          console.log('Error deleting status');
+        });
     }
 
     function signin(data) {
