@@ -111,7 +111,6 @@
     // update an existing user's profile info
     function updateProfile(data) {
       var url = '/users/' + $window.localStorage.username;
-
       return $http.put(url, data)
         .then(function successCallback(res) {
           return res.data;

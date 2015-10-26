@@ -16,8 +16,7 @@ module.exports = {
   updateStatus: function (req, res) {
     var data = {
       userID: req.params.id,
-      status: req.body.status,
-      timestamp: Date.now()
+      status: req.body.status
     };
     Status.addStatus(data, function (err, status) {
       if (err) {
