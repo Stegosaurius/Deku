@@ -18,8 +18,8 @@
     vm.followers =['john', 'edgar', 'beasta', 'sam', 'watson', 'fred', 'smithy', 'johnson', 'patty', 'ron artest', 'junior'];
     vm.following =['john', 'edgar', 'beasta', 'elon musk', 'bubba', 'gump', 'shrimp', 'fred', 'smithy', 'johnson', 'patty', 'ron artest', 'junior'];
     vm.location = '';
-    // vm.tags = [];
-    vm.tags = ['tomatos', 'aquaponics', 'kale', 'spruce', 'beans']
+    vm.tags = [];
+    // vm.tags = ['tomatos', 'aquaponics', 'kale', 'spruce', 'beans']
     vm.username = $window.localStorage.username;
     // vm.photos = [];
 
@@ -41,7 +41,8 @@
     //existing data for a user. This way the data object will
     //be complete when we send it to the database.
     getProfile();
-    // getFollowers();
+    getTags();
+    //getFollowers();
     //getAvatar();
 
     // return active user's ID
@@ -111,7 +112,10 @@
     function getTags () {
       User.getTags(vm.username)
         .then(function (data) {
-          vm.tags = data.tags;
+          console.log(data);
+          for (var i = 0; i < data.length; i++) {
+            vm.tags.push(data[i].tag);
+          }
         });
     }
 
