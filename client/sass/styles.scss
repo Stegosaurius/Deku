@@ -177,6 +177,10 @@ ul.tags {
     color: $grey;
   }
 
+  .bottom-left {
+    border-right: 1px solid $darkGreen;
+  }
+
   .follow a {
     display: inline-block;
     margin-top: 1rem;
