@@ -9,6 +9,8 @@
   function User($http, $window, $state) {
 
     var services = {
+      addStatus: addStatus,
+      deleteStatus: deleteStatus,
       signin: signin,
       signout: signout,
       signup: signup,
@@ -19,11 +21,28 @@
       getStatuses: getStatuses,
       getTags: getTags,
       addTag: addTag,
-      updateProfile: updateProfile,
-      addStatus: addStatus
+      updateProfile: updateProfile
     };
 
     return services;
+
+    function addStatus(status, id) {
+      return $http.post('/status/' + id, { status: status })
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log('Error posting status');
+        });
+    }
+
+    function deleteStatus(id) {
+      return $http.delete('/status/' + id)
+        .then(function successCallback(res) {
+          return res;
+        }, function errorCallback(res) {
+          console.log('Error deleting status');
+        });
+    }
 
     function signin(data) {
       return $http.post('/auth/signin', data)
@@ -93,7 +112,7 @@
     function getStatuses(username) {
       return $http.get('/status/' + username)
         .then(function successCallback(res) {
-          return res.data.statuses;
+          return res.data;
         }, function errorCallback(res) {
           console.log('Error retrieving statuses');
         });
@@ -126,15 +145,6 @@
           return res.data;
         }, function errorCallback(res) {
           console.log('Error updating user profile');
-        });
-    }
-
-    function addStatus(status, id) {
-      return $http.post('/status/' + id, { status: status })
-        .then(function successCallback(res) {
-          return res.data;
-        }, function errorCallback(res) {
-          console.log('Error posting status');
         });
     }
   }
