@@ -4,9 +4,9 @@
   angular.module('app')
     .controller('EditProfileController', EditProfileController);
 
-  EditProfileController.$inject = ['$window', '$state', 'User'];
+  EditProfileController.$inject = ['$window', '$state', 'jwtHelper', 'User'];
 
-  function EditProfileController($window, $state, User) {
+  function EditProfileController($window, $state, jwtHelper, User) {
     // capture variable for binding members to controller; vm stands for ViewModel
     // (https://github.com/johnpapa/angular-styleguide#controlleras-with-vm)
     var vm = this;
@@ -44,6 +44,10 @@
     // getFollowers();
     //getAvatar();
 
+    // return active user's ID
+    function getID() {
+      return jwtHelper.decodeToken($window.localStorage.token).id;
+    }
 
     function getProfile () {
       User.getProfile(vm.username)
@@ -105,14 +109,19 @@
 
     //Get all tags for the user and add them to the vm
     function getTags () {
-
+      User.getTags(vm.username)
+        .then(function (data) {
+          vm.tags = data.tags;
+        });
     }
 
     //Add tag to the vm tags list and send the new tag to the 
     //server to store the new tag in the database
     function addTag () {
+      var id = getID();
+      console.log(id);
       vm.tags.push(vm.newTag);
-      console.log(vm.tags);
+      User.addTag(vm.newTag, id);
       vm.newTag='';
       //Invoke updateTags function
     }
