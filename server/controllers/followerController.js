@@ -7,28 +7,34 @@ module.exports = {
     Follower.getFollowers(req.params.username, function (err, followers) {
       if (err) {
         console.error(err);
-        res.status(404).send(err);
+        res.status(500).send(err);
       } else {
-        res.json(followers);
+        res.status(200).json(followers);
       }
     });
   },
 
   addFollower: function (req, res) {
-    var id = req.params.id;
-    Follower.addFollower(id, req.params.id, function (err, follower) {
+    User.getUserByName(req.params.followerName, function (err, follower) {
       if (err) {
         console.error(err);
-        res.status(404).send(err);
+        res.status(500).end();
       } else {
-        res.json(follower);
+        Follower.addFollower(req.params.userID, follower.id, function (err, follower) {
+          if (err) {
+            console.error(err);
+            res.status(500).end();
+          } else {
+            res.status(201).json(follower);
+          }
+        });
       }
-    });
+    })
   },
 
   unfollow: function (req, res) {
     // get user id of follower first
-    User.getUserByName(req.body.follower, function (err, follower) {
+    User.getUserByName(req.params.followerName, function (err, follower) {
       if (err) {
         console.error(err);
         res.status(500).end();

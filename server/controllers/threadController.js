@@ -35,7 +35,14 @@ module.exports = {
   },
 
   getThreadByPage: function (req, res) {
-    Thread.getThreadByPage();
+    Thread.getThreadByPage(req.params.threadID, req.params.page, function (err, messages) {
+      if (err) {
+        console.error(err);
+        res.status(500).end();
+      } else {
+        res.status(200).json(messages);
+      }
+    });
   },
 
   // write a new message to a particular thread
@@ -60,7 +67,14 @@ module.exports = {
   },
 
   deleteThread: function (req, res) {
-    Thread.deleteThread();
+    Thread.deleteThread(req.params.id, function (err, result) {
+      if (err) {
+        console.error(err);
+        res.status(500).end();
+      } else {
+        res.status(204).end();
+      }
+    });
   }
 
 
