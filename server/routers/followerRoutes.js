@@ -6,8 +6,8 @@ module.exports = function (app) {
 
   app.get('/:username', followerController.getFollowers);
 
-  app.post('/:id', followerController.addFollower);
+  app.post('/:userID/:followerName', followerController.addFollower);
 
-  app.delete('/:id', followerController.unfollow);
+  app.delete('/:userID/:followerName', followerController.unfollow);
   
 }

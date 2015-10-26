@@ -19,14 +19,27 @@ module.exports = {
 			if (err) {
 				callback(err);
 			} else {
-
-				callback(null, messages);
+				var pageOne = {
+					count: messages.length, // return the count so we know how many pages there should be
+					messages: messages.splice(0, 20) // return first 20 messages for page one
+				};
+				callback(null, pageOne);
 			}
 		});
 	},
 
 	getThreadByPage: function (threadID, page, callback) {
-
+		db.query('select * from messages where thread_id = ?', [threadID], function (err, messages) {
+			if (err) {
+				callback(err);
+			} else {
+				var filteredMessages = {
+					count: messages.length,
+					messages: messages.splice(page - 1 * 20, 20)
+				};
+				callback(null, filteredMessages);
+			}
+		})
 	},
 
 	postToThread: function (data, callback) {
@@ -51,7 +64,13 @@ module.exports = {
 	},
 
 	deleteThread: function (threadID, callback) {
-
+		db.query('delete from threads where id = ?', [id], function (err, res) {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, res);
+			}
+		});
 	},
 
 	updateTime: function (threadID, callback) {

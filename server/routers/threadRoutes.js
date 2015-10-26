@@ -16,5 +16,6 @@ module.exports = function (app) {
   //Route for posting a message to a particular thread
   app.post('/:id', threadController.postToThread);
 
+  // Pass in the thread ID to be deleted
   app.delete('/:id', threadController.deleteThread);
 }
