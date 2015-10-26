@@ -210,21 +210,14 @@ module.exports = {
   },
 
   deleteUserTag: function (req, res) {
-    User.getTag(req.body.tag, function (err, tag) {
+    User.deleteUserTag(req.params.userid, req.params.tagid, function (err, result) {
       if (err) {
         console.error(err);
         res.status(500).end();
       } else {
-        User.deleteUserTag(req.params.id, tag.id, function (err, result) {
-          if (err) {
-            console.error(err);
-            res.status(500).end();
-          } else {
-            res.status(204).end();
-          }
-        })
+        res.status(204).end();
       }
-    })
+    });
   },
 
   getPhotos: function (req, res) {

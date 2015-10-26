@@ -220,7 +220,7 @@ module.exports = {
   },
 
   deleteUserTag: function (userID, tagID, callback) {
-    db.query('delete from usertags where user_id = ? and where tag_id = ?', [userID, tagID], function (err, res) {
+    db.query('delete from usertags where user_id = ? and tag_id = ?', [userID, tagID], function (err, res) {
       if (err) {
         callback(err);
       } else {
