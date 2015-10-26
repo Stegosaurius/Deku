@@ -33,7 +33,7 @@
     vm.updateProfile = updateProfile;
     vm.addTag = addTag;
     vm.removeTag = removeTag;
-    vm.removeFollower = removeFollower;
+    // vm.removeFollower = removeFollower;
     vm.removeFollowing = removeFollowing;
     vm.updateAvatar = updateAvatar;
 
@@ -77,11 +77,11 @@
 
     //Remove a follower when a user clicks the remove
     //button on a specific followers list item
-    function removeFollower (follower) {
-      //Remove specified follower from the vm.followers
-      //list and send to the database to update
-      vm.followers.splice(vm.followers.indexOf(follower), 1);
-    }
+    // function removeFollower (follower) {
+    //   //Remove specified follower from the vm.followers
+    //   //list and send to the database to update
+    //   vm.followers.splice(vm.followers.indexOf(follower), 1);
+    // }
 
     //Remove someone the user is following.
     function removeFollowing (following) {

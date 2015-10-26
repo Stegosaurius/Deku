@@ -2,16 +2,16 @@
 
   <div class="row z-depth-1">
 
-    <form class="col m6" name="editProfile.form" ng-submit="editProfile.updateProfile()">
+    <form class="col m5" name="editProfile.form" ng-submit="editProfile.updateProfile()">
 
       <div class="row"> 
       
         <img class="col m4" style="width: 140px;height:140px; border-radius: 20px; padding: 0;"src="github_pic.jpg">
 
-        <div class="col m8">
+        <div class="col m6">
 
-          <p>@{{ editProfile.username }}</p>
-          <p>Location</p>
+          <h4>@{{ editProfile.username }}</h4>
+          <h5>Location</h5>
           <input type="text" ng-model="editProfile.location"  placeholder="Where are you based?"><br>
           <!-- <input type="text" ng-model="editProfile.about" placeholder="Tell us about yourself"><br>   --> 
           
@@ -22,17 +22,40 @@
       <div class="row">
 
         <p>About</p>
-        <input type="text" ng-model="editProfile.about" placeholder="Where are you based?">
-        <button class="waves-effect waves-light btn" type="submit">Update!</button><br>
+        <!-- <input type="text" ng-model="editProfile.about" placeholder="Where are you based?"> -->
+        <textarea rows="2" cols="20" wrap="hard" placeholder="Where are you based?">{{ editProfile.about }}</textarea><br>
+        <button type="submit">Update!</button><br>
 
       </div>
       <!-- <p>{{ editProfile.message }}</p> -->
     </form>
     
-    <div class="user-photos-container col m6 valign-wrapper">
-      <ul class="user-photos" ng-repeat="path in editProfile.photos">
-        <li><img class="user-photo" ng-src="{{ path }}"/></li>
+    <div class="user-photos-container col m7">
+      <ul class="user-photos">
+        <li ng-repeat="path in editProfile.photos">
+          <img class="photo" ng-src="{{ path }}"/>
+        </li>
       </ul>
+
+      <div class="row">
+        Add a modal button
+        <!-- <a class="waves-effect waves-light btn modal-trigger" href="#modal1">
+          Add
+        </a>
+
+         Modal Structure -->
+        <!-- <div id="modal1" class="modal">
+          <div class="modal-content">
+            <h4>Modal Header</h4>
+            <p>A bunch of text</p>
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+          </div>
+        </div> --> 
+
+
+      </div>
     </div>
 
   </div>
@@ -55,9 +78,9 @@
       <form class="tag-form" name="editProfile.tagForm" ng-submit="editProfile.addTag()">
           <input type="text" ng-model="editProfile.newTag" placeholder="Add a new tag">
           <!-- <button class="waves-effect waves-light btn" type="submit">Add</button> -->
-          <button type="submit" class="btn-floating btn-small waves-effect waves-light red">
+          <a ng-click="editProfile.addTag()" class="btn-floating btn-small waves-effect waves-light red">
             <i class="material-icons">add</i>
-          </button>
+          </a>
 
       </form>
 
@@ -65,18 +88,15 @@
 
     <div class="col m6 valign-wrapper">
       <div class="follow-container col m6">
-        <p>Followers</p>
+        <span class="follow-header">Followers</span>
         <ul class="follow">
           <li ng-repeat="follower in editProfile.followers">
             <span> {{ follower }} </span>
-            <a ng-click="editProfile.removeFollower(follower)" class="remove-item">
-              <i class="tiny material-icons">clear</i>
-            </a>
           </li>
         </ul>
       </div>
       <div class="follow-container col m6">
-        <p>Following</p>
+        <span class="follow-header">Following</span>
         <ul class="follow">
           <li ng-repeat="following in editProfile.following">
             <span> {{ following }} </span>
