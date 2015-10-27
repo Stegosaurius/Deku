@@ -16,7 +16,8 @@
       signout: signout,
       signup: signup,
       getFollowers: getFollowers,
-      addFollower: addFollower,
+      getFollowees: getFollowees,
+      follow: follow,
       unfollow: unfollow,
       getAvatar: getAvatar,
       getProfile: getProfile,
@@ -73,7 +74,7 @@
 
     // retrieve followers AND following lists 
     function getFollowers (username) {
-      return $http.get('/follow/' + username)
+      return $http.get('/follow/followers/' + username)
         .then(function successCallback(res) {
           return res.data;
         }, function errorCallback(res) {
@@ -82,7 +83,7 @@
     }
 
     function getFollowees (username) {
-      return $http.get('/follow/' + username)
+      return $http.get('/follow/followees' + username)
         .then(function successCallback(res) {
           return res.data;
         }, function errorCallback(res) {

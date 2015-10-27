@@ -34,7 +34,7 @@
     vm.addTag = addTag;
     vm.removeTag = removeTag;
     // vm.removeFollower = removeFollower;
-    vm.removeFollowing = removeFollowing;
+    vm.unfollow = unfollow;
     vm.updateAvatar = updateAvatar;
 
     //Invoke get profile to prepopulate our view model with 
@@ -83,8 +83,11 @@
     }
 
     //Remove someone the user is following.
-    function removeFollowing (following) {
+    function unfollow (following) {
       vm.following.splice(vm.following.indexOf(following), 1);
+      User.unfollow(getID(), following);
+      getFollowers();
+      //OR just remove the follower from the view model
     }
 
     //Get current profile picture(avatar)

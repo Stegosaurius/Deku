@@ -58,7 +58,7 @@
 
     // make the active user a follower of this profile's user
     function follow() {
-
+      
     }
 
     // return active user's ID
