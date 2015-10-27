@@ -18,8 +18,8 @@ CREATE TABLE `Users` (
 );
 
 CREATE TABLE `Followers` (
-	`user_id` int NOT NULL,
-	`follower_id` int NOT NULL
+	`follower_id` int NOT NULL,
+	`followee_id` int NOT NULL
 );
 
 CREATE TABLE `Messages` (
