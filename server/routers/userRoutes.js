@@ -45,5 +45,6 @@ module.exports = function (app, passport) {
   app.post('/users/photos/path/:id', userController.addPhotoURL)
 
   app.delete('/users/photos/:id', userController.deletePhoto);
+
   
 }

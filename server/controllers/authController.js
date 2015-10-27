@@ -69,6 +69,17 @@ module.exports = {
 
 
     });
+  },
+
+  deleteAccount: function (req, res) {
+    User.deleteAccount(req.params.userID, function (err, result) {
+      if (err) {
+        console.error(err);
+        res.status(500).end();
+      } else {
+        res.status(204).end();
+      }
+    })
   }
 
 

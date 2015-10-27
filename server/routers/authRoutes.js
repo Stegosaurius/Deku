@@ -23,6 +23,8 @@ module.exports = function (app, passport) {
 	  res.redirect('/');
 	});
 
+  app.delete('/:userID', authController.deleteAccount);
+
 	// =====================================
 	// FACEBOOK ROUTES =====================
 	// =====================================
