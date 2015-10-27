@@ -137,7 +137,6 @@
     function removeTag (tag) {
       var user_id = getID();
       User.removeTag(tag.id, user_id);
-      // vm.tags.splice(vm.tags.indexOf(tag), 1);
       getTags();
     }
 

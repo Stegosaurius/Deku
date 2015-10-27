@@ -10,13 +10,11 @@ module.exports = {
         console.error(err);
         res.status(500).end();
       } else {
-        console.log(followee);
         Follower.getFollowers(followee[0].id, function (err, followers) {
           if (err) {
             console.error(err);
             res.status(500).send(err);
           } else {
-            console.log(followers);
             res.status(200).json(followers);
           }
         });
@@ -31,13 +29,11 @@ module.exports = {
         console.error(err);
         res.status(500).end();
       } else {
-        console.log(follower);
         Follower.getFollowees(follower[0].id, function (err, followees) {
           if (err) {
             console.error(err);
             res.status(500).send(err);
           } else {
-            console.log(followees);
             res.status(200).json(followees);
           }
         });
