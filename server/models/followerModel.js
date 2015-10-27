@@ -4,20 +4,32 @@ var bcrypt = require('bcrypt-nodejs');
 
 module.exports = {
 
-  getFollowers: function (username, callback) {
-    db.query('select u.username, u.id from users u inner join followers f on (f.follower_id = u.id) where u.username = ?',
-      [username],
-      function (err, followers) {
+  // those that the user is following
+  getFollowees: function (followerID, callback) {
+    db.query('select u.username, u.id from users u inner join followers f on where f.follower_id = ?',
+      [followerID],
+      function (err, followees) {
         if (err) {
           callback(err);
         } else {
-          callback(null, followers);
+          callback(null, followees);
         }
     });
   },
 
-  addFollower: function (userID, followerID, callback) {
-    db.query('insert into followers (user_id, follower_id) values (?, ?)', [userID, followerID], function (err, res) {
+  // those that are following the user
+  getFollowers: function (followeeID, callback) {
+    db.query('select u.username, u.id from users u inner join followers f where f.followee_id = ?', [followeeID], function (err, followers) {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, followers);
+      }
+    })
+  },
+
+  follow: function (followerID, followeeID, callback) {
+    db.query('insert into followers (follower_id, followee_id) values (?, ?)', [followerID, followeeID], function (err, res) {
       if (err) {
         callback(err);
       } else {
@@ -26,8 +38,8 @@ module.exports = {
     });
   },
 
-  deleteFollower: function (userID, followerID, callback) {
-    db.query('delete from followers where user_id = ? and follower_id = ?', [userID, followerID], function (err, res) {
+  unfollow: function (followerID, followeeID, callback) {
+    db.query('delete from followers where follower_id = ? and followee_id = ?', [followerID, followeeID], function (err, res) {
       if (err) {
         callback(err);
       } else {
