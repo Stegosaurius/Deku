@@ -51,7 +51,7 @@ html {
 }
 
 .main {
-  margin: 0 2%;
+  margin: 0 4%;
 }
 
 ul {
@@ -249,7 +249,25 @@ ul {
     padding-bottom: .3rem;
   }
 
+  .user-photos-container {
+    width: 40rem;
+    overflow-x: scroll;
+  }
+
+  .user-photos-container ul {
+    width: 100rem;
+  }
+
+  .user-photos-container li {
+    display: inline;
+  }
+
+  .photo {
+    height: 15rem;
+  }
+
   .about {
+    font-size: 1.1rem;
     margin-bottom: .5rem;
   }
 
@@ -257,8 +275,7 @@ ul {
     display: inline-block;
     margin: .5rem 2rem .5rem 0;
     padding: .2rem 1rem;
-    color: $white;
-    background-color: $grey;
+    background-color: $lightGrey;
     -webkit-transition: box-shadow .2s;
     transition: box-shadow .2s;
   }
@@ -268,12 +285,21 @@ ul {
     cursor: pointer;
   }
 
+  .statusForm {
+    padding: .3rem .1rem .3rem .3rem;
+    margin-top: 1.5rem;
+    border-radius: 2px;
+    background-color: $lightGrey;
+  }
+
   input {
     width: calc(100% - 74px);
     height: 1.6rem;
     padding: .2rem;
     margin: 0;
-    color: $grey;
+    // border: 1px solid $grey;
+    color: $darkGrey;
+    background-color: $white;
   }
 
   .status button {
@@ -284,6 +310,7 @@ ul {
   }
 
   .statusInfo {
+    padding-right: 0;
     text-align: right;
   }
 
@@ -295,12 +322,17 @@ ul {
   }
 
   .bottom-left {
+    padding-right: 5rem;
     border-right: 1px solid $darkGreen;
+  }
+
+  .bottom-right {
+    padding-left: 3rem;
   }
 
   .follow a {
     display: inline-block;
-    margin-top: 1rem;
+    margin-top: .5rem;
     font-size: 1.2rem;
     color: $lightBlue;
 

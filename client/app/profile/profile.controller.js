@@ -20,6 +20,9 @@
     vm.followees = [];
     vm.followers = [];
     vm.location = '';
+    vm.photos = ['http://www.mnlga.org/slider/rw4Yqd0POkqMUqg.jpg',
+                 'http://www.mafc.com/blog/wp-content/uploads/2014/07/Garden-Greenhouse-108.jpg',
+                 'http://www.sustainablenantucket.org/wp-content/uploads/2014/03/green_house_77.jpg'];
     vm.recentThreadNames = [];
     vm.recentThreads = {};
     vm.statuses = [];
