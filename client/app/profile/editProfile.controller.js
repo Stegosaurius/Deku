@@ -13,14 +13,14 @@
 
     vm.about = '';
     vm.avatar = '';
-    // vm.followers = '';
-    // vm.following = '';
-    vm.followers =['john', 'edgar', 'beasta', 'sam', 'watson', 'fred', 'smithy', 'johnson', 'patty', 'ron artest', 'junior'];
-    vm.following =['john', 'edgar', 'beasta', 'elon musk', 'bubba', 'gump', 'shrimp', 'fred', 'smithy', 'johnson', 'patty', 'ron artest', 'junior'];
+    vm.followers = [];
+    vm.followees = [];
     vm.location = '';
     vm.tags = [];
-    // vm.tags = ['tomatos', 'aquaponics', 'kale', 'spruce', 'beans']
     vm.username = $window.localStorage.username;
+    // vm.followers =['john', 'edgar', 'beasta', 'sam', 'watson', 'fred', 'smithy', 'johnson', 'patty', 'ron artest', 'junior'];
+    // vm.following =['john', 'edgar', 'beasta', 'elon musk', 'bubba', 'gump', 'shrimp', 'fred', 'smithy', 'johnson', 'patty', 'ron artest', 'junior'];
+    // vm.tags = ['tomatos', 'aquaponics', 'kale', 'spruce', 'beans']
     // vm.photos = [];
 
     vm.photos = ['http://www.mnlga.org/slider/rw4Yqd0POkqMUqg.jpg',
@@ -42,7 +42,7 @@
     //be complete when we send it to the database.
     getProfile();
     getTags();
-    //getFollowers();
+    getFollowers();
     //getAvatar();
 
     // return active user's ID
@@ -73,20 +73,38 @@
         });
     }
 
-    //Get all of the current user's followers
-    function getFollowers () {
+    function getFollowers() {
       User.getFollowers(vm.username)
-        .then(function (data) {
-          // vm.followers = data;
+        .then(function(data) {
+          console.log('follower data  ', data);
+          for (var i = 0; i < data.length; i++) {
+            vm.followers.push(data[i].username);
+          }
+        });
+
+      User.getFollowees(vm.username)
+        .then(function(data) {
+          console.log('followee data  ', data);
+          for (var i = 0; i < data.length; i++) {
+            vm.followees.push(data[i].username);
+          }
         });
     }
 
-    function getFollowees () {
-      User.getFollowees(vm.username)
-        .then(function (data) {
-          vm.followees = data;
-        })
-    }
+    //Get all of the current user's followers
+    // function getFollowers () {
+    //   User.getFollowers(vm.username)
+    //     .then(function (data) {
+    //       // vm.followers = data;
+    //     });
+    // }
+
+    // function getFollowees () {
+    //   User.getFollowees(vm.username)
+    //     .then(function (data) {
+    //       vm.followees = data;
+    //     })
+    // }
 
     //Remove someone the user is following.
     function unfollow (following) {
