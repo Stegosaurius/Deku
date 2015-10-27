@@ -23,7 +23,7 @@
 
         <p>About</p>
         <!-- <input type="text" ng-model="editProfile.about" placeholder="Where are you based?"> -->
-        <textarea rows="2" cols="20" wrap="hard" placeholder="Where are you based?">{{ editProfile.about }}</textarea><br>
+        <textarea rows="2" cols="20" wrap="hard" ng-model="editProfile.about" placeholder="Where are you based?">{{ editProfile.about }}</textarea><br>
         <button type="submit">Update!</button><br>
 
       </div>
@@ -68,8 +68,8 @@
 
       <ul class="tags">
         <li class="tag" ng-repeat="tag in editProfile.tags">
-          <span>{{ tag }}</span>
-          <a class="remove-item" href="#">
+          <span>{{ tag.tag }}</span>
+          <a ng-click="editProfile.removeTag(tag)" class="remove-item">
             <i class="tiny material-icons">clear</i>
           </a>
         </li>

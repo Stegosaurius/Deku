@@ -11,17 +11,21 @@
     var services = {
       addStatus: addStatus,
       deleteStatus: deleteStatus,
+      getStatuses: getStatuses,
       signin: signin,
       signout: signout,
       signup: signup,
       getFollowers: getFollowers,
+      getFollowees: getFollowees,
+      follow: follow,
+      unfollow: unfollow,
       getAvatar: getAvatar,
       getProfile: getProfile,
+      updateProfile: updateProfile,
       getRecentThreads: getRecentThreads,
-      getStatuses: getStatuses,
       getTags: getTags,
       addTag: addTag,
-      updateProfile: updateProfile
+      removeTag: removeTag
     };
 
     return services;
@@ -69,13 +73,40 @@
     }
 
     // retrieve followers AND following lists 
-    function getFollowers(username) {
-      return $http.get('/follower/' + username)
+    function getFollowers (username) {
+      return $http.get('/follow/followers/' + username)
         .then(function successCallback(res) {
           return res.data;
         }, function errorCallback(res) {
           console.log('Error retrieving followers');
         });
+    }
+
+    function getFollowees (username) {
+      return $http.get('/follow/followees' + username)
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log("Error retrieving followees");
+        })
+    }
+
+    function follow (followerID, followeeName) {
+      return $http.post('/follow/' + followerID + '/' + followeeName)
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log("Error adding follower");
+        });
+    }
+
+    function unfollow (followerID, followeeName) {
+      return $http.delete('/follow/' + followerID + '/' + followeeName) 
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log("Error deleting follower");
+        })
     }
 
     // retrieve a user's profile photo
@@ -137,9 +168,18 @@
         });
     }
 
+    function removeTag(tag_id, user_id) {
+      return $http.delete('/users/tags/' + tag_id + '/' + user_id)
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log("Error deleting tag");
+        });
+    }
+
     // update an existing user's profile info
-    function updateProfile(data) {
-      var url = '/users/' + $window.localStorage.username;
+    function updateProfile(data, id) {
+      var url = '/users/' + id;
       return $http.put(url, data)
         .then(function successCallback(res) {
           return res.data;
