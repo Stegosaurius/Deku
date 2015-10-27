@@ -7,7 +7,7 @@ module.exports = {
 
   getStatuses: function (username, callback) {
       db.query('select s.id, s.user_id, u.username, s.status, s.timestamp, s.vote_tally from statuses s \
-        inner join users u where u.username = ?', [username], function (err, statuses) {
+        inner join users u where u.username = ? and u.id = s.user_id', [username], function (err, statuses) {
         if (err) {
           callback(err, null);
         } else {
