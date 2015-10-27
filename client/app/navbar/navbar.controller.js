@@ -11,13 +11,18 @@
     // (https://github.com/johnpapa/angular-styleguide#controlleras-with-vm)
     var vm = this;
 
+    vm.getActiveProfile = getActiveProfile;
+    vm.notifications = ['Beasta is now following you',
+                        'shadedprofit is now following you'];
+    vm.signout = signout;
     vm.username = $window.localStorage.username;
 
-    vm.getActiveProfile = getActiveProfile;
-    vm.notifications = [];
-    // show notification nav icon if there are notifications
-    // vm.showNotifications = vm.notifications.length;
-    vm.signout = signout;
+    // options for notification dropdown
+    angular.element('.dropdown-button').dropdown({
+      constrain_width: false,
+      hover: true,
+      belowOrigin: true
+    });
 
     // on mobile-sized screen, make the nav bar appear on menu icon click
     angular.element('.button-collapse').sideNav({
