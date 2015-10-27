@@ -1,12 +1,14 @@
 <div class="editProfile section">
 
-  <div class="row z-depth-1">
+  <div class="row z-depth-1 user-meta">
 
     <form class="col m5" name="editProfile.form" ng-submit="editProfile.updateProfile()">
 
       <div class="row"> 
       
-        <img class="col m4" style="width: 140px;height:140px; border-radius: 20px; padding: 0;"src="github_pic.jpg">
+        <img class="col m4 avatar" style="width: 140px;height:140px; border-radius: 20px; padding: 0;"src="github_pic.jpg">
+
+        <button class="update-avatar">Update</button>
 
         <div class="col m6">
 
@@ -34,6 +36,9 @@
       <ul class="user-photos">
         <li ng-repeat="path in editProfile.photos">
           <img class="photo" ng-src="{{ path }}"/>
+          <a class="btn-floating btn-small waves-effect waves-light">
+            <i class="material-icons remove-photo">clear</i>
+          </a>
         </li>
       </ul>
 
@@ -78,8 +83,8 @@
       <form class="tag-form" name="editProfile.tagForm" ng-submit="editProfile.addTag()">
           <input type="text" ng-model="editProfile.newTag" placeholder="Add a new tag">
           <!-- <button class="waves-effect waves-light btn" type="submit">Add</button> -->
-          <a ng-click="editProfile.addTag()" class="btn-floating btn-small waves-effect waves-light red">
-            <i class="material-icons">add</i>
+          <a ng-click="editProfile.addTag()" class="btn-floating btn-small waves-effect waves-light">
+            <i class="material-icons add-tag">add</i>
           </a>
 
       </form>
