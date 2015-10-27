@@ -116,12 +116,18 @@
     function getFollowers() {
       User.getFollowers(vm.username)
         .then(function(data) {
-          vm.followers = data.followers;
+          console.log('follower data  ', data);
+          for (var i = 0; i < data.length; i++) {
+            vm.followers.push(data[i].username);
+          }
         });
 
       User.getFollowees(vm.username)
         .then(function(data) {
-          vm.followees = data.followees;
+          console.log('followee data  ', data);
+          for (var i = 0; i < data.length; i++) {
+            vm.followees.push(data[i].username);
+          }
         });
     }
 

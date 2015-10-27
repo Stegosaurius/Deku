@@ -6,7 +6,7 @@ module.exports = {
 
   // those that the user is following
   getFollowees: function (followerID, callback) {
-    db.query('select u.username, u.id from users u inner join followers f on where f.follower_id = ?',
+    db.query('select u.username, u.id from users u inner join followers f where f.follower_id = ? and u.id = f.followee_id',
       [followerID],
       function (err, followees) {
         if (err) {
@@ -19,7 +19,7 @@ module.exports = {
 
   // those that are following the user
   getFollowers: function (followeeID, callback) {
-    db.query('select u.username, u.id from users u inner join followers f where f.followee_id = ?', [followeeID], function (err, followers) {
+    db.query('select u.username, u.id from users u inner join followers f where f.followee_id = ? and u.id = f.follower_id', [followeeID], function (err, followers) {
       if (err) {
         callback(err);
       } else {

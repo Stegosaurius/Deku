@@ -83,7 +83,7 @@
     }
 
     function getFollowees (username) {
-      return $http.get('/follow/followees' + username)
+      return $http.get('/follow/followees/' + username)
         .then(function successCallback(res) {
           return res.data;
         }, function errorCallback(res) {

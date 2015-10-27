@@ -13,14 +13,14 @@
 
     vm.about = '';
     vm.avatar = '';
-    // vm.followers = '';
-    // vm.following = '';
-    vm.followers =['john', 'edgar', 'beasta', 'sam', 'watson', 'fred', 'smithy', 'johnson', 'patty', 'ron artest', 'junior'];
-    vm.following =['john', 'edgar', 'beasta', 'elon musk', 'bubba', 'gump', 'shrimp', 'fred', 'smithy', 'johnson', 'patty', 'ron artest', 'junior'];
+    vm.followers = [];
+    vm.followees = [];
     vm.location = '';
     vm.tags = [];
-    // vm.tags = ['tomatos', 'aquaponics', 'kale', 'spruce', 'beans']
     vm.username = $window.localStorage.username;
+    // vm.followers =['john', 'edgar', 'beasta', 'sam', 'watson', 'fred', 'smithy', 'johnson', 'patty', 'ron artest', 'junior'];
+    // vm.following =['john', 'edgar', 'beasta', 'elon musk', 'bubba', 'gump', 'shrimp', 'fred', 'smithy', 'johnson', 'patty', 'ron artest', 'junior'];
+    // vm.tags = ['tomatos', 'aquaponics', 'kale', 'spruce', 'beans']
     // vm.photos = [];
 
     vm.photos = ['http://www.mnlga.org/slider/rw4Yqd0POkqMUqg.jpg',
@@ -33,7 +33,6 @@
     vm.updateProfile = updateProfile;
     vm.addTag = addTag;
     vm.removeTag = removeTag;
-    // vm.removeFollower = removeFollower;
     vm.unfollow = unfollow;
     vm.updateAvatar = updateAvatar;
 
@@ -42,7 +41,7 @@
     //be complete when we send it to the database.
     getProfile();
     getTags();
-    //getFollowers();
+    getFollowers();
     //getAvatar();
 
     // return active user's ID
@@ -73,21 +72,30 @@
         });
     }
 
-    //Get all of the current user's followers
-    function getFollowers () {
+    function getFollowers() {
       User.getFollowers(vm.username)
-        .then(function (data) {
-          // vm.followers = data.followers || ['john', 'edgar', 'beasta', 'john', 'edgar', 'beasta','john', 'edgar', 'beasta'];
-          // vm.following = data.following || ['john', 'edgar', 'beasta', 'elon musk', 'john', 'edgar', 'beasta', 'john', 'edgar', 'beasta'];
+        .then(function(data) {
+          vm.followers = [];
+          for (var i = 0; i < data.length; i++) {
+            vm.followers.push(data[i].username);
+          }
+        });
+
+      User.getFollowees(vm.username)
+        .then(function(data) {
+          vm.followees = [];
+          for (var i = 0; i < data.length; i++) {
+            vm.followees.push(data[i].username);
+          }
         });
     }
 
     //Remove someone the user is following.
-    function unfollow (following) {
-      vm.following.splice(vm.following.indexOf(following), 1);
-      User.unfollow(getID(), following);
-      getFollowers();
-      //OR just remove the follower from the view model
+    function unfollow (followee) {
+      User.unfollow(getID(), followee)
+        .then(function (data) {
+          getFollowers();
+        })
     }
 
     //Get current profile picture(avatar)
@@ -128,9 +136,7 @@
     //Remove a tag when user clicks x on a particular tag item
     function removeTag (tag) {
       var user_id = getID();
-      console.log(tag.id, user_id);
       User.removeTag(tag.id, user_id);
-      // vm.tags.splice(vm.tags.indexOf(tag), 1);
       getTags();
     }
 
