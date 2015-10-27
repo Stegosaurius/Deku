@@ -35,9 +35,15 @@
 
       <h5>Recent Updates</h5>
       <ul class="statuses">
-        <li class="status row valign-wrapper" ng-repeat="status in profile.statuses">
-          <button class="removeStatus col s1 valign" ng-click="profile.deleteStatus(status)">X</button>
-          <div class="col s8">{{ status }}</div>
+        <li class="status row" ng-repeat="status in profile.statuses">
+          <div class="col s9">
+            {{ status }}
+          </div>
+          <div class="statusInfo col s3">
+            <button ng-click="profile.deleteStatus(status)">
+              <i class="material-icons">more_vert</i>
+            </button>
+          </div>
         </li>
       </ul>
     </div>
@@ -45,7 +51,7 @@
     <div class="col s4">
       <div class="follow row">
         <div class="col s6 center-align">
-          <a href="#">Following <span>{{ profile.following.length }}</span></a>
+          <a href="#">Following <span>{{ profile.followees.length }}</span></a>
         </div>
         <div class="col s6 center-align">
           <a href="#">Followers <span>{{ profile.followers.length }}</span></a>

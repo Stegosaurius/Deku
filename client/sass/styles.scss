@@ -262,12 +262,14 @@ ul {
   }
 
   .status button {
-    width: 20px !important;
     background-color: $mainBackground;
     color: $darkGrey;
     padding: 0;
     box-shadow: none;
-    display: none;
+  }
+
+  .statusInfo {
+    text-align: right;
   }
 
   li.status {

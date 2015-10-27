@@ -17,8 +17,8 @@
     vm.avatar = '';
     vm.deleteStatus = deleteStatus;
     vm.follow = follow;
+    vm.followees = [];
     vm.followers = [];
-    vm.following = [];
     vm.location = '';
     vm.recentThreadNames = [];
     vm.recentThreads = {};
@@ -58,7 +58,7 @@
 
     // make the active user a follower of this profile's user
     function follow() {
-      
+      User.follow(getID(), vm.username);
     }
 
     // return active user's ID
@@ -80,7 +80,7 @@
           vm.location = data.location || 'Where are you?';
           getTags();
           getStatuses();
-          // getFollowers();
+          getFollowers();
           // getRecentThreads();
           // getAvatar();
         });
@@ -93,7 +93,7 @@
             vm.tags = ['Plants?', 'Methods/Technologies?', 'Interests?', 'Put them here.'];
           } else {
             for (var i = 0; i < tags.length; i++) {
-              vm.tags.push(tags[i]);
+              vm.tags.push(tags[i].tag);
             }
           }
         });
@@ -114,7 +114,11 @@
       User.getFollowers(vm.username)
         .then(function(data) {
           vm.followers = data.followers;
-          vm.following = data.following;
+        });
+
+      User.getFollowees(vm.username)
+        .then(function(data) {
+          vm.followees = data.followees;
         });
     }
 
