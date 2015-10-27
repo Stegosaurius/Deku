@@ -27,7 +27,8 @@ module.exports = function(grunt) {
           "client/lib/angular-jwt/dist/angular-jwt.min.js",
           "client/lib/keen-js/dist/keen.min.js",
           "client/lib/jquery-knob/dist/jquery.knob.min.js",
-          "client/lib/Materialize/dist/js/materialize.min.js"
+          "client/lib/Materialize/dist/js/materialize.min.js",
+          "client/lib/angular-materialize/src/angular-materialize.js"
         ],
         dest: 'client/dist/dependencies.min.js'
       }
