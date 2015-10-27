@@ -19,32 +19,33 @@ var mysql = require('mysql');
 var request = require('request');
 var expect = require('chai').expect;
 
-xdescribe('Persistent Express Server with functional Database', function () {
+describe('Persistent Express Server with functional Database', function () {
   var dbURL = process.env.DATABASE_URL;
+  var dbConnection;
 
    
 
   beforeEach(function(done) {
     //Create a connection with the database and open it
     if (dbURL) {
-      var dbConnection = mysql.createConnection(dbURL);
+      dbConnection = mysql.createConnection(dbURL);
   } else {
-      var dbConnection = mysql.createConnection({
+      dbConnection = mysql.createConnection({
         host: 'localhost', 
         user: 'root',
         database: 'Deku'
       });
   }
-    connection.connect(function(err) {
+    dbConnection.connect(function(err) {
       if (err) {
-        console.error('error connecting to database',err);
+        console.log('error connecting to database',err);
       } else {
         console.log('Database is connected');
       }
     });
     //Invoke done so mocha knows it can proceed to the test
     done();
-  })
+  });
 
   afterEach(function() {
     //close the connection after each test
@@ -54,11 +55,33 @@ xdescribe('Persistent Express Server with functional Database', function () {
   describe('User authentication requirements', function () {
 
     it('Should sign up new users using local authentication', function (done) {
-      //Make a request
+      console.log('making a requst to sign up new user');
+      request({ method:'POST',
+                uri:'http://localhost:3000/auth/signup',
+                json: {
+                  "username":"John1234",
+                  "password":"Smith"
+                }
+      }, function(){
+        console.log('looking up user "John" in database');
+        var username = 'John1234';
+        var password = 'Smith';
+        dbConnection.query('select id, username, password, email, scoped_key, about, location from Users where username = ?', [username], function (err, user) {
+          if (err) {
+            console.log('dbConnection error trying to retrieve user John',err);
+          } else {
+            console.log('callback for dbconnection');
+            expect(user[0].username).to.equal('John1234');
+            done(); 
+          }
+        });    
+    });
     });
 
     it('Should sign up new users using FB authentication', function (done) {
       //Make a request
+      console.log('should sign up new fb blah blahA');
+      done();
     });
 
     it('Should sign up new users using Google authentication', function (done) {
@@ -103,7 +126,7 @@ xdescribe('Persistent Express Server with functional Database', function () {
       //Make a request
     });
 
-    it('Should fetch the titles of all existing threads',   (done) {
+    it('Should fetch the titles of all existing threads', function(done) {
       //Make a request
     });
 
@@ -117,7 +140,7 @@ xdescribe('Persistent Express Server with functional Database', function () {
 
     it('Should allow a user to follow another user', function (done) {
 
-    })
+    });
 
   });
 
