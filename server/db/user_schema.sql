@@ -81,9 +81,9 @@ CREATE TABLE `Photos` (
 	PRIMARY KEY (`id`)
 );
 
-ALTER TABLE `Followers` ADD CONSTRAINT `Followers_fk0` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
+ALTER TABLE `Followers` ADD CONSTRAINT `Followers_fk0` FOREIGN KEY (`follower_id`) REFERENCES `Users`(`id`);
 
-ALTER TABLE `Followers` ADD CONSTRAINT `Followers_fk1` FOREIGN KEY (`follower_id`) REFERENCES `Users`(`id`);
+ALTER TABLE `Followers` ADD CONSTRAINT `Followers_fk1` FOREIGN KEY (`followee_id`) REFERENCES `Users`(`id`);
 
 ALTER TABLE `Messages` ADD CONSTRAINT `Messages_fk0` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
 

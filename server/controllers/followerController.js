@@ -4,23 +4,39 @@ var User = require('../models/userModel.js');
 module.exports = {
 
   getFollowers: function (req, res) {
-    Follower.getFollowers(req.params.username, function (err, followers) {
+    // get followee id first using username
+    User.getUserByName(req.params.username, function (err, followee) {
       if (err) {
         console.error(err);
-        res.status(500).send(err);
+        res.status(500).end();
       } else {
-        res.status(200).json(followers);
+        Follower.getFollowers(followee.id, function (err, followers) {
+          if (err) {
+            console.error(err);
+            res.status(500).send(err);
+          } else {
+            res.status(200).json(followers);
+          }
+        });
       }
     });
   },
 
   getFollowees: function (req, res) {
-    Follower.getFollowees(req.params.username, function (err, followers) {
+    // get followee id first using username
+    User.getUserByName(req.params.username, function (err, follower) {
       if (err) {
         console.error(err);
-        res.status(500).send(err);
+        res.status(500).end();
       } else {
-        res.status(200).json(followers);
+        Follower.getFollowees(follower.id, function (err, followees) {
+          if (err) {
+            console.error(err);
+            res.status(500).send(err);
+          } else {
+            res.status(200).json(followees);
+          }
+        });
       }
     });
   },
