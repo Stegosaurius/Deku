@@ -21,7 +21,7 @@
       getStatuses: getStatuses,
       getTags: getTags,
       addTag: addTag,
-      updateProfile: updateProfile
+      updateProfile: updateProfile,
       removeTag: removeTag
     };
 
@@ -148,8 +148,8 @@
     }
 
     // update an existing user's profile info
-    function updateProfile(data) {
-      var url = '/users/' + $window.localStorage.username;
+    function updateProfile(data, id) {
+      var url = '/users/' + id;
       return $http.put(url, data)
         .then(function successCallback(res) {
           return res.data;

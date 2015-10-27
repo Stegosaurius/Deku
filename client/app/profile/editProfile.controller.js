@@ -53,6 +53,7 @@
     function getProfile () {
       User.getProfile(vm.username)
         .then(function(data) {
+          console.log(data);
           vm.about = data.about;
           vm.location = data.location;
           // vm.tags = data.plants || ['kale', 'spinach', 'chia'];
@@ -62,9 +63,10 @@
 
     //Update location and about sections of profile
     function updateProfile () {
-      User.updateProfile(vm)
+      var id = getID();
+      User.updateProfile(vm, id)
         .then(function(data) {
-          $state.transitionTo('profile');
+          $state.transitionTo('profile', {username : vm.username});
         })
         .catch(function(status) {
           vm.message = 'Bad things';
