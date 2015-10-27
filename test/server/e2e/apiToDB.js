@@ -22,11 +22,8 @@ var expect = require('chai').expect;
 describe('Persistent Express Server with functional Database', function () {
   var dbURL = process.env.DATABASE_URL;
   var dbConnection;
-
-   
-
+  //Create a connection with the database and open it
   beforeEach(function(done) {
-    //Create a connection with the database and open it
     if (dbURL) {
       dbConnection = mysql.createConnection(dbURL);
     } else {
@@ -36,7 +33,6 @@ describe('Persistent Express Server with functional Database', function () {
         database: 'Deku'
       });
     }
-
     dbConnection.connect(function(err) {
       if (err) {
         console.log('error connecting to database',err);
@@ -47,15 +43,18 @@ describe('Persistent Express Server with functional Database', function () {
     //Invoke done so mocha knows it can proceed to the test
     done();
   });
-
+  //close the connection after each test
   afterEach(function() {
-    //close the connection after each test
     dbConnection.end();
   });
 
-
-  describe('User authentication requirements', function () {
-
+  describe('User authentication requirements - Signup', function () {
+    beforeEach(function(done){
+      done();
+    });
+    afterEach(function(done){
+      done();
+    });
     it('Should sign up new users using local authentication', function (done) {
       var password = "Smith";
       var username = "John1234";
@@ -67,7 +66,7 @@ describe('Persistent Express Server with functional Database', function () {
                   "password":password
                 }
       }, function(req,res){
-
+        console.log('here');
         expect( res.statusCode ).to.equal(201);
 
         //add
@@ -90,7 +89,6 @@ describe('Persistent Express Server with functional Database', function () {
       });
     });
 
-
     xit('Should sign up new users using FB authentication', function (done) {
       //Make a request
       done();
@@ -103,6 +101,7 @@ describe('Persistent Express Server with functional Database', function () {
     it('Should reject an attempt to sign up using local authentication with a pre-existing username', function (done) {
       var password = "Smith";
       var username = "John1234";
+      //signup user
       request({ method:'POST',
                 uri:'http://localhost:3000/auth/signup',
                 json: {
@@ -111,9 +110,11 @@ describe('Persistent Express Server with functional Database', function () {
                 }
         },function(req,res){
 
+            //status 201 means user has been added
             expect( res.statusCode ).to.equal(201);
+            //checking to see that a token has been returned
             expect( res.body.token.length ).to.be.above(100);
-
+            //try to signup same user
             request({ method:'POST',
                   uri:'http://localhost:3000/auth/signup',
                   json: {
@@ -122,7 +123,7 @@ describe('Persistent Express Server with functional Database', function () {
                   }
 
               },function(req,res){
-
+                  //status 409 means user has already been signed up
                   expect( res.statusCode ).to.equal(409);
 
                   dbConnection.query('delete from users where username = ?', [username] , function(){
@@ -133,10 +134,47 @@ describe('Persistent Express Server with functional Database', function () {
         }
       );
     });
+  });
 
-    //Test all possible methods of signin
+  describe('User authentication requirements - Signin', function () {
+    var password = "Smith";
+    var username = "John1234";
+    // add user to database beforeEach
+    beforeEach(function(done){
+      //signup user
+      request({ method:'POST',
+                uri:'http://localhost:3000/auth/signup',
+                json: {
+                  "username":username,
+                  "password":password
+                }
+        },function(req,res){
+          done();
+        }
+      );
+    });
+    //delete the user from database afterEach
+    afterEach(function(done){
+      dbConnection.query('delete from users where username = ?', [username] , function(){
+        done();
+      });
+    });
+    // Test all possible methods of signin
     it('Should sign in existing users with local authentication', function (done) {
-      //Make a request
+      request({
+        method:"POST",
+        uri:"http://localhost:3000/auth/signin",
+        json: {
+          "username":username,
+          "password":password
+        }
+      },function(req,res){
+        //status code 200 means successfull signin
+        expect( res.statusCode ).to.equal(200);
+        //check that a token is returned
+        expect( res.body.token.length ).to.be.above(100);
+        done();
+      });
     });
 
     xit('Should sign in existing using FB authentication', function (done) {
@@ -147,10 +185,35 @@ describe('Persistent Express Server with functional Database', function () {
       //Make a request
     });
 
-    xit('Should reject signin when a user inputs an invalid username or password ', function (done) {
-      //Make a request
+    it('Should reject signin when a user inputs an invalid password ', function (done) {
+        request({
+        method:"POST",
+        uri:"http://localhost:3000/auth/signin",
+        json: {
+          "username":username,
+          "password":"sdkfjlaskjdf"
+        }
+        },function(req,res){
+            //422 is invalid password, 404 is username not found, 200 is success
+            expect( res.statusCode ).to.equal(422);
+            done();
+          });
     });
-    
+
+    it('Should reject signin when a user inputs an invalid username ', function (done) {
+      request({
+        method:"POST",
+        uri:"http://localhost:3000/auth/signin",
+        json: {
+          "username":"alsdkjfaslkdf",
+          "password":"sdkfjlaskjdf"
+        }
+      },function(req,res){
+        //422 is invalid password, 404 is username not found, 200 is success
+        expect( res.statusCode ).to.equal(404);
+        done();
+      });
+    });
   });
 
   
@@ -186,18 +249,45 @@ describe('Persistent Express Server with functional Database', function () {
 
   });
 
+  describe('Notifications requirements',function(){
+    it('Should get followees statuses',function(){
+      var password = "Smith";
+      var userID =0912384091288940 ;
+      var username = "John1234";
+      request({ method:'GET',
+                uri:'http://localhost:3000/status/followees/:userID',
+                json: {
+                  "username":username,
+                  "password":password
+                }
+        },function(req,res){
 
+            expect( res.statusCode ).to.equal(201);
+            expect( res.body.token.length ).to.be.above(100);
+
+            request({ method:'POST',
+                  uri:'http://localhost:3000/auth/signup',
+                  json: {
+                    "username":username,
+                    "password":password
+                  }
+
+              },function(req,res){
+
+                  expect( res.statusCode ).to.equal(409);
+
+                  dbConnection.query('delete from users where username = ?', [username] , function(){
+                    done();
+                  });
+
+                });
+        }
+      ); 
+    })
+  });
   //TODO: 
     //Statuses
     //Message votes
     //Status votes
     //Notifications
-
-  
-
-
-
-
-
-
 });
