@@ -17,41 +17,56 @@
         </li>
       </ul>
     </div>
+
+    <div class="user-photos-container col s7">
+      <ul class="user-photos">
+        <li ng-repeat="path in profile.photos">
+          <img class="photo" ng-src="{{ path }}"/>
+        </li>
+      </ul>
+    </div>
   </div>
 
   <div class="row">
-    <div class="col s8 bottom-left">
+    <div class="bottom-left col s8">
       <p class="about">{{ profile.about }}</p>
 
       <ul class="tags">
         <li class="tag" ng-repeat="tag in profile.tags">{{ tag }}</li>
       </ul>
-
-      <form name="profile.statusUpdate" ng-submit="profile.addStatus()" ng-show="profile.activeUser">
-        <h5>What's good in the greenhouse?</h5>
-        <input type="text" name="status" ng-model="profile.status" autocomplete="off" required>
-        <button type="submit">Post</button>
-      </form>
+      <div class="row">
+        <form class="statusForm col s9" name="profile.statusUpdate" ng-submit="profile.addStatus()" ng-show="profile.activeUser">
+          <input type="text" name="status" ng-model="profile.status" autocomplete="off" placeholder="How's the greenhouse?" required>
+          <button type="submit">Post</button>
+        </form>
+      </div>
 
       <h5>Recent Updates</h5>
       <ul class="statuses">
-        <li class="status" ng-repeat="status in profile.statuses">{{ status }}
-          <button ng-click="profile.deleteStatus(status)">X</button>
+        <li class="status row" ng-repeat="status in profile.statuses">
+          <div class="col s9">
+            {{ status }}
+          </div>
+          <div class="statusInfo col s3">
+            <button ng-click="profile.deleteStatus(status)">
+              <i class="material-icons">more_vert</i>
+            </button>
+          </div>
         </li>
       </ul>
     </div>
 
-    <div class="col s4">
+    <div class="bottom-right col s4">
       <div class="follow row">
         <div class="col s6 center-align">
-          <a href="#">Following <span>{{ profile.following.length }}</span></a>
+          <a href="#">Following <span>{{ profile.followees.length }}</span></a>
         </div>
         <div class="col s6 center-align">
           <a href="#">Followers <span>{{ profile.followers.length }}</span></a>
         </div>
       </div>
 
-      <h5>Recent forum activity:</h5>
+      <h5>Recent Forum Activity</h5>
       <ul class="recentThreads">
         <li class="thread" ng-repeat="thread in profile.recentThreadNames">{{ thread }}</li>
       </ul>

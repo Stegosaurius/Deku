@@ -17,9 +17,12 @@
     vm.avatar = '';
     vm.deleteStatus = deleteStatus;
     vm.follow = follow;
+    vm.followees = [];
     vm.followers = [];
-    vm.following = [];
     vm.location = '';
+    vm.photos = ['http://www.mnlga.org/slider/rw4Yqd0POkqMUqg.jpg',
+                 'http://www.mafc.com/blog/wp-content/uploads/2014/07/Garden-Greenhouse-108.jpg',
+                 'http://www.sustainablenantucket.org/wp-content/uploads/2014/03/green_house_77.jpg'];
     vm.recentThreadNames = [];
     vm.recentThreads = {};
     vm.statuses = [];
@@ -58,7 +61,7 @@
 
     // make the active user a follower of this profile's user
     function follow() {
-      
+      User.follow(getID(), vm.username);
     }
 
     // return active user's ID
@@ -80,7 +83,7 @@
           vm.location = data.location || 'Where are you?';
           getTags();
           getStatuses();
-          // getFollowers();
+          getFollowers();
           // getRecentThreads();
           // getAvatar();
         });
@@ -93,7 +96,7 @@
             vm.tags = ['Plants?', 'Methods/Technologies?', 'Interests?', 'Put them here.'];
           } else {
             for (var i = 0; i < tags.length; i++) {
-              vm.tags.push(tags[i]);
+              vm.tags.push(tags[i].tag);
             }
           }
         });
@@ -114,7 +117,11 @@
       User.getFollowers(vm.username)
         .then(function(data) {
           vm.followers = data.followers;
-          vm.following = data.following;
+        });
+
+      User.getFollowees(vm.username)
+        .then(function(data) {
+          vm.followees = data.followees;
         });
     }
 
