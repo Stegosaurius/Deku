@@ -11,17 +11,19 @@
     var services = {
       addStatus: addStatus,
       deleteStatus: deleteStatus,
+      getStatuses: getStatuses,
       signin: signin,
       signout: signout,
       signup: signup,
       getFollowers: getFollowers,
+      addFollower: addFollower,
+      unfollow: unfollow,
       getAvatar: getAvatar,
       getProfile: getProfile,
+      updateProfile: updateProfile,
       getRecentThreads: getRecentThreads,
-      getStatuses: getStatuses,
       getTags: getTags,
       addTag: addTag,
-      updateProfile: updateProfile,
       removeTag: removeTag
     };
 
@@ -70,13 +72,40 @@
     }
 
     // retrieve followers AND following lists 
-    function getFollowers(username) {
-      return $http.get('/follower/' + username)
+    function getFollowers (username) {
+      return $http.get('/follow/' + username)
         .then(function successCallback(res) {
           return res.data;
         }, function errorCallback(res) {
           console.log('Error retrieving followers');
         });
+    }
+
+    function getFollowees (username) {
+      return $http.get('/follow/' + username)
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log("Error retrieving followees");
+        })
+    }
+
+    function follow (followerID, followeeName) {
+      return $http.post('/follow/' + followerID + '/' + followeeName)
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log("Error adding follower");
+        });
+    }
+
+    function unfollow (followerID, followeeName) {
+      return $http.delete('/follow/' + followerID + '/' + followeeName) 
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log("Error deleting follower");
+        })
     }
 
     // retrieve a user's profile photo
