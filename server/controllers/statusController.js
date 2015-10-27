@@ -35,9 +35,8 @@ module.exports = {
     });
   },
 
-  getFriendsStatuses: function (req, res) {
-    var id = req.params.id;
-    Status.getFriendsStatuses(id, function (err, statuses) {
+  getFolloweesStatuses: function (req, res) {
+    Status.getFolloweesStatuses(req.params.userID, function (err, statuses) {
       if (err) {
         console.error(err);
         res.status(404).send(err);

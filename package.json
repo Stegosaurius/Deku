@@ -28,6 +28,7 @@
     "express": "^4.13.3",
     "express-jwt": "^3.1.0",
     "express-session": "^1.11.3",
+    "faker": "^3.0.1",
     "gm": "^1.20.0",
     "jsonwebtoken": "^5.4.0",
     "keen-js": "^3.2.7",
