@@ -35,7 +35,7 @@ module.exports = {
 			} else {
 				var filteredMessages = {
 					count: messages.length,
-					messages: messages.splice(page - 1 * 20, 20)
+					messages: messages.splice((page - 1) * 20, 20)
 				};
 				callback(null, filteredMessages);
 			}
@@ -64,7 +64,7 @@ module.exports = {
 	},
 
 	deleteThread: function (threadID, callback) {
-		db.query('delete from threads where id = ?', [id], function (err, res) {
+		db.query('delete from threads where id = ?', [threadID], function (err, res) {
 			if (err) {
 				callback(err);
 			} else {
