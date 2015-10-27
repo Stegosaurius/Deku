@@ -23,6 +23,7 @@
     "jquery-knob": "jquery-knob#~1.2.11",
     "jquery": "~2.1.4",
     "angular-jwt": "~0.0.9",
-    "Materialize": "materialize#~0.97.1"
+    "Materialize": "materialize#~0.97.1",
+    "angular-materialize": "*"
   }
 }
