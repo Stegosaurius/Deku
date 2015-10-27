@@ -257,6 +257,16 @@ module.exports = {
         callback(null, res);
       }
     });
+  },
+
+  deleteAccount: function (userID, callback) {
+    db.query('delete from users where id = ?', [userID], function (err, res) {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, res);
+      }
+    });
   }
 
 }
