@@ -249,8 +249,23 @@ ul {
     padding-bottom: .3rem;
   }
 
-  .tags {
-    border: 0;
+  .about {
+    margin-bottom: .5rem;
+  }
+
+  .tag {
+    display: inline-block;
+    margin: .5rem 2rem .5rem 0;
+    padding: .2rem 1rem;
+    color: $white;
+    background-color: $grey;
+    -webkit-transition: box-shadow .2s;
+    transition: box-shadow .2s;
+  }
+
+  .tag:hover {
+    @extend .z-depth-1;
+    cursor: pointer;
   }
 
   input {
