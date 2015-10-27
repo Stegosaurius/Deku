@@ -80,14 +80,6 @@
         });
     }
 
-    //Remove a follower when a user clicks the remove
-    //button on a specific followers list item
-    // function removeFollower (follower) {
-    //   //Remove specified follower from the vm.followers
-    //   //list and send to the database to update
-    //   vm.followers.splice(vm.followers.indexOf(follower), 1);
-    // }
-
     //Remove someone the user is following.
     function removeFollowing (following) {
       vm.following.splice(vm.following.indexOf(following), 1);
@@ -113,9 +105,7 @@
       User.getTags(vm.username)
         .then(function (data) {
           console.log(data);
-          for (var i = 0; i < data.length; i++) {
-            vm.tags.push(data[i].tag);
-          }
+          vm.tags = data;
         });
     }
 
@@ -123,18 +113,20 @@
     //server to store the new tag in the database
     function addTag () {
       var id = getID();
-      if (vm.tags.indexOf(vm.newTag) === -1) {
-        vm.tags.push(vm.newTag);
-        User.addTag(vm.newTag, id);
-      } 
+      User.addTag(vm.newTag, id)
+        .then(function successCallback(res) {
+          getTags();
+        });
       vm.newTag='';
-      //Invoke updateTags function
     }
 
     //Remove a tag when user clicks x on a particular tag item
-    function removeTag () {
-      //remove a tag from the vm.tags array and send either specified
-      //tag or the new tags array to the server to update
+    function removeTag (tag) {
+      var user_id = getID();
+      console.log(tag.id, user_id);
+      User.removeTag(tag.id, user_id);
+      // vm.tags.splice(vm.tags.indexOf(tag), 1);
+      getTags();
     }
 
     //Get users greenhouse photos from the server
