@@ -33,7 +33,6 @@
     vm.updateProfile = updateProfile;
     vm.addTag = addTag;
     vm.removeTag = removeTag;
-    // vm.removeFollower = removeFollower;
     vm.unfollow = unfollow;
     vm.updateAvatar = updateAvatar;
 
@@ -76,7 +75,7 @@
     function getFollowers() {
       User.getFollowers(vm.username)
         .then(function(data) {
-          console.log('follower data  ', data);
+          vm.followers = [];
           for (var i = 0; i < data.length; i++) {
             vm.followers.push(data[i].username);
           }
@@ -84,34 +83,19 @@
 
       User.getFollowees(vm.username)
         .then(function(data) {
-          console.log('followee data  ', data);
+          vm.followees = [];
           for (var i = 0; i < data.length; i++) {
             vm.followees.push(data[i].username);
           }
         });
     }
 
-    //Get all of the current user's followers
-    // function getFollowers () {
-    //   User.getFollowers(vm.username)
-    //     .then(function (data) {
-    //       // vm.followers = data;
-    //     });
-    // }
-
-    // function getFollowees () {
-    //   User.getFollowees(vm.username)
-    //     .then(function (data) {
-    //       vm.followees = data;
-    //     })
-    // }
-
     //Remove someone the user is following.
-    function unfollow (following) {
-      vm.following.splice(vm.following.indexOf(following), 1);
-      User.unfollow(getID(), following);
-      getFollowers();
-      //OR just remove the follower from the view model
+    function unfollow (followee) {
+      User.unfollow(getID(), followee)
+        .then(function (data) {
+          getFollowers();
+        })
     }
 
     //Get current profile picture(avatar)
@@ -152,7 +136,6 @@
     //Remove a tag when user clicks x on a particular tag item
     function removeTag (tag) {
       var user_id = getID();
-      console.log(tag.id, user_id);
       User.removeTag(tag.id, user_id);
       // vm.tags.splice(vm.tags.indexOf(tag), 1);
       getTags();

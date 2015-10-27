@@ -65,13 +65,13 @@ module.exports = {
 
   unfollow: function (req, res) {
     // get user id of follower first
-    User.getUserByName(req.params.followeeName, function (err, follower) {
+    User.getUserByName(req.params.followeeName, function (err, followee) {
       if (err) {
         console.error(err);
         res.status(500).end();
       } else {
         // then pass both ids into delete function
-        Follower.unfollow(req.params.id, follower.id, function (err, result) {
+        Follower.unfollow(req.params.followerID, followee[0].id, function (err, result) {
           if (err) {
             console.error(err);
             res.status(500).end();

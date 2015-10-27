@@ -98,9 +98,9 @@
       <div class="follow-container col m6">
         <span class="follow-header">Following</span>
         <ul class="follow">
-          <li ng-repeat="following in editProfile.followees">
-            <span> {{ following }} </span>
-            <a ng-click="editProfile.removeFollowing(following)" class="remove-item">
+          <li ng-repeat="followee in editProfile.followees">
+            <span> {{ followee }} </span>
+            <a ng-click="editProfile.unfollow(followee)" class="remove-item">
               <i class="tiny material-icons">clear</i>
             </a>
           </li>
