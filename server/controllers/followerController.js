@@ -10,11 +10,13 @@ module.exports = {
         console.error(err);
         res.status(500).end();
       } else {
-        Follower.getFollowers(followee.id, function (err, followers) {
+        console.log(followee);
+        Follower.getFollowers(followee[0].id, function (err, followers) {
           if (err) {
             console.error(err);
             res.status(500).send(err);
           } else {
+            console.log(followers);
             res.status(200).json(followers);
           }
         });
@@ -29,11 +31,13 @@ module.exports = {
         console.error(err);
         res.status(500).end();
       } else {
-        Follower.getFollowees(follower.id, function (err, followees) {
+        console.log(follower);
+        Follower.getFollowees(follower[0].id, function (err, followees) {
           if (err) {
             console.error(err);
             res.status(500).send(err);
           } else {
+            console.log(followees);
             res.status(200).json(followees);
           }
         });
@@ -42,12 +46,12 @@ module.exports = {
   },
 
   follow: function (req, res) {
-    User.getUserByName(req.params.followeeName, function (err, follower) {
+    User.getUserByName(req.params.followeeName, function (err, followee) {
       if (err) {
         console.error(err);
         res.status(500).end();
       } else {
-        Follower.addFollower(req.params.userID, follower.id, function (err, follower) {
+        Follower.follow(req.params.followerID, followee[0].id, function (err, follower) {
           if (err) {
             console.error(err);
             res.status(500).end();
@@ -67,7 +71,7 @@ module.exports = {
         res.status(500).end();
       } else {
         // then pass both ids into delete function
-        Follower.deleteFollower(req.params.id, follower.id, function (err, result) {
+        Follower.unfollow(req.params.id, follower.id, function (err, result) {
           if (err) {
             console.error(err);
             res.status(500).end();
