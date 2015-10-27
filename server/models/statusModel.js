@@ -41,10 +41,10 @@ module.exports = {
     });
   },
 
-  getFriendsStatuses: function (id, callback) {
+  getFolloweesStatuses: function (id, callback) {
     db.query('select u.username, s.id, s.status, s.timestamp, s.vote_tally from users u \
-      inner join followers f on (u.id = f.follower_id) \
-      inner join statuses s on (f.follower_id = s.user_id) where u.id = ?', [id], function (err, statuses) {
+      inner join followers f \
+      inner join statuses s where f.follower_id = ? and f.followee_id = s.user_id', [id], function (err, statuses) {
       if (err) {
         callback(err);
       } else {

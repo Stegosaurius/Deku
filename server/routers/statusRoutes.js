@@ -6,7 +6,7 @@ module.exports = function (app) {
   
   app.post('/:id', statusController.updateStatus);
 
-  app.get('/friends/:id', statusController.getFriendsStatuses);
+  app.get('/followees/:userID', statusController.getFolloweesStatuses);
 
   app.delete('/:id', statusController.deleteStatus);
 
