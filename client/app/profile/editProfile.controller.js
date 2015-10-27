@@ -77,9 +77,15 @@
     function getFollowers () {
       User.getFollowers(vm.username)
         .then(function (data) {
-          // vm.followers = data.followers || ['john', 'edgar', 'beasta', 'john', 'edgar', 'beasta','john', 'edgar', 'beasta'];
-          // vm.following = data.following || ['john', 'edgar', 'beasta', 'elon musk', 'john', 'edgar', 'beasta', 'john', 'edgar', 'beasta'];
+          // vm.followers = data;
         });
+    }
+
+    function getFollowees () {
+      User.getFollowees(vm.username)
+        .then(function (data) {
+          vm.followees = data;
+        })
     }
 
     //Remove someone the user is following.
