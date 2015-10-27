@@ -84,8 +84,12 @@ describe('Server side controller testing', function () {
        expect (userController.getPhotos).to.be.a('function');
     });
 
-    it('should have method called addPhoto',function(){
-       expect (userController.addPhoto).to.be.a('function');
+    it('should have method called addPhotoURL',function(){
+       expect (userController.addPhotoURL).to.be.a('function');
+    });
+
+    it('should have method called addPhotoS3',function(){
+       expect (userController.addPhotoS3).to.be.a('function');
     });
 
     it('should have a method called getNotifications', function () {
