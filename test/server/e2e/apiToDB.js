@@ -66,17 +66,19 @@ describe('Persistent Express Server with functional Database', function () {
                   "username":username,
                   "password":password
                 }
-      }, function(){
+      }, function(req,res){
+
+        expect( res.statusCode ).to.equal(201);
 
         //add
         dbConnection.query('select id, username, password, email, scoped_key, about, location from Users where username = ?', 
           [username], function (err, user) {
 
           if (err) {
-            console.log('dbConnection error trying to retrieve user John',err);
+            console.log('dbConnection error trying to retrieve user '+username,err);
           } else {
 
-            expect( user[0].username ).to.equal('John1234');
+            expect( user[0].username ).to.equal(username);
             //remove the new entry from the database
             dbConnection.query('delete from users where username = ?', [username] , function(){
 
