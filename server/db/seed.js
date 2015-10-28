@@ -1,4 +1,5 @@
 // this file will be used to seed our test database with fake data
+// run in terminal using npm seed
 var faker = require('faker');
 var User = require('../models/userModel.js');
 var Status = require('../models/statusModel.js');
