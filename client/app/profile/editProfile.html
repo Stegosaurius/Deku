@@ -1,16 +1,21 @@
 <div class="editProfile section">
 
-  <div class="row z-depth-1">
+  <div class="row z-depth-1 user-meta">
 
     <form class="col m5" name="editProfile.form" ng-submit="editProfile.updateProfile()">
 
       <div class="row"> 
       
-        <img class="col m4" style="width: 140px;height:140px; border-radius: 20px; padding: 0;"src="github_pic.jpg">
+        <div class="col m5 avatar-container">
 
-        <div class="col m6">
+          <img class="avatar responsive-img" src="github_pic.jpg">
+          <button type="button" ng-click="editProfile.updateAvatar()" class="update-avatar">Update</button>
+          
+        </div>
 
-          <h4>@{{ editProfile.username }}</h4>
+        <div class="col m7">
+
+          <h4>{{ editProfile.username }}</h4>
           <h5>Location</h5>
           <input type="text" ng-model="editProfile.location"  placeholder="Where are you based?"><br>
           <!-- <input type="text" ng-model="editProfile.about" placeholder="Tell us about yourself"><br>   --> 
@@ -32,30 +37,37 @@
     
     <div class="user-photos-container col m7">
       <ul class="user-photos">
-        <li ng-repeat="path in editProfile.photos">
-          <img class="photo" ng-src="{{ path }}"/>
+        <li ng-repeat="photo in editProfile.photos">
+          <img class="photo" ng-src="{{ photo.photo }}"/>
+          <a ng-click="editProfile.deletePhoto(photo.id)" class="btn-floating btn-small waves-effect waves-light">
+            <i class="material-icons remove-photo">clear</i>
+          </a>
         </li>
       </ul>
+    </div>
 
-      <div class="row">
-        Add a modal button
-        <!-- <a class="waves-effect waves-light btn modal-trigger" href="#modal1">
-          Add
-        </a>
-
-         Modal Structure -->
-        <!-- <div id="modal1" class="modal">
+    <div class="row">
+      <!-- Modal Trigger -->
+      <div class="col right">
+          <a class="add-photo" href="#demoModal" modal>Add a photo</a>
+      </div>
+      <!-- Modal Structure -->
+      <div id="demoModal" class="modal right">
           <div class="modal-content">
-            <h4>Modal Header</h4>
-            <p>A bunch of text</p>
+              <h4>Add a greenhouse photo!</h4>
+              <p>Or whatever else you see fit</p>
+              <form ng-submit="editProfile.addPhotoByPath()">
+                <input ng-model="editProfile.photoPath" placeholder="write the path to your photo here">
+                <button type="submit" class="modal-close">Upload</button></a>
+              </form>
+
           </div>
           <div class="modal-footer">
-            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+              <!-- <a class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a> -->
           </div>
-        </div> --> 
-
-
       </div>
+
+
     </div>
 
   </div>
@@ -78,8 +90,8 @@
       <form class="tag-form" name="editProfile.tagForm" ng-submit="editProfile.addTag()">
           <input type="text" ng-model="editProfile.newTag" placeholder="Add a new tag">
           <!-- <button class="waves-effect waves-light btn" type="submit">Add</button> -->
-          <a ng-click="editProfile.addTag()" class="btn-floating btn-small waves-effect waves-light red">
-            <i class="material-icons">add</i>
+          <a ng-click="editProfile.addTag()" class="btn-floating btn-small waves-effect waves-light">
+            <i class="material-icons add-tag">add</i>
           </a>
 
       </form>

@@ -18,14 +18,16 @@
     vm.location = '';
     vm.tags = [];
     vm.username = $window.localStorage.username;
+    vm.photoPath = '';
+    vm.photos = [];
+    
     // vm.followers =['john', 'edgar', 'beasta', 'sam', 'watson', 'fred', 'smithy', 'johnson', 'patty', 'ron artest', 'junior'];
     // vm.following =['john', 'edgar', 'beasta', 'elon musk', 'bubba', 'gump', 'shrimp', 'fred', 'smithy', 'johnson', 'patty', 'ron artest', 'junior'];
     // vm.tags = ['tomatos', 'aquaponics', 'kale', 'spruce', 'beans']
-    // vm.photos = [];
 
-    vm.photos = ['http://www.mnlga.org/slider/rw4Yqd0POkqMUqg.jpg',
-                 'http://www.mafc.com/blog/wp-content/uploads/2014/07/Garden-Greenhouse-108.jpg',
-                 'http://www.sustainablenantucket.org/wp-content/uploads/2014/03/green_house_77.jpg'];
+    // vm.photos = ['http://www.mnlga.org/slider/rw4Yqd0POkqMUqg.jpg',
+    //              'http://www.mafc.com/blog/wp-content/uploads/2014/07/Garden-Greenhouse-108.jpg',
+    //              'http://www.sustainablenantucket.org/wp-content/uploads/2014/03/green_house_77.jpg'];
 
 
 
@@ -35,6 +37,8 @@
     vm.removeTag = removeTag;
     vm.unfollow = unfollow;
     vm.updateAvatar = updateAvatar;
+    vm.addPhotoByPath = addPhotoByPath;
+    vm.deletePhoto = deletePhoto;
 
     //Invoke get profile to prepopulate our view model with 
     //existing data for a user. This way the data object will
@@ -42,6 +46,7 @@
     getProfile();
     getTags();
     getFollowers();
+    getPhotos();
     //getAvatar();
 
     // return active user's ID
@@ -141,19 +146,34 @@
     }
 
     //Get users greenhouse photos from the server
-    function getUserPhotos () {
+    function getPhotos () {
+      User.getPhotos(vm.username)
+        .then(function (data) {
+          vm.photos = [];
+          for (var i = 0; i < data.length; i++) {
+            vm.photos.push(data[i]);
+          }
+        })
       //get user photos urls from the server
       //load different urls into src attributes
       //for user images.
     }
 
-    function removeUserPhoto () {
+    function deletePhoto (photoID) {
+      User.deletePhoto(getID(), photoID)
+        .then(function (data) {
+          getPhotos();
+        })
       //Delete user photo from the vm photos url list.
       //Send request to server to delete the specified
       //photo url from the database
     }
 
-    function addUserPhoto () {
+    function addPhotoByPath () {
+      User.addPhotoByPath(getID(), vm.photoPath)
+        .then(function (data) {
+          getPhotos();
+        });
       //2 options
       //Add a url to a photo which will get added to the
       //src of an img tag and sent to the db for storage.

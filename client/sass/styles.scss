@@ -105,8 +105,10 @@ ul {
   .tag-form {
     input {
       margin-top: 20px;
+      margin-right: 15px;
       display: inline-block;
       width: 50%;
+      height: 2.3rem;
     }
     button {
       display: inline-block;
@@ -131,6 +133,19 @@ ul {
 
   .user-photos-container li {
     display: inline;
+    position: relative;
+  }
+
+  .user-photos li a {
+    position: relative;
+    top: -196px;
+    right: 48px;
+    opacity: 0.7;
+    margin-right: -25px;
+  }
+
+  .user-photos li:hover a {
+    opacity: 1;
   }
 
   .photo {
@@ -157,6 +172,7 @@ ul {
     border-bottom: 1px solid $lightGreen;
   }
 
+  
   button {
     @extend .default-button;
   }
@@ -167,7 +183,7 @@ ul {
   
   textarea {
     resize: none;
-    width: 24.1rem;
+    width: 70%;
   }
 
   input, textarea {
@@ -178,6 +194,7 @@ ul {
   input {
     height: 2rem;
     padding-right: 0px;
+    width: 50%;
   }
 
   input:focus, textarea:focus {
@@ -197,6 +214,50 @@ ul {
     cursor: pointer;
   }
 
+  .user-meta {
+    position: relative;
+  }
+
+  .update-avatar {
+    position: absolute;
+    height: 23px;
+    width: 64px;
+    top: 35%;
+    left: 6%;
+    opacity: 0;
+    padding: 0;
+  }
+
+  .update-avatar:hover {
+    opacity: 1;
+  }
+
+  .avatar-container {
+    margin-bottom: 0px;
+  }
+
+  .avatar-container:hover .update-avatar {
+    opacity: 1;
+  }
+
+  .remove-photo {
+    background-color: red;
+  }
+
+  .add-tag {
+    background-color: $lightGreen;
+  }
+
+  .avatar {
+    height: 11rem;
+    border-radius: 5%;
+  }
+
+  .add-photo {
+    margin-right: 30px;
+    margin-top: 24px;
+    @extend .default-button;
+  }
 }
 
 

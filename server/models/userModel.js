@@ -230,7 +230,7 @@ module.exports = {
   },
 
   getPhotos: function (username, callback) {
-    db.query('select photos.photo from photos inner join users on (users.id = photos.user_id) where users.username = ?', [username], function (err, res) {
+    db.query('select photos.photo, photos.id from photos inner join users on (users.id = photos.user_id) where users.username = ?', [username], function (err, res) {
       if (err) {
         callback(err);
       } else {
@@ -249,8 +249,8 @@ module.exports = {
     });
   },
 
-  deletePhoto: function (photo, callback) {
-    db.query('delete from photos where photo = ?', [photo], function (err, res) {
+  deletePhoto: function (photoID, callback) {
+    db.query('delete from photos where photos.id = ?', [photoID], function (err, res) {
       if (err) {
         callback(err);
       } else {

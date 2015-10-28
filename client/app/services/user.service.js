@@ -13,6 +13,9 @@
       signout: signout,
       signup: signup,
       getAvatar: getAvatar,
+      getPhotos: getPhotos,
+      addPhotoByPath: addPhotoByPath,
+      deletePhoto: deletePhoto,
       getFollowers: getFollowers,
       getFollowees: getFollowees,
       follow: follow,
@@ -64,6 +67,33 @@
         }, function errorCallback(res) {
           console.log('Error retrieving avatar');
         });
+    }
+
+    function getPhotos(username) {
+      return $http.get('/users/photos/' + username) 
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log('Error retrieving user photos');
+        })
+    }
+
+    function addPhotoByPath(userID, path) {
+      return $http.post('/users/photos/path/' + userID, { photo: path }) 
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log('Error posting photo by path');
+        });
+    }
+
+    function deletePhoto(userID, photoID) {
+      return $http.delete('/users/photos/' + userID + '/' + photoID)
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log('Error deleting photo');
+        })
     }
 
     // retrieve followers AND following lists 
