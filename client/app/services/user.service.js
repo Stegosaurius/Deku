@@ -13,6 +13,7 @@
       signout: signout,
       signup: signup,
       getAvatar: getAvatar,
+      addPhotoByPath: addPhotoByPath,
       getFollowers: getFollowers,
       getFollowees: getFollowees,
       follow: follow,
@@ -63,6 +64,15 @@
           return res.data.avatarURL;
         }, function errorCallback(res) {
           console.log('Error retrieving avatar');
+        });
+    }
+
+    function addPhotoByPath(userID, path) {
+      return $http.post('/users/photos/path/' + userID, { photo: path }) 
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log('Error posting photo by path');
         });
     }
 

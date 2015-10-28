@@ -36,15 +36,15 @@ module.exports = function (app, passport) {
   app.post('/avatarpath/:id', userController.addAvatarPath);
 
   // Greenhouse photos
-  app.get('/users/photos/:username', userController.getPhotos);
+  app.get('/photos/:username', userController.getPhotos);
 
   // For uploading photos first to S3
-  app.post('/users/photos/aws/:id', userController.addPhotoS3);
+  app.post('/photos/aws/:id', userController.addPhotoS3);
 
   // If photo is stored somewhere else, get path and store in database
-  app.post('/users/photos/path/:id', userController.addPhotoURL)
+  app.post('/photos/path/:id', userController.addPhotoURL)
 
-  app.delete('/users/photos/:id', userController.deletePhoto);
+  app.delete('/photos/:id', userController.deletePhoto);
 
   
 }
