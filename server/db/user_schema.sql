@@ -38,7 +38,7 @@ CREATE TABLE `Threads` (
 	`thread` varchar(250) NOT NULL,
 	`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`last_updated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	`comments_count` int NOT NULL DEFAULT '0',
+	`messages_count` int NOT NULL DEFAULT '0',
 	`vote_tally` int NOT NULL DEFAULT '0',
 	`user_id` int NOT NULL,
 	PRIMARY KEY (`id`)
