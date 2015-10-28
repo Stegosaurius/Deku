@@ -10,8 +10,11 @@ module.exports = function (app) {
   app.get('/:threadID/:page', threadController.getMessagesByPage);
 
   //Route for posting a message to a particular thread
-  app.post('/:id', threadController.addMessagesToThread);
+  app.post('/:userID/:threadID', threadController.addMessagesToThread);
 
   // Pass in the thread ID to be deleted
-  app.delete('/:id', threadController.deleteThread);
+  app.delete('/:threadID', threadController.deleteThread);
+
+  // Delete message from a thread
+  app.delete('/messages/:messageID', threadController.deleteMessage);
 }

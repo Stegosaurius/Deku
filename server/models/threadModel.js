@@ -79,6 +79,16 @@ module.exports = {
 		});
 	},
 
+	deleteMessage: function (messageID, callback) {
+		db.query('delete from messages where id = ?', [messageID], function (err, res) {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, res);
+			}
+		})
+	},
+
 	updateTime: function (threadID, callback) {
 		db.query('update Threads set last_updated = current_timestamp where id = ?', [threadID], function (err, res) {
 			if (err) {

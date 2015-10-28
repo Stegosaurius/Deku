@@ -11,7 +11,7 @@ module.exports = {
 
   //Get all threads
   getThreadsByPage: function (req, res) {
-    Thread.getThreadsByPage(function (err, threads) {
+    Thread.getThreadsByPage(req.params.page, function (err, threads) {
       if (err) {
         //do some error handing
         res.status(500).end();
@@ -35,8 +35,13 @@ module.exports = {
   // write a new message to a particular thread
   // update lastupdated column of that thread
   addMessageToThread: function (req, res) {
-    var id = req.params.id;
-    Thread.addMessageToThread(id, function (err, newMessage) {
+    var data = {
+      userID: req.params.userID,
+      threadID: req.params.threadID,
+      message: req.body.message
+    };
+
+    Thread.addMessageToThread(data, function (err, newMessage) {
       if (err) {
         //Error handling
         res.status(500).end();
@@ -54,7 +59,7 @@ module.exports = {
   },
 
   deleteThread: function (req, res) {
-    Thread.deleteThread(req.params.id, function (err, result) {
+    Thread.deleteThread(req.params.threadID, function (err, result) {
       if (err) {
         console.error(err);
         res.status(500).end();
@@ -62,6 +67,17 @@ module.exports = {
         res.status(204).end();
       }
     });
+  },
+
+  deleteMessage: function (req, res) {
+    Thread.deleteMessage(req.params.messageID, function (err, result) {
+      if (err) {
+        console.error(err);
+        res.status(500).end();
+      } else {
+        res.status(204).end();
+      }
+    })
   }
 
 
