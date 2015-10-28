@@ -8,8 +8,24 @@
       
         <div class="col m5 avatar-container">
 
-          <img class="avatar responsive-img" src="github_pic.jpg">
-          <button type="button" ng-click="editProfile.updateAvatar()" class="update-avatar">Update</button>
+          <img class="avatar responsive-img" src="{{ editProfile.avatar }}">
+
+          <a class="update-avatar" href="#avatarModal" modal>Update</a>
+
+          <!-- Modal Structure -->
+          <div id="avatarModal" class="modal">
+              <div class="modal-content">
+                  <h4>Add a profile picture!</h4>
+                  <input ng-model="editProfile.avatarPath" placeholder="write the path to your avatar here">
+                  <button type="button" ng-click="editProfile.addAvatarPath()" class="modal-close">Upload</button></a>
+
+              </div>
+              <div class="modal-footer">
+                  <!-- <a class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a> -->
+              </div>
+          </div>
+
+          <!-- <button type="button" ng-click="editProfile.updateAvatar()" class="update-avatar">Update</button> -->
           
         </div>
 
