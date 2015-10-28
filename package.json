@@ -6,8 +6,7 @@
   "scripts": {
     "start": "nodemon ./server/server.js",
     "test": "mocha test/server test/server/e2e/apiToDB",
-    "postinstall": "bower install",
-    "seed": "node ./server/db/seed.js"
+    "postinstall": "bower install"
   },
   "repository": {
     "type": "git",

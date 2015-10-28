@@ -11,7 +11,7 @@ CREATE TABLE `Users` (
 	`password` varchar(100),
 	`scoped_key` varchar(250),
 	`about` TEXT,
-	`profile_photo` blob,
+	`profile_photo` varchar(150),
 	`location` varchar(50),
 	`tessel` tinyint NOT NULL DEFAULT '0',
 	PRIMARY KEY (`id`)
