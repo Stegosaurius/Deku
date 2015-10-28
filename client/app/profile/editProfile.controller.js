@@ -45,6 +45,7 @@
     getProfile();
     getTags();
     getFollowers();
+    getPhotos();
     //getAvatar();
 
     // return active user's ID
@@ -144,7 +145,14 @@
     }
 
     //Get users greenhouse photos from the server
-    function getUserPhotos () {
+    function getPhotos () {
+      User.getPhotos(vm.username)
+        .then(function (data) {
+          vm.photos = [];
+          for (var i = 0; i < data.length; i++) {
+            vm.photos.push(data[i].photo);
+          }
+        })
       //get user photos urls from the server
       //load different urls into src attributes
       //for user images.

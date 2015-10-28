@@ -13,6 +13,7 @@
       signout: signout,
       signup: signup,
       getAvatar: getAvatar,
+      getPhotos: getPhotos,
       addPhotoByPath: addPhotoByPath,
       getFollowers: getFollowers,
       getFollowees: getFollowees,
@@ -65,6 +66,15 @@
         }, function errorCallback(res) {
           console.log('Error retrieving avatar');
         });
+    }
+
+    function getPhotos(username) {
+      return $http.get('/users/photos/' + username) 
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log('Error retrieving user photos');
+        })
     }
 
     function addPhotoByPath(userID, path) {
