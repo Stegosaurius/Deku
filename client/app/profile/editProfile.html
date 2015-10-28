@@ -6,13 +6,16 @@
 
       <div class="row"> 
       
-        <img class="col m4 avatar" style="width: 140px;height:140px; border-radius: 20px; padding: 0;"src="github_pic.jpg">
+        <div class="col m5 avatar-container">
 
-        <button class="update-avatar">Update</button>
+          <img class="avatar" src="github_pic.jpg">
+          <button class="update-avatar">Update</button>
+          
+        </div>
 
-        <div class="col m6">
+        <div class="col m7">
 
-          <h4>@{{ editProfile.username }}</h4>
+          <h4>{{ editProfile.username }}</h4>
           <h5>Location</h5>
           <input type="text" ng-model="editProfile.location"  placeholder="Where are you based?"><br>
           <!-- <input type="text" ng-model="editProfile.about" placeholder="Tell us about yourself"><br>   --> 

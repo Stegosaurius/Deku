@@ -141,6 +141,7 @@ ul {
     top: -196px;
     right: 48px;
     opacity: 0.7;
+    margin-right: -25px;
   }
 
   .user-photos li:hover a {
@@ -218,11 +219,20 @@ ul {
 
   .update-avatar {
     position: absolute;
-    height: 30px;
-    width: 80px;
-    top: 37%;
-    left: 4%;
-    opacity: .9;
+    height: 23px;
+    width: 64px;
+    top: 35%;
+    left: 6%;
+    opacity: 0;
+    padding: 0;
+  }
+
+  .update-avatar:hover {
+    opacity: 1;
+  }
+
+  .avatar-container:hover .update-avatar {
+    opacity: 1;
   }
 
   .remove-photo {
@@ -231,6 +241,11 @@ ul {
 
   .add-tag {
     background-color: $lightGreen;
+  }
+
+  .avatar {
+    height: 11rem;
+    border-radius: 5%;
   }
 
 }
