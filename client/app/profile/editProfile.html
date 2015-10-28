@@ -9,7 +9,7 @@
         <div class="col m5 avatar-container">
 
           <img class="avatar" src="github_pic.jpg">
-          <button class="update-avatar">Update</button>
+          <button type="button" ng-click="editProfile.updateAvatar()" class="update-avatar">Update</button>
           
         </div>
 
@@ -46,21 +46,20 @@
       </ul>
 
       <div class="row">
-        Add a modal button
-        <!-- <a class="waves-effect waves-light btn modal-trigger" href="#modal1">
-          Add
-        </a>
-
-         Modal Structure -->
-        <!-- <div id="modal1" class="modal">
+        <!-- Modal Trigger -->
+      <div class="col">
+          <a class='btn' href='#demoModal' modal>Show Modal</a>
+      </div>
+      <!-- Modal Structure -->
+      <div id="demoModal" class="modal">
           <div class="modal-content">
-            <h4>Modal Header</h4>
-            <p>A bunch of text</p>
+              <h4>Modal header</h4>
+              <p>A bunch of text</p>
           </div>
           <div class="modal-footer">
-            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+              <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
           </div>
-        </div> --> 
+      </div>
 
 
       </div>
