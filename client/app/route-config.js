@@ -89,6 +89,38 @@
           }
         },
         authenticate: true
+      })
+      .state('allThreads', {
+        url: '/forum/threads/:page',
+        views: {
+          'nav': {
+            templateUrl: 'app/navbar/navbar.html',
+            controller: 'NavbarController',
+            controllerAs: 'navbar'            
+          },
+          '': {
+            templateUrl: 'app/forum/allThreads.html',
+            controller: 'AllThreadsController',
+            controllerAs: 'allThreads'
+          }
+        },
+        authenticate: true
+      })
+      .state('thread', {
+        url: '/forum/:threadID/:page',
+        views: {
+          'nav': {
+            templateUrl: 'app/navbar/navbar.html',
+            controller: 'NavbarController',
+            controllerAs: 'navbar'            
+          },
+          '': {
+            templateUrl: 'app/forum/thread.html',
+            controller: 'ThreadController',
+            controllerAs: 'thread'
+          }
+        },
+        authenticate: true
       });
 
       // auth interceptor to ensure JWT gets sent in request header

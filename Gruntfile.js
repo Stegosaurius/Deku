@@ -10,10 +10,13 @@ module.exports = function(grunt) {
           "client/app/app.js",
           "client/app/auth/auth.controller.js",
           "client/app/dashboard/dashboard.controller.js",
+          "client/app/forum/allThreads.controller.js",
+          "client/app/forum/thread.controller.js",
           "client/app/profile/profile.controller.js",
           "client/app/profile/editProfile.controller.js",
           "client/app/navbar/navbar.controller.js",
           "client/app/route-config.js",
+          "client/app/services/forum.service.js",
           "client/app/services/user.service.js",
           "client/app/services/keenio.service.js"
         ],
