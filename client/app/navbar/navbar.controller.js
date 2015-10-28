@@ -4,25 +4,18 @@
   angular.module('app')
     .controller('NavbarController', NavbarController);
 
-  NavbarController.$inject = ['$window', '$state', 'User'];
+  NavbarController.$inject = ['$window', '$state', 'jwtHelper', 'User'];
 
-  function NavbarController($window, $state, User) {
+  function NavbarController($window, $state, jwtHelper, User) {
     // capture variable for binding members to controller; vm stands for ViewModel
     // (https://github.com/johnpapa/angular-styleguide#controlleras-with-vm)
     var vm = this;
 
+    vm.deleteNotification = deleteNotification;
     vm.getActiveProfile = getActiveProfile;
-    vm.notifications = ['Beasta is now following you',
-                        'shadedprofit is now following you'];
+    vm.notifications = [];
     vm.signout = signout;
     vm.username = $window.localStorage.username;
-
-    // options for notification dropdown
-    angular.element('.dropdown-button').dropdown({
-      constrain_width: false,
-      hover: true,
-      belowOrigin: true
-    });
 
     // on mobile-sized screen, make the nav bar appear on menu icon click
     angular.element('.button-collapse').sideNav({
@@ -33,13 +26,39 @@
 
     getNotifications();
 
+    // return active user's ID
+    function getID() {
+      return jwtHelper.decodeToken($window.localStorage.token).id;
+    }
+
+    function deleteNotification(notificationID) {
+      User.deleteNotification(notificationID);
+      for (var i = 0; i < vm.notifications.length; i++) {
+        if (vm.notifications[i].id === notificationID) {
+          vm.notifications.splice(i, 1);
+          break;
+        }
+      }
+    }
+
     function getActiveProfile() {
       $state.transitionTo('profile', { username: $window.localStorage.username });
     }
 
     function getNotifications() {
-      // User.getNotifications();
-      // vm.showNotifications = vm.notifications.length;
+      // User.getNotifications(getID())
+      //   .then(function(notifications) {
+      //     for (var i = 0; i < notifications.length; i++) {
+      //       vm.notifications.push(notifications[i]);
+      //     }
+      //   });
+
+      var notifications = [ { id: 1, originatorName: 'Beasta', content: ' is now following you' },
+                            { id: 2, originatorName: 'shadedprofit', content: ' is now following you'}];
+
+      for (var i = 0; i < notifications.length; i++) {
+        vm.notifications.push(notifications[i]);
+      }
     }
 
     function signout() {

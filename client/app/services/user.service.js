@@ -9,44 +9,28 @@
   function User($http, $window, $state) {
 
     var services = {
-      addStatus: addStatus,
-      deleteStatus: deleteStatus,
-      getStatuses: getStatuses,
       signin: signin,
       signout: signout,
       signup: signup,
+      getAvatar: getAvatar,
       getFollowers: getFollowers,
       getFollowees: getFollowees,
       follow: follow,
       unfollow: unfollow,
-      getAvatar: getAvatar,
+      deleteNotification: deleteNotification,
+      getNotifications: getNotifications,
       getProfile: getProfile,
       updateProfile: updateProfile,
       getRecentThreads: getRecentThreads,
-      getTags: getTags,
+      addStatus: addStatus,
+      deleteStatus: deleteStatus,
+      getStatuses: getStatuses,
       addTag: addTag,
+      getTags: getTags,
       removeTag: removeTag
     };
 
     return services;
-
-    function addStatus(status, id) {
-      return $http.post('/status/' + id, { status: status })
-        .then(function successCallback(res) {
-          return res.data;
-        }, function errorCallback(res) {
-          console.log('Error posting status');
-        });
-    }
-
-    function deleteStatus(id) {
-      return $http.delete('/status/' + id)
-        .then(function successCallback(res) {
-          return res;
-        }, function errorCallback(res) {
-          console.log('Error deleting status');
-        });
-    }
 
     function signin(data) {
       return $http.post('/auth/signin', data)
@@ -72,6 +56,16 @@
         });
     }
 
+    // retrieve a user's profile photo
+    function getAvatar(username) {
+      return $http.get('/users/avatarpath/' + username)
+        .then(function successCallback(res) {
+          return res.data.avatarURL;
+        }, function errorCallback(res) {
+          console.log('Error retrieving avatar');
+        });
+    }
+
     // retrieve followers AND following lists 
     function getFollowers (username) {
       return $http.get('/follow/followers/' + username)
@@ -88,7 +82,7 @@
           return res.data;
         }, function errorCallback(res) {
           console.log("Error retrieving followees");
-        })
+        });
     }
 
     function follow (followerID, followeeName) {
@@ -106,16 +100,24 @@
           return res.data;
         }, function errorCallback(res) {
           console.log("Error deleting follower");
-        })
+        });
     }
 
-    // retrieve a user's profile photo
-    function getAvatar(username) {
-      return $http.get('/users/avatarpath/' + username)
+    function deleteNotification(notificationID) {
+      return $http.delete('/notifications/' + notificationID)
         .then(function successCallback(res) {
-          return res.data.avatarURL;
+          return res.data;
         }, function errorCallback(res) {
-          console.log('Error retrieving avatar');
+          console.log('Error deleting notification');
+        });
+    }
+
+    function getNotifications(userID) {
+      return $http.get('/notifications/' + userID)
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log('Error retrieving notifications');
         });
     }
 
@@ -129,6 +131,17 @@
         });
     }
 
+    // update an existing user's profile info
+    function updateProfile(data, id) {
+      var url = '/users/' + id;
+      return $http.put(url, data)
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log('Error updating user profile');
+        });
+    }
+
     // retrieve user's most recent forum posts
     function getRecentThreads(username) {
       return $http.get('/threads/recent/' + username)
@@ -136,6 +149,24 @@
           return res.data.threads;
         }, function errorCallback(res) {
           console.log('Error retrieving recent threads');
+        });
+    }
+
+    function addStatus(status, id) {
+      return $http.post('/status/' + id, { status: status })
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log('Error posting status');
+        });
+    }
+
+    function deleteStatus(id) {
+      return $http.delete('/status/' + id)
+        .then(function successCallback(res) {
+          return res;
+        }, function errorCallback(res) {
+          console.log('Error deleting status');
         });
     }
 
@@ -149,6 +180,15 @@
         });
     }
 
+    function addTag(tag, id) {
+      return $http.post('/users/tags/' + id, {tag: tag}) 
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log("Error posting status");
+        });
+    }
+
     // retrieve user's tags
     function getTags(username) {
       return $http.get('/users/tags/' + username)
@@ -159,32 +199,12 @@
         });
     }
 
-    function addTag(tag, id) {
-      return $http.post('/users/tags/' + id, {tag: tag}) 
-        .then(function successCallback(res) {
-          return res.data;
-        }, function errorCallback(res) {
-          console.log("Error posting status");
-        });
-    }
-
     function removeTag(tag_id, user_id) {
       return $http.delete('/users/tags/' + tag_id + '/' + user_id)
         .then(function successCallback(res) {
           return res.data;
         }, function errorCallback(res) {
           console.log("Error deleting tag");
-        });
-    }
-
-    // update an existing user's profile info
-    function updateProfile(data, id) {
-      var url = '/users/' + id;
-      return $http.put(url, data)
-        .then(function successCallback(res) {
-          return res.data;
-        }, function errorCallback(res) {
-          console.log('Error updating user profile');
         });
     }
   }

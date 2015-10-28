@@ -376,7 +376,33 @@ ul {
   margin-right: 15px;
 }
 
-.notification {
+.dropdown-content .notification {
+  display: inline-block;
   color: $darkGrey;
-  padding: .5rem;
+  font-size: 1rem;
+}
+
+.dropdown-content .notification:hover {
+  cursor: default;
+}
+
+.dropdown-content .notification .user:hover {
+  cursor: pointer;
+  color: $lightBlue;
+  text-decoration: underline;
+}
+
+.dropdown-content button {
+  height: 52px;
+  border: 0;
+  background-color: inherit;
+}
+
+.dropdown-content button:hover {
+  color: $lightBlue;
+}
+
+.dropdown-content i {
+  position: relative;
+  top: -10px;
 }
