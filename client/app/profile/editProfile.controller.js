@@ -11,6 +11,7 @@
     // (https://github.com/johnpapa/angular-styleguide#controlleras-with-vm)
     var vm = this;
 
+    //View model properties
     vm.about = '';
     vm.avatar = '';
     vm.followers = [];
@@ -21,16 +22,6 @@
     vm.photoPath = '';
     vm.avatarPath = '';
     vm.photos = [];
-    
-    // vm.followers =['john', 'edgar', 'beasta', 'sam', 'watson', 'fred', 'smithy', 'johnson', 'patty', 'ron artest', 'junior'];
-    // vm.following =['john', 'edgar', 'beasta', 'elon musk', 'bubba', 'gump', 'shrimp', 'fred', 'smithy', 'johnson', 'patty', 'ron artest', 'junior'];
-    // vm.tags = ['tomatos', 'aquaponics', 'kale', 'spruce', 'beans']
-
-    // vm.photos = ['http://www.mnlga.org/slider/rw4Yqd0POkqMUqg.jpg',
-    //              'http://www.mafc.com/blog/wp-content/uploads/2014/07/Garden-Greenhouse-108.jpg',
-    //              'http://www.sustainablenantucket.org/wp-content/uploads/2014/03/green_house_77.jpg'];
-
-
 
     //editProfile user actions
     vm.updateProfile = updateProfile;
@@ -41,19 +32,21 @@
     vm.addPhotoByPath = addPhotoByPath;
     vm.deletePhoto = deletePhoto;
 
-    //Invoke get profile to prepopulate our view model with 
-    //existing data for a user. This way the data object will
-    //be complete when we send it to the database.
+    //Populate profile assets
     getProfile();
     getTags();
     getFollowers();
     getAvatar();
     getPhotos();
 
-    // return active user's ID
+    //return active user's ID
     function getID() {
       return jwtHelper.decodeToken($window.localStorage.token).id;
     }
+
+    ////////////////////////////
+    /////PROFILE INFO///////////
+    ////////////////////////////
 
     function getProfile () {
       User.getProfile(vm.username)
@@ -63,10 +56,8 @@
         });
     }
 
-    //Update location and about sections of profile
     function updateProfile () {
-      var id = getID();
-      User.updateProfile(vm, id)
+      User.updateProfile(vm, getID())
         .then(function(data) {
           $state.transitionTo('profile', {username : vm.username});
         })
@@ -74,6 +65,10 @@
           vm.message = 'Bad things';
         });
     }
+
+    ////////////////////////////
+    /////FOLLOWER ACTIONS///////
+    ////////////////////////////
 
     function getFollowers() {
       User.getFollowers(vm.username)
@@ -93,7 +88,6 @@
         });
     }
 
-    //Remove someone the user is following.
     function unfollow (followee) {
       User.unfollow(getID(), followee)
         .then(function (data) {
@@ -101,8 +95,10 @@
         })
     }
 
+    ////////////////////////////
+    //////TAG ACTIONS///////////
+    ////////////////////////////
 
-    //Get all tags for the user and add them to the vm
     function getTags () {
       User.getTags(vm.username)
         .then(function (data) {
@@ -110,43 +106,37 @@
         });
     }
 
-    //Add tag to the vm tags list and send the new tag to the 
-    //server to store the new tag in the database
     function addTag () {
-      var id = getID();
-      User.addTag(vm.newTag, id)
+      User.addTag(vm.newTag, getID())
         .then(function successCallback(res) {
           getTags();
         });
       vm.newTag='';
     }
 
-    //Remove a tag when user clicks x on a particular tag item
     function removeTag (tag) {
-      var user_id = getID();
-      User.removeTag(tag.id, user_id);
+      User.removeTag(tag.id, getID());
       getTags();
     }
 
-    //Get current profile picture(avatar)
+    ////////////////////////////
+    //////PHOTO ACTIONS/////////
+    ////////////////////////////
+
     function getAvatar () {
       User.getAvatar(vm.username)
         .then(function (avatar) {
           vm.avatar = avatar[0].profile_photo;
         });
-        //After we get the avatar, we then need to use
-        //the url as the src attribute in the image
     }
 
-    //Uploading a new profile picture
     function addAvatarPath () {
       User.addAvatarPath(getID(), vm.avatarPath)
         .then(function(data) {
           getAvatar();
         });
     }
-    
-    //Get users greenhouse photos from the server
+
     function getPhotos () {
       User.getPhotos(vm.username)
         .then(function (data) {
@@ -154,20 +144,14 @@
           for (var i = 0; i < data.length; i++) {
             vm.photos.push(data[i]);
           }
-        })
-      //get user photos urls from the server
-      //load different urls into src attributes
-      //for user images.
+        });
     }
 
     function deletePhoto (photoID) {
       User.deletePhoto(getID(), photoID)
         .then(function (data) {
           getPhotos();
-        })
-      //Delete user photo from the vm photos url list.
-      //Send request to server to delete the specified
-      //photo url from the database
+        });
     }
 
     function addPhotoByPath () {
@@ -175,15 +159,7 @@
         .then(function (data) {
           getPhotos();
         });
-      //2 options
-      //Add a url to a photo which will get added to the
-      //src of an img tag and sent to the db for storage.
-
-      //or upload a photo, store the url in the database, 
-      //then fetch that url and ad it to the vm.photos array.
     }
-
-
     
   }
 })();

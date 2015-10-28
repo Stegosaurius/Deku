@@ -36,6 +36,10 @@
 
     return services;
 
+    ///////////////////////
+    /////AUTHENTICATION////
+    ///////////////////////
+
     function signin(data) {
       return $http.post('/auth/signin', data)
         .then(function successCallback(res) {
@@ -59,6 +63,10 @@
           throw res.status;
         });
     }
+
+    ///////////////////////
+    ////////PHOTOS/////////
+    ///////////////////////
 
     // retrieve a user's profile photo
     function getAvatar(username) {
@@ -106,6 +114,10 @@
         })
     }
 
+    ///////////////////////
+    /////FOLLOWERS/////////
+    ///////////////////////
+
     // retrieve followers AND following lists 
     function getFollowers (username) {
       return $http.get('/follow/followers/' + username)
@@ -143,6 +155,10 @@
         });
     }
 
+    ///////////////////////
+    /////NOTIFICATIONS/////
+    ///////////////////////
+
     function deleteNotification(notificationID) {
       return $http.delete('/notifications/' + notificationID)
         .then(function successCallback(res) {
@@ -161,6 +177,10 @@
         });
     }
 
+    ///////////////////////
+    /////PROFILE INFO//////
+    ///////////////////////
+
     // retrieve user profile information
     function getProfile(username) {
       return $http.get('/users/' + username)
@@ -172,8 +192,8 @@
     }
 
     // update an existing user's profile info
-    function updateProfile(data, id) {
-      var url = '/users/' + id;
+    function updateProfile(data, userID) {
+      var url = '/users/' + userID;
       return $http.put(url, data)
         .then(function successCallback(res) {
           return res.data;
@@ -181,6 +201,10 @@
           console.log('Error updating user profile');
         });
     }
+
+    ///////////////////////
+    ////FORUM / THREADS////
+    ///////////////////////
 
     // retrieve user's most recent forum posts
     function getRecentThreads(username) {
@@ -192,8 +216,12 @@
         });
     }
 
-    function addStatus(status, id) {
-      return $http.post('/status/' + id, { status: status })
+    ///////////////////////
+    ////////STATUSES///////
+    ///////////////////////
+
+    function addStatus(status, userID) {
+      return $http.post('/status/' + userID, { status: status })
         .then(function successCallback(res) {
           return res.data;
         }, function errorCallback(res) {
@@ -201,8 +229,8 @@
         });
     }
 
-    function deleteStatus(id) {
-      return $http.delete('/status/' + id)
+    function deleteStatus(userID) {
+      return $http.delete('/status/' + userID)
         .then(function successCallback(res) {
           return res;
         }, function errorCallback(res) {
@@ -220,8 +248,12 @@
         });
     }
 
-    function addTag(tag, id) {
-      return $http.post('/users/tags/' + id, {tag: tag}) 
+    ///////////////////////
+    ////////TAGS///////////
+    ///////////////////////
+
+    function addTag(tag, userID) {
+      return $http.post('/users/tags/' + userID, {tag: tag}) 
         .then(function successCallback(res) {
           return res.data;
         }, function errorCallback(res) {
@@ -229,7 +261,6 @@
         });
     }
 
-    // retrieve user's tags
     function getTags(username) {
       return $http.get('/users/tags/' + username)
         .then(function successCallback(res) {
@@ -239,8 +270,8 @@
         });
     }
 
-    function removeTag(tag_id, user_id) {
-      return $http.delete('/users/tags/' + tag_id + '/' + user_id)
+    function removeTag(tagID, userID) {
+      return $http.delete('/users/tags/' + tagID + '/' + userID)
         .then(function successCallback(res) {
           return res.data;
         }, function errorCallback(res) {

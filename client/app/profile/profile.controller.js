@@ -20,9 +20,7 @@
     vm.followees = [];
     vm.followers = [];
     vm.location = '';
-    vm.photos = ['http://www.mnlga.org/slider/rw4Yqd0POkqMUqg.jpg',
-                 'http://www.mafc.com/blog/wp-content/uploads/2014/07/Garden-Greenhouse-108.jpg',
-                 'http://www.sustainablenantucket.org/wp-content/uploads/2014/03/green_house_77.jpg'];
+    vm.photos = [];
     vm.recentThreadNames = [];
     vm.recentThreads = {};
     vm.statuses = [];
@@ -31,6 +29,8 @@
 
     checkActiveUser();
     getProfile();
+    getPhotos();
+    getAvatar();
 
     // link statuses to IDs to aid in deletion
     var statusObj = {};
@@ -143,12 +143,24 @@
         });
     }
 
-    // this may change
-    function getAvatar() {
+    //Get current profile picture(avatar)
+    function getAvatar () {
       User.getAvatar(vm.username)
-        .then(function(avatar) {
-          vm.avatar = avatar;
+        .then(function (avatar) {
+          vm.avatar = avatar[0].profile_photo;
         });
     }
+
+    //Get users greenhouse photos from the server
+    function getPhotos () {
+      User.getPhotos(vm.username)
+        .then(function (data) {
+          vm.photos = [];
+          for (var i = 0; i < data.length; i++) {
+            vm.photos.push(data[i]);
+          }
+        });
+    }
+
   }
 })();

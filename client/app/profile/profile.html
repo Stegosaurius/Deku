@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col s5">
       <ul class="userInfo">
-        <li><img class="avatar" src="github_pic.jpg"></li>
+        <li><img class="avatar" src="{{ profile.avatar }}"></li>
 
         <li>
           <h4>{{ profile.username }}</h4>
@@ -20,8 +20,8 @@
 
     <div class="user-photos-container col s7">
       <ul class="user-photos">
-        <li ng-repeat="path in profile.photos">
-          <img class="photo" ng-src="{{ path }}"/>
+        <li ng-repeat="photo in profile.photos">
+          <img class="photo" ng-src="{{ photo.photo }}"/>
         </li>
       </ul>
     </div>
