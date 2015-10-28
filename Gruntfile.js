@@ -59,12 +59,12 @@ module.exports = function(grunt) {
     },
 
     shell: {
-      runServer: {
+      seed: {
         options: {
-          stdout: true, 
+          stdout: true,
           stderr: true
         },
-        command: 'heroku local web'
+        command: 'node server/db/seed.js'
       }
     },
 
@@ -99,4 +99,5 @@ module.exports = function(grunt) {
     'build',
     'nodemon'
   ]);
+
 };

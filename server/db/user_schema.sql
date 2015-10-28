@@ -12,7 +12,7 @@ CREATE TABLE `Users` (
 	`scoped_key` varchar(250),
 	`about` TEXT,
 	`profile_photo` varchar(150),
-	`location` varchar(50),
+	`location` varchar(80),
 	`tessel` tinyint NOT NULL DEFAULT '0',
 	PRIMARY KEY (`id`)
 );
@@ -34,14 +34,21 @@ CREATE TABLE `Messages` (
 
 CREATE TABLE `Threads` (
 	`id` INT NOT NULL AUTO_INCREMENT,
-	`thread` varchar(80) NOT NULL,
-	`lastupdated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`thread` varchar(250) NOT NULL,
+	`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`last_updated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`messages_count` int NOT NULL DEFAULT '0',
+	`vote_tally` int NOT NULL DEFAULT '0',
+	`user_id` int NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `Notifications` (
+	`id` int NOT NULL AUTO_INCREMENT,
+	`content` TEXT NOT NULL,
 	`user_id` INT NOT NULL,
-	`content` TEXT NOT NULL
+	`originatorName` varchar(50) NOT NULL,
+	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `Statuses` (
@@ -75,10 +82,15 @@ CREATE TABLE `UserTags` (
 );
 
 CREATE TABLE `Photos` (
-	`id` INT NOT NULL AUTO_INCREMENT,
+	`id` int NOT NULL AUTO_INCREMENT,
 	`photo` varchar(250) NOT NULL,
-	`user_id` INT NOT NULL,
+	`user_id` int NOT NULL,
 	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `thread_votes` (
+	`thread_id` int NOT NULL,
+	`user_id` int NOT NULL
 );
 
 ALTER TABLE `Followers` ADD CONSTRAINT `Followers_fk0` FOREIGN KEY (`follower_id`) REFERENCES `Users`(`id`);
@@ -88,6 +100,8 @@ ALTER TABLE `Followers` ADD CONSTRAINT `Followers_fk1` FOREIGN KEY (`followee_id
 ALTER TABLE `Messages` ADD CONSTRAINT `Messages_fk0` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
 
 ALTER TABLE `Messages` ADD CONSTRAINT `Messages_fk1` FOREIGN KEY (`thread_id`) REFERENCES `Threads`(`id`);
+
+ALTER TABLE `Threads` ADD CONSTRAINT `Threads_fk0` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
 
 ALTER TABLE `Notifications` ADD CONSTRAINT `Notifications_fk0` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
 
@@ -106,3 +120,7 @@ ALTER TABLE `UserTags` ADD CONSTRAINT `UserTags_fk0` FOREIGN KEY (`user_id`) REF
 ALTER TABLE `UserTags` ADD CONSTRAINT `UserTags_fk1` FOREIGN KEY (`tag_id`) REFERENCES `Tags`(`id`);
 
 ALTER TABLE `Photos` ADD CONSTRAINT `Photos_fk0` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
+
+ALTER TABLE `thread_votes` ADD CONSTRAINT `thread_votes_fk0` FOREIGN KEY (`thread_id`) REFERENCES `Threads`(`id`);
+
+ALTER TABLE `thread_votes` ADD CONSTRAINT `thread_votes_fk1` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
