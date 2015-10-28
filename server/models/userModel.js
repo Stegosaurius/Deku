@@ -13,7 +13,7 @@ module.exports = {
   //Example function for querying the db for all users
   //and passing the result to the callback
   getAllUsers: function (callback) {
-    db.query('select id, username from Users', function (err, users) {
+    db.query('select id, username, email from Users', function (err, users) {
       if (err) {
         callback(err, null);
       } else {
