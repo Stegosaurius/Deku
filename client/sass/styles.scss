@@ -183,7 +183,7 @@ ul {
   
   textarea {
     resize: none;
-    width: 24.1rem;
+    width: 70%;
   }
 
   input, textarea {
@@ -194,6 +194,7 @@ ul {
   input {
     height: 2rem;
     padding-right: 0px;
+    width: 50%;
   }
 
   input:focus, textarea:focus {
@@ -252,6 +253,11 @@ ul {
     border-radius: 5%;
   }
 
+  .add-photo {
+    margin-right: 30px;
+    margin-top: 24px;
+    @extend .default-button;
+  }
 }
 
 
