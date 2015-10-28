@@ -52,6 +52,13 @@
         });
     }
 
+    // return true if the active user is viewing his/her own profile
+    function checkActiveUser() {
+      // checking token is more secure than checking localStorage.username
+      var user = jwtHelper.decodeToken($window.localStorage.token).username;
+      vm.activeUser = user === $stateParams.username;
+    }
+
     // remove status from database
     function deleteStatus(status) {
       // call delete with status ID
@@ -69,11 +76,22 @@
       return jwtHelper.decodeToken($window.localStorage.token).id;
     }
 
-    // return true if the active user is viewing his/her own profile
-    function checkActiveUser() {
-      // checking token is more secure than checking localStorage.username
-      var user = jwtHelper.decodeToken($window.localStorage.token).username;
-      vm.activeUser = user === $stateParams.username;
+    function getFollowers() {
+      User.getFollowers(vm.username)
+        .then(function(data) {
+          console.log('follower data  ', data);
+          for (var i = 0; i < data.length; i++) {
+            vm.followers.push(data[i].username);
+          }
+        });
+
+      User.getFollowees(vm.username)
+        .then(function(data) {
+          console.log('followee data  ', data);
+          for (var i = 0; i < data.length; i++) {
+            vm.followees.push(data[i].username);
+          }
+        });
     }
 
     function getProfile() {
@@ -102,35 +120,6 @@
         });
     }
 
-    function getStatuses() {
-      User.getStatuses(vm.username)
-        .then(function(statuses) {
-          vm.statuses = [];
-          for (var i = 0; i < statuses.length; i++) {
-            vm.statuses.push(statuses[i].status);
-            statusObj[statuses[i].status] = statuses[i].id;
-          }
-        });
-    }
-
-    function getFollowers() {
-      User.getFollowers(vm.username)
-        .then(function(data) {
-          console.log('follower data  ', data);
-          for (var i = 0; i < data.length; i++) {
-            vm.followers.push(data[i].username);
-          }
-        });
-
-      User.getFollowees(vm.username)
-        .then(function(data) {
-          console.log('followee data  ', data);
-          for (var i = 0; i < data.length; i++) {
-            vm.followees.push(data[i].username);
-          }
-        });
-    }
-
     // store thread names for listing on page
     // make obj so thread id can be referenced from thread name
     function getRecentThreads() {
@@ -139,6 +128,17 @@
           for (var i = 0; i < data.length; i++) {
             vm.recentThreadNames.push(data[i].thread);
             vm.recentThreads[data[i].thread] = data[i].id;
+          }
+        });
+    }
+
+    function getStatuses() {
+      User.getStatuses(vm.username)
+        .then(function(statuses) {
+          vm.statuses = [];
+          for (var i = 0; i < statuses.length; i++) {
+            vm.statuses.push(statuses[i].status);
+            statusObj[statuses[i].status] = statuses[i].id;
           }
         });
     }

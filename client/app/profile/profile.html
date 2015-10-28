@@ -59,10 +59,12 @@
     <div class="bottom-right col s4">
       <div class="follow row">
         <div class="col s6 center-align">
-          <a href="#">Following <span>{{ profile.followees.length }}</span></a>
+          <a href="#followingModal" modal>Following</a>
+          <span>{{ profile.followees.length }}</span>
         </div>
         <div class="col s6 center-align">
-          <a href="#">Followers <span>{{ profile.followers.length }}</span></a>
+          <a href="#followersModal" modal>Followers</a>
+          <span>{{ profile.followers.length }}</span>
         </div>
       </div>
 
@@ -72,4 +74,27 @@
       </ul>
     </div>
   </div>
+
+  <div id="followingModal" class="modal">
+    <div class="modal-content">
+      <h5>Following</h5>
+      <ul class="following">
+        <li ng-repeat="followee in profile.followees">
+          <a class="modal-close" ui-sref="profile({ username: followee })">{{ followee }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="followersModal" class="modal">
+    <div class="modal-content">
+      <h5>Followers</h5>
+      <ul class="followers">
+        <li ng-repeat="follower in profile.followers">
+          <a class="modal-close" ui-sref="profile({ username: follower })">{{ follower }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
 </div>

@@ -6,7 +6,7 @@ $lightGrey: #dfdfdf;
 $grey: #8e8e8e;
 $darkGreen: #109418;
 $darkGrey: #4a4a4a;
-$darkBlue: #17a689;
+$darkBlue: #138871;
 $mainBackground: #f9f9f9;
 $white: #ffffff;
 
@@ -327,22 +327,49 @@ ul {
     padding-left: 3rem;
   }
 
-  .follow a {
-    display: inline-block;
-    margin-top: .5rem;
-    font-size: 1.2rem;
-    color: $lightBlue;
+  .follow a,
+  .follow a + span {
+      display: inline-block;
+      margin-top: .5rem;
+      font-size: 1.2rem;
+      color: $lightBlue;
+  }
 
-    span {
-      color: $grey;
-    }
+  .follow a + span {
+    padding-left: .3rem;
+    color: $grey;
   }
 
   .follow a:hover {
     color: $darkBlue;
+  }
 
-    span {
-      color: $grey;
+  .modal {
+    width: 25%;
+
+    .modal-content {
+      padding: 0;
+    }
+
+    h5 {
+      text-align: center;
+      padding-bottom: .5rem;
+      border-bottom: 1px solid $lightGrey;
+      margin-bottom: 0;
+    }
+
+    li {
+      padding: 1rem 2rem;
+      font-size: 1.3rem;
+    }
+
+    a {
+      color: $darkGrey;
+    }
+
+    a:hover {
+      cursor: pointer;
+      color: $lightBlue;
     }
   }
 }
