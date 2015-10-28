@@ -117,7 +117,7 @@ module.exports = {
   },
 
   addProfilePhoto: function (userID, photo, callback) {
-    db.query('update users set photo = ? where id = ?', [photo, userID], function (err, res) {
+    db.query('update users set profile_photo = ? where id = ?', [photo, userID], function (err, res) {
       if (err) {
         callback(err, null);
       } else {

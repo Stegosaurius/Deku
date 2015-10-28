@@ -19,6 +19,7 @@
     vm.tags = [];
     vm.username = $window.localStorage.username;
     vm.photoPath = '';
+    vm.avatarPath = '';
     vm.photos = [];
     
     // vm.followers =['john', 'edgar', 'beasta', 'sam', 'watson', 'fred', 'smithy', 'johnson', 'patty', 'ron artest', 'junior'];
@@ -36,7 +37,7 @@
     vm.addTag = addTag;
     vm.removeTag = removeTag;
     vm.unfollow = unfollow;
-    vm.updateAvatar = updateAvatar;
+    vm.addAvatarPath = addAvatarPath;
     vm.addPhotoByPath = addPhotoByPath;
     vm.deletePhoto = deletePhoto;
 
@@ -46,8 +47,8 @@
     getProfile();
     getTags();
     getFollowers();
+    getAvatar();
     getPhotos();
-    //getAvatar();
 
     // return active user's ID
     function getID() {
@@ -57,11 +58,8 @@
     function getProfile () {
       User.getProfile(vm.username)
         .then(function(data) {
-          console.log(data);
           vm.about = data.about;
           vm.location = data.location;
-          // vm.tags = data.plants || ['kale', 'spinach', 'chia'];
-          // getPhoto();
         });
     }
 
@@ -103,26 +101,11 @@
         })
     }
 
-    //Get current profile picture(avatar)
-    function getAvatar () {
-      User.getAvatar(vm.username)
-        .then(function (avatar) {
-          vm.avatar = avatar;
-        });
-        //After we get the avatar, we then need to use
-        //the url as the src attribute in the image
-    }
-
-    //Uploading a new profile picture
-    function updateAvatar () {
-
-    }
 
     //Get all tags for the user and add them to the vm
     function getTags () {
       User.getTags(vm.username)
         .then(function (data) {
-          console.log(data);
           vm.tags = data;
         });
     }
@@ -145,6 +128,24 @@
       getTags();
     }
 
+    //Get current profile picture(avatar)
+    function getAvatar () {
+      User.getAvatar(vm.username)
+        .then(function (avatar) {
+          vm.avatar = avatar[0].profile_photo;
+        });
+        //After we get the avatar, we then need to use
+        //the url as the src attribute in the image
+    }
+
+    //Uploading a new profile picture
+    function addAvatarPath () {
+      User.addAvatarPath(getID(), vm.avatarPath)
+        .then(function(data) {
+          getAvatar();
+        });
+    }
+    
     //Get users greenhouse photos from the server
     function getPhotos () {
       User.getPhotos(vm.username)
