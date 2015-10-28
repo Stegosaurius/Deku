@@ -44,7 +44,7 @@ module.exports = function (app, passport) {
   // If photo is stored somewhere else, get path and store in database
   app.post('/photos/path/:id', userController.addPhotoURL)
 
-  app.delete('/photos/:id', userController.deletePhoto);
+  app.delete('/photos/:userID/:photoID', userController.deletePhoto);
 
   
 }

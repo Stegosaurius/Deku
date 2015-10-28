@@ -38,6 +38,7 @@
     vm.unfollow = unfollow;
     vm.updateAvatar = updateAvatar;
     vm.addPhotoByPath = addPhotoByPath;
+    vm.deletePhoto = deletePhoto;
 
     //Invoke get profile to prepopulate our view model with 
     //existing data for a user. This way the data object will
@@ -150,7 +151,7 @@
         .then(function (data) {
           vm.photos = [];
           for (var i = 0; i < data.length; i++) {
-            vm.photos.push(data[i].photo);
+            vm.photos.push(data[i]);
           }
         })
       //get user photos urls from the server
@@ -158,7 +159,11 @@
       //for user images.
     }
 
-    function removeUserPhoto () {
+    function deletePhoto (photoID) {
+      User.deletePhoto(getID(), photoID)
+        .then(function (data) {
+          getPhotos();
+        })
       //Delete user photo from the vm photos url list.
       //Send request to server to delete the specified
       //photo url from the database
@@ -167,7 +172,7 @@
     function addPhotoByPath () {
       User.addPhotoByPath(getID(), vm.photoPath)
         .then(function (data) {
-          //invoke get user photos
+          getPhotos();
         });
       //2 options
       //Add a url to a photo which will get added to the

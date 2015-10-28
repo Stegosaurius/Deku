@@ -268,8 +268,8 @@ module.exports = {
   },
 
   deletePhoto: function (req, res) {
-    if (req.params.id) {
-      User.deletePhoto(req.body.photo, function (err, result) {
+    if (req.params.userID) {
+      User.deletePhoto(req.params.photoID, function (err, result) {
         if (err) {
           console.error(err);
           res.status(500).end();

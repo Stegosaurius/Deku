@@ -37,9 +37,9 @@
     
     <div class="user-photos-container col m7">
       <ul class="user-photos">
-        <li ng-repeat="path in editProfile.photos">
-          <img class="photo" ng-src="{{ path }}"/>
-          <a class="btn-floating btn-small waves-effect waves-light">
+        <li ng-repeat="photo in editProfile.photos">
+          <img class="photo" ng-src="{{ photo.photo }}"/>
+          <a ng-click="editProfile.deletePhoto(photo.id)" class="btn-floating btn-small waves-effect waves-light">
             <i class="material-icons remove-photo">clear</i>
           </a>
         </li>
@@ -58,7 +58,7 @@
               <p>Or whatever else you see fit</p>
               <form ng-submit="editProfile.addPhotoByPath()">
                 <input ng-model="editProfile.photoPath" placeholder="write the path to your photo here">
-                <button type="submit">Upload</button>
+                <button type="submit" class="modal-close">Upload</button></a>
               </form>
 
           </div>
