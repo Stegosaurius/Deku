@@ -1,3 +1,30 @@
 <div class="allThreads">
+  <h3>Forum</h3>
 
+  <div class="container">
+    <ul class="threads">
+      <li ng-repeat="thread in allThreads.threads">
+        <div class="row">
+          <div class="col l8 m8 s11">
+            <img src="Group.png">
+
+            <span>{{ thread.vote_tally }} UPVOTES</span>
+
+            <a class="thread-title" ui-sref="thread({ threadID: thread.id, page: 1 })">{{ thread.thread }}</a>
+
+            <span class="createdAt">{{ thread.created_at }}</span>
+          </div>
+
+          <div class="col l1 m1 s1">
+            {{ thread.messages_count }}
+            POSTS
+          </div>
+
+          <div class="col l3 m3 hide-on-small-only">
+            <span>Last Updated {{ thread.last_updated }}</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
 </div>
