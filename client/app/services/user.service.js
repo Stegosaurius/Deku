@@ -23,6 +23,7 @@
       getFollowees: getFollowees,
       follow: follow,
       unfollow: unfollow,
+      addNotification: addNotification,
       deleteNotification: deleteNotification,
       getNotifications: getNotifications,
       getProfile: getProfile,
@@ -182,6 +183,15 @@
     ///////////////////////
     /////NOTIFICATIONS/////
     ///////////////////////
+
+    function addNotification(username, data) {
+      return $http.post('/notifications/' + username, data)
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log("Error adding notification");
+        });
+    }
 
     function deleteNotification(notificationID) {
       return $http.delete('/notifications/' + notificationID)
