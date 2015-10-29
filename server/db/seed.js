@@ -9,6 +9,7 @@ var Follow = require('../models/followerModel.js');
 // these variables will store arrays of all users and tags we add
 var allUsers;
 var allTags;
+var allThreads;
 
 // first start by creating 20 users
 // after each function is done, the next one is called in the sequence
@@ -71,12 +72,11 @@ function createTags (n) {
 function updateProfiles (index) {
   if (index === allUsers.length - 1) {
     console.log("Updated user profiles");
-    return addPhotos(60);
+    return addAvatars(0);
   }
   var profile = {
     about: faker.lorem.paragraph(),
     email: allUsers[index].email,
-    photo: faker.image.avatar(),
     location: faker.address.city() + ', ' + faker.address.state(),
     userID: allUsers[index].id
   };
@@ -85,6 +85,21 @@ function updateProfiles (index) {
       console.error(err);
     } else {
       updateProfiles(index + 1);
+    }
+  });
+}
+
+function addAvatars (index) {
+  if (index === allUsers.length - 1) {
+    console.log("Added avatars to users");
+    return addPhotos(60);
+  }
+
+  User.addProfilePhoto(allUsers[index].id, faker.image.avatar(), function (err, result) {
+    if (err) {
+      console.error(err);
+    } else {
+      addAvatars(index + 1);
     }
   });
 }
@@ -148,13 +163,14 @@ function makeStatuses (n) {
 function addFollowees (n) {
   if (n === 0) {
     console.log("Added followers and followees!!!");
-    return;
+    return addThreads(50);
   } 
   // make sure one user can't follow himself / herself
   do {
     var user1 = allUsers[Math.floor(Math.random() * (allUsers.length - 1))];
     var user2 = allUsers[Math.floor(Math.random() * (allUsers.length - 1))];
   } while (user1.username === user2.username);
+
   Follow.follow(user1.id, user2.id, function (err, result) {
     if (err) {
       console.error(err);
@@ -163,6 +179,53 @@ function addFollowees (n) {
     }
   });
 }
+
+function addThreads (n) {
+  if (n === 0) {
+    Thread.getAllThreads(function (err, threads) {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log("Added threads", threads);
+        allThreads = threads;
+        return addMessagesToThreads(300); 
+      }
+    })
+  }
+
+  var randomUser = allUsers[Math.floor(Math.random() * (allUsers.length - 1))];
+  Thread.createThread(randomUser.id, faker.lorem.sentence(), function (err, result) {
+    if (err) {
+      console.error(err);
+    } else {
+      addThreads(n - 1);
+    }
+  });
+}
+
+function addMessagesToThreads (n) {
+  if (n === 0) {
+    console.log("Added messages to threads!!!");
+    console.log("Done!!! Press Ctrl + C to exit");
+    return;
+  }
+
+  var data = {
+    userID: allUsers[Math.floor(Math.random() * (allUsers.length - 1))].id,
+    threadID: allThreads[Math.floor(Math.random() * (allThreads.length - 1))].id,
+    message: faker.lorem.paragraph()
+  };
+
+  Thread.addMessageToThread(data, function (err, result) {
+    if (err) {
+      console.error(err);
+    } else {
+      addMessagesToThreads(n - 1);
+    }
+  })
+}
+
+
 
 
 
