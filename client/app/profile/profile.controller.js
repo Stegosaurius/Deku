@@ -45,7 +45,7 @@
 
       vm.statuses.unshift(newStatus);
 
-      User.addStatus(newStatus, getID())
+      User.addStatus(newStatus, User.getID())
         .then(function(status) {
           // add new status and ID to status object
           statusObj[newStatus] = status.id;
@@ -68,12 +68,7 @@
 
     // make the active user a follower of this profile's user
     function follow() {
-      User.follow(getID(), vm.username);
-    }
-
-    // return active user's ID
-    function getID() {
-      return jwtHelper.decodeToken($window.localStorage.token).id;
+      User.follow(User.getID(), vm.username);
     }
 
     function getFollowers() {

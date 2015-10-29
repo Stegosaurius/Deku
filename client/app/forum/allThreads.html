@@ -1,0 +1,44 @@
+<div class="allThreads container">
+  <h3>Forum</h3>
+
+  <a class="modal-trigger" href="#createThreadModal" modal>Create Thread</a>
+
+  <ul class="threads">
+    <li ng-repeat="thread in allThreads.threads">
+      <div class="row">
+        <div class="col l8 m8 s11">
+          <a ui-sref="profile({ username: thread.userID })">
+            <img src="Group.png">
+          </a>
+
+          <span>{{ thread.vote_tally }} UPVOTES</span>
+
+          <a class="thread-title" ui-sref="thread({ threadID: thread.id, page: 1 })">{{ thread.thread }}</a>
+
+          <span class="createdAt">{{ thread.created_at }}</span>
+        </div>
+
+        <div class="col l1 m1 s1">
+          {{ thread.messages_count }}
+          POSTS
+        </div>
+
+        <div class="col l3 m3 hide-on-small-only">
+          <span>Last Updated {{ thread.last_updated }}</span>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <div id="createThreadModal" class="modal">
+    <div class="modal-content">
+      <form class="threadForm" name="allThreads.threadForm" ng-submit="allThreads.createThread()">
+        <h5>Give your thread a name:</h5>
+
+        <input type="text" name="threadName" ng-model="allThreads.newThread" autocomplete="off" required>
+
+        <button class="modal-close" type="submit">Create</button>
+      </form>
+    </div>
+  </div>
+</div>

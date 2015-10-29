@@ -4,9 +4,9 @@
   angular.module('app')
     .controller('NavbarController', NavbarController);
 
-  NavbarController.$inject = ['$window', '$state', 'jwtHelper', 'User'];
+  NavbarController.$inject = ['$window', '$state', 'User'];
 
-  function NavbarController($window, $state, jwtHelper, User) {
+  function NavbarController($window, $state, User) {
     // capture variable for binding members to controller; vm stands for ViewModel
     // (https://github.com/johnpapa/angular-styleguide#controlleras-with-vm)
     var vm = this;
@@ -26,11 +26,6 @@
 
     getNotifications();
 
-    // return active user's ID
-    function getID() {
-      return jwtHelper.decodeToken($window.localStorage.token).id;
-    }
-
     function deleteNotification(notificationID) {
       User.deleteNotification(notificationID);
       for (var i = 0; i < vm.notifications.length; i++) {
@@ -46,7 +41,7 @@
     }
 
     function getNotifications() {
-      // User.getNotifications(getID())
+      // User.getNotifications(User.getID())
       //   .then(function(notifications) {
       //     for (var i = 0; i < notifications.length; i++) {
       //       vm.notifications.push(notifications[i]);
