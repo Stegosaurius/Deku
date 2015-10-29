@@ -2,6 +2,8 @@
   <h3>Forum</h3>
 
   <div class="container">
+    <a class="modal-trigger" href="#createThreadModal" modal>Create Thread</a>
+
     <ul class="threads">
       <li ng-repeat="thread in allThreads.threads">
         <div class="row">
@@ -26,5 +28,17 @@
         </div>
       </li>
     </ul>
+  </div>
+
+  <div id="createThreadModal" class="modal">
+    <div class="modal-content">
+      <form class="threadForm" name="allThreads.threadForm" ng-submit="allThreads.createThread()">
+        <h5>Give your thread a name:</h5>
+
+        <input type="text" name="threadName" ng-model="allThreads.newThread" autocomplete="off" required>
+
+        <button class="modal-close" type="submit">Create</button>
+      </form>
+    </div>
   </div>
 </div>
