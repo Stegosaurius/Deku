@@ -35,8 +35,8 @@ CREATE TABLE `messages` (
 CREATE TABLE `threads` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`thread` varchar(250) NOT NULL,
-	`created_at` INT NOT NULL,
-	`last_updated` INT NOT NULL,
+	`created_at` BIGINT NOT NULL,
+	`last_updated` BIGINT NOT NULL,
 	`messages_count` int NOT NULL DEFAULT '0',
 	`vote_tally` int NOT NULL DEFAULT '0',
 	`user_id` int NOT NULL,

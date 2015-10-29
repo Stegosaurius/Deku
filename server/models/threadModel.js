@@ -71,7 +71,7 @@ module.exports = {
 
 	createThread: function (userID, threadName, callback) {
 		var date = Date.now();
-		db.query('insert into threads (user_id, thread, created_at, last_updated) value (?, ?, ?)', [userID, threadName, date, date], function (err, res) {
+		db.query('insert into threads (user_id, thread, created_at, last_updated) value (?, ?, ?, ?)', [userID, threadName, date, date], function (err, res) {
 			if (err) {
 				callback(err);
 			} else {
