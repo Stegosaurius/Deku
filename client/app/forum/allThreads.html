@@ -1,36 +1,34 @@
-<div class="allThreads">
+<div class="allThreads container">
   <h3>Forum</h3>
 
-  <div class="container">
-    <a class="modal-trigger" href="#createThreadModal" modal>Create Thread</a>
+  <a class="modal-trigger" href="#createThreadModal" modal>Create Thread</a>
 
-    <ul class="threads">
-      <li ng-repeat="thread in allThreads.threads">
-        <div class="row">
-          <div class="col l8 m8 s11">
-            <a ui-sref="profile({ username: thread.userID })">
-              <img src="Group.png">
-            </a>
-            
-            <span>{{ thread.vote_tally }} UPVOTES</span>
+  <ul class="threads">
+    <li ng-repeat="thread in allThreads.threads">
+      <div class="row">
+        <div class="col l8 m8 s11">
+          <a ui-sref="profile({ username: thread.userID })">
+            <img src="Group.png">
+          </a>
 
-            <a class="thread-title" ui-sref="thread({ threadID: thread.id, page: 1 })">{{ thread.thread }}</a>
+          <span>{{ thread.vote_tally }} UPVOTES</span>
 
-            <span class="createdAt">{{ thread.created_at }}</span>
-          </div>
+          <a class="thread-title" ui-sref="thread({ threadID: thread.id, page: 1 })">{{ thread.thread }}</a>
 
-          <div class="col l1 m1 s1">
-            {{ thread.messages_count }}
-            POSTS
-          </div>
-
-          <div class="col l3 m3 hide-on-small-only">
-            <span>Last Updated {{ thread.last_updated }}</span>
-          </div>
+          <span class="createdAt">{{ thread.created_at }}</span>
         </div>
-      </li>
-    </ul>
-  </div>
+
+        <div class="col l1 m1 s1">
+          {{ thread.messages_count }}
+          POSTS
+        </div>
+
+        <div class="col l3 m3 hide-on-small-only">
+          <span>Last Updated {{ thread.last_updated }}</span>
+        </div>
+      </div>
+    </li>
+  </ul>
 
   <div id="createThreadModal" class="modal">
     <div class="modal-content">
