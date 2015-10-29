@@ -4,14 +4,15 @@
   angular.module('app')
     .factory('User', User);
 
-  User.$inject = ['$http', '$window', '$state'];
+  User.$inject = ['$http', '$window', '$state', 'jwtHelper'];
 
-  function User($http, $window, $state) {
+  function User($http, $window, $state, jwtHelper) {
 
     var services = {
       signin: signin,
       signout: signout,
       signup: signup,
+      getID: getID,
       getAvatar: getAvatar,
       addAvatarPath: addAvatarPath,
       getPhotos: getPhotos,
@@ -64,6 +65,11 @@
         });
     }
 
+    // return active user's ID
+    function getID() {
+      return jwtHelper.decodeToken($window.localStorage.token).id;
+    }
+
     ///////////////////////
     ////////PHOTOS/////////
     ///////////////////////
@@ -93,7 +99,7 @@
           return res.data;
         }, function errorCallback(res) {
           console.log('Error retrieving user photos');
-        })
+        });
     }
 
     function addPhotoByPath(userID, path) {
@@ -111,7 +117,7 @@
           return res.data;
         }, function errorCallback(res) {
           console.log('Error deleting photo');
-        })
+        });
     }
 
     ///////////////////////

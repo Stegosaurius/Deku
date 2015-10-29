@@ -4,9 +4,9 @@
   angular.module('app')
     .controller('EditProfileController', EditProfileController);
 
-  EditProfileController.$inject = ['$window', '$state', 'jwtHelper', 'User'];
+  EditProfileController.$inject = ['$window', '$state', 'User'];
 
-  function EditProfileController($window, $state, jwtHelper, User) {
+  function EditProfileController($window, $state, User) {
     // capture variable for binding members to controller; vm stands for ViewModel
     // (https://github.com/johnpapa/angular-styleguide#controlleras-with-vm)
     var vm = this;
@@ -39,11 +39,6 @@
     getAvatar();
     getPhotos();
 
-    //return active user's ID
-    function getID() {
-      return jwtHelper.decodeToken($window.localStorage.token).id;
-    }
-
     ////////////////////////////
     /////PROFILE INFO///////////
     ////////////////////////////
@@ -57,7 +52,7 @@
     }
 
     function updateProfile () {
-      User.updateProfile(vm, getID())
+      User.updateProfile(vm, User.getID())
         .then(function(data) {
           $state.transitionTo('profile', {username : vm.username});
         })
@@ -89,10 +84,10 @@
     }
 
     function unfollow (followee) {
-      User.unfollow(getID(), followee)
+      User.unfollow(User.getID(), followee)
         .then(function (data) {
           getFollowers();
-        })
+        });
     }
 
     ////////////////////////////
@@ -107,7 +102,7 @@
     }
 
     function addTag () {
-      User.addTag(vm.newTag, getID())
+      User.addTag(vm.newTag, User.getID())
         .then(function successCallback(res) {
           getTags();
         });
@@ -115,8 +110,10 @@
     }
 
     function removeTag (tag) {
-      User.removeTag(tag.id, getID());
-      getTags();
+      User.removeTag(tag.id, User.getID())
+        .then(function(data) {
+          getTags();
+        });
     }
 
     ////////////////////////////
@@ -148,14 +145,14 @@
     }
 
     function deletePhoto (photoID) {
-      User.deletePhoto(getID(), photoID)
+      User.deletePhoto(User.getID(), photoID)
         .then(function (data) {
           getPhotos();
         });
     }
 
     function addPhotoByPath () {
-      User.addPhotoByPath(getID(), vm.photoPath)
+      User.addPhotoByPath(User.getID(), vm.photoPath)
         .then(function (data) {
           getPhotos();
         });

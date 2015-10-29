@@ -8,8 +8,10 @@
       <li ng-repeat="thread in allThreads.threads">
         <div class="row">
           <div class="col l8 m8 s11">
-            <img src="Group.png">
-
+            <a ui-sref="profile({ username: thread.userID })">
+              <img src="Group.png">
+            </a>
+            
             <span>{{ thread.vote_tally }} UPVOTES</span>
 
             <a class="thread-title" ui-sref="thread({ threadID: thread.id, page: 1 })">{{ thread.thread }}</a>
