@@ -182,7 +182,7 @@ function addFollowees (n) {
 
 function addThreads (n) {
   if (n === 0) {
-    Thread.getAllThreads(function (err, threads) {
+    return Thread.getAllThreads(function (err, threads) {
       if (err) {
         console.error(err);
       } else {
