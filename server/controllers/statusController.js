@@ -15,7 +15,7 @@ module.exports = {
 
   updateStatus: function (req, res) {
     var data = {
-      userID: req.params.id,
+      userID: req.params.userID,
       status: req.body.status
     };
     Status.addStatus(data, function (err, result) {
@@ -47,8 +47,8 @@ module.exports = {
   },
 
   deleteStatus: function (req, res) {
-    var id = req.params.id;
-    Status.deleteStatus(id, function (err, result) {
+    var statusID = req.params.statusID;
+    Status.deleteStatus(statusID, function (err, result) {
       if (err) {
         console.error(err);
         res.status(500).send();
