@@ -55,8 +55,8 @@ module.exports = {
   },
 
   updateUser: function (data, callback) {
-    db.query('update Users set about = ?, email = ?, profile_photo = ?, location = ? where id = ?', 
-      [data.about, data.email, data.photo, data.location, data.userID],
+    db.query('update Users set about = ?, email = ?, location = ? where id = ?', 
+      [data.about, data.email, data.location, data.userID],
       function (err, res) {
         if (err) {
           callback(err, null);

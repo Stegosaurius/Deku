@@ -58,6 +58,17 @@ module.exports = {
     });
   },
 
+  addThread: function (req, res) {
+    Thread.createThread(req.params.userID, req.params.threadName, function (err, result) {
+      if (err) {
+        console.error(err);
+        res.status(500).end();
+      } else {
+        res.status(204).end();
+      }
+    })
+  },
+
   deleteThread: function (req, res) {
     Thread.deleteThread(req.params.threadID, function (err, result) {
       if (err) {

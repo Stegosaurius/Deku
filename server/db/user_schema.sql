@@ -1,28 +1,28 @@
 -- /server/db/user_schema.sql
 
-CREATE DATABASE Deku;
+CREATE DATABASE deku;
 
-USE Deku;
+USE deku;
 
-CREATE TABLE `Users` (
+CREATE TABLE `users` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`username` varchar(50) NOT NULL,
 	`email` varchar(50),
 	`password` varchar(100),
 	`scoped_key` varchar(250),
 	`about` TEXT,
-	`profile_photo` varchar(150),
+	`profile_photo` varchar(250),
 	`location` varchar(80),
 	`tessel` tinyint NOT NULL DEFAULT '0',
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `Followers` (
+CREATE TABLE `followers` (
 	`follower_id` int NOT NULL,
 	`followee_id` int NOT NULL
 );
 
-CREATE TABLE `Messages` (
+CREATE TABLE `messages` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`message` TEXT NOT NULL,
 	`timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -32,18 +32,18 @@ CREATE TABLE `Messages` (
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `Threads` (
+CREATE TABLE `threads` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`thread` varchar(250) NOT NULL,
-	`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	`last_updated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`created_at` BIGINT NOT NULL,
+	`last_updated` BIGINT NOT NULL,
 	`messages_count` int NOT NULL DEFAULT '0',
 	`vote_tally` int NOT NULL DEFAULT '0',
 	`user_id` int NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `Notifications` (
+CREATE TABLE `notifications` (
 	`id` int NOT NULL AUTO_INCREMENT,
 	`content` TEXT NOT NULL,
 	`user_id` INT NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE `Notifications` (
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `Statuses` (
+CREATE TABLE `statuses` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`user_id` INT NOT NULL,
 	`status` varchar(250) NOT NULL,
@@ -70,18 +70,18 @@ CREATE TABLE `status_votes` (
 	`status_id` INT NOT NULL
 );
 
-CREATE TABLE `Tags` (
+CREATE TABLE `tags` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`tag` varchar(50) NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `UserTags` (
+CREATE TABLE `usertags` (
 	`user_id` INT NOT NULL,
 	`tag_id` INT NOT NULL
 );
 
-CREATE TABLE `Photos` (
+CREATE TABLE `photos` (
 	`id` int NOT NULL AUTO_INCREMENT,
 	`photo` varchar(250) NOT NULL,
 	`user_id` int NOT NULL,
@@ -93,34 +93,34 @@ CREATE TABLE `thread_votes` (
 	`user_id` int NOT NULL
 );
 
-ALTER TABLE `Followers` ADD CONSTRAINT `Followers_fk0` FOREIGN KEY (`follower_id`) REFERENCES `Users`(`id`);
+ALTER TABLE `followers` ADD CONSTRAINT `followers_fk0` FOREIGN KEY (`follower_id`) REFERENCES `users`(`id`);
 
-ALTER TABLE `Followers` ADD CONSTRAINT `Followers_fk1` FOREIGN KEY (`followee_id`) REFERENCES `Users`(`id`);
+ALTER TABLE `followers` ADD CONSTRAINT `followers_fk1` FOREIGN KEY (`followee_id`) REFERENCES `users`(`id`);
 
-ALTER TABLE `Messages` ADD CONSTRAINT `Messages_fk0` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
+ALTER TABLE `messages` ADD CONSTRAINT `messages_fk0` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`);
 
-ALTER TABLE `Messages` ADD CONSTRAINT `Messages_fk1` FOREIGN KEY (`thread_id`) REFERENCES `Threads`(`id`);
+ALTER TABLE `messages` ADD CONSTRAINT `messages_fk1` FOREIGN KEY (`thread_id`) REFERENCES `threads`(`id`);
 
-ALTER TABLE `Threads` ADD CONSTRAINT `Threads_fk0` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
+ALTER TABLE `threads` ADD CONSTRAINT `threads_fk0` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`);
 
-ALTER TABLE `Notifications` ADD CONSTRAINT `Notifications_fk0` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
+ALTER TABLE `notifications` ADD CONSTRAINT `notifications_fk0` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`);
 
-ALTER TABLE `Statuses` ADD CONSTRAINT `Statuses_fk0` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
+ALTER TABLE `statuses` ADD CONSTRAINT `statuses_fk0` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`);
 
-ALTER TABLE `message_votes` ADD CONSTRAINT `message_votes_fk0` FOREIGN KEY (`message_id`) REFERENCES `Messages`(`id`);
+ALTER TABLE `message_votes` ADD CONSTRAINT `message_votes_fk0` FOREIGN KEY (`message_id`) REFERENCES `messages`(`id`);
 
-ALTER TABLE `message_votes` ADD CONSTRAINT `message_votes_fk1` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
+ALTER TABLE `message_votes` ADD CONSTRAINT `message_votes_fk1` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`);
 
-ALTER TABLE `status_votes` ADD CONSTRAINT `status_votes_fk0` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
+ALTER TABLE `status_votes` ADD CONSTRAINT `status_votes_fk0` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`);
 
-ALTER TABLE `status_votes` ADD CONSTRAINT `status_votes_fk1` FOREIGN KEY (`status_id`) REFERENCES `Statuses`(`id`);
+ALTER TABLE `status_votes` ADD CONSTRAINT `status_votes_fk1` FOREIGN KEY (`status_id`) REFERENCES `statuses`(`id`);
 
-ALTER TABLE `UserTags` ADD CONSTRAINT `UserTags_fk0` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
+ALTER TABLE `usertags` ADD CONSTRAINT `usertags_fk0` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`);
 
-ALTER TABLE `UserTags` ADD CONSTRAINT `UserTags_fk1` FOREIGN KEY (`tag_id`) REFERENCES `Tags`(`id`);
+ALTER TABLE `usertags` ADD CONSTRAINT `usertags_fk1` FOREIGN KEY (`tag_id`) REFERENCES `tags`(`id`);
 
-ALTER TABLE `Photos` ADD CONSTRAINT `Photos_fk0` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
+ALTER TABLE `photos` ADD CONSTRAINT `photos_fk0` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`);
 
-ALTER TABLE `thread_votes` ADD CONSTRAINT `thread_votes_fk0` FOREIGN KEY (`thread_id`) REFERENCES `Threads`(`id`);
+ALTER TABLE `thread_votes` ADD CONSTRAINT `thread_votes_fk0` FOREIGN KEY (`thread_id`) REFERENCES `threads`(`id`);
 
-ALTER TABLE `thread_votes` ADD CONSTRAINT `thread_votes_fk1` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
+ALTER TABLE `thread_votes` ADD CONSTRAINT `thread_votes_fk1` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`);
