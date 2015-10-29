@@ -4,6 +4,16 @@ var bcrypt = require('bcrypt-nodejs');
 
 module.exports = {
 
+	getAllThreads: function (callback) {
+		db.query('select * from threads', function (err, threads) {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, threads);
+			}
+		})
+	},
+
 	getThreadsByPage: function (page, callback) {
 		db.query('select * from threads', function (err, threads) {
 			if (err) {
@@ -60,8 +70,8 @@ module.exports = {
 			});
 	},
 
-	createThread: function (name, callback) {
-		db.query('insert into threads (thread) value (?)', [name], function (err, res) {
+	createThread: function (userID, threadName, callback) {
+		db.query('insert into threads (user_id, thread) value (?, ?)', [userID, threadName], function (err, res) {
 			if (err) {
 				callback(err);
 			} else {
