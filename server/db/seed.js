@@ -73,9 +73,6 @@ function updateProfiles (index) {
     console.log("Updated user profiles");
     return addPhotos(60);
   }
-  console.log("faker city :", faker.address.city());
-  console.log("faker state :", faker.address.state());
-  console.log("all users: ", allUsers);
   var profile = {
     about: faker.lorem.paragraph(),
     email: allUsers[index].email,
