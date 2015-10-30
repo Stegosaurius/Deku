@@ -534,7 +534,7 @@ ul {
   }
 
   h5 {
-    font-size: 1.4rem;
+    font-size: 1rem;
   }
 
   button {
@@ -553,7 +553,7 @@ ul {
     textarea {
       resize: none;
       width: 70%;
-      border: 1px solid $lightGrey;
+      border: 2px solid $lightGrey;
       margin-right: 8%;
     }
 
@@ -562,7 +562,6 @@ ul {
     }
 
     button {
-      width: 100px;
       height: 30px;
       margin-top: -6px;
     }
@@ -572,16 +571,28 @@ ul {
     margin: 2%;
   }
 
+  .avatar {
+    height: 3rem;
+    border-radius: 5%;
+  }
+
+  .message-username {
+    margin-top: -2px;
+    font-size: 1.2rem;
+  }
+
+  .message-votes {
+    h5 {
+      margin-top: 1%;
+    }
+  }
+
   .message-content {
     margin-bottom: 2px;
     padding-bottom: 15px;
     border-bottom: 2px solid $lightGrey;
   }
 
-  .avatar {
-    height: 3rem;
-    border-radius: 5%;
-  }
 
 
   .message-content {

@@ -5,8 +5,13 @@
     <h4 class="thread-title"> Aquaponics {{ thread.thread.thread }}</h4>
 
     <form class="post-form row col s12 m12 l12" ng-submit="thread.postToThread()">
+
       <textarea class="col s6 m6 l6" rows="2" cols="20" wrap="hard" ng-model="thread.newMessage" placeholder="post a new message to the thread">{{ thread.newMessage }}</textarea><br>
-      <button class="col s2 m2 l2" type="submit">Post</button>
+
+      <button class="col s2 m2 l2" type="submit">
+        <span class="col s5 m5 l5 left">Post</span>
+          <i class="material-icons col s7 m7 l7">send</i>      
+        </button>
     </form>
 
     <ul class="message-list-container">
@@ -16,11 +21,11 @@
         <div class="row message-meta col s12 m12 l12">
           
           <div class="message-avatar col s1 m1 l1">
-            <img class="avatar" src="{{ thread.avatarPath }}">
+            <img class="avatar" src="{{ message.profile_photo }}">
           </div>
 
           <div class="message-username col s2 m2 l2">
-            Matt
+            {{ message.username }}
           </div>
 
           <div class="message-timestamp col s3 m3 l3">
@@ -28,7 +33,8 @@
           </div>
 
           <div class="message-votes col s5 m5 l5">
-            {{ message.vote_tally }} upvotes
+            <i class="material-icons col s1 m1 l1">star border</i>
+            <h5 class="col s3 m3 l3">{{ message.vote_tally }} upvotes</h5>
           </div>
 
         </div>
