@@ -1,3 +1,29 @@
 <div class="thread container">
-  <h4>{{ thread.thread.thread }}</h4>
+
+  <div>
+
+    <h4>{{ thread.thread.thread }}</h4>
+
+    <form ng-submit="thread.postToThread()">
+      <input type="text" ng-model="thread.newMessage" placeholder="Write a new message">
+      <button type="submit">Post</button>
+    </form>
+
+    <ul class="message-container">
+
+      <li class="message" ng-repeat="message in thread.messages">
+
+        <div> {{ message.message }} </div>
+
+        <div> {{ message.timestamp }} </div>
+
+        <div> {{ message.vote_tally }} </div>
+
+      </li>
+
+    </ul>
+    
+    
+  </div>
+
 </div>
