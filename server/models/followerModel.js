@@ -46,6 +46,16 @@ module.exports = {
         callback(null, res);
       }
     });
+  },
+
+  checkFollowee: function (followerID, followeeID, callback) {
+    db.query('select * from followers where follower_id = ? and followee_id = ?', [followerID, followeeID], function (err, res) {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, res);
+      }
+    });
   }
 
 }

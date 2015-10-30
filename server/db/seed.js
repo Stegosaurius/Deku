@@ -170,14 +170,22 @@ function addFollowees (n) {
     var user1 = allUsers[Math.floor(Math.random() * (allUsers.length - 1))];
     var user2 = allUsers[Math.floor(Math.random() * (allUsers.length - 1))];
   } while (user1.username === user2.username);
-
-  Follow.follow(user1.id, user2.id, function (err, result) {
+  Follow.checkFollowee(user1.id, user2.id, function (err, result) {
     if (err) {
       console.error(err);
-    } else {
-      addFollowees(n - 1);
     }
-  });
+    if (!result[0]) {
+      Follow.follow(user1.id, user2.id, function (err, result) {
+        if (err) {
+          console.error(err);
+        } else {
+          addFollowees(n - 1);
+        }
+      }); 
+    } else {
+      addFollowees(n);
+    }
+  })
 }
 
 function addThreads (n) {
@@ -220,7 +228,13 @@ function addMessagesToThreads (n) {
     if (err) {
       console.error(err);
     } else {
-      addMessagesToThreads(n - 1);
+      Thread.updateTime(data.threadID, function (err, result) {
+        if (err) {
+          console.error(err);
+        } else {
+          addMessagesToThreads(n - 1);
+        }
+      });
     }
   })
 }
