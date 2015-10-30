@@ -47,13 +47,24 @@ module.exports = {
         console.error(err);
         res.status(500).end();
       } else {
-        Follower.follow(req.params.followerID, followee[0].id, function (err, follower) {
+        Follow.checkFollowee(req.params.followerID, followee[0].id, function (err, result) {
           if (err) {
             console.error(err);
             res.status(500).end();
+          } 
+          if (!result[0]) {
+            Follower.follow(req.params.followerID, followee[0].id, function (err, result) {
+              if (err) {
+                console.error(err);
+                res.status(500).end();
+              } else {
+                res.status(201).end();
+              }
+            });
           } else {
-            res.status(201).json(follower);
+            res.status(204).end();
           }
+
         });
       }
     })
