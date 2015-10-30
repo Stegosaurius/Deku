@@ -11,27 +11,35 @@
     // (https://github.com/johnpapa/angular-styleguide#controlleras-with-vm)
     var vm = this;
 
+    vm.changePage = changePage;
     vm.createThread = createThread;
+    vm.page = $stateParams.page; // current page
+    vm.pageSize = 20; // number of threads displayed per page
     vm.newThread = '';
-    vm.pageCount = 0; // number of pages needed to hold all threads
     vm.threads = [];
+    // Total is set artificially high to prevent angular-materialize from
+    // changing vm.page to 1 for being less than the page count.
+    // Value will be set correctly upon the return of getThreads AJAX call
+    vm.total = 1e9; // total number of threads
 
-    var threadsPerPage = 20; // number of threads displayed on each page
+    getThreads(vm.page);
 
-    getAllThreads();
+    function changePage(page) {
+      $state.transitionTo('allThreads', { page: page });
+    }
 
     function createThread() {
-      Forum.createThread(vm.newThread)
+      Forum.createThread(User.getID(), vm.newThread)
         .then(function(thread) {
           $state.transitionTo('thread', { threadID: thread.id, page: 1 });
         });
     }
 
-    function getThreads() {
-      Forum.getThreads(User.getID(), $stateParams.page)
+    function getThreads(page) {
+      Forum.getThreads(page)
         .then(function(data) {
           vm.threads = data.threads;
-          vm.pageCount = Math.ceil(data.count / threadsPerPage);
+          vm.total = data.count;
         });
     }
   }

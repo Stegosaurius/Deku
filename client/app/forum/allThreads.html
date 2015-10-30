@@ -30,6 +30,17 @@
     </li>
   </ul>
 
+  <pagination
+    page="allThreads.page"
+    page-size="allThreads.pageSize"
+    total="allThreads.total"
+    show-prev-next="true"
+    dots="...."
+    hide-if-empty="false"
+    adjacent="2"
+    scroll-top="true"
+    pagination-action="allThreads.changePage(page)" />
+
   <div id="createThreadModal" class="modal">
     <div class="modal-content">
       <form class="threadForm" name="allThreads.threadForm" ng-submit="allThreads.createThread()">
