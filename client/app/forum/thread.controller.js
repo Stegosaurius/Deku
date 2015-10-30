@@ -28,13 +28,14 @@
           vm.messages = [];
           for (var i = 0; i < data.messages.length; i++) {
             vm.messages.push(data.messages[i])
+            vm.messages[i].timestamp = moment.utc(vm.messages[i].timestamp).fromNow();
           }
           vm.thread = data.thread;
         });
+
     }
 
-    //TODO A function that uses the user_ids from the messages to find the 
-    //username and avatar path for each message
+    
 
     function postToThread () {
       Forum.postToThread(User.getID(), vm.thread.id, vm.newMessage)
