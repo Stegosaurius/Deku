@@ -1,23 +1,43 @@
-<div class="thread container">
+<div class="thread z-depth-1">
 
   <div>
 
-    <h4>{{ thread.thread.thread }}</h4>
+    <h4 class="thread-title"> Aquaponics {{ thread.thread.thread }}</h4>
 
-    <form ng-submit="thread.postToThread()">
-      <input type="text" ng-model="thread.newMessage" placeholder="Write a new message">
-      <button type="submit">Post</button>
+    <form class="post-form row col s12 m12 l12" ng-submit="thread.postToThread()">
+      <textarea class="col s6 m6 l6" rows="2" cols="20" wrap="hard" ng-model="thread.newMessage" placeholder="post a new message to the thread">{{ thread.newMessage }}</textarea><br>
+      <button class="col s2 m2 l2" type="submit">Post</button>
     </form>
 
-    <ul class="message-container">
+    <ul class="message-list-container">
 
-      <li class="message" ng-repeat="message in thread.messages">
+      <li class="row message-container row col s12 m12 l12" ng-repeat="message in thread.messages">
+        
+        <div class="row message-meta col s12 m12 l12">
+          
+          <div class="message-avatar col s1 m1 l1">
+            <img class="avatar" src="{{ thread.avatarPath }}">
+          </div>
 
-        <div> {{ message.message }} </div>
+          <div class="message-username col s2 m2 l2">
+            Matt
+          </div>
 
-        <div> {{ message.timestamp }} </div>
+          <div class="message-timestamp col s3 m3 l3">
+            {{ message.timestamp }}
+          </div>
 
-        <div> {{ message.vote_tally }} </div>
+          <div class="message-votes col s5 m5 l5">
+            {{ message.vote_tally }} upvotes
+          </div>
+
+        </div>
+
+        <div class="message-content row col s12 m12 l12"> 
+          {{ message.message }} 
+        </div>
+
+
 
       </li>
 

@@ -10,11 +10,11 @@ $darkBlue: #138871;
 $mainBackground: #f9f9f9;
 $white: #ffffff;
 
-.z-depth-1{
+.z-depth-1 {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
-.z-depth-1-half{
+.z-depth-1-half {
   box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 }
 
@@ -34,7 +34,9 @@ $white: #ffffff;
   @extend .z-depth-1-half;
 }
 
-/* ___GENERAL___ */
+/***************************
+ ****** GENERAL ************
+ ***************************/
 
 *,
 *::before,
@@ -67,7 +69,11 @@ ul {
   margin: 0;
 }
 
-/* ___EDITPROFILE___ */
+/***************************
+ ****** EDITPROFILE ********
+ ***************************/
+
+
 .editProfile {
 
   h4 {
@@ -265,7 +271,9 @@ ul {
 }
 
 
-/* ___PROFILE___ */
+/***************************
+ ******** PROFILE **********
+ ***************************/
 
 .profile {
   color: $darkGrey;
@@ -439,7 +447,9 @@ ul {
   }
 }
 
-/* ___NAVBAR___ */
+/***************************
+ ******** NAVBAR ***********
+ ***************************/
 
 .nav {
   background-image: linear-gradient(90deg, rgb(39, 174, 96) 15%, rgb(26, 188, 156) 100%);
@@ -507,3 +517,79 @@ ul {
     margin-bottom: .5rem;
   }
 }
+
+/***************************
+ ******** THREAD ***********
+ ***************************/
+
+.thread {
+
+  background-color: white;
+
+  .thread-title {
+    font-size: 2rem;
+    margin: 2%;
+    padding-top: 1%;
+    color: $darkGreen;
+  }
+
+  h5 {
+    font-size: 1.4rem;
+  }
+
+  button {
+    @extend .default-button;
+  }
+
+  button:hover {
+    @extend .default-button-hover;
+  }
+
+  .post-form {
+    margin: 2%;
+    padding-bottom: 25px;
+    border-bottom: 2px solid $lightGrey;
+
+    textarea {
+      resize: none;
+      width: 70%;
+      border: 1px solid $lightGrey;
+      margin-right: 8%;
+    }
+
+    textArea:focus {
+      border: 2px solid $lightBlue;
+    }
+
+    button {
+      width: 100px;
+      height: 30px;
+      margin-top: -6px;
+    }
+  }
+
+  .message-container {
+    margin: 2%;
+  }
+
+  .message-content {
+    margin-bottom: 2px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid $lightGrey;
+  }
+
+  .avatar {
+    height: 3rem;
+    border-radius: 5%;
+  }
+
+
+  .message-content {
+
+  }
+
+  
+
+}
+
+

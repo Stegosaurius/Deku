@@ -15,11 +15,13 @@
     vm.newMessage = '';
     vm.thread = {};
 
+    vm.avatarPath = "http://s3-ak.buzzfeed.com/static/enhanced/terminal01/2011/2/15/13/enhanced-buzz-16839-1297795475-9.jpg";
+
     vm.postToThread = postToThread;
 
     getMessages();
 
-    function getMessages() {
+    function getMessages () {
       Forum.getMessages($stateParams.threadID, $stateParams.page)
         .then(function(data) {
           vm.messages = [];
@@ -33,7 +35,7 @@
     //TODO A function that uses the user_ids from the messages to find the 
     //username and avatar path for each message
 
-    function postToThread() {
+    function postToThread () {
       Forum.postToThread(User.getID(), vm.thread.id, vm.newMessage)
         .then(function(data) {
           getMessages();
