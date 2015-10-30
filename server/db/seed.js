@@ -228,7 +228,7 @@ function addMessagesToThreads (n) {
     if (err) {
       console.error(err);
     } else {
-      Thread.updateTime(data.threadID, function (err, result) {
+      Thread.updateTimeAndMessagesForThread(data.threadID, function (err, result) {
         if (err) {
           console.error(err);
         } else {
