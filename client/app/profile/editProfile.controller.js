@@ -128,7 +128,7 @@
     }
 
     function addAvatarPath () {
-      User.addAvatarPath(getID(), vm.avatarPath)
+      User.addAvatarPath(User.getID(), vm.avatarPath)
         .then(function(data) {
           getAvatar();
         });

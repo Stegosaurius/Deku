@@ -27,7 +27,7 @@ module.exports = {
 
   updateProfile: function (req, res) {
     var data = req.body;
-    data.userID = req.params.id;
+    data.userID = req.params.userID;
     User.updateUser(data, function (err, result) {
       if (err) {
         //Error handling
@@ -62,7 +62,7 @@ module.exports = {
   },
 
   addAvatarPath: function (req, res) {
-    User.addProfilePhoto(req.params.id, req.body.photo, function (err, result) {
+    User.addProfilePhoto(req.params.userID, req.body.photo, function (err, result) {
       if (err) {
         console.error(err);
         res.status(404).send(err);
@@ -75,7 +75,7 @@ module.exports = {
   uploadAvatar: function (req, res) {
     var file = req.files.file;
     // Load the stream
-    var userID = req.params.id;
+    var userID = req.params.userID;
     var body = fs.createReadStream(file).pipe(zlib.createGzip());
     // Upload the stream
     var s3 = new AWS.S3({params: { Bucket: config.awsStorage.bucket }});
@@ -145,7 +145,7 @@ module.exports = {
   addUserTag: function (req, res) {
     // add a tag to the tags table first if it not already part of our collection
     // then add to UserTags table
-    var userID = req.params.id;
+    var userID = req.params.userID;
     var tagname = req.body.tag;
     User.getTag(tagname, function (err, tag) {
       if (err) {
@@ -210,7 +210,7 @@ module.exports = {
   },
 
   deleteUserTag: function (req, res) {
-    User.deleteUserTag(req.params.userid, req.params.tagid, function (err, result) {
+    User.deleteUserTag(req.params.userID, req.params.tagID, function (err, result) {
       if (err) {
         console.error(err);
         res.status(500).end();
@@ -232,7 +232,7 @@ module.exports = {
   },
 
   addPhotoURL: function (req, res) {
-    User.addPhoto(req.params.id, req.body.photo, function (err, result) {
+    User.addPhoto(req.params.userID, req.body.photo, function (err, result) {
       if (err) {
         console.error(err);
         res.status(500).end();
@@ -245,7 +245,7 @@ module.exports = {
   addPhotoS3: function (req, res) {
     var file = req.files.file;
     // Load the stream
-    var userID = req.params.id;
+    var userID = req.params.userID;
     var body = fs.createReadStream(file).pipe(zlib.createGzip());
     // Upload the stream
     var s3 = new AWS.S3({params: { Bucket: config.awsStorage.bucket }});

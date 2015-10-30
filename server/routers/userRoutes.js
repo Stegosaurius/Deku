@@ -12,7 +12,7 @@ module.exports = function (app, passport) {
 
   app.get('/:username', userController.getProfile);
 
-  app.put('/:id', userController.updateProfile);
+  app.put('/:userID', userController.updateProfile);
 
 
 
@@ -24,25 +24,25 @@ module.exports = function (app, passport) {
 
   app.get('/tags/:username', userController.getUserTags);
 
-  app.post('/tags/:id', userController.addUserTag);
+  app.post('/tags/:userID', userController.addUserTag);
 
-  app.delete('/tags/:tagid/:userid', userController.deleteUserTag);
+  app.delete('/tags/:tagID/:userID', userController.deleteUserTag);
 
   // Avatars for users
-  app.post('/upload/avatar/:id', userController.uploadAvatar);
+  app.post('/upload/avatar/:userID', userController.uploadAvatar);
 
   app.get('/avatarpath/:username', userController.getAvatarPath);
 
-  app.post('/avatarpath/:id', userController.addAvatarPath);
+  app.post('/avatarpath/:userID', userController.addAvatarPath);
 
   // Greenhouse photos
   app.get('/photos/:username', userController.getPhotos);
 
   // For uploading photos first to S3
-  app.post('/photos/aws/:id', userController.addPhotoS3);
+  app.post('/photos/aws/:userID', userController.addPhotoS3);
 
   // If photo is stored somewhere else, get path and store in database
-  app.post('/photos/path/:id', userController.addPhotoURL)
+  app.post('/photos/path/:userID', userController.addPhotoURL)
 
   app.delete('/photos/:userID/:photoID', userController.deletePhoto);
 

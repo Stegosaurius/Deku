@@ -4,10 +4,10 @@ module.exports = function (app) {
 
   app.get('/:username', statusController.getStatuses);
   
-  app.post('/:id', statusController.updateStatus);
+  app.post('/:userID', statusController.updateStatus);
 
   app.get('/followees/:userID', statusController.getFolloweesStatuses);
 
-  app.delete('/:id', statusController.deleteStatus);
+  app.delete('/:statusID', statusController.deleteStatus);
 
 }
