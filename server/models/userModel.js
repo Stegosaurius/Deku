@@ -13,7 +13,7 @@ module.exports = {
   //Example function for querying the db for all users
   //and passing the result to the callback
   getAllUsers: function (callback) {
-    db.query('select id, username, email from Users', function (err, users) {
+    db.query('select id, username, email from users', function (err, users) {
       if (err) {
         callback(err, null);
       } else {
@@ -24,7 +24,7 @@ module.exports = {
 
   getUserByID: function (id, callback) {
     // we don't need a password since a profile is viewable by anyone
-    db.query('select id, username, email, scoped_key, about, location from Users where id = ?', [id], function (err, userObj) {
+    db.query('select id, username, email, scoped_key, about, location from users where id = ?', [id], function (err, userObj) {
       if (err) {
         callback(err, null);
       } else {
@@ -34,7 +34,7 @@ module.exports = {
   },
 
   getUserByName: function (username, callback) {
-    db.query('select id, username, password, email, scoped_key, about, location from Users where username = ?', [username], function (err, user) {
+    db.query('select id, username, password, email, scoped_key, about, location from users where username = ?', [username], function (err, user) {
       if (err) {
         callback(err, null);
       } else {
@@ -44,7 +44,7 @@ module.exports = {
   },
 
   getUserByEmail: function (email, callback) {
-    db.query('select id, username, email, scoped_key, about, location from Users where email = ?',
+    db.query('select id, username, email, scoped_key, about, location from users where email = ?',
       [email], function (err, user) {
         if (err) {
           callback(err, null);
@@ -55,7 +55,7 @@ module.exports = {
   },
 
   updateUser: function (data, callback) {
-    db.query('update Users set about = ?, email = ?, location = ? where id = ?', 
+    db.query('update users set about = ?, email = ?, location = ? where id = ?', 
       [data.about, data.email, data.location, data.userID],
       function (err, res) {
         if (err) {

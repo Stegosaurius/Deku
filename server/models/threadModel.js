@@ -100,9 +100,20 @@ module.exports = {
 		})
 	},
 
+	updateTimeAndMessagesForThread: function (threadID, callback) {
+		var time = Date.now();
+		db.query('update threads set messages_count = messages_count + 1, last_updated = ? where id = ?', [time, threadID], function (err, res) {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, res);
+			}
+		})
+	},
+ 
 	updateTime: function (threadID, callback) {
 		var time = Date.now();
-		db.query('update Threads set last_updated = ? where id = ?', [time, threadID], function (err, res) {
+		db.query('update threads set last_updated = ? where id = ?', [time, threadID], function (err, res) {
 			if (err) {
 				callback(err);
 			} else {
