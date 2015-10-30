@@ -40,6 +40,11 @@
         .then(function(data) {
           vm.threads = data.threads;
           vm.total = data.count;
+
+          for (var i = 0; i < vm.threads.length; i++) {
+            vm.threads[i].created_at = moment(vm.threads[i].created_at).fromNow();
+            vm.threads[i].last_updated = moment(vm.threads[i].last_updated).fromNow();
+          }
         });
     }
   }

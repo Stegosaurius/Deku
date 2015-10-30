@@ -1,30 +1,38 @@
 <div class="allThreads container">
   <h3>Forum</h3>
 
-  <a class="modal-trigger" href="#createThreadModal" modal>Create Thread</a>
+  <a class="create modal-trigger" href="#createThreadModal" modal>Create Thread</a>
 
   <ul class="threads">
     <li ng-repeat="thread in allThreads.threads">
       <div class="row">
         <div class="col l8 m8 s11">
-          <a ui-sref="profile({ username: thread.userID })">
+          <a ui-sref="profile({ username: thread.userID })" class="left">
             <img src="Group.png">
           </a>
 
-          <span>{{ thread.vote_tally }} UPVOTES</span>
+          <button class="upvote left" ng-click="upvote(thread.id)">
+            <i class="material-icons">keyboard_arrow_up</i>
+          </button>
 
-          <a class="thread-title" ui-sref="thread({ threadID: thread.id, page: 1 })">{{ thread.thread }}</a>
+          <span class="upvoteTally left">
+            {{ thread.vote_tally }}
+          </span>
 
-          <span class="createdAt">{{ thread.created_at }}</span>
+          <span class="left">
+            <a class="thread-title" ui-sref="thread({ threadID: thread.id, page: 1 })">{{ thread.thread }}</a><br>
+
+            <p class="createdAt">Created {{ thread.created_at }}</p>
+          </span>
         </div>
 
-        <div class="col l1 m1 s1">
-          {{ thread.messages_count }}
+        <div class="postTally col l1 m1 s1">
+          <span class="postNum">{{ thread.messages_count }}</span><br>
           POSTS
         </div>
 
-        <div class="col l3 m3 hide-on-small-only">
-          <span>Last Updated {{ thread.last_updated }}</span>
+        <div class="lastUpdated col l3 m3 hide-on-small-only">
+          <span>Last updated {{ thread.last_updated }}</span>
         </div>
       </div>
     </li>

@@ -5,6 +5,7 @@ $lightBlue: #1abc9c;
 $lightGrey: #dfdfdf;
 $grey: #8e8e8e;
 $darkGreen: #109418;
+$darkerGreen: #0c7112;
 $darkGrey: #4a4a4a;
 $darkBlue: #138871;
 $mainBackground: #f9f9f9;
@@ -54,6 +55,7 @@ html {
 
 .main {
   margin: 0 4%;
+  color: $darkGrey;
 }
 
 .container {
@@ -276,8 +278,6 @@ ul {
  ***************************/
 
 .profile {
-  color: $darkGrey;
-
   h4 {
     color: $darkGreen;
     margin: 2.5rem 0 0 0;
@@ -512,6 +512,78 @@ ul {
 /* ___FORUM ALL THREADS___ */
 
 .allThreads {
+  h3 {
+    display: inline-block;
+    margin-right: 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .create {
+    position: relative;
+    top: -.6rem;
+    @extend .default-button;
+  }
+
+  .create:hover {
+    @extend .default-button-hover;
+  }
+
+  .row {
+    margin-bottom: 2rem;
+  }
+
+  .upvote {
+    padding-right: 0;
+    background-color: inherit;
+    border: 0;
+  }
+
+  .upvote:hover {
+    color: $lightGreen;
+  }
+
+  .upvoteTally {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+    text-align: center;
+  }
+
+  .thread-title {
+    font-size: 1.2rem;
+    color: $darkerGreen;
+  }
+
+  .thread-title:hover {
+    color: $lightGreen;
+  }
+
+  .createdAt {
+    font-size: .8rem;
+    color: $grey;
+  }
+
+  .postTally {
+    text-align: center;
+    font-size: .8rem;
+    color: $grey;
+  }
+
+  .postNum {
+    font-size: 1.2rem;
+    color: $darkGrey;
+  }
+
+  .lastUpdated {
+    text-align: right;
+  }
+
+  .upvote,
+  .upvoteTally,
+  .lastUpdated {
+    position: relative;
+    top: .7rem;
+  }
+
   .pagination {
     text-align: center;
     margin-bottom: .5rem;
