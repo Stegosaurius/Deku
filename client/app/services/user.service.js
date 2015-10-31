@@ -113,7 +113,6 @@
     }
 
     function addPhotoByUpload(userID, file) {
-        console.log("File is : ", file)
         return Upload.upload({
           url: '/users/photos/aws/' + userID,
           file: file
