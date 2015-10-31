@@ -13,13 +13,12 @@
   </div>
 
 
-    <form class="post-form row" ng-submit="thread.postToThread()">
+    <form class="post-form row valign-wrapper" ng-submit="thread.postToThread()">
 
-      <textarea class="col s6 m6 l6" rows="2" cols="20" wrap="hard" ng-model="thread.newMessage" placeholder="post a new message to the thread">{{ thread.newMessage }}</textarea><br>
+      <textarea  rows="3" cols="20" wrap="hard" ng-model="thread.newMessage" placeholder="post a new message to the thread">{{ thread.newMessage }}</textarea>
 
-      <button class="col s2 m2 l2" type="submit">
-        <span class="col s3 m3 l3 left">Post</span>
-          <!-- <i class="material-icons col s5 m5 l5">send</i>       -->
+      <button class="valign" type="submit">
+        <span>Post</span>
         </button>
     </form>
 

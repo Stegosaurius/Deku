@@ -663,7 +663,9 @@ ul {
 
   button {
     @extend .default-button;
-    width: 2rem;
+    width: 5rem;
+    padding-top: .3rem;
+    padding-bottom: .3rem;
   }
 
   button:hover {
@@ -676,27 +678,16 @@ ul {
 
     textarea {
       resize: none;
-      width: 70%;
       border: 2px solid $lightGrey;
-      margin-right: 8%;
+      margin-right: 2%;
+      height: 2rem;
+      width: 40%
     }
 
     textArea:focus {
       border: 2px solid $lightBlue;
-    }
-
-    button {
-      height: 30px;
-      margin-top: -6px;
-      span {
-        font-size: 1.2rem;
-        padding-left: 34%;
-      }
-
-      i {
-        padding-left: 35%;
-        padding-top: 1%;
-      }
+      height: 4rem;
+      width: 50%;
     }
   }
 
