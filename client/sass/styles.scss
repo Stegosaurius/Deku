@@ -631,7 +631,6 @@ ul {
 
 .thread {
 
-  background-color: white;
   margin-top: 2%;
   margin-bottom: 5%;
 
@@ -646,7 +645,7 @@ ul {
 
     .thread-title {
       font-size: 2rem;
-      margin: 2%;
+      margin: 2% 2% 2% 0;
       padding-top: 0%;
       color: $darkGreen;
     }
@@ -664,6 +663,7 @@ ul {
 
   button {
     @extend .default-button;
+    width: 2rem;
   }
 
   button:hover {
