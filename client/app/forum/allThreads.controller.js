@@ -21,6 +21,7 @@
     // changing vm.page to 1 for being less than the page count.
     // Value will be set correctly upon the return of getThreads AJAX call
     vm.total = 1e9; // total number of threads
+    vm.upvote = upvote;
 
     getThreads(vm.page);
 
@@ -46,6 +47,10 @@
             vm.threads[i].last_updated = moment(vm.threads[i].last_updated).fromNow();
           }
         });
+    }
+
+    function upvote(threadID) {
+      // Forum.upvoteThread(User.getID(), threadID);
     }
   }
 })();
