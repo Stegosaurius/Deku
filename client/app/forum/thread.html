@@ -1,8 +1,20 @@
 <div class="thread z-depth-1 container">
 
-  <div>
+  <div class="row thread-meta col s12 m12 l12">
+    <h4 class="thread-title col s4 m4 l4"> Aquaponics {{ thread.thread.thread }}</h4>
+    <div class="thread-stats col s7 m7 l7 right-align"> 
+      <div class="col s10 m10 l10">
+        <h5 class="col s6 m6 l6"> Created by John Smith</h5>
+        <h5 class="col s6 m6 l6"> Last Active 1 Day Ago</h5>
+      </div>
+      <div class="col s10 m10 l10">
+        <h5 class="col s6 m6 l6"> {{ thread.total }} Posts</h5>
+        <h5 class="col s6 m6 l6"> 10,543 Upvotes</h5>
+      </div>
+    </div>
+    
+  </div>
 
-    <h4 class="thread-title"> Aquaponics {{ thread.thread.thread }}</h4>
 
     <form class="post-form row col s12 m12 l12" ng-submit="thread.postToThread()">
 
@@ -43,13 +55,19 @@
           {{ message.message }} 
         </div>
 
-
-
       </li>
 
     </ul>
-    
-    
-  </div>
 
+    <pagination class="pagination center-align"
+      page="thread.page"
+      page-size="thread.pageSize"
+      total="thread.total"
+      show-prev-next="true"
+      dots="...."
+      hide-if-empty="false"
+      adjacent="2"
+      scroll-top="true"
+      pagination-action="thread.changePage(page)" />
+      
 </div>

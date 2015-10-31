@@ -14,12 +14,19 @@
     vm.messages = [];
     vm.newMessage = '';
     vm.thread = {};
+    vm.page = $stateParams.page;
+    vm.pageSize = 20;
+    vm.total = 100000;
 
-    vm.avatarPath = "http://s3-ak.buzzfeed.com/static/enhanced/terminal01/2011/2/15/13/enhanced-buzz-16839-1297795475-9.jpg";
-
+    //user action methods
     vm.postToThread = postToThread;
+    vm.changePage = changePage;
 
     getMessages();
+
+    function changePage(page) {
+      $state.transitionTo('thread', { threadID: vm.messages[0].thread_id, page: page });
+    }
 
     function getMessages () {
       Forum.getMessages($stateParams.threadID, $stateParams.page)
@@ -31,11 +38,10 @@
             vm.messages[i].timestamp = moment.utc(vm.messages[i].timestamp).fromNow();
           }
           vm.thread = data.thread;
+          vm.total = data.count;
         });
 
     }
-
-    
 
     function postToThread () {
       Forum.postToThread(User.getID(), vm.thread.id, vm.newMessage)
@@ -43,5 +49,6 @@
           getMessages();
         })
     }
+
   }
 })();
