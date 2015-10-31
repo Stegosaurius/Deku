@@ -10,7 +10,8 @@
     var services = {
       createThread: createThread,
       getMessages: getMessages,
-      getThreads: getThreads
+      getThreads: getThreads,
+      postToThread: postToThread
     };
 
     return services;
@@ -40,6 +41,15 @@
         }, function errorCallback(res) {
           console.log('Error retrieving threads by page');
         });
+    }
+
+    function postToThread(userID, threadID, message) {
+      return $http.post('/threads/' + userID + '/' + threadID, { message: message })
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log('Error posting to thread');
+        })
     }
   }
 })();

@@ -17,13 +17,14 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.4.7",
-    "angular-ui-router": "~0.2.15",
-    "keen-js": "~3.2.7",
-    "jquery-knob": "jquery-knob#~1.2.11",
-    "jquery": "~2.1.4",
-    "angular-jwt": "~0.0.9",
     "Materialize": "materialize#~0.97.1",
-    "angular-materialize": "*"
+    "angular": "~1.4.7",
+    "angular-jwt": "~0.0.9",
+    "angular-materialize": "*",
+    "angular-moment": "~0.10.3",
+    "angular-ui-router": "~0.2.15",
+    "jquery": "~2.1.4",
+    "jquery-knob": "jquery-knob#~1.2.11",
+    "keen-js": "~3.2.7"
   }
 }

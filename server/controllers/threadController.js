@@ -47,7 +47,7 @@ module.exports = {
         res.status(500).end();
       } else {
         // update time in thread table
-        Thread.updateTime(id, function (err, result) {
+        Thread.updateTime(data.threadID, function (err, result) {
           if (err) {
             res.status(500).end();
           } else {
