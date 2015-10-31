@@ -630,7 +630,6 @@ ul {
  ***************************/
 
 .thread {
-
   margin-top: 2%;
   margin-bottom: 5%;
 
@@ -639,26 +638,27 @@ ul {
   }
 
   .thread-meta {
+    .title {
+      h4 {
+        font-size: 2rem;
+        color: $darkGreen;
+        margin: 1rem 0;
+      }
+      h5 {
+        font-size: 1rem;
+        margin: 2rem 0 1rem 0;
+      }
+    }
+    .meta {
+      h5 {
+        font-size: 1rem;
+        padding-right: .5rem;
+        border-right: 2px solid $darkGreen;
+        margin: 1rem 0;
+      }
 
-    margin: 2%;
-    margin-bottom: 4%;
-
-    .thread-title {
-      font-size: 2rem;
-      margin: 2% 2% 2% 0;
-      padding-top: 0%;
-      color: $darkGreen;
     }
 
-    .thread-stats {
-      margin-left: 3%;
-    }
-    
-
-  }
-
-  #total, #creator {
-    border-right: 2px solid $lightGrey;
   }
 
   button {
@@ -671,7 +671,6 @@ ul {
   }
 
   .post-form {
-    margin: 2%;
     padding-bottom: 25px;
     border-bottom: 2px solid $lightGrey;
 
@@ -702,7 +701,7 @@ ul {
   }
 
   .message-container {
-    margin: 2%;
+    margin-top: 2%
   }
 
   .avatar {
