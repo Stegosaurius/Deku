@@ -509,18 +509,20 @@ ul {
   top: -10px;
 }
 
-/* ___FORUM ALL THREADS___ */
+/***************************
+ **** FORUM ALL THREADS ****
+ ***************************/
 
 .allThreads {
   h3 {
     display: inline-block;
     margin-right: 2rem;
-    margin-bottom: 2.5rem;
   }
 
   .create {
     position: relative;
     top: -.6rem;
+    margin-bottom: 3rem;
     @extend .default-button;
   }
 
@@ -529,11 +531,40 @@ ul {
   }
 
   .row {
-    margin-bottom: 2rem;
+    margin-bottom: 2.3rem;
+    position: relative;
+  }
+
+  .leftCol {
+    padding-right: 0;
+  }
+
+  .avatar {
+    height: 45px;
+    border-radius: 50%;
+    margin-right: .5rem;
+  }
+
+  .user {
+    display: none;
+    background-color: $lightGrey;
+    border-radius: 3px;
+    position: absolute;
+    padding: .2rem .4rem;
+    font-size: .9rem;
+    top: -2.1rem;
+    left: 2.3rem;
+    -ms-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+
+  .avatarLink:hover + .user {
+    display: block;
   }
 
   .upvote {
-    padding-right: 0;
+    padding-right: .5rem;
     background-color: inherit;
     border: 0;
   }
@@ -544,7 +575,6 @@ ul {
 
   .upvoteTally {
     font-size: 1.2rem;
-    margin-right: 1rem;
     text-align: center;
   }
 

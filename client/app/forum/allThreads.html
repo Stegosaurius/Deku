@@ -6,10 +6,12 @@
   <ul class="threads">
     <li ng-repeat="thread in allThreads.threads">
       <div class="row">
-        <div class="col l8 m8 s11">
-          <a ui-sref="profile({ username: thread.userID })" class="left">
-            <img src="Group.png">
+        <div class="leftCol col l2 m3 s12">
+          <a class="avatarLink left" ui-sref="profile({ username: thread.username })">
+            <img class="avatar" src="{{ thread.profile_photo }}">
           </a>
+
+          <div class="user">{{ thread.username }}</div>
 
           <button class="upvote left" ng-click="allThreads.upvote(thread.id)">
             <i class="material-icons">keyboard_arrow_up</i>
@@ -18,7 +20,9 @@
           <span class="upvoteTally left">
             {{ thread.vote_tally }}
           </span>
+        </div>
 
+        <div class="col l7 m8 s10">
           <span class="left">
             <a class="thread-title" ui-sref="thread({ threadID: thread.id, page: 1 })">{{ thread.thread }}</a><br>
 
@@ -26,13 +30,13 @@
           </span>
         </div>
 
-        <div class="postTally col l1 m1 s1">
+        <div class="postTally col l1 m1 s2">
           <span class="postNum">{{ thread.messages_count }}</span><br>
           POSTS
         </div>
 
-        <div class="lastUpdated col l3 m3 hide-on-small-only">
-          <span>Last updated {{ thread.last_updated }}</span>
+        <div class="lastUpdated col l2 hide-on-med-and-down">
+          <span>Last active {{ thread.last_updated }}</span>
         </div>
       </div>
     </li>
