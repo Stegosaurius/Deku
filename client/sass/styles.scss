@@ -5,6 +5,7 @@ $lightBlue: #1abc9c;
 $lightGrey: #dfdfdf;
 $grey: #8e8e8e;
 $darkGreen: #109418;
+$darkerGreen: #0c7112;
 $darkGrey: #4a4a4a;
 $darkBlue: #138871;
 $mainBackground: #f9f9f9;
@@ -54,6 +55,7 @@ html {
 
 .main {
   margin: 0 4%;
+  color: $darkGrey;
 }
 
 .container {
@@ -276,8 +278,6 @@ ul {
  ***************************/
 
 .profile {
-  color: $darkGrey;
-
   h4 {
     color: $darkGreen;
     margin: 2.5rem 0 0 0;
@@ -509,12 +509,119 @@ ul {
   top: -10px;
 }
 
-/* ___FORUM ALL THREADS___ */
+/***************************
+ **** FORUM ALL THREADS ****
+ ***************************/
 
 .allThreads {
+  h3 {
+    display: inline-block;
+    margin-right: 2rem;
+  }
+
+  .create {
+    position: relative;
+    top: -.6rem;
+    margin-bottom: 3rem;
+    @extend .default-button;
+  }
+
+  .create:hover {
+    @extend .default-button-hover;
+  }
+
+  .row {
+    margin-bottom: 2.3rem;
+    position: relative;
+  }
+
+  .leftCol {
+    padding-right: 0;
+  }
+
+  .avatar {
+    height: 45px;
+    border-radius: 50%;
+    margin-right: .5rem;
+  }
+
+  .user {
+    display: none;
+    background-color: $lightGrey;
+    border-radius: 3px;
+    position: absolute;
+    padding: .2rem .4rem;
+    font-size: .9rem;
+    top: -2.1rem;
+    left: 2.3rem;
+    -ms-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+
+  .avatarLink:hover + .user {
+    display: block;
+  }
+
+  .upvote {
+    padding-right: .5rem;
+    background-color: inherit;
+    border: 0;
+  }
+
+  .upvote:hover {
+    color: $lightGreen;
+  }
+
+  .upvoteTally {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .upvote,
+  .upvoteTally {
+    position: relative;
+    top: .7rem;
+  }
+
+  .thread-title {
+    font-size: 1.2rem;
+    color: $darkerGreen;
+  }
+
+  .thread-title:hover {
+    color: $lightGreen;
+  }
+
+  .createdAt {
+    font-size: .8rem;
+    color: $grey;
+  }
+
+  .postTally {
+    text-align: center;
+    font-size: .8rem;
+    color: $grey;
+  }
+
+  .postNum {
+    font-size: 1.2rem;
+    color: $darkGrey;
+  }
+
+  .lastUpdated {
+    text-align: right;
+    height: 43px;
+    border-left: 2px solid $lightBlue;
+  }
+
   .pagination {
     text-align: center;
-    margin-bottom: .5rem;
+    margin-bottom: 1rem;
+  }
+
+  li.active {
+    background-color: $lightBlue;
   }
 }
 
