@@ -32,8 +32,8 @@
             <img class="avatar" src="{{ message.profile_photo }}">
           </div>
 
-          <div class="message-username col s2 m2 l2">
-            {{ message.username }}
+          <div ng-click="thread.navToUser(message.username)" class="message-username col s2 m2 l2">
+            <span>{{ message.username }}</span>
           </div>
 
           <div class="message-timestamp col s3 m3 l3">

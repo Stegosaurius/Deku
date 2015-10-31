@@ -701,7 +701,10 @@ ul {
   }
 
   .message-username {
-    
+    span:hover {
+      color: $lightBlue;
+      cursor: pointer;
+    }
   }
 
   .message-timestamp {
