@@ -27,7 +27,15 @@ module.exports = {
         console.error(err);
         res.status(500).end();
       } else {
-        res.status(200).json(messages);
+        Thread.getThreadByID(req.params.threadID, function (err, thread) {
+          if (err) {
+            console.error(err);
+            res.status(500).end();
+          } else {
+            messages.thread = thread;
+            res.status(200).json(messages);
+          }
+        })
       }
     });
   },
@@ -41,17 +49,27 @@ module.exports = {
       message: req.body.message
     };
 
-    Thread.addMessageToThread(data, function (err, newMessage) {
+    Thread.addMessageToThread(data, function (err, result) {
       if (err) {
         //Error handling
+        console.error(err);
         res.status(500).end();
       } else {
         // update time in thread table
-        Thread.updateTime(data.threadID, function (err, result) {
+        var messageID = result.insertID;
+        Thread.updateTimeAndMessagesForThread(data.threadID, function (err, result) {
           if (err) {
+            console.error(err);
             res.status(500).end();
           } else {
-            res.status(201).send(result);
+            Thread.getMessageByID(messageID, function(err, message) {
+              if (err) {
+                console.error(err);
+                res.status(500).end();
+              } else {
+                res.status(201).json(message);
+              }
+            });
           }
         })
       }
@@ -64,7 +82,14 @@ module.exports = {
         console.error(err);
         res.status(500).end();
       } else {
-        res.status(204).end();
+        Thread.getThreadsByPage(result.insertID, 1, function (err, thread) {
+          if (err) {
+            console.error(err);
+            res.status(500).end();
+          } else {
+            res.status(201).json(thread);
+          }
+        });
       }
     })
   },
