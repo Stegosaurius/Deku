@@ -33,6 +33,8 @@ module.exports = function(grunt) {
           "client/lib/Materialize/dist/js/materialize.min.js",
           "client/lib/angular-materialize/src/angular-materialize.js",
           "client/lib/moment/min/moment.min.js"
+          "client/lib/ng-file-upload/ng-file-upload-shim.min.js",
+          "client/lib/ng-file-upload/ng-file-upload.min.js"
         ],
         dest: 'client/dist/dependencies.min.js'
       }

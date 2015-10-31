@@ -30,6 +30,7 @@
     vm.unfollow = unfollow;
     vm.addAvatarPath = addAvatarPath;
     vm.addPhotoByPath = addPhotoByPath;
+    vm.addPhotoByUpload = addPhotoByUpload;
     vm.deletePhoto = deletePhoto;
 
     //Populate profile assets
@@ -153,6 +154,13 @@
 
     function addPhotoByPath () {
       User.addPhotoByPath(User.getID(), vm.photoPath)
+        .then(function (data) {
+          getPhotos();
+        });
+    }
+
+    function addPhotoByUpload (file) {
+      User.addPhotoByUpload(User.getID(), file)
         .then(function (data) {
           getPhotos();
         });

@@ -4,9 +4,9 @@
   angular.module('app')
     .factory('User', User);
 
-  User.$inject = ['$http', '$window', '$state', 'jwtHelper'];
+  User.$inject = ['$http', '$window', '$state', 'jwtHelper', 'Upload'];
 
-  function User($http, $window, $state, jwtHelper) {
+  function User($http, $window, $state, jwtHelper, Upload) {
 
     var services = {
       signin: signin,
@@ -17,6 +17,7 @@
       addAvatarPath: addAvatarPath,
       getPhotos: getPhotos,
       addPhotoByPath: addPhotoByPath,
+      addPhotoByUpload: addPhotoByUpload,
       deletePhoto: deletePhoto,
       getFollowers: getFollowers,
       getFollowees: getFollowees,
@@ -108,6 +109,21 @@
           return res.data;
         }, function errorCallback(res) {
           console.log('Error posting photo by path');
+        });
+    }
+
+    function addPhotoByUpload(userID, file) {
+        return Upload.upload({
+          url: '/users/photos/aws/' + userID,
+          file: file
+        }).then(function successCallback(res) {
+          console.log("Success loading photo. Res is ", res);
+          return res.data;
+        }, function errorCallback(res) {
+          console.log('Error uploading photo', res);
+        }, function progressTracker(evt) {
+          var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+          console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
         });
     }
 
