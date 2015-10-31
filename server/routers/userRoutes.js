@@ -1,6 +1,10 @@
 var userController = require('../controllers/userController.js');
 var expressJWT = require('express-jwt');
-// var auth = require('../config/auth');
+// Require multiparty for uploading photos
+var multiparty = require('connect-multiparty');
+var multipartyMiddleware = multiparty();
+
+
 if (process.env.PORT) {
   var auth = require('../config/auth.deploy.js');
 } else {
@@ -29,7 +33,7 @@ module.exports = function (app, passport) {
   app.delete('/tags/:tagID/:userID', userController.deleteUserTag);
 
   // Avatars for users
-  app.post('/upload/avatar/:userID', userController.uploadAvatar);
+  app.post('/upload/avatar/:userID', multipartyMiddleware, userController.uploadAvatar);
 
   app.get('/avatarpath/:username', userController.getAvatarPath);
 
@@ -39,7 +43,7 @@ module.exports = function (app, passport) {
   app.get('/photos/:username', userController.getPhotos);
 
   // For uploading photos first to S3
-  app.post('/photos/aws/:userID', userController.addPhotoS3);
+  app.post('/photos/aws/:userID', multipartyMiddleware, userController.addPhotoS3);
 
   // If photo is stored somewhere else, get path and store in database
   app.post('/photos/path/:userID', userController.addPhotoURL)

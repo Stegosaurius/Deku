@@ -24,6 +24,7 @@
     "jquery": "~2.1.4",
     "angular-jwt": "~0.0.9",
     "Materialize": "materialize#~0.97.1",
-    "angular-materialize": "*"
+    "angular-materialize": "*",
+    "ng-file-upload": "~9.1.1"
   }
 }
