@@ -578,6 +578,12 @@ ul {
     text-align: center;
   }
 
+  .upvote,
+  .upvoteTally {
+    position: relative;
+    top: .7rem;
+  }
+
   .thread-title {
     font-size: 1.2rem;
     color: $darkerGreen;
@@ -605,13 +611,8 @@ ul {
 
   .lastUpdated {
     text-align: right;
-  }
-
-  .upvote,
-  .upvoteTally,
-  .lastUpdated {
-    position: relative;
-    top: .7rem;
+    height: 43px;
+    border-left: 2px solid $lightBlue;
   }
 
   .pagination {
