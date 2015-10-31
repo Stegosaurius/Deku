@@ -10,7 +10,8 @@
     var services = {
       createThread: createThread,
       getMessages: getMessages,
-      getThreads: getThreads
+      getThreads: getThreads,
+      postToThread: postToThread
     };
 
     return services;

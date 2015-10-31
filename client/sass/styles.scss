@@ -525,14 +525,18 @@ ul {
 .thread {
 
   background-color: white;
-  margin-top: 5%;
-  margin-nottom: 5%;
+  margin-top: 2%;
+  margin-bottom: 5%;
 
   h5 {
     font-size: 1rem;
   }
 
   .thread-meta {
+
+    margin: 2%;
+    margin-bottom: 4%;
+
     .thread-title {
       font-size: 2rem;
       margin: 2%;
@@ -541,8 +545,14 @@ ul {
     }
 
     .thread-stats {
-      
+      margin-left: 3%;
     }
+    
+
+  }
+
+  #total, #creator {
+    border-right: 2px solid $lightGrey;
   }
 
   button {

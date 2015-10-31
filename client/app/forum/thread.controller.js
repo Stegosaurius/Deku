@@ -44,7 +44,7 @@
     }
 
     function postToThread () {
-      Forum.postToThread(User.getID(), vm.thread.id, vm.newMessage)
+      Forum.postToThread(User.getID(), vm.messages[0].thread_id, vm.newMessage)
         .then(function(data) {
           getMessages();
         })
