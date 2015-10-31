@@ -45,12 +45,14 @@
       <ul class="statuses">
         <li class="status row" ng-repeat="status in profile.statuses">
           <div class="col s9">
-            {{ status }}
+            {{ status.status }}
           </div>
           <div class="statusInfo col s3">
-            <button ng-click="profile.deleteStatus(status)">
+            <button class="right" ng-click="profile.deleteStatus(status.id)" ng-show="profile.activeUser">
               <i class="material-icons">more_vert</i>
             </button>
+
+            <span class="statusCreated right">{{ status.timestamp }}</span>
           </div>
         </li>
       </ul>

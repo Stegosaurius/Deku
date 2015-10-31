@@ -296,7 +296,7 @@ ul {
   .userInfo li {
     display: inline-block;
     vertical-align: top;
-    padding-right: 1rem;
+    padding-left: 1rem;
   }
 
   .location {
@@ -322,6 +322,7 @@ ul {
   .user-photos-container {
     width: 40rem;
     overflow-x: scroll;
+    margin-top: 1rem;
   }
 
   .user-photos-container ul {
@@ -389,6 +390,13 @@ ul {
     padding-left: .5rem;
     margin-bottom: 1.5rem;
     border-left: 8px solid $lightGreen;
+  }
+
+  .statusCreated {
+    font-size: .8rem;
+    color: $grey;
+    position: relative;
+    top: .3rem;
   }
 
   .bottom-left {
