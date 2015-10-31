@@ -32,7 +32,7 @@ module.exports = function(grunt) {
           "client/lib/jquery-knob/dist/jquery.knob.min.js",
           "client/lib/Materialize/dist/js/materialize.min.js",
           "client/lib/angular-materialize/src/angular-materialize.js",
-          "client/lib/moment/min/moment.min.js"
+          "client/lib/moment/min/moment.min.js",
           "client/lib/ng-file-upload/ng-file-upload-shim.min.js",
           "client/lib/ng-file-upload/ng-file-upload.min.js"
         ],

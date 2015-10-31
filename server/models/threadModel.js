@@ -51,10 +51,29 @@ module.exports = {
 				callback(err);
 			} else {
 				var filteredMessages = {
-					count: messages.length,
 					messages: messages.splice((page - 1) * 20, 20)
 				};
 				callback(null, filteredMessages);
+			}
+		});
+	},
+
+	getMessageByID: function (messageID, callback) {
+		db.query('select * from messages where id = ?', [messageID], function (err, res) {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, res);
+			}
+		})
+	},
+
+	getThreadByID: function (threadID, callback) {
+		db.query('select * from threads where id = ?', [threadID], function (err, res) {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, res);
 			}
 		});
 	},
