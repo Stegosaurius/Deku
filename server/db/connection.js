@@ -5,7 +5,7 @@ var mysql = require('mysql');
 // var connection = mysql.createConnection({
 //   host: dbURL,
 //   user: 'root',
-//   database: 'Deku'
+//   database: 'deku'
 // });
 
 
@@ -17,7 +17,7 @@ if (dbURL) {
   var connection = mysql.createConnection({
     host: 'localhost', 
     user: 'root',
-    database: 'Deku'
+    database: 'deku'
   });
 }
 

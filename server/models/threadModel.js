@@ -15,7 +15,8 @@ module.exports = {
 	},
 
 	getThreadsByPage: function (page, callback) {
-		db.query('select * from threads', function (err, threads) {
+		db.query('select t.id, t.thread, t.created_at, t.last_updated, t.messages_count, t.vote_tally, t.user_id, u.username, u.profile_photo \
+		 from threads t inner join users u where u.id = t.user_id', function (err, threads) {
 			if (err) {
 				callback(err);
 			} else {
