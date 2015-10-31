@@ -701,18 +701,20 @@ ul {
   }
 
   .message-username {
-    margin-top: -2px;
-    font-size: 1.2rem;
+    
   }
 
   .message-timestamp {
-    padding-left: 10%
   }
 
   .message-votes {
-    h5 {
-      margin-top: 2%;
-      margin-left: 2%;
+    div {
+      i {
+        margin-top: -0.2rem;
+      }
+      h5 {
+        margin-top: 0.2rem;
+      }
     }
   }
 

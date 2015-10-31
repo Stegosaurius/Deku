@@ -15,7 +15,7 @@
 
     <form class="post-form row valign-wrapper" ng-submit="thread.postToThread()">
 
-      <textarea  rows="3" cols="20" wrap="hard" ng-model="thread.newMessage" placeholder="post a new message to the thread">{{ thread.newMessage }}</textarea>
+      <textarea rows="3" cols="20" wrap="hard" ng-model="thread.newMessage" placeholder="post a new message to the thread">{{ thread.newMessage }}</textarea>
 
       <button class="valign" type="submit">
         <span>Post</span>
@@ -40,9 +40,11 @@
             {{ message.timestamp }}
           </div>
 
-          <div class="message-votes col s5 m5 l5">
-            <i class="material-icons col s1 m1 l1">star_border</i>
-            <h5 class="col s5 m5 l5">{{ message.vote_tally }} upvotes</h5>
+          <div class="message-votes col s2 m2 l2">
+            <div class="row">
+              <i class="material-icons col s4 m4 l4">star_border</i>
+              <h5 class="col s8 m8 l8">{{ message.vote_tally }} upvotes</h5>
+            </div>
           </div>
 
         </div>
