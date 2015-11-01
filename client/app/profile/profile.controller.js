@@ -30,9 +30,6 @@
     checkActiveUser();
     getProfile();
 
-    // link statuses to IDs to aid in deletion
-    var statusObj = {};
-
     ///////////////////////
     /// SCOPE FUNCTIONS ///
     ///////////////////////
@@ -49,17 +46,14 @@
 
       User.addStatus(newStatus, User.getID())
         .then(function(status) {
-          // add new status and ID to status object
-          // statusObj[newStatus] = status.id;
           vm.statuses[0] = status;
         });
     }
 
     // remove status from database
     function deleteStatus(statusID) {
-      // call delete with status ID
       User.deleteStatus(statusID);
-      // vm.statuses.splice(vm.statuses.indexOf(status), 1);
+
       for (var i = 0; i < vm.statuses.length; i++) {
         if (vm.statuses[i].id === statusID) {
           vm.statuses.splice(i, 1);
@@ -145,9 +139,9 @@
           vm.statuses = statuses;
 
           // transform timestamp to readable format
-          // for (var i = 0; i < vm.statuses.length; i++) {
-          //   vm.statuses[i].timestamp = moment.utc(vm.statuses[i].timestamp).fromNow();
-          // }
+          for (var i = 0; i < vm.statuses.length; i++) {
+            vm.statuses[i].timestamp = moment.utc(vm.statuses[i].timestamp).fromNow();
+          }
         });
     }
 
@@ -169,6 +163,5 @@
           }
         });
     }
-
   }
 })();
