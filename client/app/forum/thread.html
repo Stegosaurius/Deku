@@ -1,52 +1,50 @@
-<div class="thread z-depth-1 container">
+<div class="thread container">
 
-  <div class="row thread-meta col s12 m12 l12">
-    <h4 class="thread-title col s4 m4 l4"> Aquaponics {{ thread.thread.thread }}</h4>
-    <div class="thread-stats col s7 m7 l7"> 
-      <div class="col s12 m12 l12">
-        <h5 id="creator" class="col s6 m6 l6 right-align"> Created by John Smith</h5>
-        <h5 class="col s6 m6 l6 left-align "> Last Active 1 Day Ago</h5>
-      </div>
-      <div class="col s12 m12 l12">
-        <h5 id="total" class="col s6 m6 l6 right-align"> {{ thread.total }} Posts</h5>
-        <h5 class="col s6 m6 l6 left-align"> 10,543 Upvotes</h5>
-      </div>
+  <div class="thread-meta row">
+    <div class="title col s6 m6 l6 left-align">
+      <h4>Aquaponics {{ thread.thread.thread }}</h4>
+      <h5>Created by John Smith</h5>
     </div>
-    
+    <div class="meta col s6 m6 l6 right-align">
+      <h5>Last Active 1 Day Ago</h5>
+      <h5> {{ thread.total }} Posts </h5>
+      <h5>10,543 Upvotes</h5>
+    </div>
   </div>
 
 
-    <form class="post-form row col s12 m12 l12" ng-submit="thread.postToThread()">
+    <form class="post-form row valign-wrapper" ng-submit="thread.postToThread()">
 
-      <textarea class="col s6 m6 l6" rows="2" cols="20" wrap="hard" ng-model="thread.newMessage" placeholder="post a new message to the thread">{{ thread.newMessage }}</textarea><br>
+      <textarea rows="3" cols="20" wrap="hard" ng-model="thread.newMessage" placeholder="post a new message to the thread">{{ thread.newMessage }}</textarea>
 
-      <button class="col s2 m2 l2" type="submit">
-        <span class="col s3 m3 l3 left">Post</span>
-          <i class="material-icons col s5 m5 l5">send</i>      
+      <button class="valign" type="submit">
+        <span>Post</span>
         </button>
     </form>
 
     <ul class="message-list-container">
 
-      <li class="row message-container row col s12 m12 l12" ng-repeat="message in thread.messages">
+      <li class="message-container" ng-repeat="message in thread.messages">
         
-        <div class="row message-meta col s12 m12 l12">
+        <div class="row message-meta">
           
           <div class="message-avatar col s1 m1 l1">
             <img class="avatar" src="{{ message.profile_photo }}">
           </div>
 
-          <div class="message-username col s2 m2 l2">
-            {{ message.username }}
+          <div ng-click="thread.navToUser(message.username)" class="message-username col s2 m2 l2">
+            <span>{{ message.username }}</span>
           </div>
 
           <div class="message-timestamp col s3 m3 l3">
             {{ message.timestamp }}
           </div>
 
-          <div class="message-votes col s5 m5 l5">
-            <i class="material-icons col s1 m1 l1">star_border</i>
-            <h5 class="col s5 m5 l5">{{ message.vote_tally }} upvotes</h5>
+          <div class="message-votes col s2 m2 l2">
+            <div class="row">
+              <i class="material-icons col s4 m4 l4">star_border</i>
+              <h5 class="col s8 m8 l8">{{ message.vote_tally }} upvotes</h5>
+            </div>
           </div>
 
         </div>

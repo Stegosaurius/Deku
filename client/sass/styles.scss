@@ -640,8 +640,6 @@ ul {
  ***************************/
 
 .thread {
-
-  background-color: white;
   margin-top: 2%;
   margin-bottom: 5%;
 
@@ -650,30 +648,34 @@ ul {
   }
 
   .thread-meta {
+    .title {
+      h4 {
+        font-size: 2rem;
+        color: $darkGreen;
+        margin: 1rem 0;
+      }
+      h5 {
+        font-size: 1rem;
+        margin: 2rem 0 1rem 0;
+      }
+    }
+    .meta {
+      h5 {
+        font-size: 1rem;
+        padding-right: .5rem;
+        border-right: 2px solid $darkGreen;
+        margin: 1rem 0;
+      }
 
-    margin: 2%;
-    margin-bottom: 4%;
-
-    .thread-title {
-      font-size: 2rem;
-      margin: 2%;
-      padding-top: 0%;
-      color: $darkGreen;
     }
 
-    .thread-stats {
-      margin-left: 3%;
-    }
-    
-
-  }
-
-  #total, #creator {
-    border-right: 2px solid $lightGrey;
   }
 
   button {
     @extend .default-button;
+    width: 5rem;
+    padding-top: .3rem;
+    padding-bottom: .3rem;
   }
 
   button:hover {
@@ -681,38 +683,26 @@ ul {
   }
 
   .post-form {
-    margin: 2%;
     padding-bottom: 25px;
     border-bottom: 2px solid $lightGrey;
 
     textarea {
       resize: none;
-      width: 70%;
       border: 2px solid $lightGrey;
-      margin-right: 8%;
+      margin-right: 2%;
+      height: 2rem;
+      width: 40%
     }
 
     textArea:focus {
       border: 2px solid $lightBlue;
-    }
-
-    button {
-      height: 30px;
-      margin-top: -6px;
-      span {
-        font-size: 1.2rem;
-        padding-left: 34%;
-      }
-
-      i {
-        padding-left: 35%;
-        padding-top: 1%;
-      }
+      height: 4rem;
+      width: 50%;
     }
   }
 
   .message-container {
-    margin: 2%;
+    margin-top: 2%
   }
 
   .avatar {
@@ -721,18 +711,23 @@ ul {
   }
 
   .message-username {
-    margin-top: -2px;
-    font-size: 1.2rem;
+    span:hover {
+      color: $lightBlue;
+      cursor: pointer;
+    }
   }
 
   .message-timestamp {
-    padding-left: 10%
   }
 
   .message-votes {
-    h5 {
-      margin-top: 2%;
-      margin-left: 2%;
+    div {
+      i {
+        margin-top: -0.2rem;
+      }
+      h5 {
+        margin-top: 0.2rem;
+      }
     }
   }
 

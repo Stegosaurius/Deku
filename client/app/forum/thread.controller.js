@@ -19,13 +19,18 @@
     vm.total = 100000;
 
     //user action methods
-    vm.postToThread = postToThread;
     vm.changePage = changePage;
+    vm.navToUser = navToUser;
+    vm.postToThread = postToThread;
 
     getMessages();
 
     function changePage(page) {
       $state.transitionTo('thread', { threadID: vm.messages[0].thread_id, page: page });
+    }
+
+    function navToUser (username) {
+      $state.transitionTo('profile', { username : username });
     }
 
     function getMessages () {
