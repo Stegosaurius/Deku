@@ -8,8 +8,12 @@ var bcrypt = require('bcrypt-nodejs');
 var fs = require('fs');
 var zlib = require('zlib');
 var config = require('../config/auth.js');
-var AWS = require("aws-sdk");
-AWS.config.update({ accessKeyId: config.awsStorage.accessKey, secretAccessKey: config.awsStorage.secretKey });
+var cloudinary = require('cloudinary');
+cloudinary.config({ 
+  cloud_name: config.cloudinary.cloudName, 
+  api_key: config.cloudinary.API_Key, 
+  api_secret: config.cloudinary.API_Secret
+});
 
 module.exports = {
   //Put all http req handling functions here
@@ -242,48 +246,20 @@ module.exports = {
     });
   },
 
-  addPhotoS3: function (req, res) {
+  addPhotoCloudinary: function (req, res) {
     var file = req.files.file;
     var userID = req.params.userID;
 
-    // Read the file first before uploading to s3
-    fs.readFile(file.path, function (err, data) {
-      if (err) {
-        throw err;
-      }
-      var s3 = new AWS.S3({ params: { Bucket: config.awsStorage.bucket } });
-      s3.createBucket(function () {
-        var params = {
-          Key: file.originalFilename, 
-          Body: data
-        };
-        s3.upload(params, function(err, data) {
-          // whether there is an error or not, delete the temp file
-          fs.unlink(file.path, function (err) {
-            if (err) {
-              console.error(err);
-            } else {
-              console.log('Temp File Delete');
-            }
-          });
-
-          // now send back the error if there is one
-          if (err) {
-            console.error(err);
-            res.status(500).send(err);
-          } else {
-            // store path to avatar in our database
-            User.addPhoto(userID, data.Location, function (err, result) {
-              if (err) {
-                console.error(err);
-                res.status(500).send(err);
-              } else {
-                res.status(201).json({ photo: data.Location });
-              }
-            });
-          }
-        });
-      });
+    cloudinary.uploader.upload(file.path, function(result) { 
+      var url = result.url;
+      User.addPhoto(userID, url, function (err, result) {
+        if (err) {
+          console.error(err);
+          res.status(500).end();
+        } else {
+          res.status(201).json({ photo: url });
+        }
+      }) 
     });
   },
 

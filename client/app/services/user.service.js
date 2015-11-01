@@ -114,7 +114,7 @@
 
     function addPhotoByUpload(userID, file) {
         return Upload.upload({
-          url: '/users/photos/aws/' + userID,
+          url: '/users/photos/upload/' + userID,
           file: file
         }).then(function successCallback(res) {
           console.log("Success loading photo. Res is ", res);
