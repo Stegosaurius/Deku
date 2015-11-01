@@ -29,11 +29,10 @@
 
     checkActiveUser();
     getProfile();
-    getPhotos();
-    getAvatar();
 
-    // link statuses to IDs to aid in deletion
-    var statusObj = {};
+    ///////////////////////
+    /// SCOPE FUNCTIONS ///
+    ///////////////////////
 
     // post status to database and clear form
     function addStatus() {
@@ -43,27 +42,24 @@
       vm.statusUpdate.$setPristine();
       vm.status = '';
 
-      vm.statuses.unshift(newStatus);
+      vm.statuses.unshift({ status: newStatus });
 
       User.addStatus(newStatus, User.getID())
         .then(function(status) {
-          // add new status and ID to status object
-          statusObj[newStatus] = status.id;
+          vm.statuses[0] = status;
         });
     }
 
-    // return true if the active user is viewing his/her own profile
-    function checkActiveUser() {
-      // checking token is more secure than checking localStorage.username
-      var user = jwtHelper.decodeToken($window.localStorage.token).username;
-      vm.activeUser = user === $stateParams.username;
-    }
-
     // remove status from database
-    function deleteStatus(status) {
-      // call delete with status ID
-      User.deleteStatus(statusObj[status]);
-      vm.statuses.splice(vm.statuses.indexOf(status), 1);
+    function deleteStatus(statusID) {
+      User.deleteStatus(statusID);
+
+      for (var i = 0; i < vm.statuses.length; i++) {
+        if (vm.statuses[i].id === statusID) {
+          vm.statuses.splice(i, 1);
+          break;
+        }
+      }
     }
 
     // make the active user a follower of this profile's user
@@ -71,22 +67,15 @@
       User.follow(User.getID(), vm.username);
     }
 
-    function getFollowers() {
-      User.getFollowers(vm.username)
-        .then(function(data) {
-          console.log('follower data  ', data);
-          for (var i = 0; i < data.length; i++) {
-            vm.followers.push(data[i].username);
-          }
-        });
+    ///////////////////////////
+    /// NON-SCOPE FUNCTIONS ///
+    ///////////////////////////
 
-      User.getFollowees(vm.username)
-        .then(function(data) {
-          console.log('followee data  ', data);
-          for (var i = 0; i < data.length; i++) {
-            vm.followees.push(data[i].username);
-          }
-        });
+    // return true if the active user is viewing his/her own profile
+    function checkActiveUser() {
+      // checking token is more secure than checking localStorage.username
+      var user = jwtHelper.decodeToken($window.localStorage.token).username;
+      vm.activeUser = user === $stateParams.username;
     }
 
     function getProfile() {
@@ -98,7 +87,8 @@
           getStatuses();
           getFollowers();
           // getRecentThreads();
-          // getAvatar();
+          getAvatar();
+          getPhotos();
         });
     }
 
@@ -111,6 +101,22 @@
             for (var i = 0; i < tags.length; i++) {
               vm.tags.push(tags[i].tag);
             }
+          }
+        });
+    }
+
+    function getFollowers() {
+      User.getFollowers(vm.username)
+        .then(function(data) {
+          for (var i = 0; i < data.length; i++) {
+            vm.followers.push(data[i].username);
+          }
+        });
+
+      User.getFollowees(vm.username)
+        .then(function(data) {
+          for (var i = 0; i < data.length; i++) {
+            vm.followees.push(data[i].username);
           }
         });
     }
@@ -130,10 +136,11 @@
     function getStatuses() {
       User.getStatuses(vm.username)
         .then(function(statuses) {
-          vm.statuses = [];
-          for (var i = 0; i < statuses.length; i++) {
-            vm.statuses.push(statuses[i].status);
-            statusObj[statuses[i].status] = statuses[i].id;
+          vm.statuses = statuses;
+
+          // transform timestamp to readable format
+          for (var i = 0; i < vm.statuses.length; i++) {
+            vm.statuses[i].timestamp = moment.utc(vm.statuses[i].timestamp).fromNow();
           }
         });
     }
@@ -156,6 +163,5 @@
           }
         });
     }
-
   }
 })();
