@@ -65,6 +65,10 @@
     // make the active user a follower of this profile's user
     function follow() {
       User.follow(User.getID(), vm.username);
+      User.addNotification(vm.username, {
+        originatorName: $window.localStorage.username,
+        content: ' is now following you'
+      });
     }
 
     ///////////////////////////
