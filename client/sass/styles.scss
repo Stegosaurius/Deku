@@ -475,6 +475,24 @@ ul {
       }
     }
   }
+
+  .tabs {
+    margin-bottom: 0.5rem;
+
+    .tab {
+      a {
+        color: $darkGrey;
+      }
+    }
+
+    .indicator { 
+      background-color: $darkGreen;
+    }
+  }
+
+  .status-container {
+    padding: 0;
+  }
 }
 
 /***************************

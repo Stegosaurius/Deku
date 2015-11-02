@@ -88,7 +88,7 @@
           vm.tagModalData = [];
           for (var i = 0; i < data.length; i++) {
             var userObj = {
-              avatarPath: data[i].profile_photo,
+              profile_photo: data[i].profile_photo,
               username: data[i].username,
               location: data[i].location
             }
@@ -120,6 +120,7 @@
           vm.location = data.location || 'Where are you?';
           getTags();
           getStatuses();
+          getFolloweesStatuses();
           getFollowers();
           // getRecentThreads();
           getAvatar();
@@ -178,6 +179,18 @@
             vm.statuses[i].timestamp = moment.utc(vm.statuses[i].timestamp).fromNow();
           }
         });
+    }
+
+    function getFolloweesStatuses() {
+      User.getFolloweesStatuses(User.getID())
+        .then(function (statuses) {
+          console.log(statuses);
+          vm.followeesStatuses = statuses;
+
+          for (var i = 0; i < vm.followeesStatuses.length; i++) {
+            vm.followeesStatuses[i].timestamp = moment.utc(vm.followeesStatuses[i].timestamp).fromNow();
+          }
+        })
     }
 
     //Get current profile picture(avatar)

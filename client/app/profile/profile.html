@@ -45,8 +45,52 @@
         </form>
       </div>
 
-      <h5>Recent Updates</h5>
-      <ul class="statuses">
+      <div class="row">
+          <div class="col s12 status-container">
+              <ul class="tabs" tabs>
+                  <li class="tab col s3"><a class="active" href="#friendsUpdates">Recent Updates</a></li>
+                  <li class="tab col s3"><a href="#myUpdates">My Updates</a></li>
+              </ul>
+          </div>
+          <div id="friendsUpdates" class="col s12 status-container">
+            <ul class="statuses">
+              <li class="status row" ng-repeat="status in profile.followeesStatuses">
+                <div class="col s3">
+                  {{ status.username }}
+                </div>
+                <div class="col s6">
+                  {{ status.status }}
+                </div>
+                <div class="statusInfo col s3">
+                  <button class="right" ng-click="profile.deleteStatus(status.id)" ng-show="profile.activeUser">
+                    <i class="material-icons">more_vert</i>
+                  </button>
+
+                  <span class="statusCreated right">{{ status.timestamp }}</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="myUpdates" class="col s12 status-container">
+            <ul class="statuses">
+              <li class="status row" ng-repeat="status in profile.statuses">
+                <div class="col s9">
+                  {{ status.status }}
+                </div>
+                <div class="statusInfo col s3">
+                  <button class="right" ng-click="profile.deleteStatus(status.id)" ng-show="profile.activeUser">
+                    <i class="material-icons">more_vert</i>
+                  </button>
+
+                  <span class="statusCreated right">{{ status.timestamp }}</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+      </div>
+
+      <!-- <h5>Recent Updates</h5> -->
+      <!-- <ul class="statuses">
         <li class="status row" ng-repeat="status in profile.statuses">
           <div class="col s9">
             {{ status.status }}
@@ -59,7 +103,7 @@
             <span class="statusCreated right">{{ status.timestamp }}</span>
           </div>
         </li>
-      </ul>
+      </ul> -->
     </div>
 
     <div class="bottom-right col s4">

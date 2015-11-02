@@ -31,6 +31,7 @@
       addStatus: addStatus,
       deleteStatus: deleteStatus,
       getStatuses: getStatuses,
+      getFolloweesStatuses: getFolloweesStatuses,
       addTag: addTag,
       getTags: getTags,
       removeTag: removeTag,
@@ -268,6 +269,15 @@
           return res.data;
         }, function errorCallback(res) {
           console.log('Error retrieving statuses');
+        });
+    }
+
+    function getFolloweesStatuses(userID) {
+      return $http.get('/status/followees/' + userID)
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log('Error retrieving friends statuses');
         });
     }
 
