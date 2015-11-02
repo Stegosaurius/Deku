@@ -167,9 +167,21 @@ module.exports = {
     });
   },
 
+  getUsersForTag: function (tagname, callback) {
+    db.query('select u.username, u.profile_photo, u.location from users u \
+      inner join usertags ut inner join tags t where t.tag = ? and ut.tag_id = t.id and ut.user_id = u.id', 
+      [tagname], function (err, res) {
+        if (err) {
+          callback(err);
+        } else {
+          callback(null, res);
+        }
+      });
+  },
+
   addUserTag: function (data, callback) {
-    db.query('insert into usertags (user_id, tag_id) values (?, ?)', [data.userID, data.tagID],
-      function (err, res) {
+    db.query('insert into usertags (user_id, tag_id) values (?, ?) on duplicate key update user_id = user_id', 
+      [data.userID, data.tagID], function (err, res) {
         if (err) {
           callback(err, null);
         } else {
@@ -179,7 +191,7 @@ module.exports = {
   },
 
   addTag: function (tag, callback) {
-    db.query('insert into tags (tag) values (?)', [tag], function (err, res) {
+    db.query('insert into tags (tag) values (?) on duplicate key update tag = tag', [tag], function (err, res) {
       if (err) {
         callback(err);
       } else {

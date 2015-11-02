@@ -124,6 +124,17 @@ module.exports = {
     });
   },
 
+  getUsersForTag: function (req, res) {
+    User.getUsersForTag(req.params.tagName, function (err, users) {
+      if (err) {
+        console.error(err);
+        res.status(500).end();
+      } else {
+        res.status(200).json(users);
+      }
+    })
+  },
+
   addUserTag: function (req, res) {
     // add a tag to the tags table first if it not already part of our collection
     // then add to UserTags table

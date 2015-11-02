@@ -28,6 +28,8 @@ module.exports = function (app, passport) {
 
   app.get('/tags/:username', userController.getUserTags);
 
+  app.get('/tags/associated/:tagName', userController.getUsersForTag);
+
   app.post('/tags/:userID', userController.addUserTag);
 
   app.delete('/tags/:tagID/:userID', userController.deleteUserTag);
