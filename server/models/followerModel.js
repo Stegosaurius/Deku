@@ -28,8 +28,10 @@ module.exports = {
     })
   },
 
-  follow: function (followerID, followeeID, callback) {
-    db.query('insert into followers (follower_id, followee_id) values (?, ?)', [followerID, followeeID], function (err, res) {
+  follow: function (followerID, followeeName, callback) {
+    db.query('insert into followers (follower_id, followee_id) select ?, u.id from users u where u.username = ? \
+      on duplicate key update follower_id = follower_id', 
+      [followerID, followeeName], function (err, res) {
       if (err) {
         callback(err);
       } else {

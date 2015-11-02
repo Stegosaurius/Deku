@@ -47,7 +47,7 @@ CREATE TABLE `notifications` (
 	`id` int NOT NULL AUTO_INCREMENT,
 	`content` TEXT NOT NULL,
 	`user_id` INT NOT NULL,
-	`originatorName` varchar(50) NOT NULL,
+	`originator_name` varchar(50) NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
@@ -92,6 +92,8 @@ CREATE TABLE `thread_votes` (
 	`thread_id` int NOT NULL,
 	`user_id` int NOT NULL
 );
+
+CREATE UNIQUE INDEX `record` ON `followers` (`follower_id`, `followee_id`);
 
 ALTER TABLE `followers` ADD CONSTRAINT `followers_fk0` FOREIGN KEY (`follower_id`) REFERENCES `users`(`id`);
 

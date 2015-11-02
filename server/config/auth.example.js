@@ -29,6 +29,12 @@ module.exports =
         'bucket': "xxxxxxxxxxx"
     },
 
+    'cloudinary' : {
+        'cloudName': 'xxxxxxxxxxx',
+        'API_Key': 'xxxxxxxxxxx',
+        'API_Secret': 'xxxxxxxxxxx'
+    },
+
     'secret' : 'xxxxxxxxxxx'
 
 }; 
