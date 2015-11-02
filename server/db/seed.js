@@ -170,22 +170,13 @@ function addFollowees (n) {
     var user1 = allUsers[Math.floor(Math.random() * (allUsers.length - 1))];
     var user2 = allUsers[Math.floor(Math.random() * (allUsers.length - 1))];
   } while (user1.username === user2.username);
-  Follow.checkFollowee(user1.id, user2.id, function (err, result) {
+  Follow.follow(user1.id, user2.username, function (err, result) {
     if (err) {
       console.error(err);
-    }
-    if (!result[0]) {
-      Follow.follow(user1.id, user2.id, function (err, result) {
-        if (err) {
-          console.error(err);
-        } else {
-          addFollowees(n - 1);
-        }
-      }); 
     } else {
-      addFollowees(n);
+      addFollowees(n - 1);
     }
-  })
+  }); 
 }
 
 function addThreads (n) {

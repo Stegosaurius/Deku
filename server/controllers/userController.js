@@ -101,28 +101,6 @@ module.exports = {
     });
   },
 
-  getNotifications: function (req, res) {
-    User.getNotifications(req.params.id, function (err, notifications) {
-      if (err) {
-        console.error(err);
-        res.send(err);
-      } else {
-        res.json(notifications);
-      }
-    })
-  },
-
-  createNotification: function (req, res) {
-    User.addNotification(req.params.id, req.body.content, function (err, result) {
-      if (err) {
-        console.error(err);
-        res.send(err);
-      } else {
-        res.send(result);
-      }
-    })
-  },
-
   getScopedKey: function (req, res) {
     var id = req.params.id;
     User.getScopedKey(id, function (err, key) {

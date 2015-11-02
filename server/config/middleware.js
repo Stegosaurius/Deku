@@ -13,6 +13,7 @@ module.exports = function (app, express) {
   var threadRouter = express.Router();
   var statusRouter = express.Router();
   var authRouter = express.Router();
+  var notificationRouter = express.Router();
 
   //morgan is for logging get and post data to the console.
   app.use(morgan('dev'));
@@ -30,6 +31,7 @@ module.exports = function (app, express) {
   app.use('/status', statusRouter);
   app.use('/threads', threadRouter);
   app.use('/auth', authRouter);
+  app.use('/notifications', notificationRouter);
 
   //inject our routers into their respective route files
   //TODO: Add inject Auth router into authRoutes.js
@@ -38,6 +40,7 @@ module.exports = function (app, express) {
   require('../routers/followerRoutes.js')(followerRouter);
   require('../routers/threadRoutes.js')(threadRouter);
   require('../routers/statusRoutes.js')(statusRouter);
+  require('../routers/notificationRoutes.js')(notificationRouter);
 
   //inject passport into passport configuration file
   require('../config/passport')(passport);

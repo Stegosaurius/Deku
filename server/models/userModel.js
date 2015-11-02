@@ -126,27 +126,6 @@ module.exports = {
     });
   },
 
-  getNotifications: function (id, callback) {
-    db.query('select n.content from notifications n inner join users u on (n.user_id = u.id) where n.user_id = ?', [id],
-      function (err, notifications) {
-        if (err) {
-          callback(err, null);
-        } else {
-          callback(null, notifications);
-        }
-    });
-  },
-
-  addNotification: function (id, content, callback) {
-    db.query('insert into notifications (user_id, content) values (?, ?)', [id, content], function (err, res) {
-      if (err) {
-        callback(err, null);
-      } else {
-        callback(null, res);
-      }
-    });
-  },
-
   getPassword: function (id, callback) {
     db.query('select password from users where id = ?', [id], function (err, res) {
       if (err) {
