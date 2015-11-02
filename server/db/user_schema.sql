@@ -94,6 +94,8 @@ CREATE TABLE `thread_votes` (
 );
 
 CREATE UNIQUE INDEX `record` ON `followers` (`follower_id`, `followee_id`);
+CREATE UNIQUE INDEX `username` ON `users` (`username`);
+CREATE UNIQUE INDEX `email` ON `users` (`email`);
 
 ALTER TABLE `followers` ADD CONSTRAINT `followers_fk0` FOREIGN KEY (`follower_id`) REFERENCES `users`(`id`);
 

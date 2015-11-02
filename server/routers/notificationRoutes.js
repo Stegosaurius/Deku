@@ -5,5 +5,7 @@ module.exports = function (app) {
 
   app.post('/:username', notificationController.addNotification);
 
-  app.delete('/:userID', notificationController.deleteNotifications);
+  app.delete('/all/:userID', notificationController.deleteAllNotifications);
+
+  app.delete('/:notificationID', notificationController.deleteNotification);
 }
