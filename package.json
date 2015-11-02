@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/Stegosaurius/Deku#readme",
   "dependencies": {
-    "aws-sdk": "^2.2.11",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.14.1",
     "cloudinary": "^1.2.5",

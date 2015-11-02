@@ -55,7 +55,7 @@ CREATE TABLE `statuses` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`user_id` INT NOT NULL,
 	`status` varchar(250) NOT NULL,
-	`timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`created_at` BIGINT NOT NULL,
 	`vote_tally` INT NOT NULL DEFAULT '0',
 	PRIMARY KEY (`id`)
 );
@@ -93,7 +93,15 @@ CREATE TABLE `thread_votes` (
 	`user_id` int NOT NULL
 );
 
-CREATE UNIQUE INDEX `record` ON `followers` (`follower_id`, `followee_id`);
+CREATE UNIQUE INDEX `record_f` ON `followers` (`follower_id`, `followee_id`);
+CREATE UNIQUE INDEX `record_mv` ON `message_votes` (`message_id`, `user_id`);
+CREATE UNIQUE INDEX `record_sv` ON `status_votes` (`user_id`, `status_id`);
+CREATE UNIQUE INDEX `record_tv` ON `thread_votes` (`thread_id`, `user_id`);
+CREATE UNIQUE INDEX `record_ut` ON `usertags` (`user_id`, `tag_id`);
+CREATE UNIQUE INDEX `username` ON `users` (`username`);
+CREATE UNIQUE INDEX `email` ON `users` (`email`);
+CREATE UNIQUE INDEX `tag` ON `tags` (`tag`);
+
 
 ALTER TABLE `followers` ADD CONSTRAINT `followers_fk0` FOREIGN KEY (`follower_id`) REFERENCES `users`(`id`);
 

@@ -23,8 +23,8 @@ module.exports = {
     })
   },
   
-  deleteNotifications: function (req, res) {
-    Notification.deleteNotifications(req.params.userID, function (err, result) {
+  deleteAllNotifications: function (req, res) {
+    Notification.deleteAllNotifications(req.params.userID, function (err, result) {
       if (err) {
         console.error(err);
         res.status(500).end();
@@ -32,5 +32,16 @@ module.exports = {
         res.status(204).end();
       }
     })
+  },
+
+  deleteNotification: function (req, res) {
+    Notification.deleteNotification(req.params.notificationID, function (err, result) {
+      if (err) {
+        console.error(err);
+        res.status(500).end();
+      } else {
+        res.status(204).end();
+      }
+    });
   }
 }

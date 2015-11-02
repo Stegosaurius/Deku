@@ -35,8 +35,18 @@ module.exports = {
       });
   },
 
-  deleteNotification: function () {
+  deleteAllNotifications: function (userID, callback) {
     db.query('delete from notifications where user_id = ?', [userID], function (err, res) {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, res);
+      }
+    });
+  },
+
+  deleteNotification: function (notificationID, callback) {
+    db.query('delete from notifications where id = ?', [notificationID], function (err, res) {
       if (err) {
         callback(err);
       } else {
