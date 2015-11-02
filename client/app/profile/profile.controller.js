@@ -65,35 +65,36 @@
     }
 
     function getUsersForTag(tagname) {
-      vm.tagModalData = [
-        {
-          profile_photo: "../../github_pic.jpg",
-          username: "john smith",
-          location: "San Francisco"
-        },
-        {
-          profile_photo: "../../github_pic.jpg",
-          username: "john smith",
-          location: "San Francisco"
-        },
-        {
-          profile_photo: "../../github_pic.jpg",
-          username: "john smith",
-          location: "San Francisco"
-        }
-      ];
-      // User.getUsersForTag(tagname)
-      //   .then(function (data) {
-      //     vm.tagModalData = [];
-      //     for (var i = 0; i < data.length; i++) {
-      //       var userObj = {
-      //         avatarPath: data[i].profile_photo,
-      //         username: data.username,
-      //         location: data.location
-      //       }
-      //       vm.tagModalData.push(userObj);
-      //     }
-      //   });
+      // vm.tagModalData = [
+      //   {
+      //     profile_photo: "../../github_pic.jpg",
+      //     username: "john smith",
+      //     location: "San Francisco"
+      //   },
+      //   {
+      //     profile_photo: "../../github_pic.jpg",
+      //     username: "john smith",
+      //     location: "San Francisco"
+      //   },
+      //   {
+      //     profile_photo: "../../github_pic.jpg",
+      //     username: "john smith",
+      //     location: "San Francisco"
+      //   }
+      // ];
+      User.getUsersForTag(tagname)
+        .then(function (data) {
+          console.log(data);
+          vm.tagModalData = [];
+          for (var i = 0; i < data.length; i++) {
+            var userObj = {
+              avatarPath: data[i].profile_photo,
+              username: data[i].username,
+              location: data[i].location
+            }
+            vm.tagModalData.push(userObj);
+          }
+        });
     }
 
     // make the active user a follower of this profile's user
