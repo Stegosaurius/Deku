@@ -32,7 +32,11 @@
       <p class="about">{{ profile.about }}</p>
 
       <ul class="tags">
-        <li class="tag" ng-repeat="tag in profile.tags">{{ tag }}</li>
+        <li class="tag" ng-repeat="tag in profile.tags">
+          <a href="#tagUsersModal" ng-click="profile.getUsersForTag(tag)" modal> Click
+          </a>
+          {{ tag }}
+        </li>
       </ul>
       <div class="row">
         <form class="statusForm col s9" name="profile.statusUpdate" ng-submit="profile.addStatus()" ng-show="profile.activeUser">
@@ -73,6 +77,25 @@
       <h5>Recent Forum Activity</h5>
       <ul class="recentThreads">
         <li class="thread" ng-repeat="thread in profile.recentThreadNames">{{ thread }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="tagUsersModal" class="modal">
+    <div class="modal-content">
+      <h5>Other Users Who Follow this Tag</h5>
+      <ul class="tag-modal">
+        <li class="row" ng-repeat="user in profile.tagModalData">
+            <div class="tag-avatar-container col s2 m2 l2">
+              <img class="modal-avatar" src="{{ user.profile_photo }}">
+            </div>
+            <div class="tag-username col s3 m3 l3">
+              <span> {{ user.username }} </span>
+            </div>
+            <div class="tag-userLocation col s3 m3 l3">
+              {{ user.location }}
+            </div>
+        </li>
       </ul>
     </div>
   </div>

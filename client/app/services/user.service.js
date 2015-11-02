@@ -33,7 +33,8 @@
       getStatuses: getStatuses,
       addTag: addTag,
       getTags: getTags,
-      removeTag: removeTag
+      removeTag: removeTag,
+      getUsersForTag: getUsersForTag
     };
 
     return services;
@@ -298,6 +299,15 @@
           return res.data;
         }, function errorCallback(res) {
           console.log("Error deleting tag");
+        });
+    }
+
+    function getUsersForTag(tagname) {
+      return $http.get('users/tags/associated/' + tagname)
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log("Error get asscoiated users for the tag");
         });
     }
   }

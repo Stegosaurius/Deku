@@ -351,6 +351,12 @@ ul {
     background-color: $lightGrey;
     -webkit-transition: box-shadow .2s;
     transition: box-shadow .2s;
+
+    a {
+      .ng-isolate-scope {
+        disllay:block
+      }
+    }
   }
 
   .tag:hover {
@@ -453,6 +459,20 @@ ul {
     a:hover {
       cursor: pointer;
       color: $lightBlue;
+    }
+
+    .tag-modal {
+      width: 150%;
+
+      .modal-avatar {
+        height: 3rem;
+        border-radius: 5%;
+      }
+
+      li {
+        padding: .5rem 0;
+        font-size: 1rem;
+      }
     }
   }
 }
