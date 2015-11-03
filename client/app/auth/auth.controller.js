@@ -35,7 +35,8 @@
       User.signin(vm.user)
         .then(function(data) {
           saveToken(data.token);
-          $state.transitionTo('dashboard', { username: $window.localStorage.username });
+          angular.element('#signinModal').closeModal();
+          $state.transitionTo('profile', { username: $window.localStorage.username });
         })
         .catch(function(status) {
           if (status === 404) {
@@ -52,6 +53,7 @@
       User.signup(vm.user)
         .then(function(data) {
           saveToken(data.token);
+          angular.element('#signupModal').closeModal();
           $state.transitionTo('profile', { username: $window.localStorage.username });
         })
         .catch(function(status) {

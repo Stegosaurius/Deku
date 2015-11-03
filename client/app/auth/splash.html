@@ -1,0 +1,86 @@
+<div class="splash">
+  <section class="landing">
+    <div class="headline">
+      <img src="icon.svg" alt="Deku icon">
+      <h1>Deku</h1>
+    </div>
+
+    <div class="mask">
+      <h1 data-content="Welcome, growers!"><span>Welcome, growers!</span></h1>
+      <div class="action-wrapper">
+        <p>
+          <a href="#signinModal" class="cd-btn" modal>Log In</a>
+          <a href="#signupModal" class="cd-btn" modal>Sign Up</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="learnMore">
+      <p>Learn More</p>
+      <i class="medium material-icons">expand_more</i>
+    </div>
+  </section>
+
+  <section class="info">
+    <h3>A Horticultural Hub</h3>
+
+    <div class="divider"></div>
+
+    <p>Join the community with a passion for greenhouses, gardens, and all manner of horticulture.</p>
+
+
+    <div class="features row">
+      <div class="feature col s4">
+        <img src="../../assets/Greenhouse-Botanical-Garden-Grueningen.jpg" alt="Greenhouse in Grueningen">
+
+        <p>Follow our easy steps to set up sensors that stream climate data to your profile.</p>
+      </div>
+
+      <div class="feature col s4">
+        <img src="../../assets/rooftop-garden.jpg" alt="Aeroponics">
+
+        <p>Easily find others growing the same plants or using the same techniques as you.</p>
+      </div>
+
+      <div class="feature col s4">
+        <img src="../../assets/butchart.JPG" alt="Butchart Gardens">
+
+        <p>Leave statuses to stay up-to-date with friends, and converse with others in our forum.</p>
+      </div>
+    </div>
+  </section>
+
+  <div id="signinModal" class="modal">
+    <div class="modal-content">
+      <h5>Log In</h5>
+
+      <form name="auth.form" ng-submit="auth.signin()">
+        <input type="text" name="username" ng-model="auth.user.username" placeholder="Username" ng-pattern='/^[a-zA-Z0-9]*$/' required><br>
+
+        <input type="password" name="password" ng-model="auth.user.password" placeholder="Password" required><br>
+
+        <p>{{ auth.message }}</p>
+
+        <button type="submit">Sign In</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="signupModal" class="modal">
+    <div class="modal-content">
+      <h5>Sign Up to Join Deku!</h5>
+
+      <form name="auth.form" ng-submit="auth.signup()">
+        <input type="email" name="email" ng-model="auth.user.email" placeholder="Email Address" required><br>
+
+        <input type="text" name="username" ng-model="auth.user.username" placeholder="Username" ng-pattern='/^[a-zA-Z0-9]*$/' required><br>
+
+        <input type="password" name="password" ng-model="auth.user.password" placeholder="Password" required><br>
+
+        <p>{{ auth.message }}</p>
+
+        <button type="submit">Sign Up</button>
+      </form>
+    </div>
+  </div>
+</div>
