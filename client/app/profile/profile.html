@@ -32,12 +32,20 @@
       <p class="about">{{ profile.about }}</p>
 
       <ul class="tags">
-        <li class="tag" ng-repeat="tag in profile.tags">
-          <a href="#tagUsersModal" ng-click="profile.getUsersForTag(tag)" modal> Click
-          </a>
+        <!-- <li class="tag" ng-repeat="tag in profile.tags">
           {{ tag }}
-        </li>
+          <a href="#tagUsersModal" ng-click="profile.getUsersForTag(tag)" modal>
+            <i class="material-icons tiny">search</i>
+            {{ this }}
+          </a>
+        </li> -->
+        <a href="#tagUsersModal" modal>
+          <li class="tag" ng-repeat="tag in profile.tags">
+            <span ng-click="profile.getUsersForTag(tag)"> {{ tag }} </span>
+          </li>
+        </a>
       </ul>
+
       <div class="row">
         <form class="statusForm col s9" name="profile.statusUpdate" ng-submit="profile.addStatus()" ng-show="profile.activeUser">
           <input type="text" name="status" ng-model="profile.status" autocomplete="off" placeholder="How's the greenhouse?" required>
@@ -89,21 +97,6 @@
           </div>
       </div>
 
-      <!-- <h5>Recent Updates</h5> -->
-      <!-- <ul class="statuses">
-        <li class="status row" ng-repeat="status in profile.statuses">
-          <div class="col s9">
-            {{ status.status }}
-          </div>
-          <div class="statusInfo col s3">
-            <button class="right" ng-click="profile.deleteStatus(status.id)" ng-show="profile.activeUser">
-              <i class="material-icons">more_vert</i>
-            </button>
-
-            <span class="statusCreated right">{{ status.timestamp }}</span>
-          </div>
-        </li>
-      </ul> -->
     </div>
 
     <div class="bottom-right col s4">
@@ -127,16 +120,16 @@
 
   <div id="tagUsersModal" class="modal">
     <div class="modal-content">
-      <h5>Other Users Who Follow this Tag</h5>
+      <h5>Other Users With This Tag</h5>
       <ul class="tag-modal">
         <li class="row" ng-repeat="user in profile.tagModalData">
             <div class="tag-avatar-container col s2 m2 l2">
               <img class="modal-avatar" src="{{ user.profile_photo }}">
             </div>
-            <div class="tag-username col s3 m3 l3">
+            <div class="tag-username col s4 m4 l4">
               <span> {{ user.username }} </span>
             </div>
-            <div class="tag-userLocation col s3 m3 l3">
+            <div class="tag-userLocation col s5 m5 l5">
               {{ user.location }}
             </div>
         </li>

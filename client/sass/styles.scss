@@ -344,6 +344,7 @@ ul {
   }
 
   .tag {
+    color: $darkGrey;
     display: inline-block;
     font-size: 1.1rem;
     margin: .5rem 2rem .5rem 0;
@@ -462,7 +463,6 @@ ul {
     }
 
     .tag-modal {
-      width: 150%;
 
       .modal-avatar {
         height: 3rem;
@@ -472,6 +472,12 @@ ul {
       li {
         padding: .5rem 0;
         font-size: 1rem;
+      }
+    }
+
+    #tagUsersModal {
+      .modal-content {
+        width: 60rem;
       }
     }
   }
