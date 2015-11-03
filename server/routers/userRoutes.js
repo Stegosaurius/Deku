@@ -21,7 +21,13 @@ module.exports = function (app, passport) {
 
 
   // Scoped Key for Tessel Data
-  app.get('/scopekey/:username', userController.getScopedKey);
+  app.get('/scopedkey/:userID', userController.getScopedKey);
+
+  // Enable Tessel for User
+  app.put('/tessel/:userID', userController.enableTessel);
+
+  // Disable Tessel for User
+  app.delete('/tessel/:userID', userController.disableTessel);
 
   // User Tags
   app.get('/tags/', userController.getAllTags);

@@ -102,8 +102,7 @@ module.exports = {
   },
 
   getScopedKey: function (req, res) {
-    var id = req.params.id;
-    User.getScopedKey(id, function (err, key) {
+    User.getScopedKey(req.params.userID, function (err, key) {
       if (err) {
         console.error(err);
         return res.status(500).send();
@@ -265,6 +264,28 @@ module.exports = {
     } else {
       res.status(404).end();
     }
+  },
+
+  enableTessel: function (req, res) {
+    User.enableTessel(req.params.userID, function (err, result) {
+      if (err) {
+        console.error(err);
+        res.status(500).end();
+      } else {
+        res.status(201).json({ tessel: 1 });
+      }
+    });
+  },
+
+  disableTessel: function (req, res) {
+    User.disableTessel(req.params.userID, function (err, result) {
+      if (err) {
+        console.error(err);
+        res.status(500).end();
+      } else {
+        res.status(204).json({ tessel: 0 });
+      }
+    });
   }
 
 }

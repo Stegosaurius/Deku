@@ -55,7 +55,7 @@ module.exports = {
 	},
 
 	getMessagesByPage: function (threadID, page, callback) {
-		db.query('select m.id, m.message, m.timestamp, m.user_id, m.thread_id, m.vote_tally, u.username, u.profile_photo from messages m \
+		db.query('select m.id, m.message, m.created_at, m.user_id, m.thread_id, m.vote_tally, u.username, u.profile_photo from messages m \
 			inner join users u where thread_id = ? and u.id = m.user_id', [threadID], function (err, messages) {
 			if (err) {
 				callback(err);
