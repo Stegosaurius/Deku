@@ -14,6 +14,16 @@ module.exports = {
 		})
 	},
 
+	getAllMessages: function (callback) {
+		db.query('select * from messages', function (err, messages) {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, messages);
+			}
+		})
+	},
+
 	getThreadsByPage: function (page, callback) {
 		db.query('select t.id, t.thread, t.created_at, t.last_updated, t.messages_count, t.vote_tally, t.user_id, u.username, u.profile_photo \
 		 from threads t inner join users u where u.id = t.user_id', function (err, threads) {
@@ -50,6 +60,10 @@ module.exports = {
 			if (err) {
 				callback(err);
 			} else {
+				// sort by date from oldest to most current
+				messages.sort(function (a,b) {
+					return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+				});
 				var filteredMessages = {
 					messages: messages.splice((page - 1) * 20, 20)
 				};
@@ -69,7 +83,8 @@ module.exports = {
 	},
 
 	getThreadByID: function (threadID, callback) {
-		db.query('select * from threads where id = ?', [threadID], function (err, res) {
+		db.query('select t.id, t.user_id, t.created_at, t.last_updated, t.messages_count, t.vote_tally, u.username, u.profile_photo \
+		 from threads t inner join users u where t.id = ? and u.id = t.user_id', [threadID], function (err, res) {
 			if (err) {
 				callback(err);
 			} else {

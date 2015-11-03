@@ -231,7 +231,7 @@ module.exports = {
   },
 
   addPhoto: function (userID, photo, callback) {
-    db.query('insert into photos (user_id, photo) values (?,?)', [userID, photo], function (err, res) {
+    db.query('insert into photos (user_id, photo) values (?,?) on duplicate key update user_id = user_id', [userID, photo], function (err, res) {
       if (err) {
         callback(err);
       } else {
