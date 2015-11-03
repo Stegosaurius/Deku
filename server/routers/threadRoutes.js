@@ -1,4 +1,4 @@
-var threadController = require('../controllers/threadController.js');
+ var threadController = require('../controllers/threadController.js');
 
 
 module.exports = function (app) {
@@ -7,6 +7,7 @@ module.exports = function (app) {
   //Route for getting all threads
   app.get('/:page', threadController.getThreadsByPage);
 
+  // get all the messages for a page of a thread
   app.get('/messages/:threadID/:page', threadController.getMessagesByPage);
 
   //Route for posting a message to a particular thread
@@ -20,4 +21,13 @@ module.exports = function (app) {
 
   // Delete message from a thread
   app.delete('/messages/:messageID', threadController.deleteMessage);
+
+  // Voting
+  app.post('/vote/:userID/:threadID', threadController.likeThread);
+
+  app.delete('/vote/:userID/:threadID', threadController.unlikeThread);
+
+  app.post('/vote/message/:userID/:messageID', threadController.likeMessage);
+
+  app.delete('/vote/message/:userID/:messageID', threadController.unlikeMessage);
 }

@@ -114,6 +114,78 @@ module.exports = {
         res.status(204).end();
       }
     })
+  },
+
+  likeThread: function (req, res) {
+    Thread.addUserLikeToThread(req.params.userID, req.params.threadID, function (err, result) {
+      if (err) {
+        console.error(err);
+        res.status(500).end();
+      } else {
+        Thread.upvoteThread(req.params.threadID, function (err, result) {
+          if (err) {
+            console.error(err);
+            res.status(500).end();
+          } else {
+            res.status(201).end();
+          }
+        });
+      }
+    });
+  },
+
+  unlikeThread: function (req, res) {
+    Thread.removeUserLikeFromThread(req.params.userID, req.params.threadID, function (err, result) {
+      if (err) {
+        console.error(err);
+        res.status(500).end();
+      } else {
+        Thread.downvoteThread(req.params.threadID, function (err, result) {
+          if (err) {
+            console.error(err);
+            res.status(500).end();
+          } else {
+            res.status(201).end();
+          }
+        });
+      }
+    })
+  },
+
+  likeMessage: function (req, res) {
+    Thread.addUserLikeForMessage(req.params.userID, req.params.messageID, function (err, result) {
+      if (err) {
+        console.error(err);
+        res.status(500).end();
+      } else {
+        Thread.upvoteMessage(req.params.messageID, function (err, result) {
+          if (err) {
+            console.error(err);
+            res.status(500).end();
+          } else {
+            res.status(201).end();
+          }
+        });
+      }
+    });
+  },
+
+  unlikeMessage: function (req, res) {
+    Thread.removeUserLikeFromMessage(req.params.userID, req.params.messageID, function (err, result) {
+      if (err) {
+        console.error(err);
+        res.status(500).end();
+      } else {
+        Thread.downvoteMessage(req.params.messageID, function (err, result) {
+          if (err) {
+            console.error(err);
+            res.status(500).end();
+          } else {
+            res.status(201).end();
+          }
+        });
+      }
+    });
   }
 
 

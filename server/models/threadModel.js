@@ -79,7 +79,8 @@ module.exports = {
 	},
 
 	addMessageToThread: function (data, callback) {
-		db.query('insert into messages (user_id, message, thread_id) values (?, ?, ?)', [data.userID, data.message, data.threadID],
+		var date = Date.now();
+		db.query('insert into messages (user_id, message, thread_id, created_at) values (?, ?, ?, ?)', [data.userID, data.message, data.threadID, date],
 			function (err, res) {
 				if (err) {
 					callback(err);
@@ -134,6 +135,86 @@ module.exports = {
 	updateTime: function (threadID, callback) {
 		var time = Date.now();
 		db.query('update threads set last_updated = ? where id = ?', [time, threadID], function (err, res) {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, res);
+			}
+		})
+	},
+
+	upvoteThread: function (threadID, callback) {
+		db.query('update threads set vote_tally = vote_tally + 1 where id = ?', [threadID], function (err, res) {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, res);
+			}
+		});
+	},
+
+	downvoteThread: function (threadID, callback) {
+		db.query('update threads set vote_tally = vote_tally - 1 where id = ?', [threadID], function (err, res) {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, res);
+			}
+		})
+	},
+
+	addUserLikeToThread: function (userID, threadID, callback) {
+		db.query('insert into thread_votes (user_id, thread_id) values (?, ?)', [userID, threadID], function (err, res) {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, res);
+			}
+		});
+	},
+
+	removeUserLikeFromThread: function (userID, threadID, callback) {
+		db.query('delete from thread_votes where user_id = ? and thread_id = ?', [userID, threadID], function (err, res) {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, res);
+			}
+		});
+	},
+
+	upvoteMessage: function (messageID, callback) {
+		db.query('update messages set vote_tally = vote_tally + 1 where id = ?', [messageID], function (err, res) {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, res);
+			}
+		})
+	},
+
+	downvoteMessage: function (messageID, callback) {
+		db.query('update messages set vote_tally = vote_tally - 1 where id = ?', [messageID], function (err, res) {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, res);
+			}
+		});
+	},
+
+	addUserLikeForMessage: function (userID, messageID, callback) {
+		db.query('insert into message_votes (user_id, message_id) values (?,?)', [userID, messageID], function (err, res) {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, res);
+			}
+		})
+	},
+
+	removeUserLikeFromMessage: function (userID, messageID, callback) {
+		db.query('delete from message_votes where user_id = ? and message_id = ?', [userID, messageID], function (err, res) {
 			if (err) {
 				callback(err);
 			} else {
