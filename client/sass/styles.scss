@@ -145,7 +145,6 @@ ul {
 
     h1 span {
       padding-bottom: 1rem;
-      border-bottom: 3px solid $white;
     }
 
     p {
@@ -175,8 +174,13 @@ ul {
       margin-right: 1.5rem;
       width: 115px;
     }
+
     .cd-btn:nth-of-type(2) {
       margin-right: 0;
+    }
+
+    .cd-btn:hover {
+      background-color: $darkBlue;
     }
 
     p,
@@ -203,18 +207,40 @@ ul {
   }
 
   .info {
+    margin: 0 5%;
     background-color: $mainBackground;
 
     h3 {
-      padding: 4rem 4rem;
+      padding: 4rem 4rem 2rem 4rem;
       margin: 0;
       text-align: center;
     }
 
     .divider {
-      width: 5rem;
+      width: 15rem;
       border-bottom: 2px solid $darkerGreen;
       margin: auto;
+    }
+
+    p {
+      color: $grey;
+      font-size: 2rem;
+      text-align: center;
+      padding: 2rem 3rem;
+    }
+
+    .feature {
+      text-align: center;
+
+      img {
+        max-height: 390px;
+        max-width: 100%;
+      }
+
+      p {
+        font-size: 1.4rem;
+        padding: 0 1rem;
+      }
     }
   }
 }
