@@ -41,14 +41,15 @@
             vm.messages.push(data.messages[i])
             vm.messages[i].timestamp = moment.utc(vm.messages[i].timestamp).fromNow();
           }
-          vm.thread = data.thread;
+          vm.thread = data.thread[0];
+          vm.thread.last_updated = moment.utc(vm.thread.last_updated).fromNow();
           vm.total = data.count;
         });
 
     }
 
     function postToThread () {
-      Forum.postToThread(User.getID(), vm.messages[0].thread_id, vm.newMessage)
+      Forum.postToThread(User.getID(), vm.thread.id, vm.newMessage)
         .then(function(data) {
           console.log("message posted is ", data);
           getMessages();
