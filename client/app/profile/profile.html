@@ -32,8 +32,20 @@
       <p class="about">{{ profile.about }}</p>
 
       <ul class="tags">
-        <li class="tag" ng-repeat="tag in profile.tags">{{ tag }}</li>
+        <!-- <li class="tag" ng-repeat="tag in profile.tags">
+          {{ tag }}
+          <a href="#tagUsersModal" ng-click="profile.getUsersForTag(tag)" modal>
+            <i class="material-icons tiny">search</i>
+            {{ this }}
+          </a>
+        </li> -->
+        <a href="#tagUsersModal" modal>
+          <li class="tag" ng-repeat="tag in profile.tags">
+            <span ng-click="profile.getUsersForTag(tag)"> {{ tag }} </span>
+          </li>
+        </a>
       </ul>
+
       <div class="row">
         <form class="statusForm col s9" name="profile.statusUpdate" ng-submit="profile.addStatus()" ng-show="profile.activeUser">
           <input type="text" name="status" ng-model="profile.status" autocomplete="off" placeholder="How's the greenhouse?" required>
@@ -41,21 +53,50 @@
         </form>
       </div>
 
-      <h5>Recent Updates</h5>
-      <ul class="statuses">
-        <li class="status row" ng-repeat="status in profile.statuses">
-          <div class="col s9">
-            {{ status.status }}
+      <div class="row">
+          <div class="col s12 status-container">
+              <ul class="tabs" tabs>
+                  <li class="tab col s3"><a class="active" href="#friendsUpdates">Recent Updates</a></li>
+                  <li class="tab col s3"><a href="#myUpdates">My Updates</a></li>
+              </ul>
           </div>
-          <div class="statusInfo col s3">
-            <button class="right" ng-click="profile.deleteStatus(status.id)" ng-show="profile.activeUser">
-              <i class="material-icons">more_vert</i>
-            </button>
+          <div id="friendsUpdates" class="col s12 status-container">
+            <ul class="statuses">
+              <li class="status row" ng-repeat="status in profile.followeesStatuses">
+                <div class="col s3">
+                  {{ status.username }}
+                </div>
+                <div class="col s6">
+                  {{ status.status }}
+                </div>
+                <div class="statusInfo col s3">
+                  <button class="right" ng-click="profile.deleteStatus(status.id)" ng-show="profile.activeUser">
+                    <i class="material-icons">more_vert</i>
+                  </button>
 
-            <span class="statusCreated right">{{ status.timestamp }}</span>
+                  <span class="statusCreated right">{{ status.timestamp }}</span>
+                </div>
+              </li>
+            </ul>
           </div>
-        </li>
-      </ul>
+          <div id="myUpdates" class="col s12 status-container">
+            <ul class="statuses">
+              <li class="status row" ng-repeat="status in profile.statuses">
+                <div class="col s9">
+                  {{ status.status }}
+                </div>
+                <div class="statusInfo col s3">
+                  <button class="right" ng-click="profile.deleteStatus(status.id)" ng-show="profile.activeUser">
+                    <i class="material-icons">more_vert</i>
+                  </button>
+
+                  <span class="statusCreated right">{{ status.timestamp }}</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+      </div>
+
     </div>
 
     <div class="bottom-right col s4">
@@ -73,6 +114,25 @@
       <h5>Recent Forum Activity</h5>
       <ul class="recentThreads">
         <li class="thread" ng-repeat="thread in profile.recentThreadNames">{{ thread }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="tagUsersModal" class="modal">
+    <div class="modal-content">
+      <h5>Other Users With This Tag</h5>
+      <ul class="tag-modal">
+        <li class="row" ng-repeat="user in profile.tagModalData">
+            <div class="tag-avatar-container col s2 m2 l2">
+              <img class="modal-avatar" src="{{ user.profile_photo }}">
+            </div>
+            <div class="tag-username col s4 m4 l4">
+              <span> {{ user.username }} </span>
+            </div>
+            <div class="tag-userLocation col s5 m5 l5">
+              {{ user.location }}
+            </div>
+        </li>
       </ul>
     </div>
   </div>

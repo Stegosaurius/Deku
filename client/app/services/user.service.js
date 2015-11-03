@@ -31,9 +31,11 @@
       addStatus: addStatus,
       deleteStatus: deleteStatus,
       getStatuses: getStatuses,
+      getFolloweesStatuses: getFolloweesStatuses,
       addTag: addTag,
       getTags: getTags,
-      removeTag: removeTag
+      removeTag: removeTag,
+      getUsersForTag: getUsersForTag
     };
 
     return services;
@@ -270,6 +272,15 @@
         });
     }
 
+    function getFolloweesStatuses(userID) {
+      return $http.get('/status/followees/' + userID)
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log('Error retrieving friends statuses');
+        });
+    }
+
     ///////////////////////
     ////////TAGS///////////
     ///////////////////////
@@ -298,6 +309,15 @@
           return res.data;
         }, function errorCallback(res) {
           console.log("Error deleting tag");
+        });
+    }
+
+    function getUsersForTag(tagname) {
+      return $http.get('users/tags/associated/' + tagname)
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          console.log("Error get asscoiated users for the tag");
         });
     }
   }

@@ -344,6 +344,7 @@ ul {
   }
 
   .tag {
+    color: $darkGrey;
     display: inline-block;
     font-size: 1.1rem;
     margin: .5rem 2rem .5rem 0;
@@ -454,6 +455,43 @@ ul {
       cursor: pointer;
       color: $lightBlue;
     }
+
+    .tag-modal {
+
+      .modal-avatar {
+        height: 3rem;
+        border-radius: 5%;
+      }
+
+      li {
+        padding: .5rem 0;
+        font-size: 1rem;
+      }
+    }
+
+    #tagUsersModal {
+      .modal-content {
+        width: 60rem;
+      }
+    }
+  }
+
+  .tabs {
+    margin-bottom: 0.5rem;
+
+    .tab {
+      a {
+        color: $darkGrey;
+      }
+    }
+
+    .indicator { 
+      background-color: $darkGreen;
+    }
+  }
+
+  .status-container {
+    padding: 0;
   }
 }
 
