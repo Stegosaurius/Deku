@@ -16,6 +16,9 @@ module.exports = function (app) {
   // Get recent messages posted to the forum for a user
   app.get('/recent/:username', threadController.getRecentForumActivity);
 
+  // get recent messages posted to forums by people the user is following
+  app.get('/recent/followees/:userID', threadController.getRecentFolloweeActivity);
+
   // Create thread
   app.post('/:userID/:threadName', threadController.addThread);
 

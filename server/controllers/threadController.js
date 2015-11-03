@@ -197,6 +197,17 @@ module.exports = {
         res.status(200).json(messages);
       }
     })
+  },
+
+  getRecentFolloweeActivity: function (req, res) {
+    Thread.getRecentFolloweeActivity(req.params.userID, function (err, messages) {
+      if (err) {
+        console.error(err);
+        res.status(500).end();
+      } else {
+        res.status(200).json(messages);
+      }
+    });
   }
 
 

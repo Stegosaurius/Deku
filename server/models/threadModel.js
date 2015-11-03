@@ -62,7 +62,7 @@ module.exports = {
 			} else {
 				// sort by date from oldest to most current
 				messages.sort(function (a,b) {
-					return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+					return a.created_at - b.created_at;
 				});
 				var filteredMessages = {
 					messages: messages.splice((page - 1) * 20, 20)
@@ -245,11 +245,27 @@ module.exports = {
 					callback(err);
 				} else {
 					res.sort(function (a, b) {
-						return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+						return b.created_at - a.created_at;
 					});
 					// return only the most recent 20 results
 					var filteredMessages = res.splice(0,20);
 					callback(null, filteredMessages);
+				}
+		});
+	},
+
+	getRecentFolloweeActivity: function (userID, callback) {
+		db.query('select u.username, u.profile_photo, m.id, m.message, m.created_at, m.thread_id, m.vote_tally, t.thread \
+			from followers f inner join users u inner join messages m inner join threads t \
+			where f.followee_id = u.id and m.thread_id = t.id and f.followee_id = m.user_id and f.follower_id = ?', [userID], function (err, res) {
+				if (err) {
+					callback(err);
+				} else {
+					// sort from most recent to least recent
+					res.sort(function (a,b) {
+						return b.created_at - a.created_at;
+					});
+					callback(null, res);
 				}
 		});
 	}
