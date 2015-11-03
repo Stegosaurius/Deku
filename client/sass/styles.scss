@@ -8,6 +8,7 @@ $darkGreen: #109418;
 $darkerGreen: #0c7112;
 $darkGrey: #4a4a4a;
 $darkBlue: #138871;
+$darkRed: #a50000;
 $mainBackground: #f9f9f9;
 $white: #ffffff;
 
@@ -241,6 +242,31 @@ ul {
         font-size: 1.4rem;
         padding: 0 1rem;
       }
+    }
+  }
+
+  .modal {
+    width: 45%;
+    top: 30% !important;
+    text-align: center;
+
+    button {
+      @extend .default-button;
+      background-color: $lightBlue;
+    }
+
+    button:hover {
+      @extend .default-button-hover;
+    }
+
+    p {
+      color: $darkRed;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .modal {
+      width: 60%;
     }
   }
 }

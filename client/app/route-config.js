@@ -27,7 +27,7 @@
         url: '/',
         templateUrl: 'app/auth/splash.html',
         controller: 'AuthController',
-        controllerAs: 'splash',
+        controllerAs: 'auth',
         authenticate: false
       })
       .state('oauth', {
