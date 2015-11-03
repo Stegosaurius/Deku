@@ -35,24 +35,10 @@
           }
         });
 
-        Keenio.soundQuery( function(err,res){
-          if(err) {
-            console.log('error in keenio.soundQuery callback',err);
-          } else {
-            $("#chart-04").val(res).trigger('change');
-          }
-        });
-
-        Keenio.lightTriggerQuery();
-        Keenio.soundTriggerQuery();
         Keenio.tempTimelineQuery();
         Keenio.humidityTimelineQuery();
         Keenio.soundTimelineQuery();
         Keenio.lightTimelineQuery();
     });
-
-      
-
-
   }
 })();
