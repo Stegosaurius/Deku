@@ -231,17 +231,15 @@ ul {
   }
 
   .update-avatar {
+    @extend .default-button;
     position: absolute;
-    height: 23px;
-    width: 64px;
     top: 35%;
     left: 6%;
     opacity: 0;
-    padding: 0;
   }
 
   .update-avatar:hover {
-    opacity: 1;
+    @extend .default-button-hover;
   }
 
   .avatar-container {
