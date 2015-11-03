@@ -186,6 +186,17 @@ module.exports = {
         });
       }
     });
+  },
+
+  getRecentForumActivity: function (req, res) {
+    Thread.getRecentForumActivity(req.params.username, function (err, messages) {
+      if (err) {
+        console.error(err);
+        res.status(500).end();
+      } else {
+        res.status(200).json(messages);
+      }
+    })
   }
 
 

@@ -13,6 +13,9 @@ module.exports = function (app) {
   //Route for posting a message to a particular thread
   app.post('/:userID/:threadID', threadController.addMessageToThread);
 
+  // Get recent messages posted to the forum for a user
+  app.get('/recent/:username', threadController.getRecentForumActivity);
+
   // Create thread
   app.post('/:userID/:threadName', threadController.addThread);
 

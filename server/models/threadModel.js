@@ -236,6 +236,23 @@ module.exports = {
 				callback(null, res);
 			}
 		})
+	},
+
+	getRecentForumActivity: function (username, callback) {
+		db.query('select u.username, m.id, m.message, m.created_at, m.thread_id, m.vote_tally, t.thread from messages m \
+			inner join users u inner join threads t where m.user_id = u.id and m.thread_id = t.id and u.username = ?', [username], function (err, res) {
+				if (err) {
+					callback(err);
+				} else {
+					res.sort(function (a, b) {
+						return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+					});
+					var filteredMessages = {
+						messages: res.splice(0,20);
+					}
+					callback(null, filteredMessages);
+				}
+		});
 	}
   
 }
