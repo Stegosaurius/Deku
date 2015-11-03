@@ -25,7 +25,7 @@ CREATE TABLE `followers` (
 CREATE TABLE `messages` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`message` TEXT NOT NULL,
-	`timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`created_at` BIGINT NOT NULL,
 	`user_id` INT NOT NULL,
 	`thread_id` INT NOT NULL,
 	`vote_tally` INT NOT NULL DEFAULT '0',
@@ -98,6 +98,7 @@ CREATE UNIQUE INDEX `record_mv` ON `message_votes` (`message_id`, `user_id`);
 CREATE UNIQUE INDEX `record_sv` ON `status_votes` (`user_id`, `status_id`);
 CREATE UNIQUE INDEX `record_tv` ON `thread_votes` (`thread_id`, `user_id`);
 CREATE UNIQUE INDEX `record_ut` ON `usertags` (`user_id`, `tag_id`);
+CREATE UNIQUE INDEX `record_photo` ON `photos` (`user_id`, `photo`);
 CREATE UNIQUE INDEX `username` ON `users` (`username`);
 CREATE UNIQUE INDEX `email` ON `users` (`email`);
 CREATE UNIQUE INDEX `tag` ON `tags` (`tag`);

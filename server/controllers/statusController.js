@@ -56,6 +56,43 @@ module.exports = {
         res.status(204).end();
       }
     })
+  },
+
+  likeStatus: function (req, res) {
+    Status.addUserLikeForStatus(req.params.userID, req.params.statusID, function (err, result) {
+      if (err) {
+        console.error(err);
+        res.status(500).end();
+      } else {
+        // there's no error from server and the user hasn't already liked that status
+        Status.upvote(req.params.statusID, function (err, result) {
+          if (err) {
+            console.error(err);
+            res.status(500).end();
+          } else {
+            res.status(201).end();
+          }
+        });
+      }
+    })
+  },
+
+  unlikeStatus: function (req, res) {
+    Status.removeUserLikeForStatus(req.params.userID, req.params.statusID, function (err, result) {
+      if (err) {
+        console.error(err);
+        res.status(500).end();
+      } else {
+        Status.downvote(req.params.statusID, function (err, result) {
+          if (err) {
+            console.error(err);
+            res.status(500).end();
+          } else {
+            res.status(204).end();
+          }
+        })
+      }
+    })
   }
 
 }

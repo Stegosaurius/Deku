@@ -16,7 +16,7 @@ module.exports = {
           });
           callback(null, statuses);
         }
-      })
+      });
     },
 
   getStatusByID: function (id, callback) {
@@ -42,20 +42,61 @@ module.exports = {
     });
   },
 
-  getFolloweesStatuses: function (id, callback) {
-    db.query('select u.username, s.id, s.status, s.created_at, s.vote_tally from users u \
+  getFolloweesStatuses: function (followerID, callback) {
+    db.query('select u.username, u.profile_photo, s.id, s.status, s.created_at, s.vote_tally from users u \
       inner join followers f \
-      inner join statuses s where f.follower_id = ? and f.followee_id = s.user_id', [id], function (err, statuses) {
+      inner join statuses s where f.follower_id = ? and f.followee_id = s.user_id and u.id = s.user_id', 
+      [followerID], function (err, statuses) {
       if (err) {
         callback(err);
       } else {
         callback(null, statuses);
       }
+    });
+  },
+
+  deleteStatus: function (statusID, callback) {
+    db.query('delete from statuses where id = ?', [statusID], function (err, res) {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, res);
+      }
+    });
+  },
+
+  upvote: function (statusID, callback) {
+    db.query('update statuses set vote_tally = vote_tally + 1 where id = ?', [statusID], function (err, res) {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, res);
+      }
+    });
+  },
+
+  downvote: function (statusID, callback) {
+    db.query('update statuses set vote_tally = vote_tally - 1 where id = ?', [statusID], function (err, res) {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, res);
+      }
     })
   },
 
-  deleteStatus: function (id, callback) {
-    db.query('delete from statuses where id = ?', [id], function (err, res) {
+  addUserLikeForStatus: function (userID, statusID, callback) {
+    db.query('insert into status_votes (user_id, status_id) values (?, ?)', [userID, statusID], function (err, res) {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, res);
+      }
+    });
+  },
+
+  removeUserLikeForStatus: function (userID, statusID, callback) {
+    db.query('delete from status_votes where user_id = ? and status_id = ?', [userID, statusID], function (err, res) {
       if (err) {
         callback(err);
       } else {

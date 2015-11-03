@@ -10,6 +10,7 @@ var Follow = require('../models/followerModel.js');
 var allUsers;
 var allTags;
 var allThreads;
+var allMessages;
 
 // first start by creating 20 users
 // after each function is done, the next one is called in the sequence
@@ -92,7 +93,7 @@ function updateProfiles (index) {
 function addAvatars (index) {
   if (index === allUsers.length - 1) {
     console.log("Added avatars to users");
-    return addPhotos(60);
+    return addPhotos(150);
   }
 
   User.addProfilePhoto(allUsers[index].id, faker.image.avatar(), function (err, result) {
@@ -134,6 +135,7 @@ function associateUserTags (n) {
   User.addUserTag(data, function (err, result) {
     if (err) {
       console.error(err);
+      associateUserTags(n);
     } else {
       associateUserTags(n - 1);
     }
@@ -185,7 +187,7 @@ function addThreads (n) {
       if (err) {
         console.error(err);
       } else {
-        console.log("Added threads", threads);
+        console.log("Added threads");
         allThreads = threads;
         return addMessagesToThreads(300); 
       }
@@ -204,9 +206,15 @@ function addThreads (n) {
 
 function addMessagesToThreads (n) {
   if (n === 0) {
-    console.log("Added messages to threads!!!");
-    console.log("Done!!! Press Ctrl + C to exit");
-    return;
+    return Thread.getAllMessages(function (err, messages) {
+      if (err) {
+        return console.error(err);
+      } else {
+        allMessages = messages;
+        console.log("Added Messages to Threads!");
+        return addVotesToThreads(2000);
+      }
+    });
   }
 
   var data = {
@@ -230,7 +238,56 @@ function addMessagesToThreads (n) {
   })
 }
 
+function addVotesToThreads(n) {
+  if (n === 0) {
+    console.log("Added votes to threads");
+    return addVotesToMessages(2000);
+  }
 
+  var randomUser = allUsers[Math.floor(Math.random() * (allUsers.length - 1))];
+  var randomThread = allThreads[Math.floor(Math.random() * (allThreads.length - 1))];
+  Thread.addUserLikeToThread(randomUser.id, randomThread.id, function (err, result) {
+    if (err) {
+      console.error(err);
+      addVotesToThreads(n - 1);
+    } else {
+      Thread.upvoteThread(randomThread.id, function (err, result) {
+        if (err) {
+          console.error(err);
+          addVotesToThreads(n - 1);
+        } else {
+          addVotesToThreads(n - 1);
+        }
+      })
+    }
+  })
+}
+
+function addVotesToMessages(n) {
+  if (n === 0) {
+    console.log("Added votes to threads");
+    console.log("Done!!! Press Ctrl + C to exit");
+    return;
+  }
+
+  var randomUser = allUsers[Math.floor(Math.random() * (allUsers.length - 1))];
+  var randomMessage = allMessages[Math.floor(Math.random() * (allMessages.length - 1))];
+  Thread.addUserLikeForMessage(randomUser.id, randomMessage.id, function (err, result) {
+    if (err) {
+      console.error(err);
+      addVotesToMessages(n - 1);
+    } else {
+      Thread.upvoteMessage(randomMessage.id, function (err, result) {
+        if (err) {
+          console.error(err);
+          addVotesToMessages(n - 1);
+        } else {
+          addVotesToMessages(n - 1);
+        }
+      })
+    }
+  })
+}
 
 
 

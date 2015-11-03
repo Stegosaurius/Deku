@@ -14,6 +14,16 @@ module.exports = {
 		})
 	},
 
+	getAllMessages: function (callback) {
+		db.query('select * from messages', function (err, messages) {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, messages);
+			}
+		})
+	},
+
 	getThreadsByPage: function (page, callback) {
 		db.query('select t.id, t.thread, t.created_at, t.last_updated, t.messages_count, t.vote_tally, t.user_id, u.username, u.profile_photo \
 		 from threads t inner join users u where u.id = t.user_id', function (err, threads) {
@@ -50,6 +60,10 @@ module.exports = {
 			if (err) {
 				callback(err);
 			} else {
+				// sort by date from oldest to most current
+				messages.sort(function (a,b) {
+					return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+				});
 				var filteredMessages = {
 					messages: messages.splice((page - 1) * 20, 20)
 				};
@@ -69,7 +83,8 @@ module.exports = {
 	},
 
 	getThreadByID: function (threadID, callback) {
-		db.query('select * from threads where id = ?', [threadID], function (err, res) {
+		db.query('select t.id, t.user_id, t.created_at, t.last_updated, t.messages_count, t.vote_tally, u.username, u.profile_photo \
+		 from threads t inner join users u where t.id = ? and u.id = t.user_id', [threadID], function (err, res) {
 			if (err) {
 				callback(err);
 			} else {
@@ -79,7 +94,8 @@ module.exports = {
 	},
 
 	addMessageToThread: function (data, callback) {
-		db.query('insert into messages (user_id, message, thread_id) values (?, ?, ?)', [data.userID, data.message, data.threadID],
+		var date = Date.now();
+		db.query('insert into messages (user_id, message, thread_id, created_at) values (?, ?, ?, ?)', [data.userID, data.message, data.threadID, date],
 			function (err, res) {
 				if (err) {
 					callback(err);
@@ -134,6 +150,86 @@ module.exports = {
 	updateTime: function (threadID, callback) {
 		var time = Date.now();
 		db.query('update threads set last_updated = ? where id = ?', [time, threadID], function (err, res) {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, res);
+			}
+		})
+	},
+
+	upvoteThread: function (threadID, callback) {
+		db.query('update threads set vote_tally = vote_tally + 1 where id = ?', [threadID], function (err, res) {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, res);
+			}
+		});
+	},
+
+	downvoteThread: function (threadID, callback) {
+		db.query('update threads set vote_tally = vote_tally - 1 where id = ?', [threadID], function (err, res) {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, res);
+			}
+		})
+	},
+
+	addUserLikeToThread: function (userID, threadID, callback) {
+		db.query('insert into thread_votes (user_id, thread_id) values (?, ?)', [userID, threadID], function (err, res) {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, res);
+			}
+		});
+	},
+
+	removeUserLikeFromThread: function (userID, threadID, callback) {
+		db.query('delete from thread_votes where user_id = ? and thread_id = ?', [userID, threadID], function (err, res) {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, res);
+			}
+		});
+	},
+
+	upvoteMessage: function (messageID, callback) {
+		db.query('update messages set vote_tally = vote_tally + 1 where id = ?', [messageID], function (err, res) {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, res);
+			}
+		})
+	},
+
+	downvoteMessage: function (messageID, callback) {
+		db.query('update messages set vote_tally = vote_tally - 1 where id = ?', [messageID], function (err, res) {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, res);
+			}
+		});
+	},
+
+	addUserLikeForMessage: function (userID, messageID, callback) {
+		db.query('insert into message_votes (user_id, message_id) values (?,?)', [userID, messageID], function (err, res) {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, res);
+			}
+		})
+	},
+
+	removeUserLikeFromMessage: function (userID, messageID, callback) {
+		db.query('delete from message_votes where user_id = ? and message_id = ?', [userID, messageID], function (err, res) {
 			if (err) {
 				callback(err);
 			} else {
