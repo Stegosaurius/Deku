@@ -56,7 +56,7 @@
     function signout() {
       delete $window.localStorage.token;
       delete $window.localStorage.username;
-      $state.transitionTo('signin');
+      $state.transitionTo('splash');
     }
 
     function signup(data) {
