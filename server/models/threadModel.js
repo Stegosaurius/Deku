@@ -55,7 +55,7 @@ module.exports = {
 	},
 
 	getMessagesByPage: function (threadID, page, callback) {
-		db.query('select m.id, m.message, m.timestamp, m.user_id, m.thread_id, m.vote_tally, u.username, u.profile_photo from messages m \
+		db.query('select m.id, m.message, m.created_at, m.user_id, m.thread_id, m.vote_tally, u.username, u.profile_photo from messages m \
 			inner join users u where thread_id = ? and u.id = m.user_id', [threadID], function (err, messages) {
 			if (err) {
 				callback(err);
@@ -236,6 +236,22 @@ module.exports = {
 				callback(null, res);
 			}
 		})
+	},
+
+	getRecentForumActivity: function (username, callback) {
+		db.query('select u.username, m.id, m.message, m.created_at, m.thread_id, m.vote_tally, t.thread from messages m \
+			inner join users u inner join threads t where m.user_id = u.id and m.thread_id = t.id and u.username = ?', [username], function (err, res) {
+				if (err) {
+					callback(err);
+				} else {
+					res.sort(function (a, b) {
+						return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+					});
+					// return only the most recent 20 results
+					var filteredMessages = res.splice(0,20);
+					callback(null, filteredMessages);
+				}
+		});
 	}
   
 }

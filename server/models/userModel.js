@@ -24,7 +24,7 @@ module.exports = {
 
   getUserByID: function (id, callback) {
     // we don't need a password since a profile is viewable by anyone
-    db.query('select id, username, email, scoped_key, about, location from users where id = ?', [id], function (err, userObj) {
+    db.query('select id, username, email, scoped_key, about, tessel, location from users where id = ?', [id], function (err, userObj) {
       if (err) {
         callback(err, null);
       } else {
@@ -34,7 +34,7 @@ module.exports = {
   },
 
   getUserByName: function (username, callback) {
-    db.query('select id, username, password, email, scoped_key, about, location from users where username = ?', [username], function (err, user) {
+    db.query('select id, username, password, email, scoped_key, about, tessel, location from users where username = ?', [username], function (err, user) {
       if (err) {
         callback(err, null);
       } else {
@@ -44,7 +44,7 @@ module.exports = {
   },
 
   getUserByEmail: function (email, callback) {
-    db.query('select id, username, email, scoped_key, about, location from users where email = ?',
+    db.query('select id, username, email, scoped_key, about, tessel, location from users where email = ?',
       [email], function (err, user) {
         if (err) {
           callback(err, null);
@@ -136,8 +136,8 @@ module.exports = {
     });
   },
 
-  getScopedKey: function (id, callback) {
-    db.query('select scoped_key from users where id = ?', [id], function (err, res) {
+  getScopedKey: function (userID, callback) {
+    db.query('select scoped_key from users where id = ?', [userID], function (err, res) {
       if (err) {
         callback(err);
       } else {
@@ -252,6 +252,26 @@ module.exports = {
 
   deleteAccount: function (userID, callback) {
     db.query('delete from users where id = ?', [userID], function (err, res) {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, res);
+      }
+    });
+  },
+
+  enableTessel: function (userID, callback) {
+    db.query('update users set tessel = 1 where id = ?', [userID], function (err, res) {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, res);
+      }
+    });
+  },
+
+  disableTessel: function (userID, callback) {
+    db.query('update users set tessel = 0 where id = ?', [userID], function (err, res) {
       if (err) {
         callback(err);
       } else {
