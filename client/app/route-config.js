@@ -16,25 +16,18 @@
       if (username) {
         return '/dashboard/' + username;
       } else {
-        return '/signin';
+        return '/';
       }
     });
 
     // controllerAs determines how the controller's scope will be identified
     // in our html files
     $stateProvider
-      .state('signin', {
-        url: '/signin',
-        templateUrl: 'app/auth/signin.html',
+      .state('splash', {
+        url: '/',
+        templateUrl: 'app/auth/splash.html',
         controller: 'AuthController',
-        controllerAs: 'signin',
-        authenticate: false
-      })
-      .state('signup', {
-        url: '/signup',
-        templateUrl: 'app/auth/signup.html',
-        controller: 'AuthController',
-        controllerAs: 'signup',
+        controllerAs: 'splash',
         authenticate: false
       })
       .state('oauth', {
@@ -159,7 +152,7 @@
     $rootScope.$on('$stateChangeStart', function(event, toState) {
       if (toState.authenticate && !$window.localStorage.token) {
         event.preventDefault();
-        $state.transitionTo('signin');
+        $state.transitionTo('splash');
       }
     });
   }
