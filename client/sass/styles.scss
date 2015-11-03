@@ -909,6 +909,8 @@ ul {
 
   .thread-meta {
     .title {
+      padding: 0;
+
       h4 {
         font-size: 2rem;
         color: $darkGreen;
@@ -936,6 +938,7 @@ ul {
     width: 5rem;
     padding-top: .3rem;
     padding-bottom: .3rem;
+    vertical-align: top;
   }
 
   button:hover {
@@ -957,7 +960,6 @@ ul {
     textArea:focus {
       border: 2px solid $lightBlue;
       height: 4rem;
-      width: 50%;
     }
   }
 

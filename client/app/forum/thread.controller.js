@@ -41,7 +41,8 @@
             vm.messages.push(data.messages[i]);
             vm.messages[i].timestamp = moment(vm.messages[i].timestamp).fromNow();
           }
-          vm.thread = data.thread;
+          vm.thread = data.thread[0];
+          vm.thread.last_updated = moment.utc(vm.thread.last_updated).fromNow();
           vm.total = data.count;
         });
     }
