@@ -352,12 +352,6 @@ ul {
     background-color: $lightGrey;
     -webkit-transition: box-shadow .2s;
     transition: box-shadow .2s;
-
-    a {
-      .ng-isolate-scope {
-        disllay:block
-      }
-    }
   }
 
   .tag:hover {
