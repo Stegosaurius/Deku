@@ -336,25 +336,24 @@ ul {
   }
 
   .user-photos-container {
-    width: 40rem;
-    overflow-x: scroll;
-  }
+    overflow-x: hidden;
 
-  .user-photos-container ul {
-    width: 100rem;
-  }
+   
+      li {
+        display: inline-block;
+        position: relative;
+        a {
+          color: red;
+          position: absolute;
+          top: 6px;
+          right: 38px;
+          opacity: 0.7;
+          margin-right: -25px;
+        }
+      }
+      
+    
 
-  .user-photos-container li {
-    display: inline;
-    position: relative;
-  }
-
-  .user-photos li a {
-    position: relative;
-    top: -196px;
-    right: 48px;
-    opacity: 0.7;
-    margin-right: -25px;
   }
 
   .user-photos li:hover a {
@@ -362,7 +361,7 @@ ul {
   }
 
   .photo {
-    height: 15rem;
+    height: 12rem;
   }
 
   .follow-container {
@@ -451,9 +450,6 @@ ul {
     opacity: 1;
   }
 
-  .remove-photo {
-    background-color: red;
-  }
 
   .add-tag {
     background-color: $lightGreen;

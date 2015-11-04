@@ -51,7 +51,7 @@
       <!-- <p>{{ editProfile.message }}</p> -->
     </div>
     
-    <div class="user-photos-container col m7">
+    <!-- <div class="user-photos-container col m7">
       <ul class="user-photos">
         <li ng-repeat="photo in editProfile.photos">
           <img class="photo" ng-src="{{ photo.photo }}"/>
@@ -60,6 +60,25 @@
           </a>
         </li>
       </ul>
+    </div> -->
+
+    <div class="user-photos-container col s7 m7 l7">
+        <a class="col s1 m1 l1" ng-show="editProfile.lessPhotos" ng-click="editProfile.getPrevTwoPhotos()">
+          <i class="material-icons">chevron_left</i>
+          
+        </a>
+        <ul class="user-photos col s10 m10 l10">
+          <li ng-repeat="photo in editProfile.currentPhotos">
+            <img class="photo" ng-src="{{ photo.photo }}"/>
+            <a ng-click="editProfile.deletePhoto(photo.id)">
+              <i class="material-icons">remove_circle</i>
+            </a>
+          </li>
+        </ul>
+        <a class="col s1 m1 l1" ng-show="editProfile.morePhotos" ng-click="editProfile.getNextTwoPhotos()">
+          <i class="material-icons">chevron_right</i>
+        </a>
+      
     </div>
 
     <div class="row">
