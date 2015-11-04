@@ -22,6 +22,7 @@
     vm.changePage = changePage;
     vm.navToUser = navToUser;
     vm.postToThread = postToThread;
+    vm.likeMessage = likeMessage;
 
     getMessages();
 
@@ -42,7 +43,7 @@
             vm.messages.push(data.messages[i])
             vm.messages[i].created_at = moment(vm.messages[i].created_at).fromNow();
           }
-          vm.thread = data.thread[0];
+          vm.thread = data.thread;
           vm.thread.last_updated = moment(vm.thread.last_updated).fromNow();
           vm.total = data.count;
         });
@@ -54,5 +55,16 @@
           getMessages();
         });
     }
+
+    function likeMessage(messageID, index) {
+      Forum.likeMessage(User.getID(), messageID)
+      .then(function (status) {
+        console.log(status);
+        if (status === 201) {
+          vm.messages[index].vote_tally++;
+        }
+      })
+    }
+
   }
 })();

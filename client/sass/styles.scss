@@ -987,6 +987,10 @@ ul {
       i {
         margin-top: -0.2rem;
       }
+      i:hover {
+        cursor: pointer;
+        color: $lightBlue;
+      }
       h5 {
         margin-top: 0.2rem;
       }
