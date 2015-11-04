@@ -9,15 +9,33 @@
     var viewing = $stateParams.username; //username of dashboard in current view
     console.log('viewing',viewing);
     console.log('current users username',username);
-    var userID = User.getID(); //get ID of current userA
-    var url = '/users/scopedkey/' + viewing;
-    console.log('url',url);//  /users/scopekey/1
+    var userID = User.getID(); //get ID of current user
+    var url = '/users/scopedkey/read/' + viewing;
+    console.log('url',url);//  /users/scopedkey/beasta
 
-    return $http.get(url).then(function (data) {
-      dashboardConfigure.readKey = data.data.read_scoped_key;
-      var client = new Keen( dashboardConfigure ); //loading keys in this file
-      // var user = 
-      function tempQuery(callback) {
+    var services = {
+      tempQuery: tempQuery, 
+      humidityQuery : humidityQuery,
+      lightQuery : lightQuery,
+      soundQuery : soundQuery,
+      lightTriggerQuery : lightTriggerQuery,
+      soundTriggerQuery : soundTriggerQuery,
+      tempTimelineQuery : tempTimelineQuery,
+      humidityTimelineQuery : humidityTimelineQuery,
+      lightTimelineQuery : lightTimelineQuery,
+      soundTimelineQuery : soundTimelineQuery,
+      keenInitialize:keenInitialize
+    };
+
+    return services;
+
+    function keenInitialize(viewing){
+      return $http.get('/users/scopedkey/read/' + viewing)
+        .then(function (res) {
+          return res.data;
+        });
+    }
+    function tempQuery(client,viewing,callback) {
       Keen.ready(
         function(){
 
@@ -58,8 +76,7 @@
         }
       );
     }
-
-    function humidityQuery(callback) {
+    function humidityQuery(client,viewing,callback) {
       Keen.ready(
         function(){
 
@@ -99,8 +116,7 @@
         }
       );
     }
-
-    function lightQuery(callback) {
+    function lightQuery(client,viewing,callback) {
       Keen.ready(
         function(){
 
@@ -141,8 +157,7 @@
         }
       );
     }
-
-    function soundQuery(callback) {
+    function soundQuery(client,viewing,callback) {
       Keen.ready(
         function(){
 
@@ -183,9 +198,7 @@
         }
       );
     }
-
-
-    function lightTriggerQuery(callback) {
+    function lightTriggerQuery(client,viewing,callback) {
       Keen.ready(
         function(){
 
@@ -216,8 +229,7 @@
         }
       );
     }
-
-    function soundTriggerQuery(callback) {
+    function soundTriggerQuery(client,viewing,callback) {
       Keen.ready(
         function(){
 
@@ -248,8 +260,7 @@
         }
       );
     }
-
-    function tempTimelineQuery(callback) {
+    function tempTimelineQuery(client,viewing,callback) {
       Keen.ready(
         function(){
 
@@ -280,8 +291,7 @@
         }
       );
     }
-
-    function humidityTimelineQuery(callback) {
+    function humidityTimelineQuery(client,viewing,callback) {
       Keen.ready(
         function(){
 
@@ -312,9 +322,7 @@
         }
       );
     }
-
-
-    function soundTimelineQuery(callback) {
+    function soundTimelineQuery(client,viewing,callback) {
       Keen.ready(
         function(){
 
@@ -345,8 +353,7 @@
         }
       );
     }
-
-    function lightTimelineQuery(callback) {
+    function lightTimelineQuery(client,viewing,callback) {
       Keen.ready(
         function(){
 
@@ -377,25 +384,5 @@
         }
       );
     }
-
-
-      var services = {
-        tempQuery: tempQuery, 
-        humidityQuery : humidityQuery,
-        lightQuery : lightQuery,
-        soundQuery : soundQuery,
-        lightTriggerQuery : lightTriggerQuery,
-        soundTriggerQuery : soundTriggerQuery,
-        tempTimelineQuery : tempTimelineQuery,
-        humidityTimelineQuery : humidityTimelineQuery,
-        lightTimelineQuery : lightTimelineQuery,
-        soundTimelineQuery : soundTimelineQuery
-      };
-
-      return services;
-    });
-
-
-    
   }
 })();
