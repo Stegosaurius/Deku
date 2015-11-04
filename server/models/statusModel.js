@@ -12,7 +12,7 @@ module.exports = {
           callback(err, null);
         } else {
           statuses = statuses.sort(function (a,b) {
-            return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
+            return b.created_at - a.created_at;
           });
           callback(null, statuses);
         }
@@ -50,6 +50,9 @@ module.exports = {
       if (err) {
         callback(err);
       } else {
+        statuses.sort(function (a,b) {
+          return b.created_at - a.created_at;
+        });
         callback(null, statuses);
       }
     });
