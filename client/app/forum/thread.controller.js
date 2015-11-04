@@ -36,13 +36,14 @@
     function getMessages () {
       Forum.getMessages($stateParams.threadID, $stateParams.page)
         .then(function(data) {
+          console.log("The message data is, ", data);
           vm.messages = [];
           for (var i = 0; i < data.messages.length; i++) {
             vm.messages.push(data.messages[i])
-            vm.messages[i].timestamp = moment.utc(vm.messages[i].timestamp).fromNow();
+            vm.messages[i].created_at = moment(vm.messages[i].created_at).fromNow();
           }
           vm.thread = data.thread[0];
-          vm.thread.last_updated = moment.utc(vm.thread.last_updated).fromNow();
+          vm.thread.last_updated = moment(vm.thread.last_updated).fromNow();
           vm.total = data.count;
         });
 
