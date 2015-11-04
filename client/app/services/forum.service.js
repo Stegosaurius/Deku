@@ -17,7 +17,7 @@
     return services;
 
     function createThread(userID, threadName) {
-      return $http.post('/threads/' + userID, { thread: threadName })
+      return $http.post('/threads/' + userID, { threadName: threadName })
         .then(function successCallback(res) {
           return res.data;
         }, function errorCallback(res) {
