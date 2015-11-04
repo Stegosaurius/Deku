@@ -2,12 +2,18 @@
   angular.module('app')
     .factory('Keenio', Keenio);
 
-  Keenio.$inject = ['$http', '$window'];
+  Keenio.$inject = ['$http', '$window','User'];
 
-  function Keenio($http, $window) {
-    var url = '/users/scopekey/' + $window.localStorage.userID;
+  function Keenio($http, $window, User) {
+    var username = $window.localStorage.username;
+    var userID = User.getID();
+    var url = '/users/scopekey/' +userID ;//$window.localStorage.userID;
+    console.log('user.getID',url);//  /users/scopekey/1
+
     return $http.get(url).then(function (data) {
       dashboardConfigure.readKey = data.data.scoped_key;
+      //console.log('data',data);
+      //console.log('dashboardConfigure',dashboardConfigure);
       var client = new Keen( dashboardConfigure ); //loading keys in this file
       function tempQuery(callback) {
       Keen.ready(
