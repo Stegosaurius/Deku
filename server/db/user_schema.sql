@@ -10,7 +10,7 @@ CREATE TABLE `users` (
 	`email` varchar(50),
 	`password` varchar(100),
 	`read_scoped_key` varchar(250),
-	`write_scoped_key` varchar(250),
+	`write_scoped_key` TEXT,
 	`about` TEXT,
 	`profile_photo` varchar(250),
 	`location` varchar(80),
