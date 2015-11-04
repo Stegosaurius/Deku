@@ -102,7 +102,7 @@ module.exports = {
   },
 
   getReadKey: function (req, res) {
-    User.getReadKey(req.params.userID, function (err, key) {
+    User.getReadKey(req.params.username, function (err, key) {
       if (err) {
         console.error(err);
         res.status(500).send();

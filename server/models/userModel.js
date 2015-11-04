@@ -153,8 +153,8 @@ module.exports = {
     });
   },
 
-  getReadKey: function (userID, callback) {
-    db.query('select username, read_scoped_key from users where id = ?', [userID], function (err, res) {
+  getReadKey: function (username, callback) {
+    db.query('select username, read_scoped_key from users where username = ?', [username], function (err, res) {
       if (err) {
         callback(err);
       } else {
