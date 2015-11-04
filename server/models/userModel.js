@@ -24,7 +24,7 @@ module.exports = {
 
   getUserByID: function (id, callback) {
     // we don't need a password since a profile is viewable by anyone
-    db.query('select id, username, email, scoped_key, about, tessel, location from users where id = ?', [id], function (err, userObj) {
+    db.query('select id, username, email, read_scoped_key, about, tessel, location from users where id = ?', [id], function (err, userObj) {
       if (err) {
         callback(err, null);
       } else {
@@ -34,7 +34,7 @@ module.exports = {
   },
 
   getUserByName: function (username, callback) {
-    db.query('select id, username, password, email, scoped_key, about, tessel, location from users where username = ?', [username], function (err, user) {
+    db.query('select id, username, password, email, read_scoped_key, about, tessel, location from users where username = ?', [username], function (err, user) {
       if (err) {
         callback(err, null);
       } else {
@@ -44,7 +44,7 @@ module.exports = {
   },
 
   getUserByEmail: function (email, callback) {
-    db.query('select id, username, email, scoped_key, about, tessel, location from users where email = ?',
+    db.query('select id, username, email, read_scoped_key, about, tessel, location from users where email = ?',
       [email], function (err, user) {
         if (err) {
           callback(err, null);
@@ -67,17 +67,26 @@ module.exports = {
   },
 
   addUserByLocal: function (data, callback) {
-    var scopedKey = Keen.utils.encryptScopedKey(auth.dashboardConfigure.masterKey, {
-      "allowed_operations": ["read", "write"]
+    var readScopedKey = Keen.utils.encryptScopedKey(auth.dashboardConfigure.masterKey, {
+      "allowed_operations": ["read"]
       // "filters": [{
-      //   "property_name": "account.id",
+      //   "property_name": "username",
       //   "operator": "eq",
-      //   "property_value": "123"
+      //   "property_value": data.username
       // }]
+    });
+
+    var writeScopedKey = Keen.utils.encryptScopedKey(auth.dashboardConfigure.masterKey, {
+      "allowed_operations": ["write"],
+      "filters": [{
+        "property_name": "username",
+        "operator": "eq",
+        "property_value": data.username
+      }]
     });
     var password = bcrypt.hashSync(data.password, bcrypt.genSaltSync(10));
   
-    db.query('insert into users (username, password, email, scoped_key) values (?, ?, ?, ?)', [data.username, password, data.email, scopedKey], function (err, res) {
+    db.query('insert into users (username, password, email, read_scoped_key, write_scoped_key) values (?, ?, ?, ?, ?)', [data.username, password, data.email, readScopedKey, writeScopedKey], function (err, res) {
       if (err) {
         callback(err, null);
       } else {
@@ -87,16 +96,24 @@ module.exports = {
   },
 
   addUserBySocial: function (data, callback) {
-    var scopedKey = Keen.utils.encryptScopedKey(auth.dashboardConfigure.masterKey, {
-      "allowed_operations": ["read", "write"]
+    var readScopedKey = Keen.utils.encryptScopedKey(auth.dashboardConfigure.masterKey, {
+      "allowed_operations": ["read"]
       // "filters": [{
-      //   "property_name": "account.id",
+      //   "property_name": "username",
       //   "operator": "eq",
-      //   "property_value": "123"
+      //   "property_value": data.username
       // }]
     });
 
-    db.query('insert into users (username, email, scoped_key) values (?, ?, ?)', [data.username, data.email, scopedKey],
+    var writeScopedKey = Keen.utils.encryptScopedKey(auth.dashboardConfigure.masterKey, {
+      "allowed_operations": ["write"],
+      "filters": [{
+        "property_name": "username",
+        "operator": "eq",
+        "property_value": data.username
+      }]
+    });
+    db.query('insert into users (username, email, read_scoped_key, write_scoped_key) values (?, ?, ?, ?)', [data.username, data.email, readScopedKey, writeScopedKey],
       function (err, res) {
         if (err) {
           callback(err, null);
@@ -137,7 +154,7 @@ module.exports = {
   },
 
   getScopedKey: function (userID, callback) {
-    db.query('select scoped_key from users where id = ?', [userID], function (err, res) {
+    db.query('select read_scoped_key from users where id = ?', [userID], function (err, res) {
       if (err) {
         callback(err);
       } else {

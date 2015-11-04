@@ -55,7 +55,7 @@ module.exports = {
         console.error(err);
         res.status(500).end();
       } else {
-        // update time in thread table
+        // update time in thread tabl
         var messageID = result.insertId;
         Thread.updateTimeAndMessagesForThread(data.threadID, function (err, result) {
           if (err) {
