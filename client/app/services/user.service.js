@@ -269,6 +269,7 @@
           return res.data;
         }, function errorCallback(res) {
           console.log('Error retrieving statuses');
+          throw res;
         });
     }
 

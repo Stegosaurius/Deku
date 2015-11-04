@@ -479,10 +479,11 @@ ul {
   h4 {
     color: $darkGreen;
     margin: 2.5rem 0 0 0;
+    font-size: 1.4rem;
   }
 
   h5 {
-    font-size: 1.4rem;
+    font-size: 1rem;
     margin-bottom: 1.8rem;
   }
 
@@ -537,7 +538,7 @@ ul {
   }
 
   .about {
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin-bottom: .5rem;
   }
 
@@ -587,17 +588,34 @@ ul {
   }
 
   li.status {
-    font-size: 1.2rem;
+    font-size: 1rem;
     padding-left: .5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     border-left: 8px solid $lightGreen;
+    p {
+      margin-top: -0.7rem;
+    }
+    .user-status {
+      margin-top: -2rem;
+    }
   }
 
   .statusCreated {
     font-size: .8rem;
     color: $grey;
     position: relative;
-    top: .3rem;
+  }
+
+  .status-votes {
+    div {
+      i {
+        margin-top: -0.2rem;
+      }
+      h5 {
+        margin-top: 0.2rem;
+        padding-left: 0;
+      }
+    }
   }
 
   .bottom-left {
@@ -690,6 +708,11 @@ ul {
 
   .status-container {
     padding: 0;
+    margin-bottom: 2rem;
+  }
+
+  .status-avatar {
+    height: 3rem;
   }
 }
 

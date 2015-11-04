@@ -49,6 +49,9 @@
       User.addStatus(newStatus, User.getID())
         .then(function(status) {
           vm.statuses[0] = status;
+        })
+        .catch(function(err) {
+          vm.statuses.shift();
         });
     }
 
@@ -65,23 +68,6 @@
     }
 
     function getUsersForTag(tagname) {
-      // vm.tagModalData = [
-      //   {
-      //     profile_photo: "../../github_pic.jpg",
-      //     username: "john smith",
-      //     location: "San Francisco"
-      //   },
-      //   {
-      //     profile_photo: "../../github_pic.jpg",
-      //     username: "john smith",
-      //     location: "San Francisco"
-      //   },
-      //   {
-      //     profile_photo: "../../github_pic.jpg",
-      //     username: "john smith",
-      //     location: "San Francisco"
-      //   }
-      // ];
       User.getUsersForTag(tagname)
         .then(function (data) {
           console.log(data);
@@ -173,7 +159,7 @@
       User.getStatuses(vm.username)
         .then(function(statuses) {
           vm.statuses = statuses;
-
+          console.log(statuses);
           // transform timestamp to readable format
           for (var i = 0; i < vm.statuses.length; i++) {
             vm.statuses[i].timestamp = moment.utc(vm.statuses[i].timestamp).fromNow();
