@@ -153,14 +153,24 @@ module.exports = {
     });
   },
 
-  getScopedKey: function (userID, callback) {
-    db.query('select read_scoped_key from users where id = ?', [userID], function (err, res) {
+  getReadKey: function (userID, callback) {
+    db.query('select username, read_scoped_key from users where id = ?', [userID], function (err, res) {
       if (err) {
         callback(err);
       } else {
         callback(null, res);
       }
     });
+  },
+
+  getWriteKey: function (userID, callback) {
+    db.query('select username, write_scoped_key from users where id = ?', [userID], function (err, res) {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, res);
+      }
+    })
   },
 
   getAllTags: function (callback) {
