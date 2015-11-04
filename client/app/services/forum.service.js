@@ -11,7 +11,8 @@
       createThread: createThread,
       getMessages: getMessages,
       getThreads: getThreads,
-      postToThread: postToThread
+      postToThread: postToThread,
+      likeMessage: likeMessage
     };
 
     return services;
@@ -50,6 +51,15 @@
         }, function errorCallback(res) {
           console.log('Error posting to thread');
         });
+    }
+
+    function likeMessage(userID, messageID) {
+      return $http.post('/threads/vote/message/' + userID + '/' + messageID)
+        .then(function successCallback(res) {
+          return res.status;
+        }, function errorCallback(res) {
+          console.log('Error liking message');
+        })
     }
   }
 })();

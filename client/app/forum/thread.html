@@ -2,24 +2,22 @@
 
   <div class="thread-meta row">
     <div class="title col s6 m6 l6 left-align">
-      <h4>Aquaponics {{ thread.thread.thread }}</h4>
-      <h5>Created by John Smith</h5>
+      <h4>{{ thread.thread.thread }}</h4>
+      <h5>Created by {{ thread.thread.username }} </h5>
     </div>
     <div class="meta col s6 m6 l6 right-align">
-      <h5>Last Active 1 Day Ago</h5>
-      <h5> {{ thread.total }} Posts </h5>
-      <h5>10,543 Upvotes</h5>
+      <h5>Last Active {{ thread.thread.last_updated }} </h5>
+      <h5> {{ thread.thread.messages_count }} Posts </h5>
+      <h5> {{ thread.thread.vote_tally }} Upvotes</h5>
     </div>
   </div>
 
 
-    <form class="post-form row valign-wrapper" ng-submit="thread.postToThread()">
+    <form class="post-form row" ng-submit="thread.postToThread()">
 
-      <textarea rows="3" cols="20" wrap="hard" ng-model="thread.newMessage" placeholder="post a new message to the thread">{{ thread.newMessage }}</textarea>
+      <textarea rows="3" cols="20" wrap="hard" ng-model="thread.newMessage" placeholder="post a new message to the thread"></textarea>
 
-      <button class="valign" type="submit">
-        <span>Post</span>
-        </button>
+      <button type="submit">Post</button>
     </form>
 
     <ul class="message-list-container">
@@ -37,12 +35,12 @@
           </div>
 
           <div class="message-timestamp col s3 m3 l3">
-            {{ message.timestamp }}
+            {{ message.created_at }}
           </div>
 
           <div class="message-votes col s2 m2 l2">
             <div class="row">
-              <i class="material-icons col s4 m4 l4">star_border</i>
+              <i ng-click="thread.likeMessage(message.id, $index)" class="material-icons col s4 m4 l4">star_border</i>
               <h5 class="col s8 m8 l8">{{ message.vote_tally }} upvotes</h5>
             </div>
           </div>
