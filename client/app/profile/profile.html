@@ -132,7 +132,14 @@
 
       <h5>Recent Forum Activity</h5>
       <ul class="recentThreads">
-        <li class="thread" ng-repeat="thread in profile.recentThreadNames">{{ thread }}</li>
+        <li class="thread" ng-repeat="thread in profile.recentThreads">
+          <a ui-sref="thread({ threadID: thread.thread_id, page: 1 })">
+            <h6>{{ thread.thread }}</h6>
+          </a>
+
+          <p class="message">{{ thread.message }}</p>
+          <p class="messageTime">{{ thread.created_at }}</p>
+        </li>
       </ul>
     </div>
   </div>

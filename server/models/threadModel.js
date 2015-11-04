@@ -247,8 +247,8 @@ module.exports = {
 					res.sort(function (a, b) {
 						return b.created_at - a.created_at;
 					});
-					// return only the most recent 20 results
-					var filteredMessages = res.splice(0,20);
+					// return only the most recent 10 results
+					var filteredMessages = res.splice(0,10);
 					callback(null, filteredMessages);
 				}
 		});
