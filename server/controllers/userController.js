@@ -101,15 +101,26 @@ module.exports = {
     });
   },
 
-  getScopedKey: function (req, res) {
-    User.getScopedKey(req.params.userID, function (err, key) {
+  getReadKey: function (req, res) {
+    User.getReadKey(req.params.username, function (err, key) {
       if (err) {
         console.error(err);
-        return res.status(500).send();
+        res.status(500).send();
       } else {
-        return res.status(200).json(key[0]);
+        res.status(200).json(key[0]);
       }
     });
+  },
+
+  getWriteKey: function (req, res) {
+    User.getWriteKey(req.params.userID, function (err, key) {
+      if (err) {
+        console.error(err);
+        res.status(500).end();
+      } else {
+        res.status(200).json(key[0]);
+      }
+    })
   },
 
   getUserTags: function (req, res) {

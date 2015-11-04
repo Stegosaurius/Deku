@@ -28,7 +28,7 @@ module.exports = {
             console.error(err);
             res.status(500).end();
           } else {
-            res.status(201).json(status);
+            res.status(201).json(status[0]);
           }
         });
       }
