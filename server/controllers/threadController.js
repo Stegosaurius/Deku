@@ -32,7 +32,7 @@ module.exports = {
             console.error(err);
             res.status(500).end();
           } else {
-            messages.thread = thread;
+            messages.thread = thread[0];
             res.status(200).json(messages);
           }
         })
