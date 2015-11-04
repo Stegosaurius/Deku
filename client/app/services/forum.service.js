@@ -49,7 +49,7 @@
           return res.data;
         }, function errorCallback(res) {
           console.log('Error posting to thread');
-        })
+        });
     }
   }
 })();

@@ -17,9 +17,11 @@
     vm.pageSize = 20; // number of threads displayed per page
     vm.newThread = '';
     vm.threads = [];
-    // Total is set artificially high to prevent angular-materialize from
-    // changing vm.page to 1 for being less than the page count.
-    // Value will be set correctly upon the return of getThreads AJAX call
+    /*
+    *  vm.total is set artificially high to prevent angular-materialize from
+    *  changing vm.page to 1 for being less than the page count.
+    *  It will be set correctly upon the return of getThreads AJAX call.
+    */
     vm.total = 1e9; // total number of threads
     vm.upvote = upvote;
 

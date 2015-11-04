@@ -38,22 +38,19 @@
         .then(function(data) {
           vm.messages = [];
           for (var i = 0; i < data.messages.length; i++) {
-            vm.messages.push(data.messages[i])
-            vm.messages[i].timestamp = moment.utc(vm.messages[i].timestamp).fromNow();
+            vm.messages.push(data.messages[i]);
+            vm.messages[i].timestamp = moment(vm.messages[i].timestamp).fromNow();
           }
           vm.thread = data.thread;
           vm.total = data.count;
         });
-
     }
 
     function postToThread () {
-      Forum.postToThread(User.getID(), vm.messages[0].thread_id, vm.newMessage)
+      Forum.postToThread(User.getID(), vm.thread.id, vm.newMessage)
         .then(function(data) {
-          console.log("message posted is ", data);
           getMessages();
-        })
+        });
     }
-
   }
 })();
