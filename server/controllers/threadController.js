@@ -56,9 +56,7 @@ module.exports = {
         res.status(500).end();
       } else {
         // update time in thread table
-        console.log("result is ", result);
         var messageID = result.insertId;
-        console.log("messageID is ", messageID);
         Thread.updateTimeAndMessagesForThread(data.threadID, function (err, result) {
           if (err) {
             console.error(err);
@@ -85,7 +83,6 @@ module.exports = {
         res.status(500).end();
       } else {
         Thread.getMessagesByPage(result.insertId, 1, function (err, thread) {
-          console.log("Made it into callback", thread);
           if (err) {
             console.error(err);
             res.status(500).end();
