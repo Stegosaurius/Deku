@@ -1,3 +1,4 @@
+
 //Using mysql and request we will make real API calls.
 
 //These will be end to end tests with reagrd to our server, but
@@ -70,7 +71,7 @@ describe('Persistent Express Server with functional Database', function () {
         expect( res.statusCode ).to.equal(201);
 
         //add
-        dbConnection.query('select id, username, password, email, scoped_key, about, location from Users where username = ?', 
+        dbConnection.query('select id, username, password, email, read_scoped_key, about, location from Users where username = ?', 
           [username], function (err, user) {
 
           if (err) {

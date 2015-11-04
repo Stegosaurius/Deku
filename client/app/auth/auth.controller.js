@@ -28,7 +28,7 @@
       var tokenPayload = jwtHelper.decodeToken(token);
       $window.localStorage.username = tokenPayload.username;
       // TODO: UNCOMMENT THIS LINE WHEN SCOPED KEYS HAVE BEEN IMPLEMENTED
-      // $window.localStorage.scopedKey = tokenPayload.scoped_key;
+      // $window.localStorage.scopedKey = tokenPayload.read_scoped_key;
     }
 
     function signin() {
