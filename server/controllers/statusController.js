@@ -28,7 +28,6 @@ module.exports = {
             console.error(err);
             res.status(500).end();
           } else {
-            console.log("status about to be sent is ", status)
             res.status(201).json(status[0]);
           }
         });
