@@ -23,7 +23,7 @@ module.exports = {
         console.error(err);
         res.status(404).send(err);
       } else {
-        Status.getStatusByID(result.insertID, function (err, status) {
+        Status.getStatusByID(result.insertId, function (err, status) {
           if (err) {
             console.error(err);
             res.status(500).end();

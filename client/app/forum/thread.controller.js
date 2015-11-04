@@ -51,6 +51,7 @@
     function postToThread () {
       Forum.postToThread(User.getID(), vm.messages[0].thread_id, vm.newMessage)
         .then(function(data) {
+          console.log("message posted is ", data);
           getMessages();
         })
     }
