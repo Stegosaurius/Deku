@@ -2,19 +2,21 @@
   angular.module('app')
     .factory('Keenio', Keenio);
 
-  Keenio.$inject = ['$http', '$window','User'];
+  Keenio.$inject = ['$stateParams','$http', '$window','User'];
 
-  function Keenio($http, $window, User) {
-    var username = $window.localStorage.username;
-    var userID = User.getID();
-    var url = '/users/scopekey/' +userID ;//$window.localStorage.userID;
-    console.log('user.getID',url);//  /users/scopekey/1
+  function Keenio($stateParams,$http, $window, User) {
+    var username = $window.localStorage.username; //current user's username
+    var viewing = $stateParams.username; //username of dashboard in current view
+    console.log('viewing',viewing);
+    console.log('current users username',username);
+    var userID = User.getID(); //get ID of current userA
+    var url = '/users/scopedkey/' + viewing;
+    console.log('url',url);//  /users/scopekey/1
 
     return $http.get(url).then(function (data) {
-      dashboardConfigure.readKey = data.data.scoped_key;
-      //console.log('data',data);
-      //console.log('dashboardConfigure',dashboardConfigure);
+      dashboardConfigure.readKey = data.data.read_scoped_key;
       var client = new Keen( dashboardConfigure ); //loading keys in this file
+      // var user = 
       function tempQuery(callback) {
       Keen.ready(
         function(){
@@ -27,7 +29,12 @@
             //   start: "2014-10-06T00:00:00.000",
             //   end: "2014-10-07T00:00:00.000"
             // }
-            timeframe: "today"
+            timeframe: "today",
+            filters: [{
+              "property_name":"username",
+              "operator" : "eq",
+              "property_value": viewing 
+            }]
           });
 
           $("#chart-01").knob({
@@ -64,7 +71,12 @@
             //   start: "2014-10-06T00:00:00.000",
             //   end: "2014-10-07T00:00:00.000"
             // }
-            timeframe: "today"
+            timeframe: "today",
+            filters: [{
+              "property_name":"username",
+              "operator" : "eq",
+              "property_value": viewing 
+            }]
           });
 
           $("#chart-02").knob({
@@ -100,7 +112,12 @@
             //   start: "2014-10-06T00:00:00.000",
             //   end: "2014-10-07T00:00:00.000"
             // }
-            timeframe: "today"
+            timeframe: "today",
+            filters: [{
+              "property_name":"username",
+              "operator" : "eq",
+              "property_value": viewing 
+            }]
           });
 
           $("#chart-03").knob({
@@ -137,7 +154,12 @@
             //   start: "2014-10-06T00:00:00.000",
             //   end: "2014-10-07T00:00:00.000"
             // }
-            timeframe: "today"
+            timeframe: "today",
+            filters: [{
+              "property_name":"username",
+              "operator" : "eq",
+              "property_value": viewing 
+            }]
           });
 
           $("#chart-04").knob({
@@ -176,7 +198,12 @@
             //   start: "2014-10-06T00:00:00.000",
             //   end: "2014-10-07T00:00:00.000"
             // }
-            timeframe: "today"
+            timeframe: "today",
+            filters: [{
+              "property_name":"username",
+              "operator" : "eq",
+              "property_value": viewing 
+            }]
           });
 
           client.draw(light_timeline, document.getElementById("chart-05"), {
@@ -203,7 +230,12 @@
             //   start: "2014-10-06T00:00:00.000",
             //   end: "2014-10-07T00:00:00.000"
             // }
-            timeframe: "today"
+            timeframe: "today",
+            filters: [{
+              "property_name":"username",
+              "operator" : "eq",
+              "property_value": viewing 
+            }]
           });
 
           client.draw(sound_timeline, document.getElementById("chart-06"), {
@@ -230,7 +262,12 @@
             //   start: "2014-10-06T00:00:00.000",
             //   end: "2014-10-07T00:00:00.000"
             // }
-            timeframe: "today"
+            timeframe: "today",
+            filters: [{
+              "property_name":"username",
+              "operator" : "eq",
+              "property_value": viewing 
+            }]
           });
 
           client.draw(tempLevel_timeline, document.getElementById("chart-07"), {
@@ -257,7 +294,12 @@
             //   start: "2014-10-06T00:00:00.000",
             //   end: "2014-10-07T00:00:00.000"
             // }
-            timeframe: "today"
+            timeframe: "today",
+            filters: [{
+              "property_name":"username",
+              "operator" : "eq",
+              "property_value": viewing 
+            }]
           });
 
           client.draw(humidityLevel_timeline, document.getElementById("chart-08"), {
@@ -285,7 +327,12 @@
             //   start: "2014-10-06T00:00:00.000",
             //   end: "2014-10-07T00:00:00.000"
             // }
-            timeframe: "today"
+            timeframe: "today",
+            filters: [{
+              "property_name":"username",
+              "operator" : "eq",
+              "property_value": viewing 
+            }]
           });
 
           client.draw(soundLevel_timeline, document.getElementById("chart-09"), {
@@ -312,7 +359,12 @@
             //   start: "2014-10-06T00:00:00.000",
             //   end: "2014-10-07T00:00:00.000"
             // }
-            timeframe: "today"
+            timeframe: "today",
+            filters: [{
+              "property_name":"username",
+              "operator" : "eq",
+              "property_value": viewing 
+            }]
           });
 
           client.draw(lightLevel_timeline, document.getElementById("chart-10"), {

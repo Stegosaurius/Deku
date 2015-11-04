@@ -4,9 +4,10 @@
   angular.module('app')
     .controller('DashboardController', DashboardController);
 
-  DashboardController.$inject = ['User', 'Keenio'];
+  DashboardController.$inject = ['$window','User', 'Keenio'];
 
-  function DashboardController(User,Keenio) {
+  function DashboardController($window,User,Keenio) {
+    // $window.location.reload();
     var vm = this;
     Keenio.then(function (Keenio) {
       // console.log("Keenio is :", Keenio);
