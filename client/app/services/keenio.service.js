@@ -2,14 +2,40 @@
   angular.module('app')
     .factory('Keenio', Keenio);
 
-  Keenio.$inject = ['$http', '$window'];
+  Keenio.$inject = ['$stateParams','$http', '$window','User'];
 
-  function Keenio($http, $window) {
-    var url = '/users/scopekey/' + $window.localStorage.userID;
-    return $http.get(url).then(function (data) {
-      dashboardConfigure.readKey = data.data.scoped_key;
-      var client = new Keen( dashboardConfigure ); //loading keys in this file
-      function tempQuery(callback) {
+  function Keenio($stateParams,$http, $window, User) {
+    var username = $window.localStorage.username; //current user's username
+    var viewing = $stateParams.username; //username of dashboard in current view
+    console.log('viewing',viewing);
+    console.log('current users username',username);
+    var userID = User.getID(); //get ID of current user
+    var url = '/users/scopedkey/read/' + viewing;
+    console.log('url',url);//  /users/scopedkey/beasta
+
+    var services = {
+      tempQuery: tempQuery, 
+      humidityQuery : humidityQuery,
+      lightQuery : lightQuery,
+      soundQuery : soundQuery,
+      lightTriggerQuery : lightTriggerQuery,
+      soundTriggerQuery : soundTriggerQuery,
+      tempTimelineQuery : tempTimelineQuery,
+      humidityTimelineQuery : humidityTimelineQuery,
+      lightTimelineQuery : lightTimelineQuery,
+      soundTimelineQuery : soundTimelineQuery,
+      keenInitialize:keenInitialize
+    };
+
+    return services;
+
+    function keenInitialize(viewing){
+      return $http.get('/users/scopedkey/read/' + viewing)
+        .then(function (res) {
+          return res.data;
+        });
+    }
+    function tempQuery(client,viewing,callback) {
       Keen.ready(
         function(){
 
@@ -21,7 +47,12 @@
             //   start: "2014-10-06T00:00:00.000",
             //   end: "2014-10-07T00:00:00.000"
             // }
-            timeframe: "today"
+            timeframe: "today",
+            filters: [{
+              "property_name":"username",
+              "operator" : "eq",
+              "property_value": viewing 
+            }]
           });
 
           $("#chart-01").knob({
@@ -45,8 +76,7 @@
         }
       );
     }
-
-    function humidityQuery(callback) {
+    function humidityQuery(client,viewing,callback) {
       Keen.ready(
         function(){
 
@@ -58,7 +88,12 @@
             //   start: "2014-10-06T00:00:00.000",
             //   end: "2014-10-07T00:00:00.000"
             // }
-            timeframe: "today"
+            timeframe: "today",
+            filters: [{
+              "property_name":"username",
+              "operator" : "eq",
+              "property_value": viewing 
+            }]
           });
 
           $("#chart-02").knob({
@@ -81,8 +116,7 @@
         }
       );
     }
-
-    function lightQuery(callback) {
+    function lightQuery(client,viewing,callback) {
       Keen.ready(
         function(){
 
@@ -94,7 +128,12 @@
             //   start: "2014-10-06T00:00:00.000",
             //   end: "2014-10-07T00:00:00.000"
             // }
-            timeframe: "today"
+            timeframe: "today",
+            filters: [{
+              "property_name":"username",
+              "operator" : "eq",
+              "property_value": viewing 
+            }]
           });
 
           $("#chart-03").knob({
@@ -118,8 +157,7 @@
         }
       );
     }
-
-    function soundQuery(callback) {
+    function soundQuery(client,viewing,callback) {
       Keen.ready(
         function(){
 
@@ -131,7 +169,12 @@
             //   start: "2014-10-06T00:00:00.000",
             //   end: "2014-10-07T00:00:00.000"
             // }
-            timeframe: "today"
+            timeframe: "today",
+            filters: [{
+              "property_name":"username",
+              "operator" : "eq",
+              "property_value": viewing 
+            }]
           });
 
           $("#chart-04").knob({
@@ -155,9 +198,7 @@
         }
       );
     }
-
-
-    function lightTriggerQuery(callback) {
+    function lightTriggerQuery(client,viewing,callback) {
       Keen.ready(
         function(){
 
@@ -170,7 +211,12 @@
             //   start: "2014-10-06T00:00:00.000",
             //   end: "2014-10-07T00:00:00.000"
             // }
-            timeframe: "today"
+            timeframe: "today",
+            filters: [{
+              "property_name":"username",
+              "operator" : "eq",
+              "property_value": viewing 
+            }]
           });
 
           client.draw(light_timeline, document.getElementById("chart-05"), {
@@ -183,8 +229,7 @@
         }
       );
     }
-
-    function soundTriggerQuery(callback) {
+    function soundTriggerQuery(client,viewing,callback) {
       Keen.ready(
         function(){
 
@@ -197,7 +242,12 @@
             //   start: "2014-10-06T00:00:00.000",
             //   end: "2014-10-07T00:00:00.000"
             // }
-            timeframe: "today"
+            timeframe: "today",
+            filters: [{
+              "property_name":"username",
+              "operator" : "eq",
+              "property_value": viewing 
+            }]
           });
 
           client.draw(sound_timeline, document.getElementById("chart-06"), {
@@ -210,8 +260,7 @@
         }
       );
     }
-
-    function tempTimelineQuery(callback) {
+    function tempTimelineQuery(client,viewing,callback) {
       Keen.ready(
         function(){
 
@@ -224,7 +273,12 @@
             //   start: "2014-10-06T00:00:00.000",
             //   end: "2014-10-07T00:00:00.000"
             // }
-            timeframe: "today"
+            timeframe: "today",
+            filters: [{
+              "property_name":"username",
+              "operator" : "eq",
+              "property_value": viewing 
+            }]
           });
 
           client.draw(tempLevel_timeline, document.getElementById("chart-07"), {
@@ -237,8 +291,7 @@
         }
       );
     }
-
-    function humidityTimelineQuery(callback) {
+    function humidityTimelineQuery(client,viewing,callback) {
       Keen.ready(
         function(){
 
@@ -251,7 +304,12 @@
             //   start: "2014-10-06T00:00:00.000",
             //   end: "2014-10-07T00:00:00.000"
             // }
-            timeframe: "today"
+            timeframe: "today",
+            filters: [{
+              "property_name":"username",
+              "operator" : "eq",
+              "property_value": viewing 
+            }]
           });
 
           client.draw(humidityLevel_timeline, document.getElementById("chart-08"), {
@@ -264,9 +322,7 @@
         }
       );
     }
-
-
-    function soundTimelineQuery(callback) {
+    function soundTimelineQuery(client,viewing,callback) {
       Keen.ready(
         function(){
 
@@ -279,7 +335,12 @@
             //   start: "2014-10-06T00:00:00.000",
             //   end: "2014-10-07T00:00:00.000"
             // }
-            timeframe: "today"
+            timeframe: "today",
+            filters: [{
+              "property_name":"username",
+              "operator" : "eq",
+              "property_value": viewing 
+            }]
           });
 
           client.draw(soundLevel_timeline, document.getElementById("chart-09"), {
@@ -292,8 +353,7 @@
         }
       );
     }
-
-    function lightTimelineQuery(callback) {
+    function lightTimelineQuery(client,viewing,callback) {
       Keen.ready(
         function(){
 
@@ -306,7 +366,12 @@
             //   start: "2014-10-06T00:00:00.000",
             //   end: "2014-10-07T00:00:00.000"
             // }
-            timeframe: "today"
+            timeframe: "today",
+            filters: [{
+              "property_name":"username",
+              "operator" : "eq",
+              "property_value": viewing 
+            }]
           });
 
           client.draw(lightLevel_timeline, document.getElementById("chart-10"), {
@@ -319,25 +384,5 @@
         }
       );
     }
-
-
-      var services = {
-        tempQuery: tempQuery, 
-        humidityQuery : humidityQuery,
-        lightQuery : lightQuery,
-        soundQuery : soundQuery,
-        lightTriggerQuery : lightTriggerQuery,
-        soundTriggerQuery : soundTriggerQuery,
-        tempTimelineQuery : tempTimelineQuery,
-        humidityTimelineQuery : humidityTimelineQuery,
-        lightTimelineQuery : lightTimelineQuery,
-        soundTimelineQuery : soundTimelineQuery
-      };
-
-      return services;
-    });
-
-
-    
   }
 })();
