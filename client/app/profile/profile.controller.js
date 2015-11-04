@@ -12,22 +12,24 @@
     var vm = this;
 
     vm.about = '';
-    vm.activeUser = false;
+    vm.activeUser = false;  // is user viewing his/her own profile?
     vm.addStatus = addStatus;
     vm.avatar = '';
     vm.deleteStatus = deleteStatus;
     vm.follow = follow;
     vm.followees = [];
     vm.followers = [];
+    vm.getUsersForTag = getUsersForTag;
+    vm.isFollowing = false;  // is active user following the user of this profile?
     vm.location = '';
     vm.photos = [];
     vm.recentThreadNames = [];
     vm.recentThreads = {};
     vm.statuses = [];
     vm.tags = [];
-    vm.username = $stateParams.username;
     vm.tagModalData = [];
-    vm.getUsersForTag = getUsersForTag;
+    vm.unfollow = unfollow;
+    vm.username = $stateParams.username;
 
     checkActiveUser();
     getProfile();
@@ -67,6 +69,12 @@
       }
     }
 
+    // make the active user a follower of this profile's user
+    function follow() {
+      User.follow(User.getID(), vm.username);
+      vm.isFollowing = true;
+    }
+
     function getUsersForTag(tagname) {
       User.getUsersForTag(tagname)
         .then(function (data) {
@@ -77,15 +85,15 @@
               profile_photo: data[i].profile_photo,
               username: data[i].username,
               location: data[i].location
-            }
+            };
             vm.tagModalData.push(userObj);
           }
         });
     }
 
-    // make the active user a follower of this profile's user
-    function follow() {
-      User.follow(User.getID(), vm.username);
+    function unfollow() {
+      User.unfollow(User.getID(), vm.username);
+      vm.isFollowing = false;
     }
 
     ///////////////////////////
@@ -132,6 +140,12 @@
         .then(function(data) {
           for (var i = 0; i < data.length; i++) {
             vm.followers.push(data[i].username);
+
+          }
+
+          // check whether active user is following this user
+          if (!vm.activeUser && (vm.followers.indexOf($window.localStorage.username) !== -1)) {
+            vm.isFollowing = true;
           }
         });
 
