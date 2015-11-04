@@ -19,9 +19,9 @@ module.exports = {
       });
     },
 
-  getStatusByID: function (id, callback) {
+  getStatusByID: function (statusID, callback) {
     db.query('select s.id, s.user_id, u.username, s.status, s.created_at, s.vote_tally from statuses s \
-      inner join users u where s.id = ?', [id], function (err, status) {
+      inner join users u where s.id = ? and u.id = s.user_id', [statusID], function (err, status) {
         if (err) {
           callback(err);
         } else {
