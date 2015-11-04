@@ -748,36 +748,45 @@ ul {
   margin-right: 15px;
 }
 
-.dropdown-content .notification {
-  display: inline-block;
-  color: $darkGrey;
-  font-size: 1rem;
+.dropdown-content {
+  li {
+    cursor: default;
+  }
+
+  .notification {
+    display: inline-block;
+    padding-right: 0;
+    color: $darkGrey;
+    font-size: 1rem;
+  }
+
+  .notification:hover {
+    cursor: default;
+  }
+
+  .notification .user:hover {
+    cursor: pointer;
+    color: $lightBlue;
+    text-decoration: underline;
+  }
+
+  button {
+    height: 52px;
+    border: 0;
+    background-color: inherit;
+  }
+
+  button:hover {
+    color: $lightBlue;
+  }
+
+  i {
+    position: relative;
+    top: -10px;
+  }
 }
 
-.dropdown-content .notification:hover {
-  cursor: default;
-}
 
-.dropdown-content .notification .user:hover {
-  cursor: pointer;
-  color: $lightBlue;
-  text-decoration: underline;
-}
-
-.dropdown-content button {
-  height: 52px;
-  border: 0;
-  background-color: inherit;
-}
-
-.dropdown-content button:hover {
-  color: $lightBlue;
-}
-
-.dropdown-content i {
-  position: relative;
-  top: -10px;
-}
 
 /***************************
  **** FORUM ALL THREADS ****

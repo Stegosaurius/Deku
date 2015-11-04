@@ -54,7 +54,7 @@ module.exports = {
             console.error(err);
             res.status(500).end();
           } else {
-            var content = follower[0].username + " is now following you.";
+            var content = " is now following you.";
             Notification.addNotificationByName(req.params.followeeName, content, follower[0].username, function (err, result) {
               if (err) {
                 console.error(err);
@@ -62,9 +62,9 @@ module.exports = {
               } else {
                 res.status(201).end();
               }
-            })
+            });
           }
-        })
+        });
       }
     });
   },

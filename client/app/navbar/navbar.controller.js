@@ -41,19 +41,12 @@
     }
 
     function getNotifications() {
-      // User.getNotifications(User.getID())
-      //   .then(function(notifications) {
-      //     for (var i = 0; i < notifications.length; i++) {
-      //       vm.notifications.push(notifications[i]);
-      //     }
-      //   });
-
-      var notifications = [ { id: 1, originatorName: 'Beasta', content: ' is now following you' },
-                            { id: 2, originatorName: 'shadedprofit', content: ' is now following you'}];
-
-      for (var i = 0; i < notifications.length; i++) {
-        vm.notifications.push(notifications[i]);
-      }
+      User.getNotifications(User.getID())
+        .then(function(notifications) {
+          for (var i = 0; i < notifications.length; i++) {
+            vm.notifications.push(notifications[i]);
+          }
+        });
     }
 
     function signout() {
