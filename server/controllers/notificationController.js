@@ -2,7 +2,7 @@ var Notification = require('../models/notificationModel.js');
 
 module.exports = {
   getNotifications: function (req, res) {
-    Notification.getNotifications(req.params.id, function (err, notifications) {
+    Notification.getNotifications(req.params.userID, function (err, notifications) {
       if (err) {
         console.error(err);
         res.status(500).end();
@@ -13,7 +13,7 @@ module.exports = {
   },
 
   addNotification: function (req, res) {
-    Notification.addNotification(req.params.id, req.body.content, function (err, result) {
+    Notification.addNotification(req.params.username, req.body.content, function (err, result) {
       if (err) {
         console.error(err);
         res.status(500).end();

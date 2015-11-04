@@ -56,7 +56,7 @@ module.exports = {
         res.status(500).end();
       } else {
         // update time in thread table
-        var messageID = result.insertID;
+        var messageID = result.insertId;
         Thread.updateTimeAndMessagesForThread(data.threadID, function (err, result) {
           if (err) {
             console.error(err);
@@ -77,12 +77,12 @@ module.exports = {
   },
 
   addThread: function (req, res) {
-    Thread.createThread(req.params.userID, req.params.threadName, function (err, result) {
+    Thread.createThread(req.params.userID, req.body.thread, function (err, result) {
       if (err) {
         console.error(err);
         res.status(500).end();
       } else {
-        Thread.getThreadsByPage(result.insertID, 1, function (err, thread) {
+        Thread.getMessagesByPage(result.insertId, 1, function (err, thread) {
           if (err) {
             console.error(err);
             res.status(500).end();

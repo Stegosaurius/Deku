@@ -2,8 +2,7 @@ var db = require('../db/connection.js');
 
 module.exports = {
   getNotifications: function (userID, callback) {
-    db.query('select n.id, n.content, n.originator_name from notifications n \
-      inner join users u where n.user_id = ?', [userID],
+    db.query('select * from notifications where user_id = ?', [userID],
       function (err, notifications) {
         if (err) {
           callback(err, null);

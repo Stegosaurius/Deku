@@ -56,7 +56,7 @@ module.exports = {
 
 	getMessagesByPage: function (threadID, page, callback) {
 		db.query('select m.id, m.message, m.created_at, m.user_id, m.thread_id, m.vote_tally, u.username, u.profile_photo from messages m \
-			inner join users u where thread_id = ? and u.id = m.user_id', [threadID], function (err, messages) {
+			inner join users u where m.thread_id = ? and u.id = m.user_id', [threadID], function (err, messages) {
 			if (err) {
 				callback(err);
 			} else {
@@ -83,7 +83,7 @@ module.exports = {
 	},
 
 	getThreadByID: function (threadID, callback) {
-		db.query('select t.id, t.user_id, t.created_at, t.last_updated, t.messages_count, t.vote_tally, u.username, u.profile_photo \
+		db.query('select t.id, t.user_id, t.thread, t.created_at, t.last_updated, t.messages_count, t.vote_tally, u.username, u.profile_photo \
 		 from threads t inner join users u where t.id = ? and u.id = t.user_id', [threadID], function (err, res) {
 			if (err) {
 				callback(err);

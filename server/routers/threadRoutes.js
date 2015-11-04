@@ -20,7 +20,7 @@ module.exports = function (app) {
   app.get('/recent/followees/:userID', threadController.getRecentFolloweeActivity);
 
   // Create thread
-  app.post('/:userID/:threadName', threadController.addThread);
+  app.post('/:userID', threadController.addThread);
 
   // Pass in the thread ID to be deleted
   app.delete('/:threadID', threadController.deleteThread);
