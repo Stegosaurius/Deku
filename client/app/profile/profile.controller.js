@@ -78,7 +78,6 @@
     function getUsersForTag(tagname) {
       User.getUsersForTag(tagname)
         .then(function (data) {
-          console.log(data);
           vm.tagModalData = [];
           for (var i = 0; i < data.length; i++) {
             var userObj = {
@@ -173,7 +172,6 @@
       User.getStatuses(vm.username)
         .then(function(statuses) {
           vm.statuses = statuses;
-          console.log(statuses);
           // transform timestamp to readable format
           for (var i = 0; i < vm.statuses.length; i++) {
             vm.statuses[i].timestamp = moment.utc(vm.statuses[i].timestamp).fromNow();
@@ -184,13 +182,12 @@
     function getFolloweesStatuses() {
       User.getFolloweesStatuses(User.getID())
         .then(function (statuses) {
-          console.log(statuses);
           vm.followeesStatuses = statuses;
 
           for (var i = 0; i < vm.followeesStatuses.length; i++) {
             vm.followeesStatuses[i].timestamp = moment.utc(vm.followeesStatuses[i].timestamp).fromNow();
           }
-        })
+        });
     }
 
     //Get current profile picture(avatar)

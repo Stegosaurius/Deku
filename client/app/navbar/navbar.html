@@ -1,8 +1,11 @@
 <ul id="notif-dropdown" class="dropdown-content">
   <li ng-repeat="notification in navbar.notifications">
-    <a class="notification" ui-sref="profile({ username: notification.originatorName })">
-      <span class="user">{{ notification.originatorName }}</span> {{ notification.content }}
+    <a class="notification" ui-sref="profile({ username: notification.originator_name })">
+      <span class="user">{{ notification.originator_name }}</span>
     </a>
+
+    {{ notification.content }}
+
     <button class="right" ng-click="navbar.deleteNotification(notification.id)"><i class="tiny material-icons">check</i></button>
   </li>
 </ul>
