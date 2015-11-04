@@ -36,7 +36,6 @@
     function getMessages () {
       Forum.getMessages($stateParams.threadID, $stateParams.page)
         .then(function(data) {
-          console.log('the message data is  ', data);
           vm.messages = [];
           for (var i = 0; i < data.messages.length; i++) {
             vm.messages.push(data.messages[i])
