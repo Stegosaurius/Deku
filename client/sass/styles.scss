@@ -336,32 +336,50 @@ ul {
   }
 
   .user-photos-container {
-    overflow-x: hidden;
 
+      i {
+        color: $darkGrey;
+        font-size: 3rem;
+      }
+      i:hover {
+        color: $lightBlue;
+      }
+
+      ul {
+        width: 100%;
+        overflow-x: hidden;
+        white-space: nowrap;
+        display: block;
+      }
    
       li {
         display: inline-block;
         position: relative;
+        margin-right: .5rem;
         a {
-          color: red;
           position: absolute;
           top: 6px;
-          right: 38px;
+          left: 8px;
           opacity: 0.7;
           margin-right: -25px;
+          i {
+            color: red;
+            font-size: 1.5rem;
+          }
+          i:hover {
+            color: red;
+          }
         }
       }
-      
-    
 
-  }
+      li:hover a {
+        opacity: 1
+      }
 
-  .user-photos li:hover a {
-    opacity: 1;
   }
 
   .photo {
-    height: 12rem;
+    height: 14rem;
   }
 
   .follow-container {

@@ -174,16 +174,18 @@
     }
 
     function getNextTwoPhotos () {
-      vm.photoIndex = vm.photoIndex + 2;
-      vm.currentPhotos = vm.photos.slice(vm.photoIndex, vm.photoIndex + 2);
-      if (vm.photoIndex + 2 >= vm.photos.length -1) {
+      vm.photoIndex = vm.photoIndex + 1;
+      if (vm.photoIndex === vm.photos.length - 1) {
+        vm.currentPhotos = [vm.photos[vm.photoIndex]];
         vm.morePhotos = false;
+      } else {
+        vm.currentPhotos = vm.photos.slice(vm.photoIndex, vm.photoIndex + 2);
       }
       vm.lessPhotos = true;
     }
 
     function getPrevTwoPhotos () {
-      vm.photoIndex = vm.photoIndex - 2;
+      vm.photoIndex = vm.photoIndex - 1;
       vm.currentPhotos = vm.photos.slice(vm.photoIndex, vm.photoIndex + 2);
       if (vm.photoIndex === 0) {
         vm.lessPhotos = false;
