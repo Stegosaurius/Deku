@@ -6,7 +6,7 @@
 
         <li>
           <h4>{{ profile.username }}</h4>
-          <h5 class="location flow-text">{{ profile.location }}</h5>
+          <h6 class="location flow-text">{{ profile.location }}</h6>
 
           <div class="buttons">
             <a ui-sref="editProfile" ng-show="profile.activeUser">Edit Profile</a>
@@ -75,7 +75,7 @@
                 <div class="status-votes col s3">
                   <div class="row">
                     <i class="material-icons col s4 m4 l4">star_border</i>
-                    <h5 class="col s8 m8 l8">{{ status.vote_tally }}</h5>
+                    <span class="col s8 m8 l8">{{ status.vote_tally }}</span>
                   </div>
                 </div>
                 <div class="col s3 statusCreated right">
@@ -97,7 +97,7 @@
                 <div class="status-votes col s3">
                   <div class="row">
                     <i class="material-icons col s4 m4 l4">star_border</i>
-                    <h5 class="col s8 m8 l8">{{ status.vote_tally }}</h5>
+                    <span class="col s8 m8 l8">{{ status.vote_tally }}</span>
                   </div>
                 </div>
                 <div class="col s5 statusCreated right-align">
@@ -124,15 +124,23 @@
           <a href="#followingModal" modal>Following</a>
           <span>{{ profile.followees.length }}</span>
         </div>
+
         <div class="col s6 center-align">
           <a href="#followersModal" modal>Followers</a>
           <span>{{ profile.followers.length }}</span>
         </div>
       </div>
 
-      <h5>Recent Forum Activity</h5>
+      <h5 class="forumActivity">Recent Forum Activity</h5>
       <ul class="recentThreads">
-        <li class="thread" ng-repeat="thread in profile.recentThreadNames">{{ thread }}</li>
+        <li class="thread" ng-repeat="thread in profile.recentThreads">
+          <a ui-sref="thread({ threadID: thread.thread_id, page: 1 })">
+            <h6>{{ thread.thread }}</h6>
+          </a>
+
+          <p class="message">{{ thread.message }}</p>
+          <p class="messageTime">{{ thread.created_at }}</p>
+        </li>
       </ul>
     </div>
   </div>

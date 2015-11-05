@@ -23,7 +23,6 @@
     vm.isFollowing = false;  // is active user following the user of this profile?
     vm.location = '';
     vm.photos = [];
-    vm.recentThreadNames = [];
     vm.recentThreads = {};
     vm.statuses = [];
     vm.tags = [];
@@ -115,7 +114,7 @@
           getStatuses();
           getFolloweesStatuses();
           getFollowers();
-          // getRecentThreads();
+          getRecentThreads();
           getAvatar();
           getPhotos();
         });
@@ -160,10 +159,12 @@
     // make obj so thread id can be referenced from thread name
     function getRecentThreads() {
       User.getRecentThreads(vm.username)
-        .then(function(data) {
-          for (var i = 0; i < data.length; i++) {
-            vm.recentThreadNames.push(data[i].thread);
-            vm.recentThreads[data[i].thread] = data[i].id;
+        .then(function(threads) {
+          vm.recentThreads = threads;
+
+          // transform timestamp to readable format
+          for (var i = 0; i < vm.recentThreads.length; i++) {
+            vm.recentThreads[i].created_at = moment(vm.recentThreads[i].created_at).fromNow();
           }
         });
     }
@@ -172,9 +173,10 @@
       User.getStatuses(vm.username)
         .then(function(statuses) {
           vm.statuses = statuses;
+
           // transform timestamp to readable format
           for (var i = 0; i < vm.statuses.length; i++) {
-            vm.statuses[i].timestamp = moment.utc(vm.statuses[i].timestamp).fromNow();
+            vm.statuses[i].timestamp = moment(vm.statuses[i].timestamp).fromNow();
           }
         });
     }
@@ -184,8 +186,9 @@
         .then(function (statuses) {
           vm.followeesStatuses = statuses;
 
+          // transform timestamp to readable format
           for (var i = 0; i < vm.followeesStatuses.length; i++) {
-            vm.followeesStatuses[i].timestamp = moment.utc(vm.followeesStatuses[i].timestamp).fromNow();
+            vm.followeesStatuses[i].timestamp = moment(vm.followeesStatuses[i].timestamp).fromNow();
           }
         });
     }

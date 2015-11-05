@@ -244,7 +244,7 @@
     function getRecentThreads(username) {
       return $http.get('/threads/recent/' + username)
         .then(function successCallback(res) {
-          return res.data.threads;
+          return res.data;
         }, function errorCallback(res) {
           console.log('Error retrieving recent threads');
         });
