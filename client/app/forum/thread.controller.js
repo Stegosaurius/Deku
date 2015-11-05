@@ -37,7 +37,6 @@
     function getMessages () {
       Forum.getMessages(User.getID(), $stateParams.threadID, $stateParams.page)
         .then(function(data) {
-          console.log("The message data is, ", data);
           vm.messages = [];
 
           var uservotes = {};
@@ -71,7 +70,6 @@
     function likeMessage(messageID, index) {
       Forum.likeMessage(User.getID(), messageID, vm.thread.id)
       .then(function (status) {
-        console.log(status);
         if (status === 201) {
           vm.messages[index].vote_tally++;
           vm.messages[index].votedFor = true;
