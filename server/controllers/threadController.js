@@ -215,6 +215,7 @@ module.exports = {
         console.error(err);
         res.status(500).end();
       } else {
+        console.log("messages is ", messages)
         res.status(200).json(messages);
       }
     })
