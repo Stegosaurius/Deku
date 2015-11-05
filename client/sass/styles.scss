@@ -1095,8 +1095,11 @@ ul {
       i {
         margin-top: -0.2rem;
       }
-      i:hover {
+      .not-voted:hover {
         cursor: pointer;
+        color: $lightBlue;
+      }
+      .voted-for {
         color: $lightBlue;
       }
       h5 {

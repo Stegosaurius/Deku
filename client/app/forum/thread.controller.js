@@ -39,9 +39,21 @@
         .then(function(data) {
           console.log("The message data is, ", data);
           vm.messages = [];
+
+          var uservotes = {};
+          for (i = 0; i < data.uservotes.length; i++) {
+            uservotes[data.uservotes[i].id] = true;
+          }
+
           for (var i = 0; i < data.messages.length; i++) {
             vm.messages.push(data.messages[i])
             vm.messages[i].created_at = moment(vm.messages[i].created_at).fromNow();
+
+            if (uservotes[vm.messages[i].id]) {
+              vm.messages[i].votedFor = true;
+            } else {
+              vm.messages[i].votedFor = false;
+            }
           }
           vm.thread = data.thread;
           vm.thread.last_updated = moment(vm.thread.last_updated).fromNow();
@@ -62,6 +74,7 @@
         console.log(status);
         if (status === 201) {
           vm.messages[index].vote_tally++;
+          vm.messages[index].votedFor = true;
         }
       })
     }
