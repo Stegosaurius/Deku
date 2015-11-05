@@ -9,6 +9,7 @@ module.exports = function(grunt) {
           "client/keys/dashboardConfigure.js",
           "client/app/app.js",
           "client/app/auth/auth.controller.js",
+          "client/app/auth/oauth.controller.js",
           "client/app/dashboard/dashboard.controller.js",
           "client/app/forum/allThreads.controller.js",
           "client/app/forum/thread.controller.js",

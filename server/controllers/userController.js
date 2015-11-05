@@ -78,26 +78,18 @@ module.exports = {
 
   uploadAvatar: function (req, res) {
     var file = req.files.file;
-    // Load the stream
     var userID = req.params.userID;
-    var body = fs.createReadStream(file).pipe(zlib.createGzip());
-    // Upload the stream
-    var s3 = new AWS.S3({params: { Bucket: config.awsStorage.bucket }});
-    s3.upload({ Body: body }, function(err, data) {
-      if (err) {
-        console.error(err);
-        res.status(500).send(err);
-      } else {
-        // store path to avatar in our database
-        User.addProfilePhoto(userID, data.Location, function (err, result) {
-          if (err) {
-            console.error(err);
-            res.status(500).send(err);
-          } else {
-            res.status(201).json({ avatarURL: data.Location });
-          }
-        });
-      }
+
+    cloudinary.uploader.upload(file.path, function(result) { 
+      var url = result.url;
+      User.addProfilePhoto(userID, url, function (err, result) {
+        if (err) {
+          console.error(err);
+          res.status(500).end();
+        } else {
+          res.status(201).json({ photo: url });
+        }
+      }) 
     });
   },
 

@@ -29,7 +29,7 @@ module.exports = function (app, passport) {
 	// FACEBOOK ROUTES =====================
 	// =====================================
 	// route for facebook authentication and login
-	app.get('/facebook', passport.authenticate('facebook', { scope : 'email' }));
+	app.get('/facebook', passport.authenticate('facebook', { scope : ['email', 'user_location'] }));
 
 	// handle the callback after facebook has authenticated the user
   	app.get('/facebook/callback', function(req, res, next) {
@@ -38,8 +38,9 @@ module.exports = function (app, passport) {
           return next(err); 
         }
         if (!user) { 
-          return res.redirect('/#/signin'); 
+          return res.redirect('/#/'); 
         }
+        console.log('user before sending back is ', user);
         var userObject = {
           id: user.id,
           username: user.username,
@@ -61,14 +62,11 @@ module.exports = function (app, passport) {
 	// the callback after google has authenticated the user
 	app.get('/google/callback', function(req, res, next) {
       passport.authenticate('google', function(err, user, info) {
-        console.log("Err equals ", err);
-        console.log("Info equals ", info)
-        console.log("User object equals ",user);
         if (err) { 
           return next(err); 
         }
         if (!user) { 
-          return res.redirect('/#/signin'); 
+          return res.redirect('/'); 
         }
         var userObject = {
           id: user.id,
