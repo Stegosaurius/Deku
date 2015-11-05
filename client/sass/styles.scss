@@ -280,13 +280,23 @@ ul {
 
 .editProfile {
 
+  h3 {
+    text-align: center;
+  }
+
   h4 {
     color: $darkGreen;
-    margin: 0 0 0 0;
+    margin: 1.5rem 0 0 0;
+    font-size: 1.6rem
   }
 
   h5 {
     font-size: 1.4rem;
+    margin-bottom: 0;
+  }
+
+  h6 {
+    font-size: 1.1rem;
   }
 
   ul.tags {
@@ -454,7 +464,7 @@ ul {
     position: absolute;
     top: 35%;
     left: 6%;
-    opacity: 0;
+    opacity: .5;
   }
 
   .update-avatar:hover {
@@ -476,7 +486,7 @@ ul {
 
   .avatar {
     height: 11rem;
-    border-radius: 5%;
+    border-radius: 3px;
   }
 
   .add-photo {

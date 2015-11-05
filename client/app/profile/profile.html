@@ -14,6 +14,7 @@
             <a ui-sref="dashboard({ username: profile.username })" ng-hide="profile.activeUser">Dashboard</a>
 
             <a ng-click="profile.follow()" ng-hide="profile.activeUser || profile.isFollowing">Follow</a>
+
             <a ng-click="profile.unfollow()" ng-hide="profile.activeUser || !profile.isFollowing">Unfollow</a>
           </div>
         </li>

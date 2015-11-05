@@ -1,16 +1,17 @@
 <div class="editProfile section">
 
   <div class="row z-depth-1 user-meta">
+    <h3>Set Up Your Profile</h3>
 
     <div class="col m5">
 
-      <div class="row"> 
-      
+      <div class="row">
+
         <div class="col m5 avatar-container">
 
           <img class="avatar responsive-img" ng-src="{{ editProfile.avatar }}">
 
-          <a class="update-avatar" href="#avatarModal" modal>Update</a>
+          <a class="update-avatar" href="#avatarModal" modal>Update Photo</a>
 
           <!-- Modal Structure -->
           <div id="avatarModal" class="modal">
@@ -26,16 +27,16 @@
           </div>
 
           <!-- <button type="button" ng-click="editProfile.updateAvatar()" class="update-avatar">Update</button> -->
-          
+
         </div>
 
         <div class="col m7">
 
           <h4>{{ editProfile.username }}</h4>
-          <h5>Location</h5>
+          <h6>Location:</h6>
           <input type="text" ng-model="editProfile.location"  placeholder="Where are you based?"><br>
           <!-- <input type="text" ng-model="editProfile.about" placeholder="Tell us about yourself"><br>   --> 
-          
+
         </div>
 
       </div>
@@ -109,7 +110,7 @@
 
   </div>
 
-  <div class="row z-depth-1"> 
+  <div class="row z-depth-1 user-meta">
 
     <div class="col m6">
       

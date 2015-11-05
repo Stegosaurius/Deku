@@ -54,7 +54,7 @@
         .then(function(data) {
           saveToken(data.token);
           angular.element('#signupModal').closeModal();
-          $state.transitionTo('profile', { username: $window.localStorage.username });
+          $state.transitionTo('editProfile');
         })
         .catch(function(status) {
           if (status === 409) {
