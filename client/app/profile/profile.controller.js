@@ -218,9 +218,7 @@
     function getStatuses() {
       User.getStatuses(vm.username, User.getID())
         .then(function(statuses) {
-          console.log(statuses);
           vm.statuses = statuses.statuses;
-
           var uservotes = {};
           for (i = 0; i < statuses.uservotes.length; i++) {
             uservotes[statuses.uservotes[i].id] = true;
@@ -241,18 +239,14 @@
     function getFolloweesStatuses() {
       User.getFolloweesStatuses(User.getID())
         .then(function (statuses) {
-          console.log(statuses);
-
           var uservotes = {};
           for (i = 0; i < statuses.uservotes.length; i++) {
             uservotes[statuses.uservotes[i].id] = true;
           }
-
           vm.followeesStatuses = statuses.statuses;
           // transform timestamp to readable format
           for (var i = 0; i < vm.followeesStatuses.length; i++) {
             vm.followeesStatuses[i].timestamp = moment(vm.followeesStatuses[i].timestamp).fromNow();
-
             if (uservotes[vm.followeesStatuses[i].id]) {
               vm.followeesStatuses[i].votedFor = true;
             } else {

@@ -53,7 +53,18 @@ module.exports = {
         console.error(err);
         res.status(404).send(err);
       } else {
-        res.status(200).json(statuses);
+        var results = {
+          statuses: statuses
+        };
+        Status.getUserStatusVotes(req.params.userID, function (err, votes) {
+          if (err) {
+            console.error(err);
+            res.status(500).end();
+          } else {
+            results.uservotes = votes;
+            res.status(200).json(results);
+          }
+        });
       }
     });
   },
