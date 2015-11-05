@@ -48,7 +48,6 @@ module.exports = {
 					count: threads.length,
 					threads: threads.splice((page - 1) * 20, 20)
 				}
-				console.log("inside get threads by page")
 				// return 
 				callback(null, filteredThreads);
 			}
@@ -250,7 +249,6 @@ module.exports = {
 					});
 					// return only the most recent 10 results
 					var filteredMessages = res.splice(0,10);
-					console.log("filteredMessages is ", filteredMessages);
 					callback(null, filteredMessages);
 				}
 		});
