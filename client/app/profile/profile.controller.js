@@ -47,16 +47,16 @@
     // post status to database and clear form
     function addStatus() {
       var newStatus = vm.status;
-
       // reset form
       vm.statusUpdate.$setPristine();
       vm.status = '';
-
       vm.statuses.unshift({ status: newStatus });
 
       User.addStatus(newStatus, User.getID())
         .then(function(status) {
+          console.log(status);
           vm.statuses[0] = status;
+          vm.statuses[0].timestamp = moment(vm.statuses[0].timestamp).fromNow();
         })
         .catch(function(err) {
           vm.statuses.shift();
@@ -170,9 +170,7 @@
         .then(function(data) {
           for (var i = 0; i < data.length; i++) {
             vm.followers.push(data[i].username);
-
           }
-
           // check whether active user is following this user
           if (!vm.activeUser && (vm.followers.indexOf($window.localStorage.username) !== -1)) {
             vm.isFollowing = true;
@@ -193,7 +191,6 @@
       User.getRecentThreads(vm.username)
         .then(function(threads) {
           vm.recentThreads = threads;
-
           // transform timestamp to readable format
           for (var i = 0; i < vm.recentThreads.length; i++) {
             vm.recentThreads[i].created_at = moment(vm.recentThreads[i].created_at).fromNow();
@@ -205,7 +202,6 @@
       User.getStatuses(vm.username, User.getID())
         .then(function(statuses) {
           vm.statuses = statuses.statuses;
-
           // transform timestamp to readable format
           for (var i = 0; i < vm.statuses.length; i++) {
             vm.statuses[i].timestamp = moment(vm.statuses[i].timestamp).fromNow();
@@ -217,7 +213,6 @@
       User.getFolloweesStatuses(User.getID())
         .then(function (statuses) {
           vm.followeesStatuses = statuses.statuses;
-
           // transform timestamp to readable format
           for (var i = 0; i < vm.followeesStatuses.length; i++) {
             vm.followeesStatuses[i].timestamp = moment(vm.followeesStatuses[i].timestamp).fromNow();
