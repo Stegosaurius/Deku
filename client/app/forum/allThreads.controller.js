@@ -23,7 +23,7 @@
     *  It will be set correctly upon the return of getThreads AJAX call.
     */
     vm.total = 1e9; // total number of threads
-    vm.upvote = upvote;
+    vm.upvoteThread = upvoteThread;
 
     getThreads(vm.page);
 
@@ -39,20 +39,46 @@
     }
 
     function getThreads(page) {
-      Forum.getThreads(page)
+      Forum.getThreads(User.getID(), page)
         .then(function(data) {
           vm.threads = data.threads;
           vm.total = data.count;
 
+          // convert user votes into quick-readable format
+          var uservotes = {};
+          for (i = 0; i < data.uservotes.length; i++) {
+            uservotes[data.uservotes[i].id] = true;
+          }
+
           for (var i = 0; i < vm.threads.length; i++) {
+            // convert timestamps to readable format
             vm.threads[i].created_at = moment(vm.threads[i].created_at).fromNow();
             vm.threads[i].last_updated = moment(vm.threads[i].last_updated).fromNow();
+
+            // specify threads that the active user has upvoted
+            if (uservotes[vm.threads[i].id]) {
+              vm.threads[i].votedFor = true;
+            } else {
+              vm.threads[i].votedFor = false;
+            }
           }
         });
     }
 
-    function upvote(threadID) {
-      // Forum.upvoteThread(User.getID(), threadID);
+    function upvoteThread(threadID) {
+      Forum.upvoteThread(User.getID(), threadID)
+        .then(function(res) {
+          // reflect new vote state if vote successful
+          if (res.status === 201) {
+            for (var i = 0; i < vm.threads.length; i++) {
+              if (vm.threads[i].id === threadID) {
+                vm.threads[i].vote_tally++;
+                vm.threads[i].votedFor = true;
+                break;
+              }
+            }
+          }
+        });
     }
   }
 })();

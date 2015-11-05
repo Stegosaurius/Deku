@@ -11,8 +11,9 @@
       createThread: createThread,
       getMessages: getMessages,
       getThreads: getThreads,
-      postToThread: postToThread,
-      likeMessage: likeMessage
+      likeMessage: likeMessage,
+      upvoteThread: upvoteThread,
+      postToThread: postToThread
     };
 
     return services;
@@ -35,12 +36,31 @@
         });
     }
 
-    function getThreads(page) {
-      return $http.get('/threads/' + page)
+    function getThreads(userID, page) {
+      return $http.get('/threads/' + userID + '/' + page)
         .then(function successCallback(res) {
           return res.data;
         }, function errorCallback(res) {
           console.log('Error retrieving threads by page');
+        });
+    }
+
+    function likeMessage(userID, messageID) {
+      return $http.post('/threads/vote/message/' + userID + '/' + messageID)
+        .then(function successCallback(res) {
+          return res.status;
+        }, function errorCallback(res) {
+          console.log('Error liking message');
+        });
+    }
+
+    function upvoteThread(userID, threadID) {
+      return $http.post('/threads/vote/' + userID + '/' + threadID)
+        .then(function successCallback(res) {
+          return res;
+        }, function errorCallback(res) {
+          console.log('Error liking thread');
+          return res;
         });
     }
 
@@ -51,15 +71,6 @@
         }, function errorCallback(res) {
           console.log('Error posting to thread');
         });
-    }
-
-    function likeMessage(userID, messageID) {
-      return $http.post('/threads/vote/message/' + userID + '/' + messageID)
-        .then(function successCallback(res) {
-          return res.status;
-        }, function errorCallback(res) {
-          console.log('Error liking message');
-        })
     }
   }
 })();

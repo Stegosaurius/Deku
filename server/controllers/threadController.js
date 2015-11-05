@@ -17,7 +17,8 @@ module.exports = {
         res.status(500).end();
       } else {
         var results = {
-          threads: threads
+          threads: threads.threads,
+          count: threads.count
         };
         Thread.getUserThreadVotes(req.params.userID, function (err, votes) {
           if (err) {
@@ -27,9 +28,9 @@ module.exports = {
             results.uservotes = votes;
             res.status(200).json(results);
           }
-        })
+        });
       }
-    })
+    });
   },
 
   getMessagesByPage: function (req, res) {

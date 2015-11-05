@@ -1,5 +1,6 @@
 /* ___GLOBALS___ */
 
+$lightestGreen: #17be5d;
 $lightGreen: #27ae60;
 $lightBlue: #1abc9c;
 $lightGrey: #dfdfdf;
@@ -666,7 +667,7 @@ ul {
     font-size: 1rem;
     padding-left: .5rem;
     margin-bottom: 2rem;
-    border-left: 8px solid $lightGreen;
+    border-left: 8px solid $lightestGreen;
     p {
       margin-top: -0.7rem;
     }
@@ -945,7 +946,8 @@ ul {
     border: 0;
   }
 
-  .upvote:hover {
+  .upvote:hover,
+  .upvote.voted {
     color: $lightGreen;
   }
 

@@ -13,7 +13,11 @@
 
           <div class="user">{{ thread.username }}</div>
 
-          <button class="upvote left" ng-click="allThreads.upvote(thread.id)">
+          <button class="upvote unvoted left" ng-click="allThreads.upvoteThread(thread.id)" ng-hide="thread.votedFor">
+            <i class="material-icons">keyboard_arrow_up</i>
+          </button>
+
+          <button class="upvote voted left" ng-show="thread.votedFor">
             <i class="material-icons">keyboard_arrow_up</i>
           </button>
 
