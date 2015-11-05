@@ -27,8 +27,8 @@
     vm.photoIndex = 0;
     vm.morePhotos = true;
     vm.lessPhotos = false;
-    vm.getNextTwoPhotos = getNextTwoPhotos;
-    vm.getPrevTwoPhotos = getPrevTwoPhotos;
+    vm.getNextPhoto = getNextPhoto;
+    vm.getPrevPhoto = getPrevPhoto;
     vm.recentThreadNames = [];
     vm.recentThreads = {};
     vm.statuses = [];
@@ -101,7 +101,7 @@
       vm.isFollowing = false;
     }
 
-    function getNextTwoPhotos () {
+    function getNextPhoto () {
       vm.photoIndex = vm.photoIndex + 1;
       if (vm.photoIndex === vm.photos.length - 1) {
         vm.currentPhotos = [vm.photos[vm.photoIndex]];
@@ -112,7 +112,7 @@
       vm.lessPhotos = true;
     }
 
-    function getPrevTwoPhotos () {
+    function getPrevPhoto () {
       vm.photoIndex = vm.photoIndex - 1;
       vm.currentPhotos = vm.photos.slice(vm.photoIndex, vm.photoIndex + 2);
       if (vm.photoIndex === 0) {

@@ -36,8 +36,8 @@
     vm.addPhotoByPath = addPhotoByPath;
     vm.addPhotoByUpload = addPhotoByUpload;
     vm.deletePhoto = deletePhoto;
-    vm.getNextTwoPhotos = getNextTwoPhotos;
-    vm.getPrevTwoPhotos = getPrevTwoPhotos;
+    vm.getNextPhoto = getNextPhoto;
+    vm.getPrevPhoto = getPrevPhoto;
 
     //Populate profile assets
     getProfile();
@@ -173,7 +173,7 @@
         });
     }
 
-    function getNextTwoPhotos () {
+    function getNextPhoto () {
       vm.photoIndex = vm.photoIndex + 1;
       if (vm.photoIndex === vm.photos.length - 1) {
         vm.currentPhotos = [vm.photos[vm.photoIndex]];
@@ -184,7 +184,7 @@
       vm.lessPhotos = true;
     }
 
-    function getPrevTwoPhotos () {
+    function getPrevPhoto () {
       vm.photoIndex = vm.photoIndex - 1;
       vm.currentPhotos = vm.photos.slice(vm.photoIndex, vm.photoIndex + 2);
       if (vm.photoIndex === 0) {
