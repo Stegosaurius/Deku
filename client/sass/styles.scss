@@ -328,7 +328,7 @@ ul {
     }
   }
 
-  div {
+  div.user-meta {
     margin: 5px 0;
     margin-bottom: 15px;
     padding: 5px 0;
@@ -483,6 +483,35 @@ ul {
     margin-top: 24px;
     @extend .default-button;
   }
+
+  .photos-modal {
+    span {
+      font-size: 1.5rem;
+    }
+
+    input {
+      height: 2.4rem;
+    }
+
+    form {
+      margin: 2rem 0;
+    }
+
+    .upload {
+      background-color: $lightGrey;
+      border-radius: 3px;
+      padding: .2rem .4rem;
+      margin-right: 2rem;
+    }
+
+    .upload:hover {
+      @extend .default-button-hover;
+    }
+
+    .upload-text {
+      font-size: 1rem;
+    }
+  }
 }
 
 
@@ -567,6 +596,14 @@ ul {
 
       li:hover a {
         opacity: 1
+      }
+
+      .upload-file {
+        @extend .default-button;
+      }
+
+      .upload-file {
+        @extend .default-button-hover;
       }
 
   }
