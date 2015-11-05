@@ -8,7 +8,7 @@
       
         <div class="col m5 avatar-container">
 
-          <img class="avatar responsive-img" src="{{ editProfile.avatar }}">
+          <img class="avatar responsive-img" ng-src="{{ editProfile.avatar }}">
 
           <a class="update-avatar" href="#avatarModal" modal>Update</a>
 
@@ -71,7 +71,7 @@
         
 
         <div class="col s1 m1 l1 valign">
-          <a class="left"ng-show="editProfile.morePhotos" ng-click="editProfile.getNextPhoto()">
+          <a class="left" ng-show="editProfile.morePhotos" ng-click="editProfile.getNextPhoto()">
             <i class="material-icons small">chevron_right</i>
           </a>
         </div>

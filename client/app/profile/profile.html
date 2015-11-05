@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col s5">
       <ul class="userInfo">
-        <li><img class="avatar" src="{{ profile.avatar }}"></li>
+        <li><img class="avatar" ng-src="{{ profile.avatar }}"></li>
 
         <li>
           <h4>{{ profile.username }}</h4>
@@ -83,7 +83,7 @@
             <ul class="statuses">
               <li class="status row" ng-repeat="status in profile.followeesStatuses">
                 <div class="col s2">
-                  <img class="status-avatar" src="{{ status.profile_photo }}">
+                  <img class="status-avatar" ng-src="{{ status.profile_photo }}">
                 </div>
                 <div class="col s3">
                   {{ status.username }}
@@ -168,7 +168,7 @@
       <ul class="tag-modal">
         <li class="row" ng-repeat="user in profile.tagModalData">
             <div class="tag-avatar-container col s2 m2 l2">
-              <img class="modal-avatar" src="{{ user.profile_photo }}">
+              <img class="modal-avatar" ng-src="{{ user.profile_photo }}">
             </div>
             <div class="tag-username col s4 m4 l4">
               <span> {{ user.username }} </span>
