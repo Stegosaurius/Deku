@@ -8,11 +8,9 @@ var User = require('../models/userModel');
 
 // load the auth variables
 
-if (process.env.PORT) {
-  var configAuth = require('./auth.deploy.js');
-} else {
-  var configAuth = require('./auth.js');
-}
+
+var configAuth = require('./auth.js');
+
 
 // load helpers
 var util = require('../helpers/utilities');
@@ -58,7 +56,7 @@ module.exports = function(passport) {
                         var newUser = {
                             username: username,
                             email: profile.emails[0].value,
-                            photo: profile.photos[0].value,
+                            photo: profile.photos[0].value || '/assets/placeholder_avatar.svg.hi.png',
                             location: profile._json.location.name
                         };
 
@@ -116,7 +114,7 @@ module.exports = function(passport) {
                     var newUser = {
                         username: '' + profile.displayName.replace(/\s/g, '') + Math.floor(Math.random() * 9999),
                         email: profile.emails[0].value,
-                        photo: profile.photos[0].value,
+                        photo: profile.photos[0].value || '/assets/placeholder_avatar.svg.hi.png',
                         location: profile._json.placesLived[0].value || null
                     };
 
