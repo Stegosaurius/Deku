@@ -57,7 +57,7 @@
     }
 
     function likeMessage(messageID, index) {
-      Forum.likeMessage(User.getID(), messageID)
+      Forum.likeMessage(User.getID(), messageID, vm.thread.id)
       .then(function (status) {
         console.log(status);
         if (status === 201) {
