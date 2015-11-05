@@ -99,7 +99,8 @@
     function unfollow() {
       User.unfollow(User.getID(), vm.username);
       vm.isFollowing = false;
-      
+    }
+
     function getNextTwoPhotos () {
       vm.photoIndex = vm.photoIndex + 1;
       if (vm.photoIndex === vm.photos.length - 1) {
