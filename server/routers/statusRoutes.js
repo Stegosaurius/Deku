@@ -2,7 +2,7 @@ var statusController = require('../controllers/statusController.js');
 
 module.exports = function (app) {
 
-  app.get('/:username', statusController.getStatuses);
+  app.get('/:username/:currentuserID', statusController.getStatuses);
   
   app.post('/:userID', statusController.updateStatus);
 

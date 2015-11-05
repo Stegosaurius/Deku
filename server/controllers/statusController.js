@@ -8,7 +8,19 @@ module.exports = {
         console.error(err);
         res.status(500).end();
       } else {
-        res.status(200).json(statuses);
+        var results = {
+          statuses: statuses
+        };
+
+        Status.getUserStatusVotes(req.params.currentuserID, function (err, votes) {
+          if (err) {
+            console.error(err);
+            res.status(500).end();
+          } else {
+            results.uservotes = votes;
+            res.status(200).json(results);
+          }
+        })
       }
     })
   },
