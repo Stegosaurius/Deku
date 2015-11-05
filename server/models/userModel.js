@@ -86,7 +86,7 @@ module.exports = {
     });
     var password = bcrypt.hashSync(data.password, bcrypt.genSaltSync(10));
   
-    db.query('insert into users (username, password, email, read_scoped_key, write_scoped_key) values (?, ?, ?, ?, ?)', [data.username, password, data.email, readScopedKey, writeScopedKey], function (err, res) {
+    db.query('insert into users (username, password, email, read_scoped_key, write_scoped_key, profile_photo) values (?, ?, ?, ?, ?, ?)', [data.username, password, data.email, readScopedKey, writeScopedKey, data.photo], function (err, res) {
       if (err) {
         callback(err, null);
       } else {
@@ -113,7 +113,7 @@ module.exports = {
         "property_value": data.username
       }]
     });
-    db.query('insert into users (username, email, read_scoped_key, write_scoped_key) values (?, ?, ?, ?)', [data.username, data.email, readScopedKey, writeScopedKey],
+    db.query('insert into users (username, email, read_scoped_key, write_scoped_key, profile_photo, location) values (?, ?, ?, ?, ?, ?)', [data.username, data.email, readScopedKey, writeScopedKey, data.photo, data.location],
       function (err, res) {
         if (err) {
           callback(err, null);

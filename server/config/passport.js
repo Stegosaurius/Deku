@@ -28,7 +28,7 @@ module.exports = function(passport) {
         clientID        : configAuth.facebookAuth.clientID,
         clientSecret    : configAuth.facebookAuth.clientSecret,
         callbackURL     : configAuth.facebookAuth.callbackURL,
-        profileFields   : ['id', 'displayName', 'email', 'photos']
+        profileFields   : ['id', 'displayName', 'location', 'email', 'picture.type(large)']
     },
     // facebook will send back the token and profile
     function(token, refreshToken, profile, done) {
@@ -37,40 +37,46 @@ module.exports = function(passport) {
         // asynchronous
         process.nextTick(function() {
             // find the user in the database based on their email
-            User.getUserByName(profile.emails[0].value, function(err, user) {
+            User.getUserByEmail(profile.emails[0].value, function(err, user) {
                 // if there is an error, stop everything and return that
                 // ie an error connecting to the database
                 if (err) {
-                    return done(err);
+                    done(err);
                 }
 
                 // if the user is found, generate new token
                 // save token in database
                 // then return the updated user object
-                if (user.length >= 1) {
-                    return done(user[0]);
+                if (user[0]) {
+                    done(null, user[0]);
 
                 } else {
                     // if there is no user found with that facebook id, create them
-                    var newUser = {
-                        username: profile.name.givenName + ' ' + profile.name.familyName,
-                        email: profile.emails[0].value,
-                        photo: profile.photos[0].value
-                    };
+                    var createNewUser = function () {
 
-                    User.addUserBySocial(newUser, function (err, result) {
-                        if (err) {
-                            done(err);
-                        } else {
-                            User.getUserByEmail(newUser.email, function (err, user) {
-                                if (err) {
-                                    done(err);
-                                } else {
-                                    done(null, user[0]);
-                                }
-                            });
-                        }
-                    });
+                        var username = '' + profile.displayName.replace(/\s/g, '') + Math.floor(Math.random() * 9999);
+                        var newUser = {
+                            username: username,
+                            email: profile.emails[0].value,
+                            photo: profile.photos[0].value,
+                            location: profile._json.location.name
+                        };
+
+                        User.addUserBySocial(newUser, function (err, result) {
+                            if (err) {
+                                createNewUser();
+                            } else {
+                                User.getUserByEmail(newUser.email, function (err, user) {
+                                    if (err) {
+                                        done(err);
+                                    } else {
+                                        done(null, user[0]);
+                                    }
+                                });
+                            }
+                        });
+                    };
+                    createNewUser();
                 }
 
             });
@@ -95,7 +101,7 @@ module.exports = function(passport) {
 
             // try to find the user based on their google id
             User.getUserByEmail(profile.emails[0].value, function(err, user) {
-
+                
                 if (err) {
                     return done(err);
                 }
@@ -108,9 +114,10 @@ module.exports = function(passport) {
 
                 } else {
                     var newUser = {
-                        username: profile.displayName,
+                        username: '' + profile.displayName.replace(/\s/g, '') + Math.floor(Math.random() * 9999),
                         email: profile.emails[0].value,
-                        photo: profile.photos[0].value
+                        photo: profile.photos[0].value,
+                        location: profile._json.placesLived[0].value || null
                     };
 
                     User.addUserBySocial(newUser, function (err, result) {
