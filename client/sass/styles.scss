@@ -541,21 +541,37 @@ ul {
   }
 
   .user-photos-container {
-    width: 40rem;
-    overflow-x: scroll;
-    margin-top: 1rem;
-  }
 
-  .user-photos-container ul {
-    width: 100rem;
-  }
+      i {
+        color: $darkGrey;
+        font-size: 3rem;
+      }
+      i:hover {
+        color: $lightBlue;
+        cursor: pointer;
+      }
 
-  .user-photos-container li {
-    display: inline;
+      ul {
+        width: 100%;
+        overflow-x: hidden;
+        white-space: nowrap;
+        display: block;
+      }
+   
+      li {
+        display: inline-block;
+        position: relative;
+        margin-right: .5rem;
+      }
+
+      li:hover a {
+        opacity: 1
+      }
+
   }
 
   .photo {
-    height: 15rem;
+    height: 14rem;
   }
 
   .about {
