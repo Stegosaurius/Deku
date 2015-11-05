@@ -542,7 +542,7 @@ ul {
 
   .user-photos-container {
       margin-top: 1rem;
-      
+
       i {
         color: $darkGrey;
         font-size: 3rem;
@@ -634,7 +634,6 @@ ul {
       margin-top: -0.7rem;
     }
     .user-status {
-      margin-top: -2rem;
     }
   }
 
@@ -649,9 +648,10 @@ ul {
       i {
         margin-top: -0.2rem;
       }
-      span {
-        margin-top: 0.2rem;
-        padding-left: 0;
+      .upvoteTally {
+        position: relative;
+        top: -0.1rem;
+        left: -1rem;
       }
     }
   }

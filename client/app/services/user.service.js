@@ -273,8 +273,8 @@
     }
 
     // retrieve user statuses
-    function getStatuses(username) {
-      return $http.get('/status/' + username)
+    function getStatuses(username, currentUserID) {
+      return $http.get('/status/' + username + '/' + currentUserID)
         .then(function successCallback(res) {
           return res.data;
         }, function errorCallback(res) {

@@ -202,9 +202,9 @@
     }
 
     function getStatuses() {
-      User.getStatuses(vm.username)
+      User.getStatuses(vm.username, User.getID())
         .then(function(statuses) {
-          vm.statuses = statuses;
+          vm.statuses = statuses.statuses;
 
           // transform timestamp to readable format
           for (var i = 0; i < vm.statuses.length; i++) {
@@ -216,7 +216,7 @@
     function getFolloweesStatuses() {
       User.getFolloweesStatuses(User.getID())
         .then(function (statuses) {
-          vm.followeesStatuses = statuses;
+          vm.followeesStatuses = statuses.statuses;
 
           // transform timestamp to readable format
           for (var i = 0; i < vm.followeesStatuses.length; i++) {
