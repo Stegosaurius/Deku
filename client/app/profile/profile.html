@@ -20,12 +20,29 @@
       </ul>
     </div>
 
-    <div class="user-photos-container col s7">
-      <ul class="user-photos">
-        <li ng-repeat="photo in profile.photos">
-          <img class="photo" ng-src="{{ photo.photo }}"/>
-        </li>
-      </ul>
+    <div class="user-photos-container col s7 m7 l7 valign-wrapper">
+        <div class="col s1 m1 l1 valign">
+          <a class="right" ng-show="profile.lessPhotos" ng-click="profile.getPrevPhoto()">
+            <i class="material-icons small">chevron_left</i>
+          </a>
+        </div>
+
+        <div class="photo-list-container col s10 m10 l10 valign">
+          <ul class="center">
+            <li ng-repeat="photo in profile.currentPhotos">
+              <img class="photo" ng-src="{{ photo.photo }}"/>
+            </li>
+          </ul>
+        </div>
+        
+
+        <div class="col s1 m1 l1 valign">
+          <a class="left" ng-show="profile.morePhotos" ng-click="profile.getNextPhoto()">
+            <i class="material-icons small">chevron_right</i>
+          </a>
+        </div>
+
+      
     </div>
   </div>
 
@@ -97,7 +114,7 @@
                 <div class="status-votes col s3">
                   <div class="row">
                     <i class="material-icons col s4 m4 l4">star_border</i>
-                    <span class="col s8 m8 l8">{{ status.vote_tally }}</span>
+                    <span class="upvoteTally col s8 m8 l8">{{ status.vote_tally }}</span>
                   </div>
                 </div>
                 <div class="col s5 statusCreated right-align">

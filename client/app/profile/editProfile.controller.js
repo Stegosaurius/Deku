@@ -22,6 +22,10 @@
     vm.photoPath = '';
     vm.avatarPath = '';
     vm.photos = [];
+    vm.currentPhotos = [];
+    vm.photoIndex = 0;
+    vm.morePhotos = true;
+    vm.lessPhotos = false;
 
     //editProfile user actions
     vm.updateProfile = updateProfile;
@@ -32,6 +36,8 @@
     vm.addPhotoByPath = addPhotoByPath;
     vm.addPhotoByUpload = addPhotoByUpload;
     vm.deletePhoto = deletePhoto;
+    vm.getNextPhoto = getNextPhoto;
+    vm.getPrevPhoto = getPrevPhoto;
 
     //Populate profile assets
     getProfile();
@@ -142,6 +148,7 @@
           for (var i = 0; i < data.length; i++) {
             vm.photos.push(data[i]);
           }
+          vm.currentPhotos = vm.photos.slice(0, 2);
         });
     }
 
@@ -165,6 +172,27 @@
           getPhotos();
         });
     }
+
+    function getNextPhoto () {
+      vm.photoIndex = vm.photoIndex + 1;
+      if (vm.photoIndex === vm.photos.length - 1) {
+        vm.currentPhotos = [vm.photos[vm.photoIndex]];
+        vm.morePhotos = false;
+      } else {
+        vm.currentPhotos = vm.photos.slice(vm.photoIndex, vm.photoIndex + 2);
+      }
+      vm.lessPhotos = true;
+    }
+
+    function getPrevPhoto () {
+      vm.photoIndex = vm.photoIndex - 1;
+      vm.currentPhotos = vm.photos.slice(vm.photoIndex, vm.photoIndex + 2);
+      if (vm.photoIndex === 0) {
+        vm.lessPhotos = false;
+      }
+      vm.morePhotos = true;
+    }
+
     
   }
 })();

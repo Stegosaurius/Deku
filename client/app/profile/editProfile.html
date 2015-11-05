@@ -50,46 +50,57 @@
       </div>
       <!-- <p>{{ editProfile.message }}</p> -->
     </div>
-    
-    <div class="user-photos-container col m7">
-      <ul class="user-photos">
-        <li ng-repeat="photo in editProfile.photos">
-          <img class="photo" ng-src="{{ photo.photo }}"/>
-          <a ng-click="editProfile.deletePhoto(photo.id)" class="btn-floating btn-small waves-effect waves-light">
-            <i class="material-icons remove-photo">clear</i>
+
+    <div class="user-photos-container col s7 m7 l7 valign-wrapper">
+        <div class="col s1 m1 l1 valign">
+          <a class="right" ng-show="editProfile.lessPhotos" ng-click="editProfile.getPrevPhoto()">
+            <i class="material-icons small">chevron_left</i>
           </a>
-        </li>
-      </ul>
+        </div>
+
+        <div class="photo-list-container col s10 m10 l10 valign">
+          <ul class="center">
+            <li ng-repeat="photo in editProfile.currentPhotos">
+              <img class="photo" ng-src="{{ photo.photo }}"/>
+              <a ng-click="editProfile.deletePhoto(photo.id)">
+                <i class="material-icons">remove_circle</i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        
+
+        <div class="col s1 m1 l1 valign">
+          <a class="left"ng-show="editProfile.morePhotos" ng-click="editProfile.getNextPhoto()">
+            <i class="material-icons small">chevron_right</i>
+          </a>
+        </div>
+
+      
     </div>
 
     <div class="row">
-      <!-- Modal Trigger -->
       <div class="col right">
-          <a class="add-photo" href="#demoModal" modal>Add a photo</a>
+          <a class="add-photo" href="#userPhotoModal" modal>Add a photo</a>
       </div>
-      <!-- Modal Structure -->
-      <div id="demoModal" class="modal right">
-          <div class="modal-content">
-              <h4>Add a greenhouse photo!</h4>
-              <p>Or whatever else you see fit</p>
+      <div id="userPhotoModal" class="modal">
+          <div class="modal-content photos-modal">
+              <h4>Add a photo!</h4>
+              <span>Is your photo online...</span>
+
               <form ng-submit="editProfile.addPhotoByPath()">
-                <input ng-model="editProfile.photoPath" placeholder="write the path to your photo here">
+                <input ng-model="editProfile.photoPath" placeholder="paste the url to your photo here">
                 <button type="submit" class="modal-close">Upload</button></a>
               </form>
 
-              <form ng-submit="editProfile.addPhotoByUpload(file)">
-                Single Image
-                <div class="btn btn-default" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
+              <span>...or on your computer computer?</span>
+              <form class="" ng-submit="editProfile.addPhotoByUpload(file)">
+                <button class="right modal-close" type="submit" ng-click="submit()">Upload</button>
+                <span class="upload-text">select a file to upload</span>
+                <div class="upload left" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
                   accept="image/*" ngf-max-size="20MB" ngf-min-height="100" 
-                  ngf-resize="{width: 100, height: 100}">Select {{ file }}</div>
-
-                Drop files: <div ngf-drop ng-model="file" class="drop-box">Drop</div>
-                <button type="submit" ng-click="submit()">submit</button>
+                  ngf-resize="{width: 100, height: 100}">select file {{ file }}</div>
               </form>
-
-          </div>
-          <div class="modal-footer">
-              <!-- <a class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a> -->
           </div>
       </div>
 

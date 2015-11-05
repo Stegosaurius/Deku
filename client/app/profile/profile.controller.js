@@ -23,6 +23,13 @@
     vm.isFollowing = false;  // is active user following the user of this profile?
     vm.location = '';
     vm.photos = [];
+    vm.currentPhotos = [];
+    vm.photoIndex = 0;
+    vm.morePhotos = true;
+    vm.lessPhotos = false;
+    vm.getNextPhoto = getNextPhoto;
+    vm.getPrevPhoto = getPrevPhoto;
+    vm.recentThreadNames = [];
     vm.recentThreads = {};
     vm.statuses = [];
     vm.tags = [];
@@ -92,6 +99,31 @@
     function unfollow() {
       User.unfollow(User.getID(), vm.username);
       vm.isFollowing = false;
+    }
+
+    function getNextPhoto () {
+      vm.photoIndex = vm.photoIndex + 1;
+      if (vm.photoIndex === vm.photos.length - 1) {
+        vm.currentPhotos = [vm.photos[vm.photoIndex]];
+        vm.morePhotos = false;
+      } else {
+        vm.currentPhotos = vm.photos.slice(vm.photoIndex, vm.photoIndex + 2);
+      }
+      vm.lessPhotos = true;
+    }
+
+    function getPrevPhoto () {
+      vm.photoIndex = vm.photoIndex - 1;
+      vm.currentPhotos = vm.photos.slice(vm.photoIndex, vm.photoIndex + 2);
+      if (vm.photoIndex === 0) {
+        vm.lessPhotos = false;
+      }
+      vm.morePhotos = true;
+    }
+
+    // make the active user a follower of this profile's user
+    function follow() {
+      User.follow(User.getID(), vm.username);
     }
 
     ///////////////////////////
@@ -170,9 +202,9 @@
     }
 
     function getStatuses() {
-      User.getStatuses(vm.username)
+      User.getStatuses(vm.username, User.getID())
         .then(function(statuses) {
-          vm.statuses = statuses;
+          vm.statuses = statuses.statuses;
 
           // transform timestamp to readable format
           for (var i = 0; i < vm.statuses.length; i++) {
@@ -184,7 +216,7 @@
     function getFolloweesStatuses() {
       User.getFolloweesStatuses(User.getID())
         .then(function (statuses) {
-          vm.followeesStatuses = statuses;
+          vm.followeesStatuses = statuses.statuses;
 
           // transform timestamp to readable format
           for (var i = 0; i < vm.followeesStatuses.length; i++) {
@@ -209,6 +241,7 @@
           for (var i = 0; i < data.length; i++) {
             vm.photos.push(data[i]);
           }
+          vm.currentPhotos = vm.photos.slice(0,2);
         });
     }
   }

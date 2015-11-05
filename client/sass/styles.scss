@@ -328,7 +328,7 @@ ul {
     }
   }
 
-  div {
+  div.user-meta {
     margin: 5px 0;
     margin-bottom: 15px;
     padding: 5px 0;
@@ -336,33 +336,50 @@ ul {
   }
 
   .user-photos-container {
-    width: 40rem;
-    overflow-x: scroll;
-  }
 
-  .user-photos-container ul {
-    width: 100rem;
-  }
+      i {
+        color: $darkGrey;
+        font-size: 3rem;
+      }
+      i:hover {
+        color: $lightBlue;
+      }
 
-  .user-photos-container li {
-    display: inline;
-    position: relative;
-  }
+      ul {
+        width: 100%;
+        overflow-x: hidden;
+        white-space: nowrap;
+        display: block;
+      }
+   
+      li {
+        display: inline-block;
+        position: relative;
+        margin-right: .5rem;
+        a {
+          position: absolute;
+          top: 6px;
+          left: 8px;
+          opacity: 0.7;
+          margin-right: -25px;
+          i {
+            color: red;
+            font-size: 1.5rem;
+          }
+          i:hover {
+            color: red;
+          }
+        }
+      }
 
-  .user-photos li a {
-    position: relative;
-    top: -196px;
-    right: 48px;
-    opacity: 0.7;
-    margin-right: -25px;
-  }
+      li:hover a {
+        opacity: 1
+      }
 
-  .user-photos li:hover a {
-    opacity: 1;
   }
 
   .photo {
-    height: 15rem;
+    height: 14rem;
   }
 
   .follow-container {
@@ -451,9 +468,6 @@ ul {
     opacity: 1;
   }
 
-  .remove-photo {
-    background-color: red;
-  }
 
   .add-tag {
     background-color: $lightGreen;
@@ -468,6 +482,35 @@ ul {
     margin-right: 30px;
     margin-top: 24px;
     @extend .default-button;
+  }
+
+  .photos-modal {
+    span {
+      font-size: 1.5rem;
+    }
+
+    input {
+      height: 2.4rem;
+    }
+
+    form {
+      margin: 2rem 0;
+    }
+
+    .upload {
+      background-color: $lightGrey;
+      border-radius: 3px;
+      padding: .2rem .4rem;
+      margin-right: 2rem;
+    }
+
+    .upload:hover {
+      @extend .default-button-hover;
+    }
+
+    .upload-text {
+      font-size: 1rem;
+    }
   }
 }
 
@@ -527,21 +570,46 @@ ul {
   }
 
   .user-photos-container {
-    width: 40rem;
-    overflow-x: scroll;
-    margin-top: 1rem;
-  }
+      margin-top: 1rem;
 
-  .user-photos-container ul {
-    width: 100rem;
-  }
+      i {
+        color: $darkGrey;
+        font-size: 3rem;
+      }
+      i:hover {
+        color: $lightBlue;
+        cursor: pointer;
+      }
 
-  .user-photos-container li {
-    display: inline;
+      ul {
+        width: 100%;
+        overflow-x: hidden;
+        white-space: nowrap;
+        display: block;
+      }
+   
+      li {
+        display: inline-block;
+        position: relative;
+        margin-right: .5rem;
+      }
+
+      li:hover a {
+        opacity: 1
+      }
+
+      .upload-file {
+        @extend .default-button;
+      }
+
+      .upload-file {
+        @extend .default-button-hover;
+      }
+
   }
 
   .photo {
-    height: 15rem;
+    height: 14rem;
   }
 
   .about {
@@ -603,7 +671,6 @@ ul {
       margin-top: -0.7rem;
     }
     .user-status {
-      margin-top: -2rem;
     }
   }
 
@@ -618,9 +685,10 @@ ul {
       i {
         margin-top: -0.2rem;
       }
-      span {
-        margin-top: 0.2rem;
-        padding-left: 0;
+      .upvoteTally {
+        position: relative;
+        top: -0.1rem;
+        left: -1rem;
       }
     }
   }
