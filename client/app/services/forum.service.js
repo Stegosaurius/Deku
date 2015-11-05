@@ -27,8 +27,8 @@
         });
     }
 
-    function getMessages(threadID, page) {
-      return $http.get('/threads/messages/' + threadID + '/' + page)
+    function getMessages(userID, threadID, page) {
+      return $http.get('/threads/messages/' + userID + '/' + threadID + '/' + page)
         .then(function successCallback(res) {
           return res.data;
         }, function errorCallback(res) {
