@@ -480,18 +480,24 @@ ul {
   h4 {
     color: $darkGreen;
     margin: 2.5rem 0 0 0;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
 
   h5 {
-    font-size: 1rem;
+    font-size: 1.4rem;
     margin-bottom: 1.8rem;
+    text-align: center;
+  }
+
+  h6 {
+    color: $darkGrey;
+    font-size: 1.1rem;
   }
 
   .avatar {
     height: 10rem;
     margin-top: 2rem;
-    border-radius: 5px;
+    border-radius: 3px;
   }
 
   .userInfo li {
@@ -612,7 +618,7 @@ ul {
       i {
         margin-top: -0.2rem;
       }
-      h5 {
+      span {
         margin-top: 0.2rem;
         padding-left: 0;
       }
@@ -643,6 +649,28 @@ ul {
 
   .follow a:hover {
     color: $darkBlue;
+  }
+
+  .forumActivity {
+    margin: 2.5rem 0 2rem 0;
+  }
+
+  li.thread {
+    border-left: 8px solid $lightBlue;
+    margin: 0 0 2rem 0;
+    padding-left: 1.5rem;
+  }
+
+  .thread h6:hover {
+    color: $lightBlue;
+  }
+
+  .thread p {
+    color: $grey;
+  }
+
+  .messageTime {
+    font-size: .8rem;
   }
 
   .modal {
