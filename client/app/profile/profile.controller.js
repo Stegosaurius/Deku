@@ -54,7 +54,6 @@
 
       User.addStatus(newStatus, User.getID())
         .then(function(status) {
-          console.log(status);
           vm.statuses[0] = status;
           vm.statuses[0].timestamp = moment(vm.statuses[0].timestamp).fromNow();
         })

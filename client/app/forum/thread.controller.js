@@ -63,6 +63,7 @@
     function postToThread () {
       Forum.postToThread(User.getID(), vm.thread.id, vm.newMessage)
         .then(function(data) {
+          vm.newMessage = '';
           getMessages();
         });
     }
