@@ -40,7 +40,8 @@
 
           <div class="message-votes col s2 m2 l2">
             <div class="row">
-              <i ng-click="thread.likeMessage(message.id, $index)" class="material-icons col s4 m4 l4">star_border</i>
+              <i ng-hide="message.votedFor" ng-click="thread.likeMessage(message.id, $index)" class="material-icons col s4 m4 l4 not-voted">star_border</i>
+              <i ng-show="message.votedFor" class="material-icons col s4 m4 l4 voted-for">star</i>
               <h5 class="col s8 m8 l8">{{ message.vote_tally }} upvotes</h5>
             </div>
           </div>

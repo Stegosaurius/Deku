@@ -27,8 +27,8 @@
         });
     }
 
-    function getMessages(threadID, page) {
-      return $http.get('/threads/messages/' + threadID + '/' + page)
+    function getMessages(userID, threadID, page) {
+      return $http.get('/threads/messages/' + userID + '/' + threadID + '/' + page)
         .then(function successCallback(res) {
           return res.data;
         }, function errorCallback(res) {
@@ -45,8 +45,8 @@
         });
     }
 
-    function likeMessage(userID, messageID) {
-      return $http.post('/threads/vote/message/' + userID + '/' + messageID)
+    function likeMessage(userID, messageID, threadID) {
+      return $http.post('/threads/vote/message/' + userID + '/' + messageID + '/' + threadID)
         .then(function successCallback(res) {
           return res.status;
         }, function errorCallback(res) {
