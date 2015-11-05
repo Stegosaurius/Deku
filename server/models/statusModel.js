@@ -106,6 +106,16 @@ module.exports = {
         callback(null, res);
       }
     })
+  },
+
+  getUserStatusVotes: function (userID, callback) {
+    db.query('select s.id from statuses s inner join status_votes sv where sv.status_id = s.id and sv.user_id = ?', [userID], function (err, res) {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, res);
+      }
+    })
   }
   
 }

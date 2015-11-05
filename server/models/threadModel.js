@@ -218,8 +218,8 @@ module.exports = {
 		});
 	},
 
-	addUserLikeForMessage: function (userID, messageID, callback) {
-		db.query('insert into message_votes (user_id, message_id) values (?,?)', [userID, messageID], function (err, res) {
+	addUserLikeForMessage: function (userID, messageID, threadID, callback) {
+		db.query('insert into message_votes (user_id, message_id, thread_id) values (?,?,?)', [userID, messageID, threadID], function (err, res) {
 			if (err) {
 				callback(err);
 			} else {
@@ -268,6 +268,27 @@ module.exports = {
 					callback(null, res);
 				}
 		});
+	},
+
+	getUserMessageVotes: function (userID, threadID, callback) {
+		db.query('select m.id from users u inner join message_votes mv \
+			inner join messages m where mv.user_id = u.id and m.id = mv.message_id and mv.thread_id = ? and m.user_id = ?', [threadID, userID], function (err, res) {
+				if (err) {
+					callback(err);
+				} else {
+					callback(null, res);
+				}
+			})
+	},
+
+	getUserThreadVotes: function (userID, callback) {
+		db.query('select t.id from threads t inner join thread_votes tv where tv.user_id = ? and t.id = tv.thread_id', [userID], function (err, res) {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, res);
+			}
+		})
 	}
   
 }

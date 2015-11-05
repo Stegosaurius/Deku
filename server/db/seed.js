@@ -272,7 +272,8 @@ function addVotesToMessages(n) {
 
   var randomUser = allUsers[Math.floor(Math.random() * (allUsers.length - 1))];
   var randomMessage = allMessages[Math.floor(Math.random() * (allMessages.length - 1))];
-  Thread.addUserLikeForMessage(randomUser.id, randomMessage.id, function (err, result) {
+  var randomThread = allThreads[Math.floor(Math.random() * (allThreads.length - 1))];
+  Thread.addUserLikeForMessage(randomUser.id, randomMessage.id, randomThread.id, function (err, result) {
     if (err) {
       console.error(err);
       addVotesToMessages(n - 1);

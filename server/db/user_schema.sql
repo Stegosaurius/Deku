@@ -63,7 +63,8 @@ CREATE TABLE `statuses` (
 
 CREATE TABLE `message_votes` (
 	`message_id` INT NOT NULL,
-	`user_id` INT NOT NULL
+	`user_id` INT NOT NULL,
+	`thread_id` INT NOT NULL
 );
 
 CREATE TABLE `status_votes` (
@@ -95,7 +96,7 @@ CREATE TABLE `thread_votes` (
 );
 
 CREATE UNIQUE INDEX `record_f` ON `followers` (`follower_id`, `followee_id`);
-CREATE UNIQUE INDEX `record_mv` ON `message_votes` (`message_id`, `user_id`);
+CREATE UNIQUE INDEX `record_mv` ON `message_votes` (`message_id`, `user_id`, `thread_id`);
 CREATE UNIQUE INDEX `record_sv` ON `status_votes` (`user_id`, `status_id`);
 CREATE UNIQUE INDEX `record_tv` ON `thread_votes` (`thread_id`, `user_id`);
 CREATE UNIQUE INDEX `record_ut` ON `usertags` (`user_id`, `tag_id`);
@@ -122,6 +123,8 @@ ALTER TABLE `statuses` ADD CONSTRAINT `statuses_fk0` FOREIGN KEY (`user_id`) REF
 ALTER TABLE `message_votes` ADD CONSTRAINT `message_votes_fk0` FOREIGN KEY (`message_id`) REFERENCES `messages`(`id`);
 
 ALTER TABLE `message_votes` ADD CONSTRAINT `message_votes_fk1` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`);
+
+ALTER TABLE `message_votes` ADD CONSTRAINT `message_votes_fk2` FOREIGN KEY (`thread_id`) REFERENCES `threads`(`id`);
 
 ALTER TABLE `status_votes` ADD CONSTRAINT `status_votes_fk0` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`);
 

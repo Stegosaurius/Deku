@@ -5,10 +5,10 @@ module.exports = function (app) {
   //app === userRouter injected from middlware.js
 
   //Route for getting all threads
-  app.get('/:page', threadController.getThreadsByPage);
+  app.get('/:userID/:page', threadController.getThreadsByPage);
 
   // get all the messages for a page of a thread
-  app.get('/messages/:threadID/:page', threadController.getMessagesByPage);
+  app.get('/messages/:userID/:threadID/:page', threadController.getMessagesByPage);
 
   //Route for posting a message to a particular thread
   app.post('/:userID/:threadID', threadController.addMessageToThread);
@@ -33,7 +33,7 @@ module.exports = function (app) {
 
   app.delete('/vote/:userID/:threadID', threadController.unlikeThread);
 
-  app.post('/vote/message/:userID/:messageID', threadController.likeMessage);
+  app.post('/vote/message/:userID/:messageID/:threadID', threadController.likeMessage);
 
-  app.delete('/vote/message/:userID/:messageID', threadController.unlikeMessage);
+  app.delete('/vote/message/:userID/:messageID/:threadID', threadController.unlikeMessage);
 }

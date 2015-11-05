@@ -16,7 +16,18 @@ module.exports = {
         //do some error handing
         res.status(500).end();
       } else {
-        res.status(200).json(threads);
+        var results = {
+          threads: threads
+        };
+        Thread.getUserThreadVotes(req.params.userID, function (err, votes) {
+          if (err) {
+            console.error(err);
+            res.status(500).end();
+          } else {
+            results.uservotes = votes;
+            res.status(200).json(results);
+          }
+        })
       }
     })
   },
@@ -33,9 +44,18 @@ module.exports = {
             res.status(500).end();
           } else {
             messages.thread = thread[0];
-            res.status(200).json(messages);
+            //get votes that user has made to that thread
+            Thread.getUserMessageVotes(req.params.userID, req.params.threadID, function (err, votes) {
+              if (err) {
+                console.error(err);
+                res.status(500).end();
+              } else {
+                messages.uservotes = votes;
+                res.status(200).json(messages);
+              }
+            });
           }
-        })
+        });
       }
     });
   },
@@ -153,7 +173,7 @@ module.exports = {
   },
 
   likeMessage: function (req, res) {
-    Thread.addUserLikeForMessage(req.params.userID, req.params.messageID, function (err, result) {
+    Thread.addUserLikeForMessage(req.params.userID, req.params.messageID, req.params.threadID, function (err, result) {
       if (err) {
         console.error(err);
         res.status(500).end();
