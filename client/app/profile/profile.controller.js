@@ -27,6 +27,7 @@
     vm.photoIndex = 0;
     vm.morePhotos = true;
     vm.lessPhotos = false;
+    vm.likeStatus = likeStatus;
     vm.getNextPhoto = getNextPhoto;
     vm.getPrevPhoto = getPrevPhoto;
     vm.recentThreadNames = [];
@@ -72,6 +73,23 @@
           break;
         }
       }
+    }
+
+    function likeStatus(status, index) {
+      var userID = User.getID();
+      User.likeStatus(userID, status.id) 
+        .then(function (statusCode) {
+          if (statusCode === 201) {
+            if (userID === status.user_id) {
+              vm.statuses[index].vote_tally++;
+              vm.statuses[index].votedFor = true;
+            } else {
+              vm.followeesStatuses[index].vote_tally++;
+              vm.followeesStatuses[index].votedFor = true;
+            }
+          }
+        });
+
     }
 
     // make the active user a follower of this profile's user
@@ -200,10 +218,22 @@
     function getStatuses() {
       User.getStatuses(vm.username, User.getID())
         .then(function(statuses) {
+          console.log(statuses);
           vm.statuses = statuses.statuses;
+
+          var uservotes = {};
+          for (i = 0; i < statuses.uservotes.length; i++) {
+            uservotes[statuses.uservotes[i].id] = true;
+          }
           // transform timestamp to readable format
           for (var i = 0; i < vm.statuses.length; i++) {
             vm.statuses[i].timestamp = moment(vm.statuses[i].timestamp).fromNow();
+
+            if (uservotes[vm.statuses[i].id]) {
+              vm.statuses[i].votedFor = true;
+            } else {
+              vm.statuses[i].votedFor = false;
+            }
           }
         });
     }
@@ -211,10 +241,23 @@
     function getFolloweesStatuses() {
       User.getFolloweesStatuses(User.getID())
         .then(function (statuses) {
+          console.log(statuses);
+
+          var uservotes = {};
+          for (i = 0; i < statuses.uservotes.length; i++) {
+            uservotes[statuses.uservotes[i].id] = true;
+          }
+
           vm.followeesStatuses = statuses.statuses;
           // transform timestamp to readable format
           for (var i = 0; i < vm.followeesStatuses.length; i++) {
             vm.followeesStatuses[i].timestamp = moment(vm.followeesStatuses[i].timestamp).fromNow();
+
+            if (uservotes[vm.followeesStatuses[i].id]) {
+              vm.followeesStatuses[i].votedFor = true;
+            } else {
+              vm.followeesStatuses[i].votedFor = false;
+            }
           }
         });
     }

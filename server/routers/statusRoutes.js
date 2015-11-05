@@ -6,7 +6,7 @@ module.exports = function (app) {
   
   app.post('/:userID', statusController.updateStatus);
 
-  app.post('/vote/:userID', statusController.likeStatus);
+  app.post('/vote/:userID/:statusID', statusController.likeStatus);
 
   app.delete('/vote/:userID', statusController.unlikeStatus);
 

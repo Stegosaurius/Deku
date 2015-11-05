@@ -691,6 +691,13 @@ ul {
         top: -0.1rem;
         left: -1rem;
       }
+      .not-voted:hover {
+        cursor: pointer;
+        color: $lightBlue;
+      }
+      .voted-for {
+        color: $lightBlue;
+      }
     }
   }
 

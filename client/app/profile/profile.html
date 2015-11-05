@@ -91,7 +91,8 @@
                   
                 <div class="status-votes col s3">
                   <div class="row">
-                    <i class="material-icons col s4 m4 l4">star_border</i>
+                    <i ng-hide="status.votedFor" ng-click="profile.likeStatus(status, $index)" class="material-icons col s4 m4 l4 not-voted">star_border</i>
+                    <i ng-show="status.votedFor" class="material-icons col s4 m4 l4 voted-for">star</i>
                     <span class="col s8 m8 l8">{{ status.vote_tally }}</span>
                   </div>
                 </div>
@@ -113,7 +114,8 @@
                   
                 <div class="status-votes col s3">
                   <div class="row">
-                    <i class="material-icons col s4 m4 l4">star_border</i>
+                    <i ng-hide="status.votedFor" ng-click="profile.likeStatus(status, $index)" class="material-icons col s4 m4 l4 not-voted">star_border</i>
+                    <i ng-show="status.votedFor" class="material-icons col s4 m4 l4 voted-for">star</i>
                     <span class="upvoteTally col s8 m8 l8">{{ status.vote_tally }}</span>
                   </div>
                 </div>

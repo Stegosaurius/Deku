@@ -33,6 +33,7 @@
       deleteStatus: deleteStatus,
       getStatuses: getStatuses,
       getFolloweesStatuses: getFolloweesStatuses,
+      likeStatus: likeStatus,
       addTag: addTag,
       getTags: getTags,
       removeTag: removeTag,
@@ -290,6 +291,15 @@
         }, function errorCallback(res) {
           console.log('Error retrieving friends statuses');
         });
+    }
+
+    function likeStatus(userID, statusID) {
+      return $http.post('/status/vote/' + userID + '/' + statusID)
+        .then(function successCallback(res) {
+          return res.status;
+        }, function errorCallback(res) {
+          console.log("Error liking status");
+        })
     }
 
     ///////////////////////
