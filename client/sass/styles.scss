@@ -277,16 +277,21 @@ ul {
  ****** EDITPROFILE ********
  ***************************/
 
-
 .editProfile {
+  header {
+    text-align: center;
+  }
 
   h3 {
+    display: inline-block;
+    font-size: 2.5rem;
+    margin-right: 1.5rem;
     text-align: center;
   }
 
   h4 {
     color: $darkGreen;
-    margin: 1.5rem 0 0 0;
+    margin: 0 0 1.5rem 0;
     font-size: 1.6rem
   }
 
@@ -299,10 +304,15 @@ ul {
     font-size: 1.1rem;
   }
 
+  p {
+    color: $grey;
+    font-size: 1rem;
+    margin: 1rem 0;
+  }
+
   ul.tags {
     margin-top: 5px;
     list-style: none;
-    border: 1px solid $lightGrey;
     border-radius: 2px;
     padding: 5px;
   }
@@ -424,7 +434,6 @@ ul {
   
   textarea {
     resize: none;
-    width: 70%;
   }
 
   input, textarea {
@@ -435,7 +444,6 @@ ul {
   input {
     height: 2rem;
     padding-right: 0px;
-    width: 50%;
   }
 
   input:focus, textarea:focus {
@@ -459,29 +467,11 @@ ul {
     position: relative;
   }
 
-  .update-avatar {
-    @extend .default-button;
-    position: absolute;
-    top: 35%;
-    left: 6%;
-    opacity: .5;
-  }
-
-  .update-avatar:hover {
-    @extend .default-button-hover;
-  }
-
   .avatar-container {
-    margin-bottom: 0px;
-  }
-
-  .avatar-container:hover .update-avatar {
-    opacity: 1;
-  }
-
-
-  .add-tag {
-    background-color: $lightGreen;
+    margin: 0 1rem 0 0;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
   }
 
   .avatar {
@@ -489,9 +479,34 @@ ul {
     border-radius: 3px;
   }
 
+  .update-avatar {
+    @extend .default-button;
+    position: absolute;
+    bottom: 10%;
+    left: calc(50% - 62px);
+    opacity: .5;
+  }
+
+  .update-avatar:hover {
+    @extend .default-button-hover;
+  }
+
+  .avatar-container:hover .update-avatar {
+    opacity: 1;
+  }
+
+  .basicInfo {
+    display: inline-block;
+    margin-top: 1.5rem;
+    vertical-align: top;
+  }
+
+  .add-tag {
+    background-color: $lightGreen;
+  }
+
   .add-photo {
-    margin-right: 30px;
-    margin-top: 24px;
+    margin-bottom: 1.5rem;
     @extend .default-button;
   }
 
