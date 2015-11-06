@@ -13,7 +13,6 @@ module.exports = {
         console.error(err);
         res.status(500).send();
       }
-
       // check to see if there's already a user with that email
       if (user.length === 1) {
         return res.status(409).send();
@@ -50,6 +49,7 @@ module.exports = {
   signin:  function(req, res) { // callback with email and password from our form
     // find a user whose email is the same as the forms email
     // we are checking to see if the user trying to login already exists
+
     User.getUserByName(req.body.username, function(err, user) {
       // if there are any errors, return the error before anything else
       if (err) {
@@ -65,7 +65,9 @@ module.exports = {
         return res.status(422).send();
       }
       // all is well, create new token, save it to database and return it
+
       var newToken = util.generateWebToken(user[0]);
+
       return res.status(200).json({ token: newToken });  
 
 

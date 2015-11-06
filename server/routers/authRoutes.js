@@ -43,7 +43,9 @@ module.exports = function (app, passport) {
         var userObject = {
           id: user.id,
           username: user.username,
-          email: user.email 
+          email: user.email,
+          scopedKey: user.write_scoped_key,
+          tessel: user.tessel
         };
         var newToken = util.generateWebToken(userObject);
         return res.redirect('/#/oauth/' + newToken);
@@ -70,7 +72,9 @@ module.exports = function (app, passport) {
         var userObject = {
           id: user.id,
           username: user.username,
-          email: user.email 
+          email: user.email,
+          scopedKey: user.write_scoped_key,
+          tessel: user.tessel 
         };
         var newToken = util.generateWebToken(userObject);
         return res.redirect('/#/oauth/' + newToken);

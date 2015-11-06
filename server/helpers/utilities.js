@@ -17,7 +17,9 @@ module.exports = {
     var profile = {
       id: userObj.id,
       username: userObj.username,
-      email: userObj.email
+      email: userObj.email,
+      scopedKey: userObj.write_scoped_key,
+      tessel: userObj.tessel
     };
 
     return jwt.sign(profile, auth.secret, { expiresIn: 86400 });
