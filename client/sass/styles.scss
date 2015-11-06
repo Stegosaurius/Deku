@@ -773,6 +773,23 @@ ul {
   .statusInfo {
     padding-right: 0;
     text-align: right;
+    .delete-button {
+      display: none;
+    }
+  }
+  .statusInfo:hover {
+    i {
+      display: none;
+    }
+    .delete-button {
+      display: inline-block;
+      opacity: 100%;
+      background-color: #ED4337;
+      color: white;
+      border-radius: 4%;
+      padding: .2rem .4rem;
+      opacity: .8;
+    }
   }
 
   li.status {
@@ -1182,7 +1199,7 @@ ul {
       border: 2px solid $lightGrey;
       margin-right: 2%;
       height: 2rem;
-      width: 40%
+      width: 40%;
     }
 
     textarea:focus {
@@ -1232,6 +1249,7 @@ ul {
     margin-bottom: 2px;
     padding-bottom: 15px;
     border-bottom: 2px solid $lightGrey;
+    white-space: pre-line;
   }
 
   .pagination {
