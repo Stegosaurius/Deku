@@ -37,10 +37,23 @@
       addTag: addTag,
       getTags: getTags,
       removeTag: removeTag,
-      getUsersForTag: getUsersForTag
+      getUsersForTag: getUsersForTag,
+      enableTessel: enableTessel
     };
 
     return services;
+    ///////////////////////
+    /////TESSEL////////////
+    ///////////////////////
+
+    function enableTessel(userID) {
+      return $http.put('/users/tessel/'+userID)
+        .then(function successCallback(res) {
+          return res.data;
+        }, function errorCallback(res) {
+          throw res.status;
+        });
+    }
 
     ///////////////////////
     /////AUTHENTICATION////

@@ -93,8 +93,8 @@
             'angleArc':250,
             'angleOffset':-125,
             'readOnly':true,
-            'min':0,
-            'max':50,
+            'min':20,
+            'max':90,
             'fgColor': Keen.Dataviz.defaults.colors[0]
           });
           
@@ -135,7 +135,7 @@
             'readOnly':true,
             'step':0.01,
             'min':0,
-            'max':50,
+            'max':0.1,
             'fgColor': Keen.Dataviz.defaults.colors[2]
            });
           
@@ -154,7 +154,7 @@
       Keen.ready(
         function(){
 
-          //Humidity Knob Query
+          // Sound Knob Query
           var sound = new Keen.Query("average", {
             eventCollection: "climate",
             targetProperty: "sound",
@@ -175,8 +175,8 @@
             'angleOffset':-125,
             'readOnly':true,
             'step':0.01,
-            'min':0,
-            'max':100,
+            'min':30,
+            'max':120,
             'fgColor': Keen.Dataviz.defaults.colors[3]
           });
 
@@ -278,6 +278,7 @@
             chartType: "linechart",
             title: " ",
             height: 250,
+            minimum: 30,
             width: "auto"
           });
 

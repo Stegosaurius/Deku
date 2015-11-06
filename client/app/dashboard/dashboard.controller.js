@@ -7,7 +7,9 @@
   DashboardController.$inject = ['$stateParams','$window','User', 'Keenio', 'jwtHelper', '$state'];
 
   function DashboardController($stateParams,$window,User,Keenio,jwtHelper, $state) {
-    if (jwtHelper.decodeToken($window.localStorage.token).tessel === 0) {
+    var tesselStatus = $window.localStorage.tesselStatus || !!jwtHelper.decodeToken($window.localStorage.token).tessel;
+    if (!tesselStatus &&
+        $stateParams.username === $window.localStorage.username ) {
       $state.transitionTo('setup');
     }
     // console.log(jwtHelper.decodeToken($window.localStorage.token));
