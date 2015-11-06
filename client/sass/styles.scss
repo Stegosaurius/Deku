@@ -277,22 +277,48 @@ ul {
  ****** EDITPROFILE ********
  ***************************/
 
-
 .editProfile {
+  header {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  h3 {
+    display: inline-block;
+    font-size: 2.5rem;
+    margin-right: 1.5rem;
+    text-align: center;
+  }
 
   h4 {
     color: $darkGreen;
-    margin: 0 0 0 0;
+    margin: 0 0 1.5rem 0;
+    font-size: 1.6rem
   }
 
   h5 {
     font-size: 1.4rem;
+    margin-bottom: 0;
+  }
+
+  h6 {
+    font-size: 1.1rem;
+  }
+
+  p {
+    color: $grey;
+    font-size: 1rem;
+    margin: 1rem 0;
+  }
+
+  .title,
+  .update {
+    vertical-align: middle;
   }
 
   ul.tags {
     margin-top: 5px;
     list-style: none;
-    border: 1px solid $lightGrey;
     border-radius: 2px;
     padding: 5px;
   }
@@ -389,21 +415,27 @@ ul {
   }
 
   .follow {
-    height: 10rem;
+    height: 14rem;
     overflow-y: scroll;
   }
 
   .follow li {
-    width: 100%;
     border-bottom: 1px solid $lightGrey;
+    margin-bottom: .3rem;
     text-align: right;
+    width: 100%;
   }
 
   .follow li:hover {
     border-bottom: 1px solid $lightGreen;
   }
-
   
+  .follow-header {
+    font-size: 1.2rem;
+    color: $darkGreen;
+
+  }
+
   button {
     @extend .default-button;
   }
@@ -414,7 +446,6 @@ ul {
   
   textarea {
     resize: none;
-    width: 70%;
   }
 
   input, textarea {
@@ -425,20 +456,10 @@ ul {
   input {
     height: 2rem;
     padding-right: 0px;
-    width: 50%;
   }
 
   input:focus, textarea:focus {
     border-bottom: 2px solid $darkGreen;
-  }
-
-  .follow-header {
-    font-size: 1.2rem;
-    color: $darkGreen;
-  }
-
-  .follow-header:hover {
-    color: $lightGreen;
   }
 
   a:hover {
@@ -449,39 +470,46 @@ ul {
     position: relative;
   }
 
+  .avatar-container {
+    margin: 0 1rem 0 0;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .avatar {
+    height: 11rem;
+    border-radius: 3px;
+  }
+
   .update-avatar {
     @extend .default-button;
     position: absolute;
-    top: 35%;
-    left: 6%;
-    opacity: 0;
+    bottom: 10%;
+    left: calc(50% - 62px);
+    opacity: .5;
   }
 
   .update-avatar:hover {
     @extend .default-button-hover;
   }
 
-  .avatar-container {
-    margin-bottom: 0px;
-  }
-
   .avatar-container:hover .update-avatar {
     opacity: 1;
   }
 
+  .basicInfo {
+    display: inline-block;
+    margin-top: 1.5rem;
+    vertical-align: top;
+  }
 
   .add-tag {
     background-color: $lightGreen;
   }
 
-  .avatar {
-    height: 11rem;
-    border-radius: 5%;
-  }
-
   .add-photo {
-    margin-right: 30px;
-    margin-top: 24px;
+    margin-bottom: 1.5rem;
     @extend .default-button;
   }
 
