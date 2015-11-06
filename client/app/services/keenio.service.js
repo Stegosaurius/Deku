@@ -93,7 +93,7 @@
             'angleArc':250,
             'angleOffset':-125,
             'readOnly':true,
-            'min':20,
+            'min':0,
             'max':90,
             'fgColor': Keen.Dataviz.defaults.colors[0]
           });
