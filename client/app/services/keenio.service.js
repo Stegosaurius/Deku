@@ -5,13 +5,6 @@
   Keenio.$inject = ['$stateParams','$http', '$window','User'];
 
   function Keenio($stateParams,$http, $window, User) {
-    var username = $window.localStorage.username; //current user's username
-    var viewing = $stateParams.username; //username of dashboard in current view
-    console.log('viewing',viewing);
-    console.log('current users username',username);
-    var userID = User.getID(); //get ID of current user
-    var url = '/users/scopedkey/read/' + viewing;
-    console.log('url',url);//  /users/scopedkey/beasta
 
     var services = {
       tempQuery: tempQuery, 

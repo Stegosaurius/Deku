@@ -27,6 +27,7 @@
     vm.photoIndex = 0;
     vm.morePhotos = true;
     vm.lessPhotos = false;
+    vm.likeStatus = likeStatus;
     vm.getNextPhoto = getNextPhoto;
     vm.getPrevPhoto = getPrevPhoto;
     vm.recentThreadNames = [];
@@ -47,16 +48,15 @@
     // post status to database and clear form
     function addStatus() {
       var newStatus = vm.status;
-
       // reset form
       vm.statusUpdate.$setPristine();
       vm.status = '';
-
       vm.statuses.unshift({ status: newStatus });
 
       User.addStatus(newStatus, User.getID())
         .then(function(status) {
           vm.statuses[0] = status;
+          vm.statuses[0].timestamp = moment(vm.statuses[0].timestamp).fromNow();
         })
         .catch(function(err) {
           vm.statuses.shift();
@@ -73,6 +73,23 @@
           break;
         }
       }
+    }
+
+    function likeStatus(status, index) {
+      var userID = User.getID();
+      User.likeStatus(userID, status.id) 
+        .then(function (statusCode) {
+          if (statusCode === 201) {
+            if (userID === status.user_id) {
+              vm.statuses[index].vote_tally++;
+              vm.statuses[index].votedFor = true;
+            } else {
+              vm.followeesStatuses[index].vote_tally++;
+              vm.followeesStatuses[index].votedFor = true;
+            }
+          }
+        });
+
     }
 
     // make the active user a follower of this profile's user
@@ -170,9 +187,7 @@
         .then(function(data) {
           for (var i = 0; i < data.length; i++) {
             vm.followers.push(data[i].username);
-
           }
-
           // check whether active user is following this user
           if (!vm.activeUser && (vm.followers.indexOf($window.localStorage.username) !== -1)) {
             vm.isFollowing = true;
@@ -193,7 +208,6 @@
       User.getRecentThreads(vm.username)
         .then(function(threads) {
           vm.recentThreads = threads;
-
           // transform timestamp to readable format
           for (var i = 0; i < vm.recentThreads.length; i++) {
             vm.recentThreads[i].created_at = moment(vm.recentThreads[i].created_at).fromNow();
@@ -205,10 +219,19 @@
       User.getStatuses(vm.username, User.getID())
         .then(function(statuses) {
           vm.statuses = statuses.statuses;
-
+          var uservotes = {};
+          for (i = 0; i < statuses.uservotes.length; i++) {
+            uservotes[statuses.uservotes[i].id] = true;
+          }
           // transform timestamp to readable format
           for (var i = 0; i < vm.statuses.length; i++) {
             vm.statuses[i].timestamp = moment(vm.statuses[i].timestamp).fromNow();
+
+            if (uservotes[vm.statuses[i].id]) {
+              vm.statuses[i].votedFor = true;
+            } else {
+              vm.statuses[i].votedFor = false;
+            }
           }
         });
     }
@@ -216,11 +239,19 @@
     function getFolloweesStatuses() {
       User.getFolloweesStatuses(User.getID())
         .then(function (statuses) {
+          var uservotes = {};
+          for (i = 0; i < statuses.uservotes.length; i++) {
+            uservotes[statuses.uservotes[i].id] = true;
+          }
           vm.followeesStatuses = statuses.statuses;
-
           // transform timestamp to readable format
           for (var i = 0; i < vm.followeesStatuses.length; i++) {
             vm.followeesStatuses[i].timestamp = moment(vm.followeesStatuses[i].timestamp).fromNow();
+            if (uservotes[vm.followeesStatuses[i].id]) {
+              vm.followeesStatuses[i].votedFor = true;
+            } else {
+              vm.followeesStatuses[i].votedFor = false;
+            }
           }
         });
     }
