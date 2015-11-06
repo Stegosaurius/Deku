@@ -4,10 +4,15 @@
   angular.module('app')
     .controller('DashboardController', DashboardController);
 
-  DashboardController.$inject = ['$stateParams','$window','User', 'Keenio'];
+  DashboardController.$inject = ['$stateParams','$window','User', 'Keenio', 'jwtHelper', '$state'];
 
-  function DashboardController($stateParams,$window,User,Keenio) {
+  function DashboardController($stateParams,$window,User,Keenio,jwtHelper, $state) {
+    if (jwtHelper.decodeToken($window.localStorage.token).tessel === 0) {
+      $state.transitionTo('setup');
+    }
+
     var vm = this;
+
     vm.user = $stateParams.username;
     Keenio.keenInitialize(vm.user)
       .then(function(data){

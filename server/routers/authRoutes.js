@@ -40,7 +40,6 @@ module.exports = function (app, passport) {
         if (!user) { 
           return res.redirect('/#/'); 
         }
-        console.log('user before sending back is ', user);
         var userObject = {
           id: user.id,
           username: user.username,
