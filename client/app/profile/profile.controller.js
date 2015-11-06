@@ -38,6 +38,7 @@
     vm.unfollow = unfollow;
     vm.username = $stateParams.username;
 
+    angular.element('.lean-overlay').remove();
     checkActiveUser();
     getProfile();
 
@@ -167,12 +168,8 @@
     function getTags() {
       User.getTags(vm.username)
         .then(function(tags) {
-          if (tags.length === 0) {
-            vm.tags = ['Plants?', 'Methods/Technologies?', 'Interests?', 'Put them here.'];
-          } else {
-            for (var i = 0; i < tags.length; i++) {
-              vm.tags.push(tags[i].tag);
-            }
+          for (var i = 0; i < tags.length; i++) {
+            vm.tags.push(tags[i].tag);
           }
         });
     }
@@ -180,20 +177,22 @@
     function getFollowers() {
       User.getFollowers(vm.username)
         .then(function(data) {
-          for (var i = 0; i < data.length; i++) {
-            vm.followers.push(data[i].username);
-          }
+          vm.followers = data;
+
           // check whether active user is following this user
-          if (!vm.activeUser && (vm.followers.indexOf($window.localStorage.username) !== -1)) {
-            vm.isFollowing = true;
+          if (!vm.activeUser) {
+            for (var i = 0; i < vm.followers.length; i++) {
+              if (vm.followers[i].username === $window.localStorage.username) {
+                vm.isFollowing = true;
+                break;
+              }
+            }
           }
         });
 
       User.getFollowees(vm.username)
         .then(function(data) {
-          for (var i = 0; i < data.length; i++) {
-            vm.followees.push(data[i].username);
-          }
+          vm.followees = data;
         });
     }
 
