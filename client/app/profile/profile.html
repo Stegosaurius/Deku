@@ -70,14 +70,14 @@
 
           <div ng-hide="profile.activeUser" class="col s12 status-container">
               <ul class="tabs" tabs>
-                  <li class="tab col s3"><a class="active" href="#myUpdates">Recent Updates</a></li>
+                  <li class="tab col s3"><a class="active" href="#myUpdates">Your Updates</a></li>
               </ul>
           </div>
 
           <div ng-show="profile.activeUser" class="col s12 status-container">
               <ul class="tabs" tabs>
                   <li class="tab col s3"><a href="#friendsUpdates">Updates In Your Network</a></li>
-                  <li class="tab col s3"><a class="active" href="#myUpdates">Recent Updates</a></li>
+                  <li class="tab col s3"><a class="active" href="#myUpdates">Your Updates</a></li>
               </ul>
           </div>
           <div id="friendsUpdates" class="col s12 status-container">
@@ -169,17 +169,14 @@
   <div id="tagUsersModal" class="modal">
     <div class="modal-content">
       <h5>Other Users With This Tag</h5>
+
       <ul class="tag-modal">
-        <li class="row" ng-repeat="user in profile.tagModalData">
-            <div class="tag-avatar-container col s2 m2 l2">
-              <img class="modal-avatar" ng-src="{{ user.profile_photo }}">
-            </div>
-            <div class="tag-username col s4 m4 l4">
-              <span> {{ user.username }} </span>
-            </div>
-            <div class="tag-userLocation col s5 m5 l5">
-              {{ user.location }}
-            </div>
+        <li ng-repeat="user in profile.tagModalData">
+          <a class="thumbnail modal-close" ui-sref="profile({ username: user.username })">
+            <img ng-src="{{ user.profile_photo }}">
+          </a>
+
+          <a class="modal-close" ui-sref="profile({ username: user.username })">{{ user.username }}</a >
         </li>
       </ul>
     </div>
@@ -188,9 +185,14 @@
   <div id="followingModal" class="modal">
     <div class="modal-content">
       <h5>Following</h5>
+
       <ul class="following">
         <li ng-repeat="followee in profile.followees">
-          <a class="modal-close" ui-sref="profile({ username: followee })">{{ followee }}</a>
+          <a class="modal-close" ui-sref="profile({ username: followee.username })">
+            <img ng-src="{{ followee.profile_photo }}">
+          </a>
+
+          <a class="modal-close" ui-sref="profile({ username: followee.username })">{{ followee.username }}</a>
         </li>
       </ul>
     </div>
@@ -199,12 +201,16 @@
   <div id="followersModal" class="modal">
     <div class="modal-content">
       <h5>Followers</h5>
+
       <ul class="followers">
         <li ng-repeat="follower in profile.followers">
-          <a class="modal-close" ui-sref="profile({ username: follower })">{{ follower }}</a>
+          <a class="modal-close" ui-sref="profile({ username: follower.username })">
+            <img ng-src="{{ follower.profile_photo }}">
+          </a>
+
+          <a class="modal-close" ui-sref="profile({ username: follower.username })">{{ follower.username }}</a>
         </li>
       </ul>
     </div>
   </div>
-
 </div>
