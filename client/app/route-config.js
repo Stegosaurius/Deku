@@ -51,6 +51,22 @@
         },
         authenticate: true
       })
+      .state('setup', {
+        url: '/monitor/setup',
+        views: {
+          'nav': {
+            templateUrl: 'app/navbar/navbar.html',
+            controller: 'NavbarController',
+            controllerAs: 'navbar'
+          },
+          '': {
+            templateUrl: 'app/dashboard/setup.html',
+            controller: 'SetupController',
+            controllerAs: 'setup'
+          }
+        },
+        authenticate: true
+      })
       .state('profile', {
         url: '/profile/:username',
         views: {
