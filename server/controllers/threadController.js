@@ -103,7 +103,7 @@ module.exports = {
         console.error(err);
         res.status(500).end();
       } else {
-        Thread.getMessagesByPage(result.insertId, 1, function (err, thread) {
+        Thread.getThreadByID(result.insertId, function (err, thread) {
           if (err) {
             console.error(err);
             res.status(500).end();
