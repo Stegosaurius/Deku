@@ -124,8 +124,9 @@
                   {{ status.timestamp }}
                 </div>
                 <div class="statusInfo col s1">
+                  <i class="material-icons delete-icon">more_vert</i>
                   <button class="right" ng-click="profile.deleteStatus(status.id)" ng-show="profile.activeUser">
-                    <i class="material-icons">more_vert</i>
+                    <span class="delete-button">Delete</span> 
                   </button>
                 </div>
                 <p class="col s12 user-status">
