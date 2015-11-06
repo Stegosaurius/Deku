@@ -76,6 +76,14 @@ p {
 .tesselButton {
   @extend .default-button;
   margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.tesselSetupImage {
+  width: 60%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .scopedKey {
