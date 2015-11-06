@@ -8,9 +8,13 @@
 <body id="preview">
   <button class="tesselButton" ng-show="setup.hideKey" ng-click="setup.getScopedKey()">Show Tessel Key</button>
   <button class="tesselButton" ng-hide="setup.hideKey" ng-click="setup.getScopedKey()">Hide Tessel Key</button>
-
+  
   <span class="scopedKey" ng-hide="setup.hideKey">{{setup.scopedKey}}</span>
-  <p>After you have the hardware, you will need to get it setup by following
+  <p>You haven't setup your Tessel yet! Would you like to be able to monitor the temperature, humidity, light and sound of your greenhouse or garden?</p> 
+  <br \>
+  <img class="tesselSetupImage" src="/assets/DashboardScreenshot.png">
+  <!-- <img class="tesselSetupImage" src="https://raw.githubusercontent.com/rwaldron/tessel-io/master/fritzing/tessel.png"> -->
+  <p>If you'd like your dashboard to look like the above, you'll first need to purchase a Tessel with the climate and ambient modules. After you have the hardware, you will need to get it setup by following
   the instructions <a href="http://start.tessel.io/install">here</a>. Note that
   there are different instructions if you are setting up a <a href=
   "http://start.tessel.io/install">tessel 1</a> versus a <a href=
