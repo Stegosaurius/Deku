@@ -38,6 +38,7 @@
     vm.unfollow = unfollow;
     vm.username = $stateParams.username;
 
+    angular.element('.lean-overlay').remove();
     checkActiveUser();
     getProfile();
 

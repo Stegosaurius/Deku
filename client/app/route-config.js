@@ -14,7 +14,7 @@
       var window = $windowProvider.$get();
       var username = window.localStorage.username;
       if (username) {
-        return '/dashboard/' + username;
+        return '/profile/' + username;
       } else {
         return '/';
       }
