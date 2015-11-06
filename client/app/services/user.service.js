@@ -58,6 +58,7 @@
     function signout() {
       delete $window.localStorage.token;
       delete $window.localStorage.username;
+      delete $window.localStorage.tesselStatus;
       $state.transitionTo('splash');
     }
 
