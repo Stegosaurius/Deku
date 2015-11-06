@@ -279,6 +279,7 @@ ul {
 
 .editProfile {
   header {
+    margin-bottom: 1.5rem;
     text-align: center;
   }
 
@@ -308,6 +309,11 @@ ul {
     color: $grey;
     font-size: 1rem;
     margin: 1rem 0;
+  }
+
+  .title,
+  .update {
+    vertical-align: middle;
   }
 
   ul.tags {
@@ -409,21 +415,27 @@ ul {
   }
 
   .follow {
-    height: 10rem;
+    height: 14rem;
     overflow-y: scroll;
   }
 
   .follow li {
-    width: 100%;
     border-bottom: 1px solid $lightGrey;
+    margin-bottom: .3rem;
     text-align: right;
+    width: 100%;
   }
 
   .follow li:hover {
     border-bottom: 1px solid $lightGreen;
   }
-
   
+  .follow-header {
+    font-size: 1.2rem;
+    color: $darkGreen;
+
+  }
+
   button {
     @extend .default-button;
   }
@@ -448,15 +460,6 @@ ul {
 
   input:focus, textarea:focus {
     border-bottom: 2px solid $darkGreen;
-  }
-
-  .follow-header {
-    font-size: 1.2rem;
-    color: $darkGreen;
-  }
-
-  .follow-header:hover {
-    color: $lightGreen;
   }
 
   a:hover {
