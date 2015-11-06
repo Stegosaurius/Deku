@@ -7,6 +7,8 @@
   DashboardController.$inject = ['$stateParams','$window','User', 'Keenio', 'jwtHelper', '$state'];
 
   function DashboardController($stateParams,$window,User,Keenio,jwtHelper, $state) {
+    
+    console.log("token is ", jwtHelper.decodeToken($window.localStorage.token));
     if (jwtHelper.decodeToken($window.localStorage.token).tessel === 0) {
       $state.transitionTo('setup');
     }
