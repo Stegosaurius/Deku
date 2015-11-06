@@ -10,6 +10,7 @@
     if (jwtHelper.decodeToken($window.localStorage.token).tessel === 0) {
       $state.transitionTo('setup');
     }
+    // console.log(jwtHelper.decodeToken($window.localStorage.token));
 
     var vm = this;
 
