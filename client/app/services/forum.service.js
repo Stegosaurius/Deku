@@ -21,8 +21,7 @@
     function createThread(userID, threadName) {
       return $http.post('/threads/' + userID, { thread: threadName })
         .then(function successCallback(res) {
-          console.log(res.data);
-          return res.data;
+          return res.data[0];
         }, function errorCallback(res) {
           console.log('Error creating thread');
         });
