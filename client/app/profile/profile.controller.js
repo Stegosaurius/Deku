@@ -217,9 +217,11 @@
           for (i = 0; i < statuses.uservotes.length; i++) {
             uservotes[statuses.uservotes[i].id] = true;
           }
-          // transform timestamp to readable format
+
+          // transform creation date to readable format
           for (var i = 0; i < vm.statuses.length; i++) {
-            vm.statuses[i].timestamp = moment(vm.statuses[i].timestamp).fromNow();
+            console.log(vm.statuses[i].created_at);
+            vm.statuses[i].created_at = moment(vm.statuses[i].created_at).fromNow();
 
             if (uservotes[vm.statuses[i].id]) {
               vm.statuses[i].votedFor = true;
@@ -238,9 +240,11 @@
             uservotes[statuses.uservotes[i].id] = true;
           }
           vm.followeesStatuses = statuses.statuses;
-          // transform timestamp to readable format
+
+          // transform creation date to readable format
           for (var i = 0; i < vm.followeesStatuses.length; i++) {
-            vm.followeesStatuses[i].timestamp = moment(vm.followeesStatuses[i].timestamp).fromNow();
+            vm.followeesStatuses[i].created_at = moment(vm.followeesStatuses[i].created_at).fromNow();
+
             if (uservotes[vm.followeesStatuses[i].id]) {
               vm.followeesStatuses[i].votedFor = true;
             } else {

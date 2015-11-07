@@ -83,13 +83,13 @@
           <div id="friendsUpdates" class="col s12 status-container">
             <ul class="statuses">
               <li class="status row" ng-repeat="status in profile.followeesStatuses">
-                <div class="col s2">
+                <a class="col s2" ui-sref="profile({ username: status.username })">
                   <img class="status-avatar" ng-src="{{ status.profile_photo }}">
-                </div>
-                <div class="col s3">
+                </a>
+                <a class="col s3" ui-sref="profile({ username: status.username })">
                   {{ status.username }}
-                </div>
-                  
+                </a>
+
                 <div class="status-votes col s3">
                   <div class="row">
                     <i ng-hide="status.votedFor" ng-click="profile.likeStatus(status, $index)" class="material-icons col s4 m4 l4 not-voted">star_border</i>
@@ -121,7 +121,7 @@
                   </div>
                 </div>
                 <div class="col s5 statusCreated right-align">
-                  {{ status.timestamp }}
+                  {{ status.created_at }}
                 </div>
                 <div class="statusInfo col s1">
                   <i class="material-icons delete-icon">more_vert</i>
