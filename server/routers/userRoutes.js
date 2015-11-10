@@ -53,7 +53,7 @@ module.exports = function (app, passport) {
   app.get('/photos/:username', userController.getPhotos);
 
   // For uploading photos first to S3
-  app.post('/photos/upload/:userID', multipartyMiddleware, userController.addPhotoCloudinary);
+  app.post('/photos/upload/:userID', multipartyMiddleware, userController.addPhotoS3);
 
   // If photo is stored somewhere else, get path and store in database
   app.post('/photos/path/:userID', userController.addPhotoURL)
