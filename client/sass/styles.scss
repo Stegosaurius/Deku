@@ -42,6 +42,7 @@ $google: #e50101;
   @extend .z-depth-1-half;
 }
 
+
 /***********************
     #GENERAL
  ***********************/
@@ -77,6 +78,7 @@ p {
 ul {
   margin: 0;
 }
+
 
 /***************************
     #SPLASH-PAGE
@@ -302,6 +304,78 @@ ul {
     }
   }
 }
+
+
+/***************************
+    #NAVBAR
+ ***************************/
+
+.nav {
+  background-image: linear-gradient(90deg, rgb(39, 174, 96) 15%, rgb(26, 188, 156) 100%);
+  background-image: -moz-linear-gradient(left, rgb(39, 174, 96) 15%, rgb(26, 188, 156) 100%);
+  background-image: -webkit-linear-gradient(left, rgb(39, 174, 96) 15%, rgb(26, 188, 156) 100%);
+  background-image: -o-linear-gradient(left, rgb(39, 174, 96) 15%, rgb(26, 188, 156) 100%);
+  background-image: -ms-linear-gradient(left, rgb(39, 174, 96) 15%, rgb(26, 188, 156) 100%);
+}
+
+.nav-wrapper {
+  padding-left: 2rem;
+  padding-right: 1rem;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 200;
+}
+
+.nav a:hover {
+  cursor: pointer;
+}
+
+.icon {
+  height: 56px;
+  padding-top: 10px;
+  margin-right: 15px;
+}
+
+.dropdown-content {
+  li {
+    cursor: default;
+  }
+
+  .notification {
+    display: inline-block;
+    padding-right: 0;
+    font-size: 1rem;
+    color: $darkGrey;
+
+    &:hover {
+      cursor: default;
+    }
+  }
+
+  .notification .user:hover {
+    color: $lightBlue;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  button {
+    height: 52px;
+    border: 0;
+    background-color: inherit;
+
+    &:hover {
+      color: $lightBlue;
+    }
+  }
+
+  i {
+    position: relative;
+    top: -10px;
+  }
+}
+
 
 /***************************
     #EDIT-PROFILE
@@ -575,7 +649,7 @@ ul {
 
 
 /***************************
- ******** PROFILE **********
+    #PROFILE
  ***************************/
 
 .profile {
@@ -875,25 +949,6 @@ ul {
       margin-right: 1.5rem;
       vertical-align: middle;
     }
-
-    // .tag-modal {
-
-    //   .modal-avatar {
-    //     height: 3rem;
-    //     border-radius: 5%;
-    //   }
-
-    //   li {
-    //     padding: .5rem 0;
-    //     font-size: 1rem;
-    //   }
-    // }
-
-    // #tagUsersModal {
-    //   .modal-content {
-    //     width: 60rem;
-    //   }
-    // }
   }
 
   .tabs {
@@ -919,77 +974,6 @@ ul {
     height: 3rem;
   }
 }
-
-/***************************
- ******** NAVBAR ***********
- ***************************/
-
-.nav {
-  background-image: linear-gradient(90deg, rgb(39, 174, 96) 15%, rgb(26, 188, 156) 100%);
-  background-image: -moz-linear-gradient(left, rgb(39, 174, 96) 15%, rgb(26, 188, 156) 100%);
-  background-image: -webkit-linear-gradient(left, rgb(39, 174, 96) 15%, rgb(26, 188, 156) 100%);
-  background-image: -o-linear-gradient(left, rgb(39, 174, 96) 15%, rgb(26, 188, 156) 100%);
-  background-image: -ms-linear-gradient(left, rgb(39, 174, 96) 15%, rgb(26, 188, 156) 100%);
-}
-
-.nav-wrapper {
-  padding-left: 2rem;
-  padding-right: 1rem;
-}
-
-.logo {
-  font-size: 1.8rem;
-  font-weight: 200;
-}
-
-.nav a:hover {
-  cursor: pointer;
-}
-
-.icon {
-  height: 56px;
-  padding-top: 10px;
-  margin-right: 15px;
-}
-
-.dropdown-content {
-  li {
-    cursor: default;
-  }
-
-  .notification {
-    display: inline-block;
-    padding-right: 0;
-    color: $darkGrey;
-    font-size: 1rem;
-  }
-
-  .notification:hover {
-    cursor: default;
-  }
-
-  .notification .user:hover {
-    cursor: pointer;
-    color: $lightBlue;
-    text-decoration: underline;
-  }
-
-  button {
-    height: 52px;
-    border: 0;
-    background-color: inherit;
-  }
-
-  button:hover {
-    color: $lightBlue;
-  }
-
-  i {
-    position: relative;
-    top: -10px;
-  }
-}
-
 
 
 /***************************
