@@ -381,7 +381,7 @@ ul {
     #EDIT-PROFILE
  ***************************/
 
-.editProfile {
+.edit-profile {
   header {
     margin-bottom: 1.5rem;
     text-align: center;
@@ -389,20 +389,20 @@ ul {
 
   h3 {
     display: inline-block;
-    font-size: 2.5rem;
     margin-right: 1.5rem;
+    font-size: 2.5rem;
     text-align: center;
   }
 
   h4 {
-    color: $darkGreen;
     margin: 0 0 1.5rem 0;
-    font-size: 1.6rem
+    font-size: 1.6rem;
+    color: $darkGreen;
   }
 
   h5 {
-    font-size: 1.4rem;
     margin-bottom: 0;
+    font-size: 1.4rem;
   }
 
   h6 {
@@ -410,9 +410,9 @@ ul {
   }
 
   p {
-    color: $grey;
-    font-size: 1rem;
     margin: 1rem 0;
+    font-size: 1rem;
+    color: $grey;
   }
 
   .title,
@@ -422,18 +422,18 @@ ul {
 
   ul.tags {
     margin-top: 5px;
-    list-style: none;
-    border-radius: 2px;
     padding: 5px;
+    border-radius: 2px;
+    list-style: none;
   }
 
   .tag {
     display: inline-block;
     margin: 2px 5px;
+    padding: 2px 5px;
     background-color: $lightGrey;
     border: 1px solid $lightGrey;
     border-radius: 3px;
-    padding: 2px 5px;
   } 
 
   .tag span {
@@ -441,16 +441,15 @@ ul {
     padding-right: 5px
   }
 
-
   .tag-form {
     display: block;
   }
 
   .tag-form {
     input {
+      display: inline-block;
       margin-top: 20px;
       margin-right: 15px;
-      display: inline-block;
       width: 50%;
       height: 2.3rem;
     }
@@ -467,38 +466,41 @@ ul {
   }
 
   .user-photos-container {
-
       i {
         color: $darkGrey;
         font-size: 3rem;
-      }
-      i:hover {
-        color: $lightBlue;
+
+        &:hover {
+          color: $lightBlue;
+        }
       }
 
       ul {
+        display: block;
         width: 100%;
         overflow-x: hidden;
         white-space: nowrap;
-        display: block;
       }
    
       li {
         display: inline-block;
         position: relative;
         margin-right: .5rem;
+
         a {
           position: absolute;
           top: 6px;
           left: 8px;
-          opacity: 0.7;
           margin-right: -25px;
+          opacity: 0.7;
+
           i {
-            color: red;
             font-size: 1.5rem;
-          }
-          i:hover {
             color: red;
+
+            &:hover {
+              color: red;
+            }
           }
         }
       }
@@ -506,7 +508,6 @@ ul {
       li:hover a {
         opacity: 1
       }
-
   }
 
   .photo {
@@ -514,8 +515,8 @@ ul {
   }
 
   .follow-container {
-    border-left: 2px solid $lightGrey;
     text-align: right;
+    border-left: 2px solid $lightGrey;
   }
 
   .follow {
@@ -524,14 +525,14 @@ ul {
   }
 
   .follow li {
+    width: 100%;
     border-bottom: 1px solid $lightGrey;
     margin-bottom: .3rem;
     text-align: right;
-    width: 100%;
-  }
 
-  .follow li:hover {
-    border-bottom: 1px solid $lightGreen;
+    &:hover {
+      border-bottom: 1px solid $lightGreen;
+    }
   }
   
   .follow-header {
@@ -553,8 +554,8 @@ ul {
   }
 
   input, textarea {
-    border: 1px solid $lightGrey;
     padding-left: 5px;
+    border: 1px solid $lightGrey;
   }
 
   input {
@@ -575,10 +576,10 @@ ul {
   }
 
   .avatar-container {
-    margin: 0 1rem 0 0;
-    position: relative;
     display: inline-block;
+    position: relative;
     vertical-align: top;
+    margin: 0 1rem 0 0;
   }
 
   .avatar {
@@ -588,9 +589,9 @@ ul {
 
   .update-avatar {
     @extend .default-button;
-    position: absolute;
-    bottom: 10%;
     left: calc(50% - 62px);
+    bottom: 10%;
+    position: absolute;
     opacity: .5;
   }
 
@@ -604,8 +605,8 @@ ul {
 
   .basicInfo {
     display: inline-block;
-    margin-top: 1.5rem;
     vertical-align: top;
+    margin-top: 1.5rem;
   }
 
   .add-tag {
@@ -613,8 +614,12 @@ ul {
   }
 
   .add-photo {
-    margin-bottom: 1.5rem;
     @extend .default-button;
+    margin-bottom: 1.5rem;
+  }
+
+  .add-photo:hover {
+    @extend .default-button-hover;
   }
 
   .photos-modal {
@@ -631,10 +636,10 @@ ul {
     }
 
     .upload {
-      background-color: $lightGrey;
-      border-radius: 3px;
       padding: .2rem .4rem;
       margin-right: 2rem;
+      background-color: $lightGrey;
+      border-radius: 3px;
     }
 
     .upload:hover {
