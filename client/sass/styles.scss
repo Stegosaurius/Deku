@@ -659,20 +659,20 @@ ul {
 
 .profile {
   h4 {
-    color: $darkGreen;
     margin: 2.5rem 0 0 0;
     font-size: 1.6rem;
+    color: $darkGreen;
   }
 
   h5 {
-    font-size: 1.4rem;
     margin-bottom: 1.8rem;
     text-align: center;
+    font-size: 1.4rem;
   }
 
   h6 {
-    color: $darkGrey;
     font-size: 1.1rem;
+    color: $darkGrey;
   }
 
   .avatar {
@@ -681,15 +681,15 @@ ul {
     border-radius: 3px;
   }
 
-  .userInfo li {
+  .user-info li {
     display: inline-block;
     vertical-align: top;
     padding-left: 1rem;
   }
 
   .location {
-    color: $grey;
     margin: .6rem 0 1rem 0;
+    color: $grey;
   }
 
   .buttons a,
@@ -711,19 +711,20 @@ ul {
       margin-top: 1rem;
 
       i {
-        color: $darkGrey;
         font-size: 3rem;
-      }
-      i:hover {
-        color: $lightBlue;
-        cursor: pointer;
+        color: $darkGrey;
+
+        &:hover {
+          color: $lightBlue;
+          cursor: pointer;
+        }
       }
 
       ul {
+        display: block;
         width: 100%;
         overflow-x: hidden;
         white-space: nowrap;
-        display: block;
       }
    
       li {
@@ -750,32 +751,32 @@ ul {
   }
 
   .about {
-    font-size: 1rem;
     margin-bottom: .5rem;
     margin-top: .5rem;
+    font-size: 1rem;
   }
 
   .tag {
-    color: $darkGrey;
     display: inline-block;
-    font-size: 1.1rem;
     margin: .5rem 2rem .5rem 0;
     padding: .2rem 1rem;
+    font-size: 1.1rem;
+    color: $darkGrey;
     background-color: $lightGrey;
     -webkit-transition: box-shadow .2s;
     transition: box-shadow .2s;
+
+    &:hover {
+      @extend .z-depth-1;
+      cursor: pointer;
+    }
   }
 
-  .tag:hover {
-    @extend .z-depth-1;
-    cursor: pointer;
-  }
-
-  .statusForm {
+  .status-form {
     padding: .3rem .1rem .3rem .3rem;
     margin-top: 1.5rem;
-    border-radius: 2px;
     background-color: $lightGrey;
+    border-radius: 2px;
   }
 
   input {
@@ -783,7 +784,6 @@ ul {
     height: 1.6rem;
     padding: .2rem;
     margin: 0;
-    // border: 1px solid $grey;
     color: $darkGrey;
     background-color: $white;
   }
@@ -794,60 +794,62 @@ ul {
     text-transform: none;
     -webkit-transition: background-color .2s linear;
     transition: background-color .2s linear;
-  }
 
-  .tabs .tab:hover {
-    background-color: $lightestGrey;
+    &:hover {
+      background-color: $lightestGrey;
+    }
   }
 
   .statuses a {
     color: $darkGrey;
-  }
 
-  .statuses a:hover {
-    color: $lightGreen;
+    &:hover {
+      color: $lightGreen;
+    }
   }
 
   .status button {
+    padding: 0;
     background-color: $mainBackground;
     color: $darkGrey;
-    padding: 0;
     box-shadow: none;
   }
 
-  .statusInfo {
+  .status-info {
     padding-right: 0;
     text-align: right;
+
     .delete-button {
       display: none;
     }
   }
-  .statusInfo:hover {
+
+  .status-info:hover {
     i {
       display: none;
     }
+
     .delete-button {
       display: inline-block;
-      opacity: 100%;
+      padding: .2rem .4rem;
       background-color: #ED4337;
       color: white;
       border-radius: 4%;
-      padding: .2rem .4rem;
       opacity: .8;
     }
   }
 
   li.status {
-    font-size: 1rem;
     padding-left: .5rem;
     margin-bottom: 2rem;
+    font-size: 1rem;
     border-left: 8px solid $lightestGreen;
   }
 
-  .statusCreated {
+  .status-created {
+    position: relative;
     font-size: .8rem;
     color: $grey;
-    position: relative;
   }
 
   .status-votes {
@@ -855,15 +857,18 @@ ul {
       i {
         margin-top: -0.2rem;
       }
-      .upvoteTally {
+
+      .upvote-tally {
         position: relative;
         top: -0.1rem;
         left: -1rem;
       }
+
       .not-voted:hover {
-        cursor: pointer;
         color: $lightBlue;
+        cursor: pointer;
       }
+
       .voted-for {
         color: $lightBlue;
       }
@@ -896,14 +901,14 @@ ul {
     color: $darkBlue;
   }
 
-  .forumActivity {
+  .forum-activity {
     margin: 2.5rem 0 2rem 0;
   }
 
   li.thread {
-    border-left: 8px solid $lightBlue;
     margin: 0 0 2rem 0;
     padding-left: 1.5rem;
+    border-left: 8px solid $lightBlue;
   }
 
   .thread h6:hover {
@@ -914,9 +919,9 @@ ul {
     color: $grey;
   }
 
-  .messageTime {
-    font-size: .8rem;
+  .message-time {
     margin-top: .4rem;
+    font-size: .8rem;
   }
 
   .modal {
@@ -927,10 +932,10 @@ ul {
     }
 
     h5 {
-      text-align: center;
       padding-bottom: .5rem;
-      border-bottom: 1px solid $lightGrey;
       margin-bottom: 0;
+      text-align: center;
+      border-bottom: 1px solid $lightGrey;
     }
 
     li {
@@ -939,20 +944,20 @@ ul {
     }
 
     a {
-      color: $darkGrey;
       vertical-align: middle;
-    }
+      color: $darkGrey;
 
-    a:hover {
-      cursor: pointer;
-      color: $lightBlue;
+      &:hover {
+        color: $lightBlue;
+        cursor: pointer;
+      }
     }
 
     img {
-      height: 50px;
-      border-radius: 50%;
-      margin-right: 1.5rem;
       vertical-align: middle;
+      height: 50px;
+      margin-right: 1.5rem;
+      border-radius: 50%;
     }
   }
 
@@ -982,7 +987,7 @@ ul {
 
 
 /***************************
- **** FORUM ALL THREADS ****
+    #FORUM-ALL-THREADS
  ***************************/
 
 .allThreads {
