@@ -990,7 +990,7 @@ ul {
     #FORUM-ALL-THREADS
  ***************************/
 
-.allThreads {
+.all-threads {
   h3 {
     display: inline-block;
     margin-right: 2rem;
@@ -1008,29 +1008,29 @@ ul {
   }
 
   .row {
-    margin-bottom: 2.3rem;
     position: relative;
+    margin-bottom: 2.3rem;
   }
 
-  .leftCol {
+  .left-col {
     padding-right: 0;
   }
 
   .avatar {
     height: 45px;
-    border-radius: 50%;
     margin-right: .5rem;
+    border-radius: 50%;
   }
 
   .user {
     display: none;
-    background-color: $lightGrey;
-    border-radius: 3px;
+    top: -2.1rem;
+    left: 2.3rem;
     position: absolute;
     padding: .2rem .4rem;
     font-size: .9rem;
-    top: -2.1rem;
-    left: 2.3rem;
+    background-color: $lightGrey;
+    border-radius: 3px;
     -ms-transform: translateX(-50%);
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
@@ -1051,13 +1051,13 @@ ul {
     color: $lightGreen;
   }
 
-  .upvoteTally {
+  .upvote-tally {
     font-size: 1.2rem;
     text-align: center;
   }
 
   .upvote,
-  .upvoteTally {
+  .upvote-tally {
     position: relative;
     top: .7rem;
   }
@@ -1071,31 +1071,31 @@ ul {
     color: $lightGreen;
   }
 
-  .createdAt {
+  .created-at {
     font-size: .8rem;
     color: $grey;
   }
 
-  .postTally {
+  .post-tally {
     text-align: center;
     font-size: .8rem;
     color: $grey;
   }
 
-  .postNum {
+  .post-num {
     font-size: 1.2rem;
     color: $darkGrey;
   }
 
-  .lastUpdated {
-    text-align: right;
+  .last-updated {
     height: 43px;
+    text-align: right;
     border-left: 2px solid $lightBlue;
   }
 
   .pagination {
-    text-align: center;
     margin-bottom: 1rem;
+    text-align: center;
   }
 
   li.active {
@@ -1112,7 +1112,7 @@ ul {
 }
 
 /***************************
- ******** THREAD ***********
+    #THREAD
  ***************************/
 
 .thread {
@@ -1128,33 +1128,31 @@ ul {
       padding: 0;
 
       h4 {
+        margin: 1rem 0;
         font-size: 2rem;
         color: $darkGreen;
-        margin: 1rem 0;
       }
       h5 {
-        font-size: 1rem;
         margin: 2rem 0 1rem 0;
+        font-size: 1rem;
       }
     }
     .meta {
       h5 {
-        font-size: 1rem;
-        padding-right: .5rem;
-        border-right: 2px solid $darkGreen;
         margin: 1rem 0;
+        padding-right: .5rem;
+        font-size: 1rem;
+        border-right: 2px solid $darkGreen;
       }
-
     }
-
   }
 
   button {
     @extend .default-button;
+    vertical-align: top;
     width: 5rem;
     padding-top: .3rem;
     padding-bottom: .3rem;
-    vertical-align: top;
   }
 
   button:hover {
@@ -1166,16 +1164,16 @@ ul {
     border-bottom: 2px solid $lightGrey;
 
     textarea {
-      resize: none;
-      border: 2px solid $lightGrey;
-      margin-right: 2%;
       height: 2rem;
       width: 40%;
+      margin-right: 2%;
+      border: 2px solid $lightGrey;
+      resize: none;
     }
 
     textarea:focus {
-      border: 2px solid $lightBlue;
       height: 4rem;
+      border: 2px solid $lightBlue;
     }
   }
 
@@ -1195,21 +1193,21 @@ ul {
     }
   }
 
-  .message-timestamp {
-  }
-
   .message-votes {
     div {
       i {
         margin-top: -0.2rem;
       }
+
       .not-voted:hover {
-        cursor: pointer;
         color: $lightBlue;
+        cursor: pointer;
       }
+
       .voted-for {
         color: $lightBlue;
       }
+
       h5 {
         margin-top: 0.2rem;
       }
@@ -1323,10 +1321,12 @@ ol {
 .mask .action-wrapper {
   overflow: hidden;
 }
+
 .mask .action-wrapper .cd-btn {
   opacity: 1;
   margin: 0 0 0 1.5em;
 }
+
 .mask .action-wrapper .cd-btn:first-of-type {
   margin-left: 0;
 }
@@ -1341,6 +1341,7 @@ ol {
     -webkit-transform: translateY(0);
   }
 }
+
 @-moz-keyframes cd-reveal-down {
   0% {
     opacity: 1;
@@ -1351,6 +1352,7 @@ ol {
     -moz-transform: translateY(0);
   }
 }
+
 @keyframes cd-reveal-down {
   0% {
     opacity: 1;
@@ -1369,4 +1371,3 @@ ol {
     transform: translateY(0);
   }
 }
-

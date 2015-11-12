@@ -1,4 +1,4 @@
-<div class="allThreads container">
+<div class="all-threads container">
   <h3>Forum</h3>
 
   <a class="create modal-trigger" href="#createThreadModal" modal>Create Thread</a>
@@ -6,7 +6,7 @@
   <ul class="threads">
     <li ng-repeat="thread in allThreads.threads">
       <div class="row">
-        <div class="leftCol col l2 m3 s12">
+        <div class="left-col col l2 m3 s12">
           <a class="avatarLink left" ui-sref="profile({ username: thread.username })">
             <img class="avatar" ng-src="{{ thread.profile_photo }}">
           </a>
@@ -21,7 +21,7 @@
             <i class="material-icons">keyboard_arrow_up</i>
           </button>
 
-          <span class="upvoteTally left">
+          <span class="upvote-tally left">
             {{ thread.vote_tally }}
           </span>
         </div>
@@ -30,16 +30,16 @@
           <span class="left">
             <a class="thread-title" ui-sref="thread({ threadID: thread.id, page: 1 })">{{ thread.thread }}</a><br>
 
-            <p class="createdAt">Created {{ thread.created_at }}</p>
+            <p class="created-at">Created {{ thread.created_at }}</p>
           </span>
         </div>
 
-        <div class="postTally col l1 m1 s2">
-          <span class="postNum">{{ thread.messages_count }}</span><br>
+        <div class="post-tally col l1 m1 s2">
+          <span class="post-num">{{ thread.messages_count }}</span><br>
           POSTS
         </div>
 
-        <div class="lastUpdated col l2 hide-on-med-and-down">
+        <div class="last-updated col l2 hide-on-med-and-down">
           <span>Last active {{ thread.last_updated }}</span>
         </div>
       </div>
