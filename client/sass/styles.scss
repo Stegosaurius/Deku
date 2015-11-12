@@ -1,18 +1,20 @@
-/* ___GLOBALS___ */
+/***********************
+    #GLOBALS
+ ***********************/
 
-$lightestGreen: #17be5d;
-$lightestGrey: #e9e9e9;
-$lightGreen: #27ae60;
 $lightBlue: #1abc9c;
-$lightGrey: #dfdfdf;
-$grey: #8e8e8e;
+$darkBlue: #138871;
+$lightestGreen: #17be5d;
+$lightGreen: #27ae60;
 $darkGreen: #109418;
 $darkerGreen: #0c7112;
+$lightestGrey: #e9e9e9;
+$lightGrey: #dfdfdf;
+$grey: #8e8e8e;
 $darkGrey: #4a4a4a;
-$darkBlue: #138871;
 $darkRed: #a50000;
-$mainBackground: #f9f9f9;
 $white: #ffffff;
+$mainBackground: #f9f9f9;
 $facebook: #3b5998;
 $google: #e50101;
 
@@ -25,14 +27,14 @@ $google: #e50101;
 }
 
 .default-button {
+  display: inline-block;
+  padding: .5rem 1rem;
   background-color: $lightGreen;
   color: $white;
-  padding: .5rem 1rem;
   border: 0;
-  display: inline-block;
-  @extend .z-depth-1;
   -webkit-transition: box-shadow .2s;
   transition: box-shadow .2s;
+  @extend .z-depth-1;
 }
 
 .default-button-hover {
@@ -40,9 +42,10 @@ $google: #e50101;
   @extend .z-depth-1-half;
 }
 
-/***************************
- ****** GENERAL ************
- ***************************/
+
+/***********************
+    #GENERAL
+ ***********************/
 
 *,
 *::before,
@@ -54,76 +57,13 @@ html {
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  background-color: $mainBackground;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background-color: $mainBackground;
 }
 
 .main {
   margin: 0 4%;
   color: $darkGrey;
-}
-
-p {
-  code {
-    background-color: $lightGrey;
-    color: red;
-    padding: 1.5px;
-    padding-left: 5px;
-    padding-right: 5px;
-    border-radius: 3px;
-  }
-}
-
-.tesselButton {
-  @extend .default-button;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.dashboard {
-  margin-top: 20px;
-}
-
-#exampleDashTitle {
-  text-align: center;
-}
-
-.tesselSetupImage {
-  width: 60%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.scopedKey {
-  display: inline-block;
-  word-wrap: break-word;
-  padding-right: 10px;
-  margin-top: 10px;
-  border: 1px solid black;
-  background-color: #dfdfdf;
-  padding-left: 10px;
-  border-radius: 3px;
-  white-space: pre-line;
-  padding-top: .7rem;
-  width: 100%;
-  font-size: 10px;
-  padding-bottom: 5px;
-  margin-bottom: 10px;
-}
-
-pre {
-  border: 1px solid black;
-  background-color: $lightGrey;
-  padding-left: 10px;
-  border-radius: 3px;
-  padding-top: .7rem;
-}
-
-ol {
-  li {
-    margin-bottom: 2rem;
-  }
 }
 
 .container {
@@ -139,8 +79,9 @@ ul {
   margin: 0;
 }
 
+
 /***************************
- ****** SPLASH PAGE ********
+    #SPLASH-PAGE
  ***************************/
 
 .splash {
@@ -148,37 +89,37 @@ ul {
 
   .landing {
     position: relative;
-    text-align: center;
     height: 100vh;
     width: 100%;
     overflow: hidden;
-  }
+    text-align: center;
 
-  .landing:after {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    opacity: 0.7;
-    background: url(../assets/Nature.jpg) no-repeat;
-    -webkit-background-size: cover;
-    background-size: cover;
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.7;
+      background: url(../assets/Nature.jpg) no-repeat;
+      -webkit-background-size: cover;
+      background-size: cover;
+    }
   }
 
   .headline {
-    color: $white;
     margin: 2rem 4rem;
     text-align: right;
+    color: $white;
 
     h1 {
-      font-size: 4rem;
-      display: inline-block;
       position: relative;
       top: -1.2rem;
+      display: inline-block;
+      font-size: 4rem;
       font-weight: 200;
     }
 
@@ -193,8 +134,8 @@ ul {
       text-align: center;
 
       h1 {
-        font-size: 3rem;
         top: -.5rem;
+        font-size: 3rem;
       }
 
       img {
@@ -208,8 +149,8 @@ ul {
     -moz-osx-font-smoothing: grayscale;
 
     h1 {
-      color: $white;
       margin: 8rem 0 0 0;
+      color: $white;
     }
 
     h1 span {
@@ -217,8 +158,8 @@ ul {
     }
 
     p {
-      font-size: 1.4rem;
       margin: 1rem 0;
+      font-size: 1.4rem;
     }
 
     a {
@@ -237,11 +178,11 @@ ul {
 
     .cd-btn {
       display: inline-block;
+      margin-right: 1.5rem;
       padding: .8rem 1.2rem;
+      width: 115px;
       background-color: $lightBlue;
       border-radius: .25rem;
-      margin-right: 1.5rem;
-      width: 115px;
     }
 
     .cd-btn:nth-of-type(2) {
@@ -267,12 +208,12 @@ ul {
     }
   }
 
-  .learnMore {
-    font-size: 1.4rem;
-    color: $white;
+  .learn-more {
     position: absolute;
     bottom: 0%;
     left: calc(50% - 53px);
+    font-size: 1.4rem;
+    color: $white;
   }
 
   .info {
@@ -286,16 +227,16 @@ ul {
     }
 
     .divider {
+      margin: auto;
       width: 15rem;
       border-bottom: 2px solid $darkerGreen;
-      margin: auto;
     }
 
     p {
-      color: $grey;
+      padding: 2rem 3rem;
       font-size: 2rem;
       text-align: center;
-      padding: 2rem 3rem;
+      color: $grey;
     }
 
     .feature {
@@ -307,8 +248,8 @@ ul {
       }
 
       p {
-        font-size: 1.4rem;
         padding: 0 1rem;
+        font-size: 1.4rem;
       }
     }
   }
@@ -317,6 +258,10 @@ ul {
     width: 400px;
     top: 30% !important;
     text-align: center;
+
+    @media only screen and (max-width: 768px) {
+      width: 300px;
+    }
 
     button {
       @extend .default-button;
@@ -334,10 +279,10 @@ ul {
     .facebook,
     .google {
       @extend .default-button;
-      border-radius: 2px;
-      color: $white;
       display: inline-block;
       padding: .3rem .5rem;
+      color: $white;
+      border-radius: 2px;
     }
 
     .facebook:hover,
@@ -346,8 +291,8 @@ ul {
     }
 
     .facebook {
-      background-color: $facebook;
       margin: 1rem 0 .8rem 0;
+      background-color: $facebook;
     }
 
     .google {
@@ -358,633 +303,11 @@ ul {
       margin-top: 1rem;
     }
   }
-
-  @media only screen and (max-width: 768px) {
-    .modal {
-      width: 300px;
-    }
-  }
-}
-
-/***************************
- ****** EDITPROFILE ********
- ***************************/
-
-.editProfile {
-  header {
-    margin-bottom: 1.5rem;
-    text-align: center;
-  }
-
-  h3 {
-    display: inline-block;
-    font-size: 2.5rem;
-    margin-right: 1.5rem;
-    text-align: center;
-  }
-
-  h4 {
-    color: $darkGreen;
-    margin: 0 0 1.5rem 0;
-    font-size: 1.6rem
-  }
-
-  h5 {
-    font-size: 1.4rem;
-    margin-bottom: 0;
-  }
-
-  h6 {
-    font-size: 1.1rem;
-  }
-
-  p {
-    color: $grey;
-    font-size: 1rem;
-    margin: 1rem 0;
-  }
-
-  .title,
-  .update {
-    vertical-align: middle;
-  }
-
-  ul.tags {
-    margin-top: 5px;
-    list-style: none;
-    border-radius: 2px;
-    padding: 5px;
-  }
-
-  .tag {
-    display: inline-block;
-    margin: 2px 5px;
-    background-color: $lightGrey;
-    border: 1px solid $lightGrey;
-    border-radius: 3px;
-    padding: 2px 5px;
-  } 
-
-  .tag span {
-    margin: 3px 0px;
-    padding-right: 5px
-  }
-
-
-  .tag-form {
-    display: block;
-  }
-
-  .tag-form {
-    input {
-      margin-top: 20px;
-      margin-right: 15px;
-      display: inline-block;
-      width: 50%;
-      height: 2.3rem;
-    }
-    button {
-      display: inline-block;
-    }
-  }
-
-  div.user-meta {
-    margin: 5px 0;
-    margin-bottom: 15px;
-    padding: 5px 0;
-    background-color: white;
-  }
-
-  .user-photos-container {
-
-      i {
-        color: $darkGrey;
-        font-size: 3rem;
-      }
-      i:hover {
-        color: $lightBlue;
-      }
-
-      ul {
-        width: 100%;
-        overflow-x: hidden;
-        white-space: nowrap;
-        display: block;
-      }
-   
-      li {
-        display: inline-block;
-        position: relative;
-        margin-right: .5rem;
-        a {
-          position: absolute;
-          top: 6px;
-          left: 8px;
-          opacity: 0.7;
-          margin-right: -25px;
-          i {
-            color: red;
-            font-size: 1.5rem;
-          }
-          i:hover {
-            color: red;
-          }
-        }
-      }
-
-      li:hover a {
-        opacity: 1
-      }
-
-  }
-
-  .photo {
-    height: 14rem;
-  }
-
-  .follow-container {
-    border-left: 2px solid $lightGrey;
-    text-align: right;
-  }
-
-  .follow {
-    height: 14rem;
-    overflow-y: scroll;
-  }
-
-  .follow li {
-    border-bottom: 1px solid $lightGrey;
-    margin-bottom: .3rem;
-    text-align: right;
-    width: 100%;
-  }
-
-  .follow li:hover {
-    border-bottom: 1px solid $lightGreen;
-  }
-  
-  .follow-header {
-    font-size: 1.2rem;
-    color: $darkGreen;
-
-  }
-
-  button {
-    @extend .default-button;
-  }
-
-  button:hover {
-    @extend .default-button-hover;
-  }
-  
-  textarea {
-    resize: none;
-  }
-
-  input, textarea {
-    border: 1px solid $lightGrey;
-    padding-left: 5px;
-  }
-
-  input {
-    height: 2rem;
-    padding-right: 0px;
-  }
-
-  input:focus, textarea:focus {
-    border-bottom: 2px solid $darkGreen;
-  }
-
-  a:hover {
-    cursor: pointer;
-  }
-
-  .user-meta {
-    position: relative;
-  }
-
-  .avatar-container {
-    margin: 0 1rem 0 0;
-    position: relative;
-    display: inline-block;
-    vertical-align: top;
-  }
-
-  .avatar {
-    height: 11rem;
-    border-radius: 3px;
-  }
-
-  .update-avatar {
-    @extend .default-button;
-    position: absolute;
-    bottom: 10%;
-    left: calc(50% - 62px);
-    opacity: .5;
-  }
-
-  .update-avatar:hover {
-    @extend .default-button-hover;
-  }
-
-  .avatar-container:hover .update-avatar {
-    opacity: 1;
-  }
-
-  .basicInfo {
-    display: inline-block;
-    margin-top: 1.5rem;
-    vertical-align: top;
-  }
-
-  .add-tag {
-    background-color: $lightGreen;
-  }
-
-  .add-photo {
-    margin-bottom: 1.5rem;
-    @extend .default-button;
-  }
-
-  .photos-modal {
-    span {
-      font-size: 1.5rem;
-    }
-
-    input {
-      height: 2.4rem;
-    }
-
-    form {
-      margin: 2rem 0;
-    }
-
-    .upload {
-      background-color: $lightGrey;
-      border-radius: 3px;
-      padding: .2rem .4rem;
-      margin-right: 2rem;
-    }
-
-    .upload:hover {
-      @extend .default-button-hover;
-    }
-
-    .upload-text {
-      font-size: 1rem;
-    }
-  }
 }
 
 
 /***************************
- ******** PROFILE **********
- ***************************/
-
-.profile {
-  h4 {
-    color: $darkGreen;
-    margin: 2.5rem 0 0 0;
-    font-size: 1.6rem;
-  }
-
-  h5 {
-    font-size: 1.4rem;
-    margin-bottom: 1.8rem;
-    text-align: center;
-  }
-
-  h6 {
-    color: $darkGrey;
-    font-size: 1.1rem;
-  }
-
-  .avatar {
-    height: 10rem;
-    margin-top: 2rem;
-    border-radius: 3px;
-  }
-
-  .userInfo li {
-    display: inline-block;
-    vertical-align: top;
-    padding-left: 1rem;
-  }
-
-  .location {
-    color: $grey;
-    margin: .6rem 0 1rem 0;
-  }
-
-  .buttons a,
-  button {
-    @extend .default-button;
-  }
-
-  .buttons a:hover,
-  button:hover {
-    @extend .default-button-hover;
-  }
-
-  button {
-    padding-top: .3rem;
-    padding-bottom: .3rem;
-  }
-
-  .user-photos-container {
-      margin-top: 1rem;
-
-      i {
-        color: $darkGrey;
-        font-size: 3rem;
-      }
-      i:hover {
-        color: $lightBlue;
-        cursor: pointer;
-      }
-
-      ul {
-        width: 100%;
-        overflow-x: hidden;
-        white-space: nowrap;
-        display: block;
-      }
-   
-      li {
-        display: inline-block;
-        position: relative;
-        margin-right: .5rem;
-      }
-
-      li:hover a {
-        opacity: 1
-      }
-
-      .upload-file {
-        @extend .default-button;
-      }
-
-      .upload-file {
-        @extend .default-button-hover;
-      }
-  }
-
-  .photo {
-    height: 14rem;
-  }
-
-  .about {
-    font-size: 1rem;
-    margin-bottom: .5rem;
-    margin-top: .5rem;
-  }
-
-  .tag {
-    color: $darkGrey;
-    display: inline-block;
-    font-size: 1.1rem;
-    margin: .5rem 2rem .5rem 0;
-    padding: .2rem 1rem;
-    background-color: $lightGrey;
-    -webkit-transition: box-shadow .2s;
-    transition: box-shadow .2s;
-  }
-
-  .tag:hover {
-    @extend .z-depth-1;
-    cursor: pointer;
-  }
-
-  .statusForm {
-    padding: .3rem .1rem .3rem .3rem;
-    margin-top: 1.5rem;
-    border-radius: 2px;
-    background-color: $lightGrey;
-  }
-
-  input {
-    width: calc(100% - 74px);
-    height: 1.6rem;
-    padding: .2rem;
-    margin: 0;
-    // border: 1px solid $grey;
-    color: $darkGrey;
-    background-color: $white;
-  }
-
-  .tabs .tab {
-    font-size: 1.1rem;
-    letter-spacing: 0;
-    text-transform: none;
-    -webkit-transition: background-color .2s linear;
-    transition: background-color .2s linear;
-  }
-
-  .tabs .tab:hover {
-    background-color: $lightestGrey;
-  }
-
-  .statuses a {
-    color: $darkGrey;
-  }
-
-  .statuses a:hover {
-    color: $lightGreen;
-  }
-
-  .status button {
-    background-color: $mainBackground;
-    color: $darkGrey;
-    padding: 0;
-    box-shadow: none;
-  }
-
-  .statusInfo {
-    padding-right: 0;
-    text-align: right;
-    .delete-button {
-      display: none;
-    }
-  }
-  .statusInfo:hover {
-    i {
-      display: none;
-    }
-    .delete-button {
-      display: inline-block;
-      opacity: 100%;
-      background-color: #ED4337;
-      color: white;
-      border-radius: 4%;
-      padding: .2rem .4rem;
-      opacity: .8;
-    }
-  }
-
-  li.status {
-    font-size: 1rem;
-    padding-left: .5rem;
-    margin-bottom: 2rem;
-    border-left: 8px solid $lightestGreen;
-  }
-
-  .statusCreated {
-    font-size: .8rem;
-    color: $grey;
-    position: relative;
-  }
-
-  .status-votes {
-    div {
-      i {
-        margin-top: -0.2rem;
-      }
-      .upvoteTally {
-        position: relative;
-        top: -0.1rem;
-        left: -1rem;
-      }
-      .not-voted:hover {
-        cursor: pointer;
-        color: $lightBlue;
-      }
-      .voted-for {
-        color: $lightBlue;
-      }
-    }
-  }
-
-  .bottom-left {
-    padding-right: 5rem;
-    border-right: 1px solid $darkGreen;
-  }
-
-  .bottom-right {
-    padding-left: 3rem;
-  }
-
-  .follow a,
-  .follow a + span {
-      display: inline-block;
-      margin-top: .5rem;
-      font-size: 1.2rem;
-      color: $lightBlue;
-  }
-
-  .follow a + span {
-    padding-left: .3rem;
-    color: $grey;
-  }
-
-  .follow a:hover {
-    color: $darkBlue;
-  }
-
-  .forumActivity {
-    margin: 2.5rem 0 2rem 0;
-  }
-
-  li.thread {
-    border-left: 8px solid $lightBlue;
-    margin: 0 0 2rem 0;
-    padding-left: 1.5rem;
-  }
-
-  .thread h6:hover {
-    color: $lightBlue;
-  }
-
-  .thread p {
-    color: $grey;
-  }
-
-  .messageTime {
-    font-size: .8rem;
-    margin-top: .4rem;
-  }
-
-  .modal {
-    width: 25%;
-
-    .modal-content {
-      padding: 0;
-    }
-
-    h5 {
-      text-align: center;
-      padding-bottom: .5rem;
-      border-bottom: 1px solid $lightGrey;
-      margin-bottom: 0;
-    }
-
-    li {
-      padding: 1rem 2rem;
-      font-size: 1.2rem;
-    }
-
-    a {
-      color: $darkGrey;
-      vertical-align: middle;
-    }
-
-    a:hover {
-      cursor: pointer;
-      color: $lightBlue;
-    }
-
-    img {
-      height: 50px;
-      border-radius: 50%;
-      margin-right: 1.5rem;
-      vertical-align: middle;
-    }
-
-    // .tag-modal {
-
-    //   .modal-avatar {
-    //     height: 3rem;
-    //     border-radius: 5%;
-    //   }
-
-    //   li {
-    //     padding: .5rem 0;
-    //     font-size: 1rem;
-    //   }
-    // }
-
-    // #tagUsersModal {
-    //   .modal-content {
-    //     width: 60rem;
-    //   }
-    // }
-  }
-
-  .tabs {
-    margin-bottom: 0.5rem;
-
-    .tab {
-      a {
-        color: $darkGrey;
-      }
-    }
-
-    .indicator { 
-      background-color: $darkGreen;
-    }
-  }
-
-  .status-container {
-    padding: 0;
-    margin-bottom: 2rem;
-  }
-
-  .status-avatar {
-    height: 3rem;
-  }
-}
-
-/***************************
- ******** NAVBAR ***********
+    #NAVBAR
  ***************************/
 
 .nav {
@@ -1023,28 +346,28 @@ ul {
   .notification {
     display: inline-block;
     padding-right: 0;
-    color: $darkGrey;
     font-size: 1rem;
-  }
+    color: $darkGrey;
 
-  .notification:hover {
-    cursor: default;
+    &:hover {
+      cursor: default;
+    }
   }
 
   .notification .user:hover {
-    cursor: pointer;
     color: $lightBlue;
     text-decoration: underline;
+    cursor: pointer;
   }
 
   button {
     height: 52px;
     border: 0;
     background-color: inherit;
-  }
 
-  button:hover {
-    color: $lightBlue;
+    &:hover {
+      color: $lightBlue;
+    }
   }
 
   i {
@@ -1054,12 +377,620 @@ ul {
 }
 
 
-
 /***************************
- **** FORUM ALL THREADS ****
+    #EDIT-PROFILE
  ***************************/
 
-.allThreads {
+.edit-profile {
+  header {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  h3 {
+    display: inline-block;
+    margin-right: 1.5rem;
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  h4 {
+    margin: 0 0 1.5rem 0;
+    font-size: 1.6rem;
+    color: $darkGreen;
+  }
+
+  h5 {
+    margin-bottom: 0;
+    font-size: 1.4rem;
+  }
+
+  h6 {
+    font-size: 1.1rem;
+  }
+
+  p {
+    margin: 1rem 0;
+    font-size: 1rem;
+    color: $grey;
+  }
+
+  .title,
+  .update {
+    vertical-align: middle;
+  }
+
+  ul.tags {
+    margin-top: 5px;
+    padding: 5px;
+    border-radius: 2px;
+    list-style: none;
+  }
+
+  .tag {
+    display: inline-block;
+    margin: 2px 5px;
+    padding: 2px 5px;
+    background-color: $lightGrey;
+    border: 1px solid $lightGrey;
+    border-radius: 3px;
+  } 
+
+  .tag span {
+    margin: 3px 0px;
+    padding-right: 5px
+  }
+
+  .tag-form {
+    display: block;
+  }
+
+  .tag-form {
+    input {
+      display: inline-block;
+      margin-top: 20px;
+      margin-right: 15px;
+      width: 50%;
+      height: 2.3rem;
+    }
+    button {
+      display: inline-block;
+    }
+  }
+
+  div.user-meta {
+    margin: 5px 0;
+    margin-bottom: 15px;
+    padding: 5px 0;
+    background-color: white;
+  }
+
+  .user-photos-container {
+      i {
+        color: $darkGrey;
+        font-size: 3rem;
+
+        &:hover {
+          color: $lightBlue;
+        }
+      }
+
+      ul {
+        display: block;
+        width: 100%;
+        overflow-x: hidden;
+        white-space: nowrap;
+      }
+   
+      li {
+        display: inline-block;
+        position: relative;
+        margin-right: .5rem;
+
+        a {
+          position: absolute;
+          top: 6px;
+          left: 8px;
+          margin-right: -25px;
+          opacity: 0.7;
+
+          i {
+            font-size: 1.5rem;
+            color: red;
+
+            &:hover {
+              color: red;
+            }
+          }
+        }
+      }
+
+      li:hover a {
+        opacity: 1
+      }
+  }
+
+  .photo {
+    height: 14rem;
+  }
+
+  .follow-container {
+    text-align: right;
+    border-left: 2px solid $lightGrey;
+  }
+
+  .follow {
+    height: 14rem;
+    overflow-y: scroll;
+  }
+
+  .follow li {
+    width: 100%;
+    border-bottom: 1px solid $lightGrey;
+    margin-bottom: .3rem;
+    text-align: right;
+
+    &:hover {
+      border-bottom: 1px solid $lightGreen;
+    }
+  }
+  
+  .follow-header {
+    font-size: 1.2rem;
+    color: $darkGreen;
+
+  }
+
+  button {
+    @extend .default-button;
+  }
+
+  button:hover {
+    @extend .default-button-hover;
+  }
+  
+  textarea {
+    resize: none;
+  }
+
+  input, textarea {
+    padding-left: 5px;
+    border: 1px solid $lightGrey;
+  }
+
+  input {
+    height: 2rem;
+    padding-right: 0px;
+  }
+
+  input:focus, textarea:focus {
+    border-bottom: 2px solid $darkGreen;
+  }
+
+  a:hover {
+    cursor: pointer;
+  }
+
+  .user-meta {
+    position: relative;
+  }
+
+  .avatar-container {
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    margin: 0 1rem 0 0;
+  }
+
+  .avatar {
+    height: 11rem;
+    border-radius: 3px;
+  }
+
+  .update-avatar {
+    @extend .default-button;
+    left: calc(50% - 62px);
+    bottom: 10%;
+    position: absolute;
+    opacity: .5;
+  }
+
+  .update-avatar:hover {
+    @extend .default-button-hover;
+  }
+
+  .avatar-container:hover .update-avatar {
+    opacity: 1;
+  }
+
+  .basicInfo {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 1.5rem;
+  }
+
+  .add-tag {
+    background-color: $lightGreen;
+  }
+
+  .add-photo {
+    @extend .default-button;
+    margin-bottom: 1.5rem;
+  }
+
+  .add-photo:hover {
+    @extend .default-button-hover;
+  }
+
+  .photos-modal {
+    span {
+      font-size: 1.5rem;
+    }
+
+    input {
+      height: 2.4rem;
+    }
+
+    form {
+      margin: 2rem 0;
+    }
+
+    .upload {
+      padding: .2rem .4rem;
+      margin-right: 2rem;
+      background-color: $lightGrey;
+      border-radius: 3px;
+    }
+
+    .upload:hover {
+      @extend .default-button-hover;
+    }
+
+    .upload-text {
+      font-size: 1rem;
+    }
+  }
+}
+
+
+/***************************
+    #PROFILE
+ ***************************/
+
+.profile {
+  h4 {
+    margin: 2.5rem 0 0 0;
+    font-size: 1.6rem;
+    color: $darkGreen;
+  }
+
+  h5 {
+    margin-bottom: 1.8rem;
+    text-align: center;
+    font-size: 1.4rem;
+  }
+
+  h6 {
+    font-size: 1.1rem;
+    color: $darkGrey;
+  }
+
+  .avatar {
+    height: 10rem;
+    margin-top: 2rem;
+    border-radius: 3px;
+  }
+
+  .user-info li {
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 1rem;
+  }
+
+  .location {
+    margin: .6rem 0 1rem 0;
+    color: $grey;
+  }
+
+  .buttons a,
+  button {
+    @extend .default-button;
+  }
+
+  .buttons a:hover,
+  button:hover {
+    @extend .default-button-hover;
+  }
+
+  button {
+    padding-top: .3rem;
+    padding-bottom: .3rem;
+  }
+
+  .user-photos-container {
+      margin-top: 1rem;
+
+      i {
+        font-size: 3rem;
+        color: $darkGrey;
+
+        &:hover {
+          color: $lightBlue;
+          cursor: pointer;
+        }
+      }
+
+      ul {
+        display: block;
+        width: 100%;
+        overflow-x: hidden;
+        white-space: nowrap;
+      }
+   
+      li {
+        display: inline-block;
+        position: relative;
+        margin-right: .5rem;
+      }
+
+      li:hover a {
+        opacity: 1
+      }
+
+      .upload-file {
+        @extend .default-button;
+      }
+
+      .upload-file {
+        @extend .default-button-hover;
+      }
+  }
+
+  .photo {
+    height: 14rem;
+  }
+
+  .about {
+    margin-bottom: .5rem;
+    margin-top: .5rem;
+    font-size: 1rem;
+  }
+
+  .tag {
+    display: inline-block;
+    margin: .5rem 2rem .5rem 0;
+    padding: .2rem 1rem;
+    font-size: 1.1rem;
+    color: $darkGrey;
+    background-color: $lightGrey;
+    -webkit-transition: box-shadow .2s;
+    transition: box-shadow .2s;
+
+    &:hover {
+      @extend .z-depth-1;
+      cursor: pointer;
+    }
+  }
+
+  .status-form {
+    padding: .3rem .1rem .3rem .3rem;
+    margin-top: 1.5rem;
+    background-color: $lightGrey;
+    border-radius: 2px;
+  }
+
+  input {
+    width: calc(100% - 74px);
+    height: 1.6rem;
+    padding: .2rem;
+    margin: 0;
+    color: $darkGrey;
+    background-color: $white;
+  }
+
+  .tabs .tab {
+    font-size: 1.1rem;
+    letter-spacing: 0;
+    text-transform: none;
+    -webkit-transition: background-color .2s linear;
+    transition: background-color .2s linear;
+
+    &:hover {
+      background-color: $lightestGrey;
+    }
+  }
+
+  .statuses a {
+    color: $darkGrey;
+
+    &:hover {
+      color: $lightGreen;
+    }
+  }
+
+  .status button {
+    padding: 0;
+    background-color: $mainBackground;
+    color: $darkGrey;
+    box-shadow: none;
+  }
+
+  .status-info {
+    padding-right: 0;
+    text-align: right;
+
+    .delete-button {
+      display: none;
+    }
+  }
+
+  .status-info:hover {
+    i {
+      display: none;
+    }
+
+    .delete-button {
+      display: inline-block;
+      padding: .2rem .4rem;
+      background-color: #ED4337;
+      color: white;
+      border-radius: 4%;
+      opacity: .8;
+    }
+  }
+
+  li.status {
+    padding-left: .5rem;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    border-left: 8px solid $lightestGreen;
+  }
+
+  .status-created {
+    position: relative;
+    font-size: .8rem;
+    color: $grey;
+  }
+
+  .status-votes {
+    div {
+      i {
+        margin-top: -0.2rem;
+      }
+
+      .upvote-tally {
+        position: relative;
+        top: -0.1rem;
+        left: -1rem;
+      }
+
+      .not-voted:hover {
+        color: $lightBlue;
+        cursor: pointer;
+      }
+
+      .voted-for {
+        color: $lightBlue;
+      }
+    }
+  }
+
+  .bottom-left {
+    padding-right: 5rem;
+    border-right: 1px solid $darkGreen;
+  }
+
+  .bottom-right {
+    padding-left: 3rem;
+  }
+
+  .follow a,
+  .follow a + span {
+      display: inline-block;
+      margin-top: .5rem;
+      font-size: 1.2rem;
+      color: $lightBlue;
+  }
+
+  .follow a + span {
+    padding-left: .3rem;
+    color: $grey;
+  }
+
+  .follow a:hover {
+    color: $darkBlue;
+  }
+
+  .forum-activity {
+    margin: 2.5rem 0 2rem 0;
+  }
+
+  li.thread {
+    margin: 0 0 2rem 0;
+    padding-left: 1.5rem;
+    border-left: 8px solid $lightBlue;
+  }
+
+  .thread h6:hover {
+    color: $lightBlue;
+  }
+
+  .thread p {
+    color: $grey;
+  }
+
+  .message-time {
+    margin-top: .4rem;
+    font-size: .8rem;
+  }
+
+  .modal {
+    width: 25%;
+
+    .modal-content {
+      padding: 0;
+    }
+
+    h5 {
+      padding-bottom: .5rem;
+      margin-bottom: 0;
+      text-align: center;
+      border-bottom: 1px solid $lightGrey;
+    }
+
+    li {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+    }
+
+    a {
+      vertical-align: middle;
+      color: $darkGrey;
+
+      &:hover {
+        color: $lightBlue;
+        cursor: pointer;
+      }
+    }
+
+    img {
+      vertical-align: middle;
+      height: 50px;
+      margin-right: 1.5rem;
+      border-radius: 50%;
+    }
+  }
+
+  .tabs {
+    margin-bottom: 0.5rem;
+
+    .tab {
+      a {
+        color: $darkGrey;
+      }
+    }
+
+    .indicator { 
+      background-color: $darkGreen;
+    }
+  }
+
+  .status-container {
+    padding: 0;
+    margin-bottom: 2rem;
+  }
+
+  .status-avatar {
+    height: 3rem;
+  }
+}
+
+
+/***************************
+    #FORUM-ALL-THREADS
+ ***************************/
+
+.all-threads {
   h3 {
     display: inline-block;
     margin-right: 2rem;
@@ -1077,29 +1008,29 @@ ul {
   }
 
   .row {
-    margin-bottom: 2.3rem;
     position: relative;
+    margin-bottom: 2.3rem;
   }
 
-  .leftCol {
+  .left-col {
     padding-right: 0;
   }
 
   .avatar {
     height: 45px;
-    border-radius: 50%;
     margin-right: .5rem;
+    border-radius: 50%;
   }
 
   .user {
     display: none;
-    background-color: $lightGrey;
-    border-radius: 3px;
+    top: -2.1rem;
+    left: 2.3rem;
     position: absolute;
     padding: .2rem .4rem;
     font-size: .9rem;
-    top: -2.1rem;
-    left: 2.3rem;
+    background-color: $lightGrey;
+    border-radius: 3px;
     -ms-transform: translateX(-50%);
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
@@ -1120,13 +1051,13 @@ ul {
     color: $lightGreen;
   }
 
-  .upvoteTally {
+  .upvote-tally {
     font-size: 1.2rem;
     text-align: center;
   }
 
   .upvote,
-  .upvoteTally {
+  .upvote-tally {
     position: relative;
     top: .7rem;
   }
@@ -1140,31 +1071,31 @@ ul {
     color: $lightGreen;
   }
 
-  .createdAt {
+  .created-at {
     font-size: .8rem;
     color: $grey;
   }
 
-  .postTally {
+  .post-tally {
     text-align: center;
     font-size: .8rem;
     color: $grey;
   }
 
-  .postNum {
+  .post-num {
     font-size: 1.2rem;
     color: $darkGrey;
   }
 
-  .lastUpdated {
-    text-align: right;
+  .last-updated {
     height: 43px;
+    text-align: right;
     border-left: 2px solid $lightBlue;
   }
 
   .pagination {
-    text-align: center;
     margin-bottom: 1rem;
+    text-align: center;
   }
 
   li.active {
@@ -1181,7 +1112,7 @@ ul {
 }
 
 /***************************
- ******** THREAD ***********
+    #THREAD
  ***************************/
 
 .thread {
@@ -1197,33 +1128,31 @@ ul {
       padding: 0;
 
       h4 {
+        margin: 1rem 0;
         font-size: 2rem;
         color: $darkGreen;
-        margin: 1rem 0;
       }
       h5 {
-        font-size: 1rem;
         margin: 2rem 0 1rem 0;
+        font-size: 1rem;
       }
     }
     .meta {
       h5 {
-        font-size: 1rem;
-        padding-right: .5rem;
-        border-right: 2px solid $darkGreen;
         margin: 1rem 0;
+        padding-right: .5rem;
+        font-size: 1rem;
+        border-right: 2px solid $darkGreen;
       }
-
     }
-
   }
 
   button {
     @extend .default-button;
+    vertical-align: top;
     width: 5rem;
     padding-top: .3rem;
     padding-bottom: .3rem;
-    vertical-align: top;
   }
 
   button:hover {
@@ -1235,16 +1164,16 @@ ul {
     border-bottom: 2px solid $lightGrey;
 
     textarea {
-      resize: none;
-      border: 2px solid $lightGrey;
-      margin-right: 2%;
       height: 2rem;
       width: 40%;
+      margin-right: 2%;
+      border: 2px solid $lightGrey;
+      resize: none;
     }
 
     textarea:focus {
-      border: 2px solid $lightBlue;
       height: 4rem;
+      border: 2px solid $lightBlue;
     }
   }
 
@@ -1264,21 +1193,21 @@ ul {
     }
   }
 
-  .message-timestamp {
-  }
-
   .message-votes {
     div {
       i {
         margin-top: -0.2rem;
       }
+
       .not-voted:hover {
-        cursor: pointer;
         color: $lightBlue;
+        cursor: pointer;
       }
+
       .voted-for {
         color: $lightBlue;
       }
+
       h5 {
         margin-top: 0.2rem;
       }
@@ -1301,8 +1230,69 @@ ul {
   }
 }
 
+/***********************
+    #DASHBOARD SETUP
+************************/
+
+p {
+  code {
+    padding: .1rem .4rem;
+    background-color: $lightGrey;
+    color: red;
+    border-radius: 3px;
+  }
+}
+
+.tesselButton {
+  @extend .default-button;
+  margin-top: .7rem;
+  margin-bottom: .7rem;
+}
+
+.dashboard {
+  margin-top: 1.4rem;
+}
+
+#exampleDashTitle {
+  text-align: center;
+}
+
+.tesselSetupImage {
+  display: block;
+  width: 60%;
+  margin: auto;
+}
+
+.scopedKey {
+  display: inline-block;
+  padding: .7rem .7rem .4rem .7rem;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  font-size: 10px;
+  background-color: #dfdfdf;
+  border: 1px solid black;
+  border-radius: 3px;
+  white-space: pre-line;
+  word-wrap: break-word;
+}
+
+pre {
+  padding-top: .7rem;
+  padding-left: .7rem;
+  background-color: $lightGrey;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+ol {
+  li {
+    margin-bottom: 2rem;
+  }
+}
+
 /***************************
- ** SPLASH PAGE ANIMATION **
+    #SPLASH PAGE ANIMATION
  ***************************/
 
 .mask p {
@@ -1331,10 +1321,12 @@ ul {
 .mask .action-wrapper {
   overflow: hidden;
 }
+
 .mask .action-wrapper .cd-btn {
   opacity: 1;
   margin: 0 0 0 1.5em;
 }
+
 .mask .action-wrapper .cd-btn:first-of-type {
   margin-left: 0;
 }
@@ -1349,6 +1341,7 @@ ul {
     -webkit-transform: translateY(0);
   }
 }
+
 @-moz-keyframes cd-reveal-down {
   0% {
     opacity: 1;
@@ -1359,6 +1352,7 @@ ul {
     -moz-transform: translateY(0);
   }
 }
+
 @keyframes cd-reveal-down {
   0% {
     opacity: 1;
@@ -1377,4 +1371,3 @@ ul {
     transform: translateY(0);
   }
 }
-

@@ -1,7 +1,7 @@
 <div class="profile">
   <div class="row">
     <div class="col s5">
-      <ul class="userInfo">
+      <ul class="user-info">
         <li><img class="avatar" ng-src="{{ profile.avatar }}"></li>
 
         <li>
@@ -60,7 +60,7 @@
       </ul>
 
       <div class="row">
-        <form class="statusForm col s9" name="profile.statusUpdate" ng-submit="profile.addStatus()" ng-show="profile.activeUser">
+        <form class="status-form col s9" name="profile.statusUpdate" ng-submit="profile.addStatus()" ng-show="profile.activeUser">
           <input type="text" name="status" ng-model="profile.status" autocomplete="off" placeholder="How's the greenhouse?" required>
           <button type="submit">Post</button>
         </form>
@@ -97,7 +97,7 @@
                     <span class="col s8 m8 l8">{{ status.vote_tally }}</span>
                   </div>
                 </div>
-                <div class="col s3 statusCreated right">
+                <div class="col s3 status-created right">
                   {{ status.timestamp }}
                 </div>
                 <p class="col s12">
@@ -117,13 +117,13 @@
                   <div class="row">
                     <i ng-hide="status.votedFor" ng-click="profile.likeStatus(status, $index)" class="material-icons col s4 m4 l4 not-voted">star_border</i>
                     <i ng-show="status.votedFor" class="material-icons col s4 m4 l4 voted-for">star</i>
-                    <span class="upvoteTally col s8 m8 l8">{{ status.vote_tally }}</span>
+                    <span class="upvote-tally col s8 m8 l8">{{ status.vote_tally }}</span>
                   </div>
                 </div>
-                <div class="col s5 statusCreated right-align">
+                <div class="col s5 status-created right-align">
                   {{ status.created_at }}
                 </div>
-                <div class="statusInfo col s1">
+                <div class="status-info col s1">
                   <i class="material-icons delete-icon">more_vert</i>
                   <button class="right" ng-click="profile.deleteStatus(status.id)" ng-show="profile.activeUser">
                     <span class="delete-button">Delete</span> 
@@ -152,7 +152,7 @@
         </div>
       </div>
 
-      <h5 class="forumActivity">Recent Forum Activity</h5>
+      <h5 class="forum-activity">Recent Forum Activity</h5>
       <ul class="recentThreads">
         <li class="thread" ng-repeat="thread in profile.recentThreads">
           <a ui-sref="thread({ threadID: thread.thread_id, page: 1 })">
@@ -160,7 +160,7 @@
           </a>
 
           <p class="message">{{ thread.message }}</p>
-          <p class="messageTime">{{ thread.created_at }}</p>
+          <p class="message-time">{{ thread.created_at }}</p>
         </li>
       </ul>
     </div>
