@@ -485,7 +485,7 @@ ul {
         overflow-x: hidden;
         white-space: nowrap;
       }
-   
+
       li {
         display: inline-block;
         position: relative;
@@ -712,42 +712,42 @@ ul {
   }
 
   .user-photos-container {
-      margin-top: 1rem;
+    margin-top: 1rem;
 
-      i {
-        font-size: 3rem;
-        color: $darkGrey;
+    i {
+      font-size: 3rem;
+      color: $darkGrey;
 
-        &:hover {
-          color: $lightBlue;
-          cursor: pointer;
-        }
+      &:hover {
+        color: $lightBlue;
+        cursor: pointer;
       }
+    }
 
-      ul {
-        display: block;
-        width: 100%;
-        overflow-x: hidden;
-        white-space: nowrap;
-      }
-   
-      li {
-        display: inline-block;
-        position: relative;
-        margin-right: .5rem;
-      }
+    ul {
+      display: block;
+      width: 100%;
+      overflow-x: hidden;
+      white-space: nowrap;
+    }
+ 
+    li {
+      display: inline-block;
+      position: relative;
+      margin-right: .5rem;
+    }
 
-      li:hover a {
-        opacity: 1
-      }
+    li:hover a {
+      opacity: 1
+    }
 
-      .upload-file {
-        @extend .default-button;
-      }
+    .upload-file {
+      @extend .default-button;
+    }
 
-      .upload-file {
-        @extend .default-button-hover;
-      }
+    .upload-file {
+      @extend .default-button-hover;
+    }
   }
 
   .photo {
@@ -758,6 +758,11 @@ ul {
     margin-bottom: .5rem;
     margin-top: .5rem;
     font-size: 1rem;
+  }
+
+  .tags {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid $lightGrey;
   }
 
   .tag {
@@ -881,11 +886,23 @@ ul {
 
   .bottom-left {
     padding-right: 5rem;
+    padding-left: .7rem;
     border-right: 1px solid $darkGreen;
+
+    @media only screen and (max-width: 992px) {
+      padding-right: .7rem;
+      border-right: none;
+      border-bottom: 1px solid $darkGreen;
+    }
   }
 
   .bottom-right {
     padding-left: 3rem;
+  }
+
+  .bottom-left,
+  .bottom-right {
+    margin-top: 2rem;
   }
 
   .follow a,
@@ -979,7 +996,7 @@ ul {
     }
   }
 
-  .status-container {
+  .status-tabs {
     padding: 0;
     margin-bottom: 2rem;
   }

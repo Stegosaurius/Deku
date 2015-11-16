@@ -49,6 +49,7 @@
     // post status to database and clear form
     function addStatus() {
       var newStatus = vm.status;
+
       // reset form
       vm.statusUpdate.$setPristine();
       vm.status = '';
@@ -57,7 +58,7 @@
       User.addStatus(newStatus, User.getID())
         .then(function(status) {
           vm.statuses[0] = status;
-          vm.statuses[0].timestamp = moment(vm.statuses[0].timestamp).fromNow();
+          vm.statuses[0].created_at = moment(vm.statuses[0].created_at).fromNow();
         })
         .catch(function(err) {
           vm.statuses.shift();

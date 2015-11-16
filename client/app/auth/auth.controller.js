@@ -20,6 +20,7 @@
       vm.form.$setPristine();
       vm.user.password = '';
       vm.message = message;
+      setTimeout(function() { vm.message = ''; }, 1000);
     }
 
     function saveToken(token) {
@@ -27,8 +28,6 @@
       $window.localStorage.token = token;
       var tokenPayload = jwtHelper.decodeToken(token);
       $window.localStorage.username = tokenPayload.username;
-      // TODO: UNCOMMENT THIS LINE WHEN SCOPED KEYS HAVE BEEN IMPLEMENTED
-      // $window.localStorage.scopedKey = tokenPayload.read_scoped_key;
     }
 
     function signin() {
