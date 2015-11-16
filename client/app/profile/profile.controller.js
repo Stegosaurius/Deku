@@ -221,7 +221,6 @@
 
           // transform creation date to readable format
           for (var i = 0; i < vm.statuses.length; i++) {
-            console.log(vm.statuses[i].created_at);
             vm.statuses[i].created_at = moment(vm.statuses[i].created_at).fromNow();
 
             if (uservotes[vm.statuses[i].id]) {
@@ -236,14 +235,17 @@
     function getFolloweesStatuses() {
       User.getFolloweesStatuses(User.getID())
         .then(function (statuses) {
+          // number of statuses that will be displayed
+          var numStatuses = Math.min(statuses.statuses.length, 10);
+
           var uservotes = {};
           for (i = 0; i < statuses.uservotes.length; i++) {
             uservotes[statuses.uservotes[i].id] = true;
           }
-          vm.followeesStatuses = statuses.statuses;
+          vm.followeesStatuses = statuses.statuses.slice(0, numStatuses);
 
           // transform creation date to readable format
-          for (var i = 0; i < vm.followeesStatuses.length; i++) {
+          for (var i = 0; i < numStatuses; i++) {
             vm.followeesStatuses[i].created_at = moment(vm.followeesStatuses[i].created_at).fromNow();
 
             if (uservotes[vm.followeesStatuses[i].id]) {
