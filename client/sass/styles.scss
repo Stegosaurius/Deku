@@ -129,7 +129,7 @@ ul {
     }
   }
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 600px) {
     .headline {
       text-align: center;
 
@@ -170,7 +170,7 @@ ul {
       display: inline-block;
     }
 
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 600px) {
       h1 {
         font-size: 3rem;
       }
@@ -221,7 +221,7 @@ ul {
     background-color: $mainBackground;
 
     h3 {
-      padding: 4rem 4rem 2rem 4rem;
+      padding: 4rem 2rem 2rem 2rem;
       margin: 0;
       text-align: center;
     }
@@ -233,10 +233,14 @@ ul {
     }
 
     p {
-      padding: 2rem 3rem;
+      padding: 2rem;
       font-size: 2rem;
       text-align: center;
       color: $grey;
+
+      @media only screen and (max-width: 600px) {
+        font-size: 1.3rem;
+      }
     }
 
     .feature {
@@ -248,10 +252,11 @@ ul {
       }
 
       p {
-        padding: 0 1rem;
-        font-size: 1.4rem;
+        padding: 0 1rem 2rem 1rem;
+        font-size: 1.3rem;
       }
     }
+
   }
 
   .modal {
@@ -259,7 +264,7 @@ ul {
     top: 30% !important;
     text-align: center;
 
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 600px) {
       width: 300px;
     }
 
