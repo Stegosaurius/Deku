@@ -7,44 +7,46 @@
   ProfileController.$inject = ['$stateParams', '$window', 'jwtHelper', 'User'];
 
   function ProfileController($stateParams, $window, jwtHelper, User) {
-    // capture variable for binding members to controller; vm stands for ViewModel
-    // (https://github.com/johnpapa/angular-styleguide#controlleras-with-vm)
     var vm = this;
 
+    // view model properties
     vm.about = '';
     vm.activeUser = false;  // is user viewing his/her own profile?
-    vm.addStatus = addStatus;
     vm.avatar = '';
-    vm.deleteStatus = deleteStatus;
-    vm.follow = follow;
+    vm.currentPhotos = [];
     vm.followees = [];
     vm.followers = [];
-    vm.getUsersForTag = getUsersForTag;
     vm.isFollowing = false;  // is active user following the user of this profile?
+    vm.lessPhotos = false;  // determines if left arrow should be shown
     vm.location = '';
+    vm.morePhotos = true;  // determines if right arrow should be shown
     vm.photos = [];
-    vm.currentPhotos = [];
     vm.photoIndex = 0;
-    vm.morePhotos = true;
-    vm.lessPhotos = false;
-    vm.likeStatus = likeStatus;
-    vm.getNextPhoto = getNextPhoto;
-    vm.getPrevPhoto = getPrevPhoto;
     vm.recentThreadNames = [];
     vm.recentThreads = {};
     vm.statuses = [];
     vm.tags = [];
-    vm.tagModalData = [];
-    vm.unfollow = unfollow;
+    vm.tagModalData = []; // users who share the tag
     vm.username = $stateParams.username;
 
+    // view model methods
+    vm.addStatus = addStatus;
+    vm.deleteStatus = deleteStatus;
+    vm.follow = follow;
+    vm.getNextPhoto = getNextPhoto;
+    vm.getPrevPhoto = getPrevPhoto;
+    vm.getUsersForTag = getUsersForTag;
+    vm.likeStatus = likeStatus;
+    vm.unfollow = unfollow;
+
+    // actions on controller instantiation
     angular.element('.lean-overlay').remove();
     checkActiveUser();
     getProfile();
 
-    ///////////////////////
-    /// SCOPE FUNCTIONS ///
-    ///////////////////////
+    //////////////////////////
+    //  VIEW MODEL METHODS  //
+    //////////////////////////
 
     // post status to database and clear form
     function addStatus() {
@@ -53,33 +55,62 @@
       // reset form
       vm.statusUpdate.$setPristine();
       vm.status = '';
-      vm.statuses.unshift({ status: newStatus });
 
       User.addStatus(newStatus, User.getID())
         .then(function(status) {
-          vm.statuses[0] = status;
+          vm.statuses.unshift(status);
           vm.statuses[0].created_at = moment(vm.statuses[0].created_at).fromNow();
-        })
-        .catch(function(err) {
-          vm.statuses.shift();
         });
     }
 
     // remove status from database
-    function deleteStatus(statusID) {
+    function deleteStatus(statusID, index) {
       User.deleteStatus(statusID);
 
-      for (var i = 0; i < vm.statuses.length; i++) {
-        if (vm.statuses[i].id === statusID) {
-          vm.statuses.splice(i, 1);
-          break;
-        }
+      // remove status from display
+      vm.statuses.splice(index, 1);
+    }
+
+    // make the active user a follower of this profile's user
+    function follow() {
+      User.follow(User.getID(), vm.username);
+      vm.isFollowing = true;
+    }
+
+    // shift displayed photos to the left
+    function getNextPhoto () {
+      vm.photoIndex++;
+
+      if (vm.photoIndex === vm.photos.length - 1) {
+        vm.currentPhotos = [vm.photos[vm.photoIndex]];
+        vm.morePhotos = false;
+      } else {
+        vm.currentPhotos = vm.photos.slice(vm.photoIndex, vm.photoIndex + 2);
       }
+      vm.lessPhotos = true;
+    }
+
+    // shift displayed photos to the right
+    function getPrevPhoto () {
+      vm.photoIndex--;
+
+      vm.currentPhotos = vm.photos.slice(vm.photoIndex, vm.photoIndex + 2);
+      if (vm.photoIndex === 0) {
+        vm.lessPhotos = false;
+      }
+      vm.morePhotos = true;
+    }
+
+    // find users who have the same tag on their profile
+    function getUsersForTag(tagname) {
+      User.getUsersForTag(tagname)
+        .then(function (data) {
+          vm.tagModalData = data;
+        });
     }
 
     function likeStatus(status, index) {
-      var userID = User.getID();
-      User.likeStatus(userID, status.id) 
+      User.likeStatus(User.getID(), status.id)
         .then(function (statusCode) {
           if (statusCode === 201) {
             if (userID === status.user_id) {
@@ -91,28 +122,6 @@
             }
           }
         });
-
-    }
-
-    // make the active user a follower of this profile's user
-    function follow() {
-      User.follow(User.getID(), vm.username);
-      vm.isFollowing = true;
-    }
-
-    function getUsersForTag(tagname) {
-      User.getUsersForTag(tagname)
-        .then(function (data) {
-          vm.tagModalData = [];
-          for (var i = 0; i < data.length; i++) {
-            var userObj = {
-              profile_photo: data[i].profile_photo,
-              username: data[i].username,
-              location: data[i].location
-            };
-            vm.tagModalData.push(userObj);
-          }
-        });
     }
 
     function unfollow() {
@@ -120,31 +129,11 @@
       vm.isFollowing = false;
     }
 
-    function getNextPhoto () {
-      vm.photoIndex = vm.photoIndex + 1;
-      if (vm.photoIndex === vm.photos.length - 1) {
-        vm.currentPhotos = [vm.photos[vm.photoIndex]];
-        vm.morePhotos = false;
-      } else {
-        vm.currentPhotos = vm.photos.slice(vm.photoIndex, vm.photoIndex + 2);
-      }
-      vm.lessPhotos = true;
-    }
+    ///////////////////////
+    //   LOCAL METHODS   //
+    ///////////////////////
 
-    function getPrevPhoto () {
-      vm.photoIndex = vm.photoIndex - 1;
-      vm.currentPhotos = vm.photos.slice(vm.photoIndex, vm.photoIndex + 2);
-      if (vm.photoIndex === 0) {
-        vm.lessPhotos = false;
-      }
-      vm.morePhotos = true;
-    }
-
-    ///////////////////////////
-    /// NON-SCOPE FUNCTIONS ///
-    ///////////////////////////
-
-    // return true if the active user is viewing his/her own profile
+    // check if the active user is viewing his/her own profile
     function checkActiveUser() {
       // checking token is more secure than checking localStorage.username
       var user = jwtHelper.decodeToken($window.localStorage.token).username;
@@ -154,15 +143,40 @@
     function getProfile() {
       User.getProfile(vm.username)
         .then(function(data) {
-          vm.about = data.about || 'Talk a little about yourself...';
-          vm.location = data.location || 'Where are you?';
+          vm.about = data.about;
+          vm.location = data.location;
+
+          getAvatar();
+          getPhotos();
           getTags();
           getStatuses();
           getFolloweesStatuses();
           getFollowers();
           getRecentThreads();
-          getAvatar();
-          getPhotos();
+        });
+    }
+
+    // retrieve current profile picture (avatar)
+    function getAvatar () {
+      User.getAvatar(vm.username)
+        .then(function (avatar) {
+          vm.avatar = avatar[0].profile_photo;
+        });
+    }
+
+    function getPhotos () {
+      User.getPhotos(vm.username)
+        .then(function (data) {
+          vm.photos = data;
+
+          // remove scroll arrows if they are unnecessary
+          if (vm.photos.length < 2) {
+            vm.lessPhotos = false;
+            vm.morePhotos = false;
+          }
+
+          // set photos that will be displayed
+          vm.currentPhotos = vm.photos.slice(0,2);
         });
     }
 
@@ -171,6 +185,59 @@
         .then(function(tags) {
           for (var i = 0; i < tags.length; i++) {
             vm.tags.push(tags[i].tag);
+          }
+        });
+    }
+
+    function getStatuses() {
+      User.getStatuses(vm.username, User.getID())
+        .then(function(statuses) {
+          vm.statuses = statuses.statuses;
+
+          // statuses that the active user has upvoted
+          var uservotes = {};
+          for (i = 0; i < statuses.uservotes.length; i++) {
+            uservotes[statuses.uservotes[i].id] = true;
+          }
+
+          for (var i = 0; i < vm.statuses.length; i++) {
+            // transform creation date to readable format
+            vm.statuses[i].created_at = moment(vm.statuses[i].created_at).fromNow();
+
+            // show user what they have already upvoted
+            if (uservotes[vm.statuses[i].id]) {
+              vm.statuses[i].votedFor = true;
+            } else {
+              vm.statuses[i].votedFor = false;
+            }
+          }
+        });
+    }
+
+    function getFolloweesStatuses() {
+      User.getFolloweesStatuses(User.getID())
+        .then(function (statuses) {
+          // only show up to 10 most recent statuses
+          var numStatuses = Math.min(statuses.statuses.length, 10);
+
+          vm.followeesStatuses = statuses.statuses.slice(0, numStatuses);
+
+          // statuses that the active user has upvoted
+          var uservotes = {};
+          for (i = 0; i < statuses.uservotes.length; i++) {
+            uservotes[statuses.uservotes[i].id] = true;
+          }
+
+          for (var i = 0; i < numStatuses; i++) {
+            // transform creation date to readable format
+            vm.followeesStatuses[i].created_at = moment(vm.followeesStatuses[i].created_at).fromNow();
+
+            // show user what they have already upvoted
+            if (uservotes[vm.followeesStatuses[i].id]) {
+              vm.followeesStatuses[i].votedFor = true;
+            } else {
+              vm.followeesStatuses[i].votedFor = false;
+            }
           }
         });
     }
@@ -198,82 +265,15 @@
     }
 
     // store thread names for listing on page
-    // make obj so thread id can be referenced from thread name
     function getRecentThreads() {
       User.getRecentThreads(vm.username)
         .then(function(threads) {
           vm.recentThreads = threads;
-          // transform timestamp to readable format
+
+          // transform timestamps to readable format
           for (var i = 0; i < vm.recentThreads.length; i++) {
             vm.recentThreads[i].created_at = moment(vm.recentThreads[i].created_at).fromNow();
           }
-        });
-    }
-
-    function getStatuses() {
-      User.getStatuses(vm.username, User.getID())
-        .then(function(statuses) {
-          vm.statuses = statuses.statuses;
-          var uservotes = {};
-          for (i = 0; i < statuses.uservotes.length; i++) {
-            uservotes[statuses.uservotes[i].id] = true;
-          }
-
-          // transform creation date to readable format
-          for (var i = 0; i < vm.statuses.length; i++) {
-            vm.statuses[i].created_at = moment(vm.statuses[i].created_at).fromNow();
-
-            if (uservotes[vm.statuses[i].id]) {
-              vm.statuses[i].votedFor = true;
-            } else {
-              vm.statuses[i].votedFor = false;
-            }
-          }
-        });
-    }
-
-    function getFolloweesStatuses() {
-      User.getFolloweesStatuses(User.getID())
-        .then(function (statuses) {
-          // number of statuses that will be displayed
-          var numStatuses = Math.min(statuses.statuses.length, 10);
-
-          var uservotes = {};
-          for (i = 0; i < statuses.uservotes.length; i++) {
-            uservotes[statuses.uservotes[i].id] = true;
-          }
-          vm.followeesStatuses = statuses.statuses.slice(0, numStatuses);
-
-          // transform creation date to readable format
-          for (var i = 0; i < numStatuses; i++) {
-            vm.followeesStatuses[i].created_at = moment(vm.followeesStatuses[i].created_at).fromNow();
-
-            if (uservotes[vm.followeesStatuses[i].id]) {
-              vm.followeesStatuses[i].votedFor = true;
-            } else {
-              vm.followeesStatuses[i].votedFor = false;
-            }
-          }
-        });
-    }
-
-    //Get current profile picture(avatar)
-    function getAvatar () {
-      User.getAvatar(vm.username)
-        .then(function (avatar) {
-          vm.avatar = avatar[0].profile_photo;
-        });
-    }
-
-    //Get users greenhouse photos from the server
-    function getPhotos () {
-      User.getPhotos(vm.username)
-        .then(function (data) {
-          vm.photos = [];
-          for (var i = 0; i < data.length; i++) {
-            vm.photos.push(data[i]);
-          }
-          vm.currentPhotos = vm.photos.slice(0,2);
         });
     }
   }

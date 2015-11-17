@@ -136,7 +136,7 @@
               <div class="status-info col s1">
                 <i class="material-icons delete-icon">more_vert</i>
 
-                <button class="right" ng-click="profile.deleteStatus(status.id)" ng-show="profile.activeUser">
+                <button class="right" ng-click="profile.deleteStatus(status.id, $index)" ng-show="profile.activeUser">
                   <span class="delete-button">Delete</span>
                 </button>
               </div>
