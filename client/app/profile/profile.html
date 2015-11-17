@@ -1,11 +1,12 @@
 <div class="profile">
   <div class="row">
-    <div class="col s5">
+    <div class="col s12 m12 l5">
       <ul class="user-info">
         <li><img class="avatar" ng-src="{{ profile.avatar }}"></li>
 
         <li>
           <h4>{{ profile.username }}</h4>
+
           <h6 class="location flow-text">{{ profile.location }}</h6>
 
           <div class="buttons">
@@ -21,34 +22,29 @@
       </ul>
     </div>
 
-    <div class="user-photos-container col s7 m7 l7 valign-wrapper">
-        <div class="col s1 m1 l1 valign">
-          <a class="right" ng-show="profile.lessPhotos" ng-click="profile.getPrevPhoto()">
-            <i class="material-icons small">chevron_left</i>
-          </a>
-        </div>
+    <div class="user-photos-container col s12 m12 l7 valign-wrapper">
+      <div class="col s1 m1 l1 valign">
+        <a class="right" ng-show="profile.lessPhotos" ng-click="profile.getPrevPhoto()">
+          <i class="material-icons small">chevron_left</i>
+        </a>
+      </div>
 
-        <div class="photo-list-container col s10 m10 l10 valign">
-          <ul class="center">
-            <li ng-repeat="photo in profile.currentPhotos">
-              <img class="photo" ng-src="{{ photo.photo }}"/>
-            </li>
-          </ul>
-        </div>
-        
+      <div class="photo-list-container col s10 m10 l10 valign">
+        <ul class="center">
+          <li ng-repeat="photo in profile.currentPhotos">
+            <img class="photo" ng-src="{{ photo.photo }}"/>
+          </li>
+        </ul>
+      </div>
 
-        <div class="col s1 m1 l1 valign">
-          <a class="left" ng-show="profile.morePhotos" ng-click="profile.getNextPhoto()">
-            <i class="material-icons small">chevron_right</i>
-          </a>
-        </div>
-
-      
+      <div class="col s1 m1 l1 valign">
+        <a class="left" ng-show="profile.morePhotos" ng-click="profile.getNextPhoto()">
+          <i class="material-icons small">chevron_right</i>
+        </a>
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="bottom-left col s8">
+    <div class="bottom-left col s12 m12 l8">
       <p class="about">{{ profile.about }}</p>
 
       <ul class="tags">
@@ -60,99 +56,115 @@
       </ul>
 
       <div class="row">
-        <form class="status-form col s9" name="profile.statusUpdate" ng-submit="profile.addStatus()" ng-show="profile.activeUser">
-          <input type="text" name="status" ng-model="profile.status" autocomplete="off" placeholder="How's the greenhouse?" required>
+        <form class="status-form col s12" name="profile.statusUpdate" ng-submit="profile.addStatus()" ng-show="profile.activeUser">
+          <input type="text" name="status" ng-model="profile.status" autocomplete="off" placeholder="Post an update..." required>
+
           <button type="submit">Post</button>
         </form>
       </div>
 
       <div class="row">
-
-          <div ng-hide="profile.activeUser" class="col s12 status-container">
-              <ul class="tabs" tabs>
-                  <li class="tab col s3"><a class="active" href="#myUpdates">Your Updates</a></li>
-              </ul>
-          </div>
-
-          <div ng-show="profile.activeUser" class="col s12 status-container">
-              <ul class="tabs" tabs>
-                  <li class="tab col s3"><a href="#friendsUpdates">Updates In Your Network</a></li>
-                  <li class="tab col s3"><a class="active" href="#myUpdates">Your Updates</a></li>
-              </ul>
-          </div>
-          <div id="friendsUpdates" class="col s12 status-container">
-            <ul class="statuses">
-              <li class="status row" ng-repeat="status in profile.followeesStatuses">
-                <a class="col s2" ui-sref="profile({ username: status.username })">
-                  <img class="status-avatar" ng-src="{{ status.profile_photo }}">
-                </a>
-                <a class="col s3" ui-sref="profile({ username: status.username })">
-                  {{ status.username }}
-                </a>
-
-                <div class="status-votes col s3">
-                  <div class="row">
-                    <i ng-hide="status.votedFor" ng-click="profile.likeStatus(status, $index)" class="material-icons col s4 m4 l4 not-voted">star_border</i>
-                    <i ng-show="status.votedFor" class="material-icons col s4 m4 l4 voted-for">star</i>
-                    <span class="col s8 m8 l8">{{ status.vote_tally }}</span>
-                  </div>
-                </div>
-                <div class="col s3 status-created right">
-                  {{ status.timestamp }}
-                </div>
-                <p class="col s12">
-                  {{ status.status }}
-                </p>
-              </li>
+        <div ng-hide="profile.activeUser" class="col s12 status-tabs">
+            <ul class="tabs" tabs>
+                <li class="tab col s3">
+                  <a class="active" href="#myUpdates">Recent Updates</a>
+                </li>
             </ul>
-          </div>
-          <div id="myUpdates" class="col s12 status-container">
-            <ul class="statuses">
-              <li class="status row" ng-repeat="status in profile.statuses">
-                <div class="col s3">
-                  {{ status.username }}
-                </div>
-                  
-                <div class="status-votes col s3">
-                  <div class="row">
-                    <i ng-hide="status.votedFor" ng-click="profile.likeStatus(status, $index)" class="material-icons col s4 m4 l4 not-voted">star_border</i>
-                    <i ng-show="status.votedFor" class="material-icons col s4 m4 l4 voted-for">star</i>
-                    <span class="upvote-tally col s8 m8 l8">{{ status.vote_tally }}</span>
-                  </div>
-                </div>
-                <div class="col s5 status-created right-align">
-                  {{ status.created_at }}
-                </div>
-                <div class="status-info col s1">
-                  <i class="material-icons delete-icon">more_vert</i>
-                  <button class="right" ng-click="profile.deleteStatus(status.id)" ng-show="profile.activeUser">
-                    <span class="delete-button">Delete</span> 
-                  </button>
-                </div>
-                <p class="col s12 user-status">
-                  {{ status.status }}
-                </p>
-              </li>
+        </div>
+
+        <div ng-show="profile.activeUser" class="col s12 status-tabs">
+            <ul class="tabs" tabs>
+                <li class="tab col s3">
+                  <a href="#friendsUpdates">Updates In Your Network</a>
+                </li>
+
+                <li class="tab col s3">
+                  <a class="active" href="#myUpdates">Your Updates</a>
+                </li>
             </ul>
-          </div>
+        </div>
+
+        <div id="friendsUpdates" class="col s12">
+          <ul class="statuses">
+            <li class="status row" ng-repeat="status in profile.followeesStatuses">
+              <a class="col s2" ui-sref="profile({ username: status.username })">
+                <img class="status-avatar" ng-src="{{ status.profile_photo }}">
+              </a>
+
+              <a class="col s3" ui-sref="profile({ username: status.username })">
+                {{ status.username }}
+              </a>
+
+              <div class="status-votes col s3">
+                <div class="row">
+                  <i ng-hide="status.votedFor" ng-click="profile.likeStatus(status, $index)" class="material-icons col s4 m4 l4 not-voted">star_border</i>
+
+                  <i ng-show="status.votedFor" class="material-icons col s4 m4 l4 voted-for">star</i>
+
+                  <span class="col s8 m8 l8">{{ status.vote_tally }}</span>
+                </div>
+              </div>
+
+              <div class="col s3 status-created right">{{ status.timestamp }}</div>
+
+              <p class="col s12">{{ status.status }}</p>
+            </li>
+          </ul>
+        </div>
+
+        <div id="myUpdates" class="col s12">
+          <ul class="statuses">
+            <li class="status row" ng-repeat="status in profile.statuses">
+              <div class="col s3">
+                {{ status.username }}
+              </div>
+
+              <div class="status-votes col s3">
+                <div class="row">
+                  <i ng-hide="status.votedFor" ng-click="profile.likeStatus(status, $index)" class="material-icons col s4 m4 l4 not-voted">star_border</i>
+
+                  <i ng-show="status.votedFor" class="material-icons col s4 m4 l4 voted-for">star</i>
+
+                  <span class="upvote-tally col s8 m8 l8">{{ status.vote_tally }}</span>
+                </div>
+              </div>
+
+              <div class="col s5 status-created right-align">
+                {{ status.created_at }}
+              </div>
+
+              <div class="status-info col s1">
+                <i class="material-icons delete-icon">more_vert</i>
+
+                <button class="right" ng-click="profile.deleteStatus(status.id, $index)" ng-show="profile.activeUser">
+                  <span class="delete-button">Delete</span>
+                </button>
+              </div>
+
+              <p class="col s12 user-status">{{ status.status }}</p>
+            </li>
+          </ul>
+        </div>
       </div>
-
     </div>
 
-    <div class="bottom-right col s4">
+    <div class="bottom-right col s12 m12 l4">
       <div class="follow row">
         <div class="col s6 center-align">
           <a href="#followingModal" modal>Following</a>
+
           <span>{{ profile.followees.length }}</span>
         </div>
 
         <div class="col s6 center-align">
           <a href="#followersModal" modal>Followers</a>
+
           <span>{{ profile.followers.length }}</span>
         </div>
       </div>
 
       <h5 class="forum-activity">Recent Forum Activity</h5>
+
       <ul class="recentThreads">
         <li class="thread" ng-repeat="thread in profile.recentThreads">
           <a ui-sref="thread({ threadID: thread.thread_id, page: 1 })">
@@ -160,6 +172,7 @@
           </a>
 
           <p class="message">{{ thread.message }}</p>
+
           <p class="message-time">{{ thread.created_at }}</p>
         </li>
       </ul>

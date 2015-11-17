@@ -4,12 +4,12 @@
     
     <header>
       <h3 class="title">Set Up Your Profile</h3>
+
       <button class="update" type="button" ng-click="editProfile.updateProfile()">Update!</button>
     </header>
 
-    <div class="col m5">
+    <div class="col s12 m12 l5">
       <div class="avatar-container">
-
         <img class="avatar responsive-img" src="{{ editProfile.avatar }}">
 
         <a class="update-avatar" href="#avatarModal" modal>Update Photo</a>
@@ -18,13 +18,12 @@
         <div id="avatarModal" class="modal">
           <div class="modal-content">
             <h4>Add a profile picture!</h4>
+
             <input ng-model="editProfile.avatarPath" placeholder="write the path to your avatar here">
+
             <button type="button" ng-click="editProfile.addAvatarPath()" class="modal-close">Upload</button></a>
           </div>
         </div>
-
-        <!-- <button type="button" ng-click="editProfile.updateAvatar()" class="update-avatar">Update</button> -->
-
       </div>
 
       <div class="basicInfo">
@@ -33,18 +32,14 @@
         <h6>Location:</h6>
 
         <input type="text" ng-model="editProfile.location"  placeholder="Where are you based?">
-
-        <!-- <input type="text" ng-model="editProfile.about" placeholder="Tell us about yourself"><br>   --> 
       </div>
 
       <h6>Talk a little about your botanical endeavors:</h6>
-      <!-- <input type="text" ng-model="editProfile.about" placeholder="Where are you based?"> -->
-      <textarea rows="2" cols="20" wrap="hard" ng-model="editProfile.about" placeholder="General info">{{ editProfile.about }}</textarea><br>
 
-      <!-- <p>{{ editProfile.message }}</p> -->
+      <textarea class="about" rows="2" cols="20" wrap="hard" ng-model="editProfile.about" placeholder="General info">{{ editProfile.about }}</textarea><br>
     </div>
 
-    <div class="user-photos-container col s7 m7 l7 valign-wrapper">
+    <div class="user-photos-container col s12 m12 l7 valign-wrapper">
       <div class="col s1 m1 l1 valign">
         <a class="right" ng-show="editProfile.lessPhotos" ng-click="editProfile.getPrevPhoto()">
           <i class="material-icons small">chevron_left</i>
@@ -55,6 +50,7 @@
         <ul class="center">
           <li ng-repeat="photo in editProfile.currentPhotos">
             <img class="photo" ng-src="{{ photo.photo }}"/>
+
             <a ng-click="editProfile.deletePhoto(photo.id)">
               <i class="material-icons">remove_circle</i>
             </a>
@@ -63,7 +59,7 @@
       </div>
 
       <div class="col s1 m1 l1 valign">
-        <a class="left"ng-show="editProfile.morePhotos" ng-click="editProfile.getNextPhoto()">
+        <a class="left" ng-show="editProfile.morePhotos" ng-click="editProfile.getNextPhoto()">
           <i class="material-icons small">chevron_right</i>
         </a>
       </div>      
@@ -78,6 +74,7 @@
     <div id="userPhotoModal" class="modal">
       <div class="modal-content photos-modal">
         <h4>Add a photo!</h4>
+
         <span>Is your photo online...</span>
 
         <form ng-submit="editProfile.addPhotoByPath()">
@@ -85,21 +82,23 @@
           <button type="submit" class="modal-close">Upload</button></a>
         </form>
 
-        <span>...or on your computer computer?</span>
-        <form class="" ng-submit="editProfile.addPhotoByUpload(file)">
+        <span>...or on your computer?</span>
+
+        <form ng-submit="editProfile.addPhotoByUpload(file)">
           <button class="right modal-close" type="submit" ng-click="submit()">Upload</button>
+
           <span class="upload-text">select a file to upload</span>
-          <div class="upload left" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
-            accept="image/*" ngf-max-size="10MB" ngf-min-height="100">select file {{ file }}</div>
+
+          <div class="upload left" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB" ngf-min-height="100">
+            select file
+          </div>
         </form>
       </div>
     </div>
   </div>
 
   <div class="row z-depth-1 user-meta">
-
     <div class="col m6">
-      
       <h6>Tags</h6>
 
       <p class="tagInfo">Make a tag for any plants you're growing, any methods or technologies you're using, or any topics that interest you. Click these tags on any profile page to see a list of others with the same tags!</p>
@@ -107,6 +106,7 @@
       <ul class="tags">
         <li class="tag" ng-repeat="tag in editProfile.tags">
           <span>{{ tag.tag }}</span>
+
           <a ng-click="editProfile.removeTag(tag)" class="remove-item">
             <i class="tiny material-icons">clear</i>
           </a>
@@ -114,30 +114,32 @@
       </ul> 
       
       <form class="tag-form" name="editProfile.tagForm" ng-submit="editProfile.addTag()">
-          <input type="text" ng-model="editProfile.newTag" placeholder="Add a new tag">
-          <!-- <button class="waves-effect waves-light btn" type="submit">Add</button> -->
-          <a ng-click="editProfile.addTag()" class="btn-floating btn-small waves-effect waves-light">
-            <i class="material-icons add-tag">add</i>
-          </a>
+        <input type="text" ng-model="editProfile.newTag" placeholder="Add a new tag">
 
+        <a ng-click="editProfile.addTag()" class="btn-floating btn-small waves-effect waves-light">
+          <i class="material-icons add-tag">add</i>
+        </a>
       </form>
-
     </div>
 
     <div class="col m6 valign-wrapper">
       <div class="follow-container col m6">
         <span class="follow-header">Followers</span>
+
         <ul class="follow">
           <li ng-repeat="follower in editProfile.followers">
             <span> {{ follower }} </span>
           </li>
         </ul>
       </div>
+
       <div class="follow-container col m6">
         <span class="follow-header">Following</span>
+
         <ul class="follow">
           <li ng-repeat="followee in editProfile.followees">
             <span> {{ followee }} </span>
+
             <a ng-click="editProfile.unfollow(followee)" class="remove-item">
               <i class="tiny material-icons">clear</i>
             </a>

@@ -144,10 +144,13 @@
     function getPhotos () {
       User.getPhotos(vm.username)
         .then(function (data) {
-          vm.photos = [];
-          for (var i = 0; i < data.length; i++) {
-            vm.photos.push(data[i]);
+          vm.photos = data;
+
+          if (vm.photos.length < 2) {
+            vm.lessPhotos = false;
+            vm.morePhotos = false;
           }
+
           vm.currentPhotos = vm.photos.slice(0, 2);
         });
     }
