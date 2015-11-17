@@ -4,16 +4,16 @@ Deku is a social network and climate monitoring tool for gardening and greenhous
 
 The final piece of Deku is climate monitoring. A pathway is provided for users to set up a [Tessel microcontroller](https://tessel.io). When equipped with the proper sensors, the Tessel can stream data on temperature, humidity, and light conditions straight to a user's Deku profile.
 
-See the currently deployed site at [dekugreen.com](dekugreen.com).
+See the currently deployed site at [dekugreen.com](http://dekugreen.com).
 
-![Deku profile page](https://www.dropbox.com/s/qfou8bdcs09q4q4/Deku%20screenshot.png?dl=0)
+![Deku profile page](/screenshots/profile.png)
 
 ## Team
 
-*Product Owner*: [Barry Blaha](https://github.com/Beasta)
-*Scrum Master*: [Matt Loftus](https://github.com/MattLoftus)
-*Lead Front End Engineer*: [John Anderson](https://github.com/jfanderson)
-*Lead Back End Engineer*: [Edgar Pabon](https://github.com/shadedprofit)
+**Product Owner**: [Barry Blaha](https://github.com/Beasta)  
+**Scrum Master**: [Matt Loftus](https://github.com/MattLoftus)  
+**Lead Front End Engineer**: [John Anderson](https://github.com/jfanderson)  
+**Lead Back End Engineer**: [Edgar Pabon](https://github.com/shadedprofit)  
 
 ## Requirements
 
