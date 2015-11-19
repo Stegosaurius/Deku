@@ -41,4 +41,4 @@ Deku utilizes Tessel hardware, the Keen.io API, and Amazon AWS S3 as shown in th
 
 ##Deku SQL Database Structure
 
-![Deku Database Structure](/screenshots/Screen Shot 2015-11-18 at 17.31.51.png)
+![Deku Database Structure](/screenshots/DekuSchema.png)
