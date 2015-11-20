@@ -113,7 +113,7 @@
       User.likeStatus(User.getID(), status.id)
         .then(function (statusCode) {
           if (statusCode === 201) {
-            if (userID === status.user_id) {
+            if (User.getID() === status.user_id) {
               vm.statuses[index].vote_tally++;
               vm.statuses[index].votedFor = true;
             } else {

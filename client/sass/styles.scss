@@ -683,6 +683,10 @@ ul {
     height: 10rem;
     margin-top: 2rem;
     border-radius: 3px;
+
+    @media only screen and (max-width: 600px) {
+      height: 8rem;
+    }
   }
 
   .user-info li {
@@ -825,26 +829,23 @@ ul {
   }
 
   .status-info {
+    position: relative;
     padding-right: 0;
     text-align: right;
 
-    .delete-button {
-      display: none;
+    i:hover {
+      cursor: pointer;
     }
   }
 
-  .status-info:hover {
-    i {
-      display: none;
-    }
+  .delete-status {
+    padding-left: .5rem;
+    color: $grey;
+    cursor: default;
 
-    .delete-button {
-      display: inline-block;
-      padding: .2rem .4rem;
-      background-color: #ED4337;
-      color: white;
-      border-radius: 4%;
-      opacity: .8;
+    &:hover {
+      color: $darkGrey;
+      cursor: pointer;
     }
   }
 
@@ -855,32 +856,46 @@ ul {
     border-left: 8px solid $lightestGreen;
   }
 
+  .user-status {
+    color: $grey;
+  }
+
   .status-created {
     position: relative;
     font-size: .8rem;
     color: $grey;
   }
 
+  #my-updates .status-created {
+    top: -.1rem;
+  }
+
   .status-votes {
-    div {
-      i {
-        margin-top: -0.2rem;
-      }
+    i {
+      margin-top: -0.3rem;
+    }
 
-      .upvote-tally {
-        position: relative;
-        top: -0.1rem;
-        left: -1rem;
-      }
+    .upvote-tally {
+      position: relative;
+      top: -0.1rem;
+      left: -1rem;
+      vertical-align: middle;
+    }
 
-      .not-voted:hover {
-        color: $lightBlue;
-        cursor: pointer;
-      }
+    .not-voted {
+      vertical-align: middle;
+      padding-right: 1rem;
+    }
 
-      .voted-for {
-        color: $lightBlue;
-      }
+    .not-voted:hover {
+      color: $lightBlue;
+      cursor: pointer;
+    }
+
+    .voted-for {
+      vertical-align: middle;
+      padding-right: 1rem;
+      color: $lightBlue;
     }
   }
 
