@@ -32,13 +32,4 @@ $ npm install
 $ grunt
 ```
 
-The Bower dependencies will be installed as a post-install for the `npm install` command. The default Grunt command will build out the distribution folder and compile the SCSS file into CSS before running the server.
-
-##Network Structure
-
-Deku utilizes Tessel hardware, the Keen.io API, and Amazon AWS S3 as shown in the network diagram below:
-![Deku Network Diagram](/screenshots/dekugreen.com setup.jpg)
-
-##Deku SQL Database Structure
-
-![Deku Database Structure](/screenshots/DekuSchema.png)
+The Bower dependencies will be installed via a post-install for the `npm install` command. The default Grunt command will build out the distribution folder and compile the SCSS file into CSS before running the server.
