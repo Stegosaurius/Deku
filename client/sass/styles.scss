@@ -683,6 +683,10 @@ ul {
     height: 10rem;
     margin-top: 2rem;
     border-radius: 3px;
+
+    @media only screen and (max-width: 600px) {
+      height: 8rem;
+    }
   }
 
   .user-info li {
@@ -809,6 +813,17 @@ ul {
     }
   }
 
+  .status-tabs {
+    padding: 0;
+    margin-bottom: 2rem;
+  }
+
+  .status-avatar {
+    height: 3rem;
+    vertical-align: middle;
+    padding-right: .5rem;
+  }
+
   .statuses a {
     color: $darkGrey;
 
@@ -825,26 +840,23 @@ ul {
   }
 
   .status-info {
+    position: relative;
     padding-right: 0;
     text-align: right;
 
-    .delete-button {
-      display: none;
+    i:hover {
+      cursor: pointer;
     }
   }
 
-  .status-info:hover {
-    i {
-      display: none;
-    }
+  .delete-status {
+    padding-left: .5rem;
+    color: $grey;
+    cursor: default;
 
-    .delete-button {
-      display: inline-block;
-      padding: .2rem .4rem;
-      background-color: #ED4337;
-      color: white;
-      border-radius: 4%;
-      opacity: .8;
+    &:hover {
+      color: $darkGrey;
+      cursor: pointer;
     }
   }
 
@@ -855,32 +867,50 @@ ul {
     border-left: 8px solid $lightestGreen;
   }
 
+  .user-status {
+    padding-top: .5rem;
+    color: $grey;
+  }
+
   .status-created {
     position: relative;
+    text-align: right;
     font-size: .8rem;
     color: $grey;
   }
 
+  #my-updates .status-created {
+    top: -.1rem;
+  }
+
   .status-votes {
-    div {
-      i {
-        margin-top: -0.2rem;
-      }
+    text-align: right;
 
-      .upvote-tally {
-        position: relative;
-        top: -0.1rem;
-        left: -1rem;
-      }
+    i {
+      margin-top: -0.3rem;
+    }
 
-      .not-voted:hover {
-        color: $lightBlue;
-        cursor: pointer;
-      }
+    .upvote-tally {
+      position: relative;
+      top: -0.1rem;
+      left: -1rem;
+      vertical-align: middle;
+    }
 
-      .voted-for {
-        color: $lightBlue;
-      }
+    .not-voted {
+      vertical-align: middle;
+      padding-right: 1rem;
+    }
+
+    .not-voted:hover {
+      color: $lightBlue;
+      cursor: pointer;
+    }
+
+    .voted-for {
+      vertical-align: middle;
+      padding-right: 1rem;
+      color: $lightBlue;
     }
   }
 
@@ -1003,15 +1033,6 @@ ul {
     .indicator { 
       background-color: $darkGreen;
     }
-  }
-
-  .status-tabs {
-    padding: 0;
-    margin-bottom: 2rem;
-  }
-
-  .status-avatar {
-    height: 3rem;
   }
 }
 
