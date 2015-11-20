@@ -813,6 +813,17 @@ ul {
     }
   }
 
+  .status-tabs {
+    padding: 0;
+    margin-bottom: 2rem;
+  }
+
+  .status-avatar {
+    height: 3rem;
+    vertical-align: middle;
+    padding-right: .5rem;
+  }
+
   .statuses a {
     color: $darkGrey;
 
@@ -857,11 +868,13 @@ ul {
   }
 
   .user-status {
+    padding-top: .5rem;
     color: $grey;
   }
 
   .status-created {
     position: relative;
+    text-align: right;
     font-size: .8rem;
     color: $grey;
   }
@@ -871,6 +884,8 @@ ul {
   }
 
   .status-votes {
+    text-align: right;
+
     i {
       margin-top: -0.3rem;
     }
@@ -1018,15 +1033,6 @@ ul {
     .indicator { 
       background-color: $darkGreen;
     }
-  }
-
-  .status-tabs {
-    padding: 0;
-    margin-bottom: 2rem;
-  }
-
-  .status-avatar {
-    height: 3rem;
   }
 }
 
