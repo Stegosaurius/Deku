@@ -305,6 +305,17 @@ module.exports = {
         callback(null, res);
       }
     });
+  },
+
+  searchUsers: function (username, callback) {
+    username = '%' + username + '%';
+    db.query('select id, username, profile_photo, location from users where username like ?', [username], function (err, res) {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, res);
+      }
+    })
   }
 
 }

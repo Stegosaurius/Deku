@@ -376,6 +376,17 @@ module.exports = {
         res.status(204).json({ tessel: 0 });
       }
     });
+  },
+
+  searchUsers: function (req, res) {
+    User.searchUsers(req.params.username, function (err, users) {
+      if (err) {
+        console.error(err);
+        res.status(500).end();
+      } else {
+        res.status(200).json(users);
+      }
+    });
   }
 
 }
