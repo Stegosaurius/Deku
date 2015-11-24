@@ -30,7 +30,7 @@ function generateNewUsers (n) {
 
   }
   var newUser = {
-    username: faker.internet.userName(),
+    username: faker.internet.userName().toLowerCase(),
     password: 'helloworld',
     email: faker.internet.email()
   };
