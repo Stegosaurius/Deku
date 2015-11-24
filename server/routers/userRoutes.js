@@ -18,6 +18,8 @@ module.exports = function (app, passport) {
 
   app.put('/:userID', userController.updateProfile);
 
+  // Search for users by username
+  app.get('/search/:username', userController.searchUsers);
 
 
   // Scoped Key for Tessel Data
