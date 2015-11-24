@@ -313,7 +313,6 @@ module.exports = {
       if (err) {
         callback(err);
       } else {
-        console.log(res);
         callback(null, res);
       }
     })
